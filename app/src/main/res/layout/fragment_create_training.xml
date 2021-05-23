@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_create_training"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#995FA1A8"
+        android:drawableTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_bac"
+        app:title="Add new training"
+        app:titleTextColor="@color/white">
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
+        app:flow_horizontalStyle="packed"
+        app:layout_constraintBottom_toTopOf="@id/tvText1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_create_training"
+        app:picker_curvedMaxAngle="45"
+        app:picker_cyclic="true"
+        app:picker_dayCount="62"
+        app:picker_displayHours="false"
+        app:picker_displayMinutes="false"
+        app:picker_itemSpacing="6dp"
+        app:picker_mustBeOnFuture="false"
+        app:picker_selectedTextColor="@color/white"
+        app:picker_selectorColor="@android:color/transparent"
+        app:picker_textColor="@color/purple_500"
+        app:picker_visibleItemCount="3" />
+
+    <EditText
+        android:id="@+id/etComment_create_training"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/background_edit_text"
+        android:elevation="4dp"
+        android:hint="Optional"
+        android:maxHeight="100dp"
+        android:padding="16dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/confirm_create_training"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="Comment"
+        app:layout_constraintBottom_toTopOf="@id/etComment_create_training"
+        app:layout_constraintStart_toStartOf="@id/etComment_create_training" />
+
+    <TextView
+        android:id="@+id/tvText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="Your weight, kg"
+        app:layout_constraintBottom_toTopOf="@id/etWeight_create_training"
+        app:layout_constraintStart_toStartOf="@id/etWeight_create_training" />
+
+    <EditText
+        android:id="@+id/etWeight_create_training"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/background_edit_text"
+        android:elevation="4dp"
+        android:hint="Optional"
+        android:maxHeight="100dp"
+        android:padding="16dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/tvText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/confirm_create_training"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:background="@drawable/button_background"
+        android:paddingVertical="12dp"
+        android:text="Confirm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
