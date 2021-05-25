@@ -4,12 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/fragment_create_training.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/fragment_create_training.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/fragment_exercise_list.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/fragment_training_list.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/item_approache.xml" value="1.25" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/item_exercise_list.xml" value="0.36614583333333334" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/item_training_list.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/item_approache.xml" value="0.25" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/item_exercise_list.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/item_training_list.xml" value="0.75" />
       </map>
     </option>
   </component>
