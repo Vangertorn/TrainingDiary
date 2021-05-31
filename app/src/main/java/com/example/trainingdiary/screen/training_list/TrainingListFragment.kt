@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.example.myapplication.support.SupportFragmentInset
+import com.example.myapplication.support.setVerticalMargin
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentTrainingListBinding
 import com.example.trainingdiary.screen.approach_create.ApproachCreateBottomDialog
@@ -14,20 +16,25 @@ import com.example.trainingdiary.support.SwipeCallback
 import com.example.trainingdiary.support.navigateSave
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class TrainingListFragment : Fragment() {
+class TrainingListFragment :
+    SupportFragmentInset<FragmentTrainingListBinding>(R.layout.fragment_training_list) {
 
-    private lateinit var viewBinding: FragmentTrainingListBinding
+    override lateinit var viewBinding: FragmentTrainingListBinding
 
     private val viewModel: TrainingListViewModel by viewModel()
 
     private val adapter = TrainingRecyclerViewAdapter(onClick = { training ->
-
+        findNavController().navigateSave(
+            TrainingListFragmentDirections.actionTrainingListFragmentToExerciseListFragment(
+                training
+            )
+        )
     })
 
     private val simpleCallback = SwipeCallback { position, direction ->
         when (direction) {
             ItemTouchHelper.LEFT -> {
-               viewModel.deleteTraining(position)
+                viewModel.deleteTraining(position)
             }
             ItemTouchHelper.RIGHT -> {
                 viewModel.deleteTraining(position)
@@ -52,15 +59,17 @@ class TrainingListFragment : Fragment() {
         viewBinding.btnAdd.setOnClickListener {
             findNavController().navigateSave(TrainingListFragmentDirections.actionTrainingListFragmentToTrainingCreateFragment())
         }
-        viewModel.trainingLiveData.observe(this.viewLifecycleOwner){
+        viewModel.trainingLiveData.observe(this.viewLifecycleOwner) {
             adapter.submitList(it)
         }
         val noteHelper = ItemTouchHelper(simpleCallback)
         noteHelper.attachToRecyclerView(viewBinding.recyclerViewTraining)
 
-        viewBinding.settingsTrainingList.setOnClickListener {
-            val bottomFragment = ApproachCreateBottomDialog()
-            bottomFragment.show(childFragmentManager, "")
-        }
+
+    }
+
+    override fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean) {
+        viewBinding.toolbarTrainingList.setVerticalMargin(top)
+        viewBinding.btnAdd.setVerticalMargin(0, bottom)
     }
 }

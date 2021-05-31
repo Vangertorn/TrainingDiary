@@ -3,19 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent"
-    android:background="#B9B2C3">
+    >
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_training_list"
+        android:background="@drawable/background_toolbar_color"
+        android:id="@+id/toolbar_exercise_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_bac"
-        app:titleTextColor="@color/black">
+        app:navigationIcon="@drawable/ic_bac">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
@@ -43,17 +44,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/date_training_exercise_list"
                 tools:text="Something weight" />
+
             <TextView
                 android:id="@+id/muscle_groups_exercise_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingStart="4dp"
                 android:textColor="@color/white"
                 android:textSize="12sp"
-                android:paddingStart="4dp"
                 android:textStyle="normal"
                 app:layout_constraintStart_toEndOf="@id/weight_exercise_list"
                 app:layout_constraintTop_toBottomOf="@id/date_training_exercise_list"
                 tools:text="Something muscle group" />
+
             <TextView
                 android:id="@+id/comment_exercise_list"
                 android:layout_width="wrap_content"
@@ -75,7 +78,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="end"
             android:scaleType="center"
-            android:src="@drawable/ic_pencil" />
+            android:src="@drawable/ic_pencil_edit" />
 
 
     </androidx.appcompat.widget.Toolbar>
@@ -90,7 +93,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_training_list"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_exercise_list"
         app:spanCount="1"
         tools:listitem="@layout/item_exercise_list" />
 

@@ -13,10 +13,22 @@
         <action
             android:id="@+id/action_trainingListFragment_to_trainingCreateFragment"
             app:destination="@id/trainingCreateFragment" />
+        <action
+            android:id="@+id/action_trainingListFragment_to_exerciseListFragment"
+            app:destination="@id/exerciseListFragment" />
     </fragment>
     <fragment
         android:id="@+id/trainingCreateFragment"
         android:name="com.example.trainingdiary.screen.training_create.TrainingCreateFragment"
         android:label="TrainingCreateFragment"
         tools:layout="@layout/fragment_create_training"/>
+    <fragment
+        android:id="@+id/exerciseListFragment"
+        android:name="com.example.trainingdiary.screen.exercise_list.ExerciseListFragment"
+        android:label="ExerciseListFragment"
+        tools:layout="@layout/fragment_exercise_list">
+        <argument
+            android:name="training"
+            app:argType="com.example.trainingdiary.models.Training" />
+    </fragment>
 </navigation>
