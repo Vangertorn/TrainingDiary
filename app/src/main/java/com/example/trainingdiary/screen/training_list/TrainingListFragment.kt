@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentTrainingListBinding
+import com.example.trainingdiary.screen.approach_create.ApproachCreateBottomDialog
 import com.example.trainingdiary.support.SwipeCallback
 import com.example.trainingdiary.support.navigateSave
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -56,5 +57,10 @@ class TrainingListFragment : Fragment() {
         }
         val noteHelper = ItemTouchHelper(simpleCallback)
         noteHelper.attachToRecyclerView(viewBinding.recyclerViewTraining)
+
+        viewBinding.settingsTrainingList.setOnClickListener {
+            val bottomFragment = ApproachCreateBottomDialog()
+            bottomFragment.show(childFragmentManager, "")
+        }
     }
 }

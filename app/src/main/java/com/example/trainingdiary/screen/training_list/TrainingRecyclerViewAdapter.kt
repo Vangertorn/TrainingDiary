@@ -11,15 +11,15 @@ import com.example.trainingdiary.R
 import com.example.trainingdiary.models.Training
 
 class TrainingRecyclerViewAdapter(private val onClick: (Training) -> Unit) :
-    ListAdapter<Training, TrainingRecyclerViewAdapter.NoteViewHolder>(TrainingAdapterDiffCallBack()) {
+    ListAdapter<Training, TrainingRecyclerViewAdapter.TrainingViewHolder>(TrainingAdapterDiffCallBack()) {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = NoteViewHolder (
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = TrainingViewHolder (
         LayoutInflater.from(parent.context).inflate(R.layout.item_training_list, parent, false),
         ::onItemClick
     )
 
-    override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TrainingViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
@@ -27,7 +27,7 @@ class TrainingRecyclerViewAdapter(private val onClick: (Training) -> Unit) :
         onClick(getItem(position))
     }
 
-    inner class NoteViewHolder(itemView: View, private val itemClick: (Int) -> Unit) :
+    inner class TrainingViewHolder(itemView: View, private val itemClick: (Int) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         private val tvDate = itemView.findViewById<TextView>(R.id.tvDate_training_item)
         private val tvMuscleGroups =

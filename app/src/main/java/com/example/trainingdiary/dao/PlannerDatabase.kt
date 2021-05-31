@@ -4,11 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.trainingdiary.models.Approach
 import com.example.trainingdiary.models.Training
 
 @Database(
     entities = [
-        Training::class
+        Training::class,
+        Approach::class
     ],
     version = 1,
     exportSchema = false
@@ -16,6 +18,7 @@ import com.example.trainingdiary.models.Training
 
 abstract class PlannerDatabase : RoomDatabase() {
     abstract fun trainingDao(): TrainingDao
+    abstract fun approachDao(): ApproachDao
 }
 
 object DatabaseConstructor {

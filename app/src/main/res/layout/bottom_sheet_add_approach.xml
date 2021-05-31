@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTvExerciseName"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Names exercise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etCommentExercise"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Comment"
+        app:layout_constraintEnd_toEndOf="@id/autoCompleteTvExerciseName"
+        app:layout_constraintStart_toStartOf="@id/autoCompleteTvExerciseName"
+        app:layout_constraintTop_toBottomOf="@id/autoCompleteTvExerciseName" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvApproach"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etCommentExercise"
+
+        tools:listitem="@layout/item_approach" />
+
+    <ImageView
+        android:id="@+id/ivAddWeight"
+        style="@style/AddRemoveImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_plus"
+
+        app:layout_constraintBottom_toBottomOf="@id/etWeight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etWeight" />
+
+    <ImageView
+        android:id="@+id/ivRemoveWeight"
+        style="@style/AddRemoveImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_minus"
+        app:layout_constraintBottom_toBottomOf="@id/etWeight"
+        app:layout_constraintEnd_toStartOf="@+id/etWeight"
+        app:layout_constraintTop_toTopOf="@id/etWeight" />
+
+    <EditText
+        android:id="@+id/etWeight"
+        style="@style/EditWeightStyle"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/ivAddWeight"
+        app:layout_constraintTop_toBottomOf="@id/rvApproach" />
+
+    <TextView
+        style="@style/MyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weight, kg"
+        app:layout_constraintBottom_toBottomOf="@id/etWeight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etWeight" />
+
+    <ImageView
+        android:id="@+id/ivAddQuantity"
+        style="@style/AddRemoveImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_plus"
+        app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etReoccurrence" />
+
+    <ImageView
+        android:id="@+id/ivRemoveQuantity"
+        style="@style/AddRemoveImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_minus"
+        app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
+        app:layout_constraintEnd_toStartOf="@+id/etReoccurrence"
+        app:layout_constraintTop_toTopOf="@id/etReoccurrence" />
+
+    <EditText
+        android:id="@+id/etReoccurrence"
+        style="@style/EditNumberStyle"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/etWeight"
+        app:layout_constraintStart_toStartOf="@id/etWeight"
+        app:layout_constraintTop_toBottomOf="@id/etWeight" />
+
+    <TextView
+        style="@style/MyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reoccurrences"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etReoccurrence" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAddApproach"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/background_color"
+        android:letterSpacing="0.06"
+        android:text="Add approach"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etReoccurrence"
+        tools:layout_editor_absoluteX="0dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

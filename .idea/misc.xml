@@ -3,13 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/background_edit_text.xml" value="0.3828125" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/button_back_background.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/button_background.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/color_cursor.xml" value="0.3828125" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/ic_minus.xml" value="0.3828125" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/ic_minus_rv.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/ic_plus.xml" value="0.3828125" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/ic_plus_rv.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/bottom_sheet_add_approach.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/bottom_sheet_dialog_layout.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/fragment_create_approach.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/fragment_create_training.xml" value="0.25" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/fragment_exercise_list.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/fragment_training_list.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/item_approache.xml" value="0.25" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/fragment_exercise_list.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/fragment_training_list.xml" value="0.22" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/item_approach.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/item_approache.xml" value="0.67" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/item_exercise_list.xml" value="0.33" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/item_training_list.xml" value="0.75" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/item_training_list.xml" value="0.5" />
       </map>
     </option>
   </component>
