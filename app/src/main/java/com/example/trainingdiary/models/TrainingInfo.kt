@@ -10,5 +10,5 @@ class TrainingInfo(
         parentColumn = "id",
         entityColumn = "idTraining"
     )
-    val exercises: List<Exercise>
+    val exercises: List<Exercise>?
 )

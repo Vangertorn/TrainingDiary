@@ -11,6 +11,7 @@ import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentExerciseListBinding
 import com.example.trainingdiary.screen.approach_create.ApproachCreateBottomDialog
 import com.example.trainingdiary.screen.exercise_create.ExerciseCreateBottomDialog
+import com.example.trainingdiary.support.navigateSave
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ExerciseListFragment :
@@ -20,15 +21,14 @@ class ExerciseListFragment :
     private val args: ExerciseListFragmentArgs by navArgs()
     private val adapter = ExerciseRecyclerViewAdapter(
         onClick = {
-            val bottomFragment = ApproachCreateBottomDialog()
-            bottomFragment.show(childFragmentManager, "1")
+           findNavController().navigateSave(ExerciseListFragmentDirections.actionExerciseListFragmentToApproachCreateBottomDialog2())
         }
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.recyclerView.adapter = adapter
-        viewModel.exerciseLiveData.observe(this.viewLifecycleOwner){
+        viewModel.exerciseLiveData.observe(this.viewLifecycleOwner) {
             adapter.submitList(it)
         }
         args.training.let {
@@ -38,11 +38,15 @@ class ExerciseListFragment :
             viewBinding.weightExerciseList.text = it.weight
         }
         viewBinding.toolbarExerciseList.setNavigationOnClickListener {
+            viewModel.forgotIdTraining()
             findNavController().popBackStack()
         }
         viewBinding.btnAdd.setOnClickListener {
-            val bottomFragment = ExerciseCreateBottomDialog()
-            bottomFragment.show(childFragmentManager, "2")
+            findNavController().navigateSave(
+                ExerciseListFragmentDirections.actionExerciseListFragmentToExerciseCreateBottomDialog(
+                    args.training
+                )
+            )
         }
     }
 

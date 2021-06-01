@@ -30,5 +30,26 @@
         <argument
             android:name="training"
             app:argType="com.example.trainingdiary.models.Training" />
+        <action
+            android:id="@+id/action_exerciseListFragment_to_exerciseCreateBottomDialog"
+            app:destination="@id/exerciseCreateBottomDialog" />
+        <action
+            android:id="@+id/action_exerciseListFragment_to_approachCreateBottomDialog2"
+            app:destination="@id/approachCreateBottomDialog2" />
     </fragment>
+    <dialog
+        android:id="@+id/exerciseCreateBottomDialog"
+        android:name="com.example.trainingdiary.screen.exercise_create.ExerciseCreateBottomDialog"
+        android:label="ExerciseCreateBottomDialog"
+        tools:layout="@layout/bottom_sheet_add_exercise">
+        <argument
+            android:name="training"
+            app:argType="com.example.trainingdiary.models.Training" />
+    </dialog>
+    <dialog
+        android:id="@+id/approachCreateBottomDialog2"
+        android:name="com.example.trainingdiary.screen.approach_create.ApproachCreateBottomDialog"
+        android:label="ApproachCreateBottomDialog"
+        tools:layout="@layout/bottom_sheet_add_approach"/>
+
 </navigation>

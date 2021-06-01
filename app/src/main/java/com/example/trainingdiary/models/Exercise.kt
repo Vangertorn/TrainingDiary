@@ -21,5 +21,5 @@ data class Exercise(
     val id: Long = 0,
     val name: String,
     @ColumnInfo(index = true, name = "idTraining")
-    val idTraining: Long = 0
+    val idTraining: Long
 ) : Parcelable

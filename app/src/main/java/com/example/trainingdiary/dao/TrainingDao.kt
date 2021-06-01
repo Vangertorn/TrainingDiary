@@ -31,9 +31,9 @@ abstract class TrainingDao {
     }
     @Transaction
     @Query("SELECT * FROM table_trainings WHERE id == :id LIMIT 1")
-    abstract fun getTrainingInfoFlow(id: Long): Flow<TrainingInfo>
+    abstract fun getTrainingInfoFlow(id: Long): Flow<TrainingInfo?>
 
     @Transaction
     @Query("SELECT * FROM table_trainings WHERE id == :id LIMIT 1")
-    abstract fun getTrainingInfo(id: Long): TrainingInfo
+    abstract fun getTrainingInfo(id: Long): TrainingInfo?
 }

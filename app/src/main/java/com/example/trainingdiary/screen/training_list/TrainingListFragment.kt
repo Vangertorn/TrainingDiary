@@ -24,6 +24,7 @@ class TrainingListFragment :
     private val viewModel: TrainingListViewModel by viewModel()
 
     private val adapter = TrainingRecyclerViewAdapter(onClick = { training ->
+        viewModel.rememberIdTraining(training)
         findNavController().navigateSave(
             TrainingListFragmentDirections.actionTrainingListFragmentToExerciseListFragment(
                 training

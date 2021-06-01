@@ -3,6 +3,7 @@ package com.example.trainingdiary
 import android.app.Application
 import com.example.trainingdiary.dao.DatabaseConstructor
 import com.example.trainingdiary.dao.PlannerDatabase
+import com.example.trainingdiary.datastore.AppSettings
 import com.example.trainingdiary.repository.ApproachRepository
 import com.example.trainingdiary.repository.ExerciseRepository
 import com.example.trainingdiary.repository.TrainingRepository
@@ -27,16 +28,16 @@ class PlannerApp : Application() {
     }
 
     private val viewModel = module {
-        viewModel { TrainingListViewModel(get()) }
+        viewModel { TrainingListViewModel(get(), get()) }
         viewModel { TrainingCreateViewModel(get()) }
         viewModel { ApproachCreateViewModel(get()) }
         viewModel { ExerciseCreateViewModel(get()) }
-        viewModel { ExerciseListViewModel(get()) }
+        viewModel { ExerciseListViewModel(get(), get()) }
     }
     private val repositoryModel = module {
-        factory { TrainingRepository(get()) }
+        factory { TrainingRepository(get(),get()) }
         factory { ApproachRepository(get()) }
-        factory { ExerciseRepository(get()) }
+        factory { ExerciseRepository(get(), get(), get()) }
     }
 
     private val barnModel = module {
@@ -44,5 +45,6 @@ class PlannerApp : Application() {
         factory { get<PlannerDatabase>().trainingDao() }
         factory { get<PlannerDatabase>().approachDao() }
         factory { get<PlannerDatabase>().exerciseDao() }
+        single { AppSettings(get()) }
     }
 }
