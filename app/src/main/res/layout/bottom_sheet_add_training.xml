@@ -5,26 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_create_training"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/crimson"
-        android:drawableTint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_bac"
-
-        app:title="Add new training"
-        app:titleTextColor="@color/white">
-
-    </androidx.appcompat.widget.Toolbar>
 
     <com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="200dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
@@ -33,7 +17,7 @@
         app:layout_constraintBottom_toTopOf="@id/tvText1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_create_training"
+
         app:picker_curvedMaxAngle="45"
         app:picker_cyclic="true"
         app:picker_dayCount="62"
@@ -83,9 +67,9 @@
 
     <EditText
         android:id="@+id/etWeight_create_training"
+        style="@style/EditWeightStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/EditWeightStyle"
         android:hint="Optional"
         app:layout_constraintBottom_toTopOf="@id/tvText"
         app:layout_constraintEnd_toEndOf="parent"

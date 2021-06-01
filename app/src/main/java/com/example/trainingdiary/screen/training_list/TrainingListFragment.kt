@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.myapplication.support.SupportFragmentInset
 import com.example.myapplication.support.setVerticalMargin
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentTrainingListBinding
-import com.example.trainingdiary.screen.approach_create.ApproachCreateBottomDialog
 import com.example.trainingdiary.support.SwipeCallback
 import com.example.trainingdiary.support.navigateSave
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -58,7 +56,7 @@ class TrainingListFragment :
         super.onViewCreated(view, savedInstanceState)
         viewBinding.recyclerViewTraining.adapter = adapter
         viewBinding.btnAdd.setOnClickListener {
-            findNavController().navigateSave(TrainingListFragmentDirections.actionTrainingListFragmentToTrainingCreateFragment())
+            findNavController().navigateSave(TrainingListFragmentDirections.actionTrainingListFragmentToTrainingCreateBottomDialog(null))
         }
         viewModel.trainingLiveData.observe(this.viewLifecycleOwner) {
             adapter.submitList(it)

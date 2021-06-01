@@ -4,6 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.trainingdiary.dao.database.ApproachDao
+import com.example.trainingdiary.dao.database.ExerciseDao
+import com.example.trainingdiary.dao.database.TrainingDao
 import com.example.trainingdiary.models.Approach
 import com.example.trainingdiary.models.Exercise
 import com.example.trainingdiary.models.Training
@@ -12,7 +15,7 @@ import com.example.trainingdiary.models.Training
     entities = [
         Training::class,
         Approach::class,
-    Exercise::class
+        Exercise::class
     ],
     version = 1,
     exportSchema = false

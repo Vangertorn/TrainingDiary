@@ -11,17 +11,12 @@
         android:label="TrainingListFragment"
         tools:layout="@layout/fragment_training_list">
         <action
-            android:id="@+id/action_trainingListFragment_to_trainingCreateFragment"
-            app:destination="@id/trainingCreateFragment" />
-        <action
             android:id="@+id/action_trainingListFragment_to_exerciseListFragment"
             app:destination="@id/exerciseListFragment" />
+        <action
+            android:id="@+id/action_trainingListFragment_to_trainingCreateBottomDialog"
+            app:destination="@id/trainingCreateBottomDialog" />
     </fragment>
-    <fragment
-        android:id="@+id/trainingCreateFragment"
-        android:name="com.example.trainingdiary.screen.training_create.TrainingCreateFragment"
-        android:label="TrainingCreateFragment"
-        tools:layout="@layout/fragment_create_training"/>
     <fragment
         android:id="@+id/exerciseListFragment"
         android:name="com.example.trainingdiary.screen.exercise_list.ExerciseListFragment"
@@ -50,6 +45,21 @@
         android:id="@+id/approachCreateBottomDialog2"
         android:name="com.example.trainingdiary.screen.approach_create.ApproachCreateBottomDialog"
         android:label="ApproachCreateBottomDialog"
-        tools:layout="@layout/bottom_sheet_add_approach"/>
+        tools:layout="@layout/bottom_sheet_add_approach">
+        <argument
+            android:name="exercise"
+            app:argType="com.example.trainingdiary.models.Exercise" />
+    </dialog>
+    <dialog
+        android:id="@+id/trainingCreateBottomDialog"
+        android:name="com.example.trainingdiary.screen.training_create.TrainingCreateBottomDialog"
+        android:label="TrainingCreateBottomDialog"
+        tools:layout="@layout/bottom_sheet_add_training">
+        <argument
+            android:name="training"
+            app:argType="com.example.trainingdiary.models.Training"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </dialog>
 
 </navigation>

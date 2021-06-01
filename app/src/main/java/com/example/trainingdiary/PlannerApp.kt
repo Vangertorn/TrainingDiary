@@ -32,11 +32,11 @@ class PlannerApp : Application() {
         viewModel { TrainingCreateViewModel(get()) }
         viewModel { ApproachCreateViewModel(get()) }
         viewModel { ExerciseCreateViewModel(get()) }
-        viewModel { ExerciseListViewModel(get(), get()) }
+        viewModel { ExerciseListViewModel(get(), get(), get()) }
     }
     private val repositoryModel = module {
         factory { TrainingRepository(get(),get()) }
-        factory { ApproachRepository(get()) }
+        factory { ApproachRepository(get(), get(), get()) }
         factory { ExerciseRepository(get(), get(), get()) }
     }
 

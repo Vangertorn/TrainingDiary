@@ -9,8 +9,6 @@ import com.example.myapplication.support.SupportFragmentInset
 import com.example.myapplication.support.setVerticalMargin
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentExerciseListBinding
-import com.example.trainingdiary.screen.approach_create.ApproachCreateBottomDialog
-import com.example.trainingdiary.screen.exercise_create.ExerciseCreateBottomDialog
 import com.example.trainingdiary.support.navigateSave
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -21,7 +19,12 @@ class ExerciseListFragment :
     private val args: ExerciseListFragmentArgs by navArgs()
     private val adapter = ExerciseRecyclerViewAdapter(
         onClick = {
-           findNavController().navigateSave(ExerciseListFragmentDirections.actionExerciseListFragmentToApproachCreateBottomDialog2())
+            viewModel.rememberIdExercise(it)
+            findNavController().navigateSave(
+                ExerciseListFragmentDirections.actionExerciseListFragmentToApproachCreateBottomDialog2(
+                    it
+                )
+            )
         }
     )
 

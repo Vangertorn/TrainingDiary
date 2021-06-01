@@ -1,0 +1,28 @@
+package com.example.trainingdiary.dao.database
+
+import androidx.room.*
+import com.example.trainingdiary.models.Exercise
+import com.example.trainingdiary.models.ExerciseInfo
+import com.example.trainingdiary.models.TrainingInfo
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+abstract class ExerciseDao {
+
+    @Insert
+    abstract fun saveExercise(exercise: Exercise): Long
+
+    @Delete
+    abstract fun deleteExercise(exercise: Exercise)
+
+    @Query("SELECT * FROM table_exercise")
+    abstract fun getExerciseFlow(): Flow<List<Exercise>?>
+
+    @Transaction
+    @Query("SELECT * FROM table_exercise WHERE id == :id LIMIT 1")
+    abstract fun getExerciseInfo(id: Long): ExerciseInfo?
+
+    @Transaction
+    @Query("SELECT * FROM table_exercise WHERE id == :id LIMIT 1")
+    abstract fun getExerciseInfoFlow(id: Long): Flow<ExerciseInfo?>
+}

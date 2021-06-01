@@ -5,19 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.trainingdiary.R
+import com.example.trainingdiary.databinding.BottomSheetAddTrainingBinding
 import java.util.*
-
-import com.example.trainingdiary.databinding.FragmentCreateTrainingBinding
 import com.example.trainingdiary.models.Training
 import com.example.trainingdiary.support.hideKeyboard
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 
-class TrainingCreateFragment : Fragment() {
-    private lateinit var viewBinding: FragmentCreateTrainingBinding
+class TrainingCreateBottomDialog : BottomSheetDialogFragment() {
+    private lateinit var viewBinding: BottomSheetAddTrainingBinding
     private val viewModel: TrainingCreateViewModel by viewModel()
     private var noteDate = Date()
     private val dateFormatter = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
@@ -27,18 +26,15 @@ class TrainingCreateFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewBinding = FragmentCreateTrainingBinding.bind(
+        viewBinding = BottomSheetAddTrainingBinding.bind(
             LayoutInflater.from(context)
-                .inflate(R.layout.fragment_create_training, container, false)
+                .inflate(R.layout.bottom_sheet_add_training, container, false)
         )
         return viewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewBinding.toolbarCreateTraining.setNavigationOnClickListener {
-            findNavController().popBackStack()
-        }
         viewBinding.confirmCreateTraining.setOnClickListener {
             viewModel.addNewTraining(
                 Training(

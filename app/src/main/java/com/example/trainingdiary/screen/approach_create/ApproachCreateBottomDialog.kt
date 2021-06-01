@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.BottomSheetAddApproachBinding
 import com.example.trainingdiary.models.Approach
@@ -15,6 +16,8 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
     private lateinit var viewBinding: BottomSheetAddApproachBinding
 
     private val viewModel: ApproachCreateViewModel by viewModel()
+
+    private val args: ApproachCreateBottomDialogArgs by navArgs()
 
     private val adapter = ApproachRecyclerViewAdapter(onClick = { approach ->
         viewModel.deleteApproach(approach)
@@ -44,7 +47,8 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
             viewModel.addNewApproach(
                 Approach(
                     weight = viewBinding.etWeight.text.toString(),
-                    reoccurrences = viewBinding.etReoccurrence.text.toString()
+                    reoccurrences = viewBinding.etReoccurrence.text.toString(),
+                    idExercise = args.exercise.id
                 )
             )
         }
