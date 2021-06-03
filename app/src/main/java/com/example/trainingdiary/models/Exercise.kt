@@ -16,6 +16,7 @@ import kotlinx.parcelize.Parcelize
         onUpdate = ForeignKey.CASCADE
     )]
 )
+
 data class Exercise(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

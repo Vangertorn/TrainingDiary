@@ -4,6 +4,7 @@ import com.example.trainingdiary.dao.database.ExerciseDao
 import com.example.trainingdiary.dao.database.TrainingDao
 import com.example.trainingdiary.datastore.AppSettings
 import com.example.trainingdiary.models.Exercise
+import com.example.trainingdiary.models.info.ExerciseInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +16,8 @@ class ExerciseRepository(
     private val exerciseDao: ExerciseDao,
     private val trainingDao: TrainingDao,
     private val appSettings: AppSettings
-) {
+)
+{
 
     @ExperimentalCoroutinesApi
     val currentExerciseFlow: Flow<List<Exercise>> =

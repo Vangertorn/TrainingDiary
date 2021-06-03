@@ -41,8 +41,6 @@ class AppSettings(context: Context) {
         }
     }
 
-
-
     companion object {
         private const val TRAINING_ID_KEY = "TRAINING_ID_KEY"
         private const val EXERCISE_ID_KEY = "EXERCISE_ID_KEY"

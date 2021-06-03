@@ -2,7 +2,7 @@ package com.example.trainingdiary.dao.database
 
 import androidx.room.*
 import com.example.trainingdiary.models.Training
-import com.example.trainingdiary.models.TrainingInfo
+import com.example.trainingdiary.models.info.TrainingInfo
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -36,4 +36,5 @@ abstract class TrainingDao {
     @Transaction
     @Query("SELECT * FROM table_trainings WHERE id == :id LIMIT 1")
     abstract fun getTrainingInfo(id: Long): TrainingInfo?
+
 }

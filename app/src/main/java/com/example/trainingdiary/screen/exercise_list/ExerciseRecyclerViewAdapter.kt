@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingdiary.R
 import com.example.trainingdiary.models.Exercise
+import com.google.android.material.chip.ChipGroup
 
 class ExerciseRecyclerViewAdapter(private val onClick: (Exercise) -> Unit) :
     ListAdapter<Exercise, ExerciseRecyclerViewAdapter.ExerciseViewHolder>(
         ExerciseAdapterDiffCallBack()
     ) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ExerciseViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.item_exercise_list, parent, false),
         ::onItemClick
@@ -31,6 +33,7 @@ class ExerciseRecyclerViewAdapter(private val onClick: (Exercise) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         private val tvExerciseName =
             itemView.findViewById<TextView>(R.id.tvNameExercise_exercise_item)
+        val cgApproachGroup = itemView.findViewById<ChipGroup>(R.id.approaches_chipGroup)
 
         init {
             itemView.setOnClickListener {

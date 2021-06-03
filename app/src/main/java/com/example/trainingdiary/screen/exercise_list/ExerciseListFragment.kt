@@ -1,6 +1,7 @@
 package com.example.trainingdiary.screen.exercise_list
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -9,7 +10,9 @@ import com.example.myapplication.support.SupportFragmentInset
 import com.example.myapplication.support.setVerticalMargin
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentExerciseListBinding
+import com.example.trainingdiary.models.Approach
 import com.example.trainingdiary.support.navigateSave
+import com.google.android.material.chip.Chip
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ExerciseListFragment :
@@ -33,6 +36,11 @@ class ExerciseListFragment :
         viewBinding.recyclerView.adapter = adapter
         viewModel.exerciseLiveData.observe(this.viewLifecycleOwner) {
             adapter.submitList(it)
+
+//        viewModel.approachLiveData.observe(this.viewLifecycleOwner) {
+//            for (approach in it) {
+//
+//            }
         }
         args.training.let {
             viewBinding.commentExerciseList.text = it.comment
@@ -52,6 +60,11 @@ class ExerciseListFragment :
             )
         }
     }
+
+//    private fun addNewChip(approach: Approach){
+//        val keyword = approach.weight + approach.reoccurrences
+//        val newChip: Chip = LayoutInflater.from(context).inflate(R.layout.chip_approaches, this.adapter.cgApproachGroup)
+//    }
 
     override fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean) {
         viewBinding.toolbarExerciseList.setVerticalMargin(top)

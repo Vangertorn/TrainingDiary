@@ -24,7 +24,6 @@ class ApproachRepository(
             }
         }
 
-
     suspend fun saveApproach(approach: Approach) {
         withContext(Dispatchers.IO) {
             approachDao.insertApproach(approach)

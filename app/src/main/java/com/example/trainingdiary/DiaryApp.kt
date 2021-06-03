@@ -6,6 +6,7 @@ import com.example.trainingdiary.dao.PlannerDatabase
 import com.example.trainingdiary.datastore.AppSettings
 import com.example.trainingdiary.repository.ApproachRepository
 import com.example.trainingdiary.repository.ExerciseRepository
+import com.example.trainingdiary.repository.MuscleGroupRepository
 import com.example.trainingdiary.repository.TrainingRepository
 import com.example.trainingdiary.screen.approach_create.ApproachCreateViewModel
 import com.example.trainingdiary.screen.exercise_create.ExerciseCreateViewModel
@@ -18,18 +19,18 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
 
-class PlannerApp : Application() {
+class DiaryApp : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
-            androidContext(this@PlannerApp)
+            androidContext(this@DiaryApp)
             modules(listOf(viewModel, barnModel, repositoryModel))
         }
     }
 
     private val viewModel = module {
-        viewModel { TrainingListViewModel(get(), get()) }
-        viewModel { TrainingCreateViewModel(get()) }
+        viewModel { TrainingListViewModel(get(), get(),get()) }
+        viewModel { TrainingCreateViewModel(get(), get()) }
         viewModel { ApproachCreateViewModel(get()) }
         viewModel { ExerciseCreateViewModel(get()) }
         viewModel { ExerciseListViewModel(get(), get(), get()) }
@@ -38,6 +39,7 @@ class PlannerApp : Application() {
         factory { TrainingRepository(get(),get()) }
         factory { ApproachRepository(get(), get(), get()) }
         factory { ExerciseRepository(get(), get(), get()) }
+        factory { MuscleGroupRepository(get()) }
     }
 
     private val barnModel = module {
@@ -45,6 +47,7 @@ class PlannerApp : Application() {
         factory { get<PlannerDatabase>().trainingDao() }
         factory { get<PlannerDatabase>().approachDao() }
         factory { get<PlannerDatabase>().exerciseDao() }
+        factory { get<PlannerDatabase>().muscleGroupDao() }
         single { AppSettings(get()) }
     }
 }

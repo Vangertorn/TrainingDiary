@@ -20,5 +20,4 @@ abstract class ApproachDao {
     abstract fun getApproachFlow(): Flow<List<Approach>?>
 
 
-
 }

@@ -17,7 +17,6 @@ class TrainingRepository(
         it ?: listOf()
     }
 
-
     suspend fun saveTraining(training: Training) {
         withContext(Dispatchers.IO) {
             trainingDao.insertTraining(training)

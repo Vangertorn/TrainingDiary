@@ -19,6 +19,7 @@ import kotlinx.parcelize.Parcelize
         onUpdate = ForeignKey.CASCADE
     )]
 )
+
 data class Approach(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,

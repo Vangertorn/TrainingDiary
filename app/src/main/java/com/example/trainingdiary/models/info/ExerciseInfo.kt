@@ -1,7 +1,9 @@
-package com.example.trainingdiary.models
+package com.example.trainingdiary.models.info
 
 import androidx.room.Embedded
 import androidx.room.Relation
+import com.example.trainingdiary.models.Approach
+import com.example.trainingdiary.models.Exercise
 
 class ExerciseInfo(
     @Embedded
