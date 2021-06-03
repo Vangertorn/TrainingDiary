@@ -17,6 +17,9 @@ abstract class TrainingDao {
     @Query("SELECT * FROM table_trainings")
     abstract fun getTrainingFlow(): Flow<List<Training>?>
 
+    @Query("SELECT * FROM table_trainings")
+    abstract fun getTrainings(): List<Training>?
+
     @Query("DELETE FROM table_trainings")
     abstract fun clearTrainingTable()
 
@@ -29,11 +32,11 @@ abstract class TrainingDao {
         insertTrainings(trainings)
 
     }
-    @Transaction
+
     @Query("SELECT * FROM table_trainings WHERE id == :id LIMIT 1")
     abstract fun getTrainingInfoFlow(id: Long): Flow<TrainingInfo?>
 
-    @Transaction
+
     @Query("SELECT * FROM table_trainings WHERE id == :id LIMIT 1")
     abstract fun getTrainingInfo(id: Long): TrainingInfo?
 

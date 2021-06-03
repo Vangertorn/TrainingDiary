@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.ItemTouchHelper
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.myapplication.support.SupportFragmentInset
 import com.example.myapplication.support.setVerticalMargin
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentExerciseListBinding
 import com.example.trainingdiary.models.Approach
+import com.example.trainingdiary.support.SwipeCallback
 import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.chip.Chip
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -30,6 +32,16 @@ class ExerciseListFragment :
             )
         }
     )
+    private val simpleCallback = SwipeCallback { position, direction ->
+        when (direction) {
+            ItemTouchHelper.LEFT -> {
+
+            }
+            ItemTouchHelper.RIGHT -> {
+
+            }
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,6 +54,8 @@ class ExerciseListFragment :
 //
 //            }
         }
+        val noteHelper = ItemTouchHelper(simpleCallback)
+        noteHelper.attachToRecyclerView(viewBinding.recyclerView)
         args.training.let {
             viewBinding.commentExerciseList.text = it.comment
             viewBinding.dateTrainingExerciseList.text = it.date

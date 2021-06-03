@@ -12,7 +12,10 @@
         tools:layout="@layout/fragment_training_list">
         <action
             android:id="@+id/action_trainingListFragment_to_exerciseListFragment"
-            app:destination="@id/exerciseListFragment" />
+            app:destination="@id/exerciseListFragment"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_trainingListFragment_to_trainingCreateBottomDialog"
             app:destination="@id/trainingCreateBottomDialog" />

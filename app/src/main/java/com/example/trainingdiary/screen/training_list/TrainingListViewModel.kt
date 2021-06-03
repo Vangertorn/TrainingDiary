@@ -23,11 +23,19 @@ class TrainingListViewModel(
         }
     }
 
+    fun getNoteFromPosition(position: Int): Training? {
+        return trainingLiveData.value?.get(position)
+    }
+    fun reSave(training: Training){
+        launch { trainingRepository.saveTraining(training) }
+    }
+
     fun rememberIdTraining(training: Training) {
         launch {
             appSettings.setIdTraining(training.id)
         }
     }
+
 
     init {
         launch {

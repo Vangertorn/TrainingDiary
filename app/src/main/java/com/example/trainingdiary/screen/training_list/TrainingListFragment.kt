@@ -10,8 +10,10 @@ import com.example.myapplication.support.SupportFragmentInset
 import com.example.myapplication.support.setVerticalMargin
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentTrainingListBinding
+import com.example.trainingdiary.models.Training
 import com.example.trainingdiary.support.SwipeCallback
 import com.example.trainingdiary.support.navigateSave
+import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TrainingListFragment :
@@ -33,7 +35,7 @@ class TrainingListFragment :
     private val simpleCallback = SwipeCallback { position, direction ->
         when (direction) {
             ItemTouchHelper.LEFT -> {
-                viewModel.deleteTraining(position)
+                deleteTraining(position)
             }
             ItemTouchHelper.RIGHT -> {
                 viewModel.deleteTraining(position)
@@ -56,7 +58,11 @@ class TrainingListFragment :
         super.onViewCreated(view, savedInstanceState)
         viewBinding.recyclerViewTraining.adapter = adapter
         viewBinding.btnAdd.setOnClickListener {
-            findNavController().navigateSave(TrainingListFragmentDirections.actionTrainingListFragmentToTrainingCreateBottomDialog(null))
+            findNavController().navigateSave(
+                TrainingListFragmentDirections.actionTrainingListFragmentToTrainingCreateBottomDialog(
+                    null
+                )
+            )
         }
         viewModel.trainingLiveData.observe(this.viewLifecycleOwner) {
             adapter.submitList(it)
@@ -67,8 +73,18 @@ class TrainingListFragment :
 
     }
 
+    private fun deleteTraining(position: Int) {
+        val training = viewModel.getNoteFromPosition(position)
+        viewModel.deleteTraining(position)
+        Snackbar.make(viewBinding.recyclerViewTraining, "Training was delete", Snackbar.LENGTH_LONG)
+            .setAction("Undo") {
+                viewModel.reSave(training ?: Training(date = "something happened"))
+            }.show()
+    }
+
     override fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean) {
         viewBinding.toolbarTrainingList.setVerticalMargin(top)
         viewBinding.btnAdd.setVerticalMargin(0, bottom)
+        viewBinding.recyclerViewTraining.setPadding(0,0,0,bottom)
     }
 }
