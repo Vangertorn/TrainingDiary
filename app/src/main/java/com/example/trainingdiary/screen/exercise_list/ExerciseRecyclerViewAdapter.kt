@@ -1,5 +1,6 @@
 package com.example.trainingdiary.screen.exercise_list
 
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,10 +8,11 @@ import androidx.recyclerview.widget.ListAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.beloo.widget.chipslayoutmanager.ChipsLayoutManager
+import com.beloo.widget.chipslayoutmanager.gravity.IChildGravityResolver
 import com.example.trainingdiary.R
-import com.example.trainingdiary.models.Exercise
 import com.example.trainingdiary.models.info.ExerciseInfo
-import com.google.android.material.chip.ChipGroup
+import com.example.trainingdiary.screen.approach_create.ApproachRecyclerViewAdapter
 
 class ExerciseRecyclerViewAdapter(private val onClick: (ExerciseInfo) -> Unit) :
     ListAdapter<ExerciseInfo, ExerciseRecyclerViewAdapter.ExerciseViewHolder>(
@@ -34,7 +36,7 @@ class ExerciseRecyclerViewAdapter(private val onClick: (ExerciseInfo) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         private val tvExerciseName =
             itemView.findViewById<TextView>(R.id.tvNameExercise_exercise_item)
-        val cgApproachGroup = itemView.findViewById<ChipGroup>(R.id.approaches_chipGroup)
+        private val rvApproach = itemView.findViewById<RecyclerView>(R.id.rvApproachInExerciseItem)
 
         init {
             itemView.setOnClickListener {
@@ -42,8 +44,26 @@ class ExerciseRecyclerViewAdapter(private val onClick: (ExerciseInfo) -> Unit) :
             }
         }
 
-        fun bind(item:ExerciseInfo) {
+        fun bind(item: ExerciseInfo) {
+//            val chipsLayoutManager = ChipsLayoutManager.newBuilder().setChildGravity(Gravity.TOP)
+//                .setScrollingEnabled(false).setMaxViewsInRow(3).setGravityResolver(
+//                    object : IChildGravityResolver {
+//                        override fun getItemGravity(p0: Int): Int {
+//                            return Gravity.CENTER
+//                        }
+//                    }).setRowBreaker { adapterPosition == 6 }
+//                .setOrientation(ChipsLayoutManager.HORIZONTAL)
+//                .setRowStrategy(ChipsLayoutManager.STRATEGY_FILL_SPACE)
+//                .withLastRow(true)
+//                .build()
+            val adapter = ApproachRecyclerViewAdapter(onClick = { approach ->
+                Unit
+            })
+
             tvExerciseName.text = item.exercise.name
+            rvApproach.adapter = adapter
+            adapter.submitList(item.approaches)
+//            rvApproach.layoutManager = chipsLayoutManager
         }
 
     }

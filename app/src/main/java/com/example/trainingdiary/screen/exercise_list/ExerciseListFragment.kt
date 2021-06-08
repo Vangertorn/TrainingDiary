@@ -12,6 +12,7 @@ import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentExerciseListBinding
 import com.example.trainingdiary.support.SwipeCallback
 import com.example.trainingdiary.support.navigateSave
+import com.google.android.material.snackbar.Snackbar
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ExerciseListFragment :
@@ -32,10 +33,10 @@ class ExerciseListFragment :
     private val simpleCallback = SwipeCallback { position, direction ->
         when (direction) {
             ItemTouchHelper.LEFT -> {
-
+                deleteExercise(position)
             }
             ItemTouchHelper.RIGHT -> {
-
+                deleteExercise(position)
             }
         }
     }
@@ -46,13 +47,12 @@ class ExerciseListFragment :
         viewModel.exerciseLiveData.observe(this.viewLifecycleOwner) {
             adapter.submitList(it)
 
-//        viewModel.approachLiveData.observe(this.viewLifecycleOwner) {
-//            for (approach in it) {
-//
-//            }
         }
-        val noteHelper = ItemTouchHelper(simpleCallback)
-        noteHelper.attachToRecyclerView(viewBinding.recyclerView)
+
+        val exerciseHelper = ItemTouchHelper(simpleCallback)
+        exerciseHelper.attachToRecyclerView(viewBinding.recyclerView)
+
+
         args.training.let {
             viewBinding.commentExerciseList.text = it.comment
             viewBinding.dateTrainingExerciseList.text = it.date
@@ -72,10 +72,17 @@ class ExerciseListFragment :
         }
     }
 
-//    private fun addNewChip(approach: Approach){
-//        val keyword = approach.weight + approach.reoccurrences
-//        val newChip: Chip = LayoutInflater.from(context).inflate(R.layout.chip_approaches, this.adapter.cgApproachGroup)
-//    }
+    private fun deleteExercise(position: Int) {
+        val exercise = viewModel.getExerciseFromPosition(position)
+        viewModel.deletedExerciseTrue(exercise)
+        Snackbar.make(viewBinding.recyclerView, "Exercise was delete", Snackbar.LENGTH_LONG)
+            .setAction("Undo") {
+                viewModel.deletedExerciseFalse(exercise)
+            }.apply {
+                this.view.translationY =- savedInsets.bottom.toFloat()
+            }.show()
+    }
+
 
     override fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean) {
         viewBinding.toolbarExerciseList.setPadding(0,top,0,0)

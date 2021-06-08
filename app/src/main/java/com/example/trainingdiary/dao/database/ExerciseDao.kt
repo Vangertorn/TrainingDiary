@@ -2,6 +2,7 @@ package com.example.trainingdiary.dao.database
 
 import androidx.room.*
 import com.example.trainingdiary.models.Exercise
+import com.example.trainingdiary.models.Training
 import com.example.trainingdiary.models.info.ExerciseInfo
 import kotlinx.coroutines.flow.Flow
 
@@ -13,6 +14,12 @@ abstract class ExerciseDao {
 
     @Insert
     abstract fun insertExercises(exercises: List<Exercise>): List<Long>
+
+    @Update
+    abstract fun deletedExerciseFlags(exercise: Exercise)
+
+    @Query("SELECT * FROM table_exercise WHERE deleted == :flags")
+    abstract fun getTrainingDeletedFalseFlow(flags: Boolean): Flow<List<Exercise>?>
 
     @Delete
     abstract fun deleteExercise(exercise: Exercise)
@@ -27,5 +34,8 @@ abstract class ExerciseDao {
     @Transaction
     @Query("SELECT * FROM table_exercise WHERE id == :id LIMIT 1")
     abstract fun getExerciseInfoFlow(id: Long): Flow<ExerciseInfo?>
+
+    @Query("SELECT position FROM table_exercise ORDER BY position ASC")
+    abstract fun getExercisePositions(): MutableList<Int>?
 
 }

@@ -20,6 +20,23 @@ class ExerciseListViewModel(
 
     @ExperimentalCoroutinesApi
     val exerciseLiveData = exerciseRepository.currentExerciseFlow.asLiveData()
+
+
+    fun getExerciseFromPosition(position: Int): Exercise{
+        return exerciseLiveData.value?.get(position)!!.exercise
+    }
+
+    fun deletedExerciseTrue(exercise: Exercise) {
+        launch {
+            exerciseRepository.deletedExerciseTrue(exercise)
+        }
+    }
+    fun deletedExerciseFalse(exercise: Exercise) {
+        launch {
+            exerciseRepository.deletedExerciseFalse(exercise)
+        }
+    }
+
     fun forgotIdTraining() {
         launch {
             trainingRepository.forgotIdTraining()

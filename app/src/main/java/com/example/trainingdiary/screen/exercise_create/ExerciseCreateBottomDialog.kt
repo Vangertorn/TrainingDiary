@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.BottomSheetAddExerciseBinding
@@ -40,6 +41,7 @@ class ExerciseCreateBottomDialog : BottomSheetDialogFragment() {
                     name = viewBinding.autoCompleteTvExerciseName.text.toString(),
                     idTraining = args.training.id
                 ))
+                findNavController().popBackStack()
             } else{
                 Toast.makeText(
                     requireContext(),

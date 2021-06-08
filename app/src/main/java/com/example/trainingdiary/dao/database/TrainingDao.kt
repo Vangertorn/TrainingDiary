@@ -44,8 +44,11 @@ abstract class TrainingDao {
     @Query("SELECT * FROM table_trainings WHERE id == :id LIMIT 1")
     abstract fun getTrainingInfoFlow(id: Long): Flow<TrainingInfo?>
 
-    @Query("SELECT * FROM table_exercise WHERE idTraining == :id")
-    abstract fun getExercisesInfoByTrainingIdFlow(id: Long): Flow<List<ExerciseInfo>>
+    @Query("SELECT * FROM table_exercise WHERE idTraining == :id AND deleted ==:flags")
+    abstract fun getExercisesInfoByTrainingIdAndFlagsFlow(
+        id: Long,
+        flags: Boolean
+    ): Flow<List<ExerciseInfo>>
 
     @Query("SELECT * FROM table_exercise WHERE idTraining == :id")
     abstract fun getExercisesInfoByTrainingId(id: Long): List<ExerciseInfo>

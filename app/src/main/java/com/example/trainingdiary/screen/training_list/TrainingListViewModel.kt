@@ -16,9 +16,9 @@ class TrainingListViewModel(
 ) : CoroutineViewModel() {
     val trainingLiveData = trainingRepository.currentTrainingFlow.asLiveData()
 
-    fun deletedTrainingTrue(position: Int) {
+    fun deletedTrainingTrue(training: Training) {
         launch {
-            trainingRepository.deletedTrainingTrue(trainingLiveData.value?.get(position)!!)
+            trainingRepository.deletedTrainingTrue(training)
         }
     }
 

@@ -67,15 +67,15 @@ class TrainingListFragment :
         viewModel.trainingLiveData.observe(this.viewLifecycleOwner) {
             adapter.submitList(it)
         }
-        val noteHelper = ItemTouchHelper(simpleCallback)
-        noteHelper.attachToRecyclerView(viewBinding.recyclerViewTraining)
+        val trainingHelper = ItemTouchHelper(simpleCallback)
+        trainingHelper.attachToRecyclerView(viewBinding.recyclerViewTraining)
 
 
     }
 
     private fun deleteTraining(position: Int) {
         val training = viewModel.getTrainingFromPosition(position)!!
-        viewModel.deletedTrainingTrue(position)
+        viewModel.deletedTrainingTrue(training)
         Snackbar.make(viewBinding.recyclerViewTraining, "Training was delete", Snackbar.LENGTH_LONG)
             .setAction("Undo") {
                 viewModel.deletedTrainingFalse(training)

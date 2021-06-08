@@ -36,7 +36,7 @@ class DiaryApp : Application() {
         viewModel { ExerciseListViewModel(get(), get(), get()) }
     }
     private val repositoryModel = module {
-        factory { TrainingRepository(get(), get(), get(), get()) }
+        factory { TrainingRepository(get(), get()) }
         factory { ApproachRepository(get(), get(), get()) }
         factory { ExerciseRepository(get(), get(), get()) }
         factory { MuscleGroupRepository(get()) }
