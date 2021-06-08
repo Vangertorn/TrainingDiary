@@ -17,5 +17,6 @@ data class Training(
     val muscleGroups: String? = null,
     val comment: String? = null,
     val weight: String? = null,
-    val position: Int = 0
+    val position: Int = 0,
+    val deleted: Boolean = false
 ) : Parcelable

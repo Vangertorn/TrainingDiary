@@ -38,6 +38,7 @@
         android:layout_height="wrap_content"
         style="@style/EditWeightStyle"
         android:hint="Optional"
+        android:inputType="textAutoCorrect"
         app:layout_constraintBottom_toTopOf="@id/confirm_create_training"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

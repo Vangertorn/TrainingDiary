@@ -9,7 +9,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class ExerciseRepository(
@@ -20,17 +19,15 @@ class ExerciseRepository(
 {
 
     @ExperimentalCoroutinesApi
-    val currentExerciseFlow: Flow<List<Exercise>> =
+    val currentExerciseFlow: Flow<List<ExerciseInfo>> =
         appSettings.idTrainingFlow().flatMapLatest { idTraining ->
-            trainingDao.getTrainingInfoFlow(idTraining).map {
-                it?.exercises ?: emptyList()
-            }
+            trainingDao.getExercisesInfoByTrainingIdFlow(idTraining)
         }
 
 
     suspend fun saveExercise(exercise: Exercise) {
         withContext(Dispatchers.IO) {
-            exerciseDao.saveExercise(exercise)
+            exerciseDao.insertExercise(exercise)
         }
     }
 

@@ -9,7 +9,10 @@ import kotlinx.coroutines.flow.Flow
 abstract class ExerciseDao {
 
     @Insert
-    abstract fun saveExercise(exercise: Exercise): Long
+    abstract fun insertExercise(exercise: Exercise): Long
+
+    @Insert
+    abstract fun insertExercises(exercises: List<Exercise>): List<Long>
 
     @Delete
     abstract fun deleteExercise(exercise: Exercise)

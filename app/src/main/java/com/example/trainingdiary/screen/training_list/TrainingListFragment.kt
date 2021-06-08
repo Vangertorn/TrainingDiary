@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.myapplication.support.SupportFragmentInset
+import com.example.myapplication.support.VerticalInset
 import com.example.myapplication.support.setVerticalMargin
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentTrainingListBinding
-import com.example.trainingdiary.models.Training
 import com.example.trainingdiary.support.SwipeCallback
 import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.snackbar.Snackbar
@@ -38,7 +38,7 @@ class TrainingListFragment :
                 deleteTraining(position)
             }
             ItemTouchHelper.RIGHT -> {
-                viewModel.deleteTraining(position)
+                deleteTraining(position)
             }
         }
     }
@@ -74,16 +74,19 @@ class TrainingListFragment :
     }
 
     private fun deleteTraining(position: Int) {
-        val training = viewModel.getNoteFromPosition(position)
-        viewModel.deleteTraining(position)
+        val training = viewModel.getTrainingFromPosition(position)!!
+        viewModel.deletedTrainingTrue(position)
         Snackbar.make(viewBinding.recyclerViewTraining, "Training was delete", Snackbar.LENGTH_LONG)
             .setAction("Undo") {
-                viewModel.reSave(training ?: Training(date = "something happened"))
+                viewModel.deletedTrainingFalse(training)
+            }.apply {
+                this.view.translationY =- savedInsets.bottom.toFloat()
             }.show()
     }
 
     override fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean) {
-        viewBinding.toolbarTrainingList.setVerticalMargin(top)
+        this.savedInsets = VerticalInset(top,bottom,hasKeyboard)
+        viewBinding.toolbarTrainingList.setPadding(0,top,0,0)
         viewBinding.btnAdd.setVerticalMargin(0, bottom)
         viewBinding.recyclerViewTraining.setPadding(0,0,0,bottom)
     }

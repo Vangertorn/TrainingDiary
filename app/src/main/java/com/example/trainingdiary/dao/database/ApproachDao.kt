@@ -13,6 +13,9 @@ abstract class ApproachDao {
     @Insert
     abstract fun insertApproach(approach: Approach): Long
 
+    @Insert
+    abstract fun insertApproaches(approaches: List<Approach>): List<Long>
+
     @Delete
     abstract fun deleteApproach(approach: Approach)
 

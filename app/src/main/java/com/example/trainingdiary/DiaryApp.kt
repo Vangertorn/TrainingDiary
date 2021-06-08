@@ -29,14 +29,14 @@ class DiaryApp : Application() {
     }
 
     private val viewModel = module {
-        viewModel { TrainingListViewModel(get(), get(),get()) }
+        viewModel { TrainingListViewModel(get(), get(), get()) }
         viewModel { TrainingCreateViewModel(get(), get()) }
         viewModel { ApproachCreateViewModel(get()) }
         viewModel { ExerciseCreateViewModel(get()) }
         viewModel { ExerciseListViewModel(get(), get(), get()) }
     }
     private val repositoryModel = module {
-        factory { TrainingRepository(get(),get()) }
+        factory { TrainingRepository(get(), get(), get(), get()) }
         factory { ApproachRepository(get(), get(), get()) }
         factory { ExerciseRepository(get(), get(), get()) }
         factory { MuscleGroupRepository(get()) }

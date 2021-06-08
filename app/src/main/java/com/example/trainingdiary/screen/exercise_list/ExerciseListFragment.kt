@@ -1,7 +1,6 @@
 package com.example.trainingdiary.screen.exercise_list
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -11,10 +10,8 @@ import com.example.myapplication.support.SupportFragmentInset
 import com.example.myapplication.support.setVerticalMargin
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentExerciseListBinding
-import com.example.trainingdiary.models.Approach
 import com.example.trainingdiary.support.SwipeCallback
 import com.example.trainingdiary.support.navigateSave
-import com.google.android.material.chip.Chip
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ExerciseListFragment :
@@ -24,10 +21,10 @@ class ExerciseListFragment :
     private val args: ExerciseListFragmentArgs by navArgs()
     private val adapter = ExerciseRecyclerViewAdapter(
         onClick = {
-            viewModel.rememberIdExercise(it)
+            viewModel.rememberIdExercise(it.exercise)
             findNavController().navigateSave(
                 ExerciseListFragmentDirections.actionExerciseListFragmentToApproachCreateBottomDialog2(
-                    it
+                    it.exercise
                 )
             )
         }
@@ -81,7 +78,7 @@ class ExerciseListFragment :
 //    }
 
     override fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean) {
-        viewBinding.toolbarExerciseList.setVerticalMargin(top)
+        viewBinding.toolbarExerciseList.setPadding(0,top,0,0)
         viewBinding.btnAdd.setVerticalMargin(0, bottom)
     }
 

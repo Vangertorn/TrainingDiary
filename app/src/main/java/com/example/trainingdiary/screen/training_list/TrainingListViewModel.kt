@@ -1,7 +1,6 @@
 package com.example.trainingdiary.screen.training_list
 
 import androidx.lifecycle.asLiveData
-import com.example.trainingdiary.dao.database.MuscleGroupDao
 import com.example.trainingdiary.datastore.AppSettings
 import com.example.trainingdiary.models.MuscleGroup
 import com.example.trainingdiary.models.Training
@@ -17,17 +16,23 @@ class TrainingListViewModel(
 ) : CoroutineViewModel() {
     val trainingLiveData = trainingRepository.currentTrainingFlow.asLiveData()
 
-    fun deleteTraining(position: Int) {
+    fun deletedTrainingTrue(position: Int) {
         launch {
-            trainingRepository.deleteTraining(trainingLiveData.value?.get(position)!!)
+            trainingRepository.deletedTrainingTrue(trainingLiveData.value?.get(position)!!)
         }
     }
 
-    fun getNoteFromPosition(position: Int): Training? {
+    fun getTrainingFromPosition(position: Int): Training? {
         return trainingLiveData.value?.get(position)
     }
-    fun reSave(training: Training){
-        launch { trainingRepository.saveTraining(training) }
+
+    fun deletedTrainingFalse(training: Training){
+
+        launch {
+
+            trainingRepository.deletedTrainingFalse(training)
+
+        }
     }
 
     fun rememberIdTraining(training: Training) {
