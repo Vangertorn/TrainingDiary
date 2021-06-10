@@ -31,7 +31,7 @@ class DiaryApp : Application() {
     private val viewModel = module {
         viewModel { TrainingListViewModel(get(), get(), get()) }
         viewModel { TrainingCreateViewModel(get(), get()) }
-        viewModel { ApproachCreateViewModel(get()) }
+        viewModel { ApproachCreateViewModel(get(),get()) }
         viewModel { ExerciseCreateViewModel(get()) }
         viewModel { ExerciseListViewModel(get(), get(), get()) }
     }

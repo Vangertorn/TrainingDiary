@@ -35,11 +35,14 @@ class ExerciseCreateBottomDialog : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         viewBinding.btnSave.setOnClickListener {
             if(viewBinding.autoCompleteTvExerciseName.text.isNotEmpty()){
                 viewModel.addNewExercise(Exercise(
                     name = viewBinding.autoCompleteTvExerciseName.text.toString(),
-                    idTraining = args.training.id
+                    idTraining = args.training.id,
+                    comment = viewBinding.etCommentExercise.text.toString()
                 ))
                 findNavController().popBackStack()
             } else{

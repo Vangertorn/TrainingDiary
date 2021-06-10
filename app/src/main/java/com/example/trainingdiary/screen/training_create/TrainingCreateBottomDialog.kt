@@ -1,14 +1,12 @@
 package com.example.trainingdiary.screen.training_create
 
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.fragment.findNavController
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.BottomSheetAddTrainingBinding
@@ -26,6 +24,7 @@ class TrainingCreateBottomDialog : BottomSheetDialogFragment() {
     private val viewModel: TrainingCreateViewModel by viewModel()
     private var selectedDate: Date = Date()
     private val dateFormatter = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+    private val args: TrainingCreateBottomDialogArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,10 +45,14 @@ class TrainingCreateBottomDialog : BottomSheetDialogFragment() {
                 addNewChip(muscleGroup.nameMuscleGroup)
             }
         }
-        viewBinding.calendar.onDateChangedCallback = object : CalendarView.DateChangeListener{
+        viewBinding.calendar.onDateChangedCallback = object : CalendarView.DateChangeListener {
             override fun onDateChanged(date: Date) {
                 selectedDate.time = date.time
             }
+        }
+        args.training?.let {
+            viewBinding.etCommentCreateTraining.setText(it.comment)
+            viewBinding.etWeightCreateTraining.setText(it.weight)
         }
 
         viewBinding.confirmCreateTraining.setOnClickListener {

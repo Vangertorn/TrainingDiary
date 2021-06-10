@@ -16,10 +16,13 @@ abstract class ExerciseDao {
     abstract fun insertExercises(exercises: List<Exercise>): List<Long>
 
     @Update
+    abstract fun updateExercise(exercise: Exercise)
+
+    @Update
     abstract fun deletedExerciseFlags(exercise: Exercise)
 
-    @Query("SELECT * FROM table_exercise WHERE deleted == :flags")
-    abstract fun getTrainingDeletedFalseFlow(flags: Boolean): Flow<List<Exercise>?>
+    @Query("SELECT * FROM table_exercise WHERE id == :id LIMIT 1")
+    abstract fun getExerciseFromId(id: Long): Exercise
 
     @Delete
     abstract fun deleteExercise(exercise: Exercise)

@@ -35,7 +35,8 @@ class ExerciseRepository(
                     Exercise(
                         name = exercise.name,
                         idTraining = exercise.idTraining,
-                        position = listPositions[0] - 1
+                        position = listPositions[0] - 1,
+                        comment = exercise.comment
                     )
                 )
             }
@@ -48,6 +49,17 @@ class ExerciseRepository(
         }
     }
 
+    suspend fun updateExercise(exercise: Exercise) {
+        withContext(Dispatchers.IO) {
+            exerciseDao.updateExercise(exercise)
+        }
+    }
+    suspend fun getExerciseFromId(id: Long): Exercise{
+        return withContext(Dispatchers.IO){
+            exerciseDao.getExerciseFromId(id)
+        }
+    }
+
     suspend fun deletedExerciseTrue(exercise: Exercise) {
         withContext(Dispatchers.IO) {
             exerciseDao.deletedExerciseFlags(
@@ -56,11 +68,13 @@ class ExerciseRepository(
                     name = exercise.name,
                     idTraining = exercise.idTraining,
                     position = exercise.position,
-                    deleted = true
+                    deleted = true,
+                    comment = exercise.comment
                 )
             )
         }
     }
+
     suspend fun deletedExerciseFalse(exercise: Exercise) {
         withContext(Dispatchers.IO) {
             exerciseDao.deletedExerciseFlags(
@@ -69,7 +83,8 @@ class ExerciseRepository(
                     name = exercise.name,
                     idTraining = exercise.idTraining,
                     position = exercise.position,
-                    deleted = false
+                    deleted = false,
+                    comment = exercise.comment
                 )
             )
         }

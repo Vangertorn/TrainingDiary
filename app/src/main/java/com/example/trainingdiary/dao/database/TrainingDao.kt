@@ -15,6 +15,7 @@ abstract class TrainingDao {
     @Delete
     abstract fun deleteTraining(training: Training)
 
+
     @Update
     abstract fun deletedTrainingFlags(training: Training)
 
