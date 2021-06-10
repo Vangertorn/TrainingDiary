@@ -11,10 +11,12 @@ import com.example.trainingdiary.R
 import com.example.trainingdiary.models.Training
 
 class TrainingRecyclerViewAdapter(private val onClick: (Training) -> Unit) :
-    ListAdapter<Training, TrainingRecyclerViewAdapter.TrainingViewHolder>(TrainingAdapterDiffCallBack()) {
+    ListAdapter<Training, TrainingRecyclerViewAdapter.TrainingViewHolder>(
+        TrainingAdapterDiffCallBack()
+    ) {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = TrainingViewHolder (
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = TrainingViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.item_training_list, parent, false),
         ::onItemClick
     )
@@ -43,18 +45,18 @@ class TrainingRecyclerViewAdapter(private val onClick: (Training) -> Unit) :
 
         fun bind(item: Training) {
             tvDate.text = item.date
-            if (item.comment == null) {
-                tvComment.visibility = View.INVISIBLE
+            if (item.comment == null || item.comment == "") {
+                tvComment.visibility = View.GONE
             } else {
                 tvComment.text = item.comment
             }
             if (item.muscleGroups == null) {
-                tvMuscleGroups.visibility = View.INVISIBLE
+                tvMuscleGroups.visibility = View.GONE
             } else {
                 tvMuscleGroups.text = item.muscleGroups
             }
-            if (item.weight == null) {
-                tvWeight.visibility = View.INVISIBLE
+            if (item.weight == null || item.weight == "") {
+                tvWeight.visibility = View.GONE
             } else {
                 tvWeight.text = item.weight
             }

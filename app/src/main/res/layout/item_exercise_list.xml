@@ -36,14 +36,14 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/white" />
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/approachLayout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvApproachInExerciseItem"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/ivSwap"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvNameExercise_exercise_item" />
+            app:layout_constraintEnd_toStartOf="@id/ivSwap"
+            app:layout_constraintTop_toBottomOf="@id/tvNameExercise_exercise_item"
+            tools:listitem="@layout/item_approach"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

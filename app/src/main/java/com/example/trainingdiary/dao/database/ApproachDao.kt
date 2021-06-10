@@ -1,4 +1,4 @@
-package com.example.trainingdiary.dao
+package com.example.trainingdiary.dao.database
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -13,12 +13,14 @@ abstract class ApproachDao {
     @Insert
     abstract fun insertApproach(approach: Approach): Long
 
+    @Insert
+    abstract fun insertApproaches(approaches: List<Approach>): List<Long>
+
     @Delete
     abstract fun deleteApproach(approach: Approach)
 
     @Query("SELECT*FROM table_approach")
     abstract fun getApproachFlow(): Flow<List<Approach>?>
-
 
 
 }

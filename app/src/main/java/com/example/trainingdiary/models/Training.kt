@@ -6,7 +6,6 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
-import java.text.FieldPosition
 
 @Parcelize
 @Entity(tableName = "table_trainings", indices = [Index(value = ["id"], unique = true)])
@@ -18,5 +17,6 @@ data class Training(
     val muscleGroups: String? = null,
     val comment: String? = null,
     val weight: String? = null,
-    val position: Int = 0
+    val position: Int = 0,
+    val deleted: Boolean = false
 ) : Parcelable

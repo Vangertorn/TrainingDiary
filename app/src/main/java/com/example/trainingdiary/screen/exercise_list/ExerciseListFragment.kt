@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.ItemTouchHelper
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.myapplication.support.SupportFragmentInset
 import com.example.myapplication.support.setVerticalMargin
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentExerciseListBinding
-import com.example.trainingdiary.screen.approach_create.ApproachCreateBottomDialog
-import com.example.trainingdiary.screen.exercise_create.ExerciseCreateBottomDialog
+import com.example.trainingdiary.support.SwipeCallback
 import com.example.trainingdiary.support.navigateSave
+import com.google.android.material.snackbar.Snackbar
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ExerciseListFragment :
@@ -21,16 +22,37 @@ class ExerciseListFragment :
     private val args: ExerciseListFragmentArgs by navArgs()
     private val adapter = ExerciseRecyclerViewAdapter(
         onClick = {
-           findNavController().navigateSave(ExerciseListFragmentDirections.actionExerciseListFragmentToApproachCreateBottomDialog2())
+            viewModel.rememberIdExercise(it.exercise)
+            findNavController().navigateSave(
+                ExerciseListFragmentDirections.actionExerciseListFragmentToApproachCreateBottomDialog2(
+                    it.exercise
+                )
+            )
         }
     )
+    private val simpleCallback = SwipeCallback { position, direction ->
+        when (direction) {
+            ItemTouchHelper.LEFT -> {
+                deleteExercise(position)
+            }
+            ItemTouchHelper.RIGHT -> {
+                deleteExercise(position)
+            }
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.recyclerView.adapter = adapter
         viewModel.exerciseLiveData.observe(this.viewLifecycleOwner) {
             adapter.submitList(it)
+
         }
+
+        val exerciseHelper = ItemTouchHelper(simpleCallback)
+        exerciseHelper.attachToRecyclerView(viewBinding.recyclerView)
+
+
         args.training.let {
             viewBinding.commentExerciseList.text = it.comment
             viewBinding.dateTrainingExerciseList.text = it.date
@@ -48,10 +70,25 @@ class ExerciseListFragment :
                 )
             )
         }
+//        viewBinding.ivEditTrainingExerciseList.setOnClickListener {
+//            findNavController().navigateSave(ExerciseListFragmentDirections.actionExerciseListFragmentToTrainingCreateBottomDialog(args.training))
+//        }
     }
 
+    private fun deleteExercise(position: Int) {
+        val exercise = viewModel.getExerciseFromPosition(position)
+        viewModel.deletedExerciseTrue(exercise)
+        Snackbar.make(viewBinding.recyclerView, "Exercise was delete", Snackbar.LENGTH_LONG)
+            .setAction("Undo") {
+                viewModel.deletedExerciseFalse(exercise)
+            }.apply {
+                this.view.translationY =- savedInsets.bottom.toFloat()
+            }.show()
+    }
+
+
     override fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean) {
-        viewBinding.toolbarExerciseList.setVerticalMargin(top)
+        viewBinding.toolbarExerciseList.setPadding(0,top,0,0)
         viewBinding.btnAdd.setVerticalMargin(0, bottom)
     }
 

@@ -23,6 +23,9 @@ class AppSettings(context: Context) {
     fun idTrainingFlow(): Flow<Long> = dataStore.data.map { preferences ->
         preferences[longPreferencesKey(TRAINING_ID_KEY)] ?: -1
     }
+    fun idExerciseFlow(): Flow<Long> = dataStore.data.map { preferences ->
+        preferences[longPreferencesKey(EXERCISE_ID_KEY)] ?: -1
+    }
 
     suspend fun idTraining(): Long = idTrainingFlow().first()
 
@@ -32,9 +35,14 @@ class AppSettings(context: Context) {
         }
     }
 
-
+    suspend fun setIdExercise(idExercise: Long) {
+        dataStore.edit { preferences ->
+            preferences[longPreferencesKey(EXERCISE_ID_KEY)] =idExercise
+        }
+    }
 
     companion object {
         private const val TRAINING_ID_KEY = "TRAINING_ID_KEY"
+        private const val EXERCISE_ID_KEY = "EXERCISE_ID_KEY"
     }
 }
