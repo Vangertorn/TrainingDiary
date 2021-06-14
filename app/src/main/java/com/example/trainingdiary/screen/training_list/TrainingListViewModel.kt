@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 class TrainingListViewModel(
     private val trainingRepository: TrainingRepository,
     private val appSettings: AppSettings,
-    private val muscleGroupRepository: MuscleGroupRepository
+    private val muscleGroupRepository: MuscleGroupRepository,
 ) : CoroutineViewModel() {
     val trainingLiveData = trainingRepository.currentTrainingFlow.asLiveData()
 

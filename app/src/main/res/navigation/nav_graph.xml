@@ -37,6 +37,14 @@
         <action
             android:id="@+id/action_exerciseListFragment_to_trainingCreateBottomDialog"
             app:destination="@id/trainingCreateBottomDialog" />
+        <action
+            android:id="@+id/action_exerciseListFragment_to_trainingListFragment"
+            app:destination="@id/trainingListFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <dialog
         android:id="@+id/exerciseCreateBottomDialog"
@@ -61,11 +69,17 @@
         android:name="com.example.trainingdiary.screen.training_create.TrainingCreateBottomDialog"
         android:label="TrainingCreateBottomDialog"
         tools:layout="@layout/bottom_sheet_add_training">
+
         <argument
             android:name="training"
             app:argType="com.example.trainingdiary.models.Training"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_trainingCreateBottomDialog_to_exerciseListFragment"
+            app:destination="@id/exerciseListFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"/>
     </dialog>
 
 </navigation>

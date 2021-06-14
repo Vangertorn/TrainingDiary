@@ -1,4 +1,5 @@
 package com.example.trainingdiary.support
+
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
@@ -48,14 +49,20 @@ class CalendarView @JvmOverloads constructor(
         time = Date()
     }
 
-    val selectedDate: Date?
+    var selectedDate: Date?
         get() {
-            return (rvDays.adapter as DaysAdapter).selectedDate
+            return (rvDays.adapter as? DaysAdapter)?.selectedDate
         }
+        set(value) {
+            (rvDays.adapter as? DaysAdapter)?.selectedDate = value
+//            setMonthDay()
+        }
+
     private lateinit var calendarStyleSettings: CalendarStyleSettings
 
 
     init {
+
         View.inflate(context, R.layout.calendar_view, this)
         context.theme?.let { theme ->
             val attr = theme.obtainStyledAttributes(attributeSet, R.styleable.CalendarView, 0, 0)
@@ -120,7 +127,7 @@ class CalendarView @JvmOverloads constructor(
             calendar.set(Calendar.DAY_OF_MONTH, i)
             list.add(calendar.time)
         }
-        rvDays.adapter = DaysAdapter(calendarStyleSettings, list) {
+        rvDays.adapter = DaysAdapter(calendarStyleSettings, list, selectedDate) {
             calendar.time = it
             onDateChangedCallback?.onDateChanged(it)
         }
@@ -136,12 +143,24 @@ class CalendarView @JvmOverloads constructor(
     class DaysAdapter(
         private val settings: CalendarStyleSettings,
         private val items: List<Date>,
+        selected: Date? = null,
         private val onDateChangedCallback: (Date) -> Unit,
 
         ) : RecyclerView.Adapter<DayViewHolder>() {
 
         var selectedDate: Date? = null
-            private set
+
+        init {
+            selected?.let {
+                selectedDate = it
+            }
+        }
+
+        override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+            super.onAttachedToRecyclerView(recyclerView)
+            recyclerView.scrollToPosition(items.indexOf(selectedDate))
+        }
+
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayViewHolder {
             return DayViewHolder(

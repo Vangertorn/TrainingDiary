@@ -36,39 +36,36 @@ class ExerciseRecyclerViewAdapter(private val onClick: (ExerciseInfo) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         private val tvExerciseName =
             itemView.findViewById<TextView>(R.id.tvNameExercise_exercise_item)
+        private val tvComment =
+            itemView.findViewById<TextView>(R.id.tvCommentExercise_exercise_item)
         private val rvApproach = itemView.findViewById<RecyclerView>(R.id.rvApproachInExerciseItem)
+        private val chipsLayoutManager =
+            ChipsLayoutManager.newBuilder(itemView.context).setChildGravity(Gravity.TOP)
+                .setScrollingEnabled(false)
+                .setGravityResolver { Gravity.CENTER }
+                .setRowBreaker { adapterPosition == 6 }
+                .setOrientation(ChipsLayoutManager.HORIZONTAL)
+                .setRowStrategy(ChipsLayoutManager.STRATEGY_DEFAULT)
+                .withLastRow(false)
+                .build()
+        private val adapter = ApproachRecyclerViewAdapterInExerciseItem()
 
         init {
             itemView.setOnClickListener {
                 itemClick(adapterPosition)
             }
+            rvApproach.layoutManager = chipsLayoutManager
+            rvApproach.adapter = adapter
         }
 
         fun bind(item: ExerciseInfo) {
-//            val chipsLayoutManager = ChipsLayoutManager.newBuilder().setChildGravity(Gravity.TOP)
-//                .setScrollingEnabled(false).setMaxViewsInRow(3).setGravityResolver(
-//                    object : IChildGravityResolver {
-//                        override fun getItemGravity(p0: Int): Int {
-//                            return Gravity.CENTER
-//                        }
-//                    }).setRowBreaker { adapterPosition == 6 }
-//                .setOrientation(ChipsLayoutManager.HORIZONTAL)
-//                .setRowStrategy(ChipsLayoutManager.STRATEGY_FILL_SPACE)
-//                .withLastRow(true)
-//                .build()
-            val adapter = ApproachRecyclerViewAdapter(onClick = { approach ->
-                Unit
-            })
 
             tvExerciseName.text = item.exercise.name
-            rvApproach.adapter = adapter
+            tvComment.text = item.exercise.comment
             adapter.submitList(item.approaches)
-//            rvApproach.layoutManager = chipsLayoutManager
+
         }
-
     }
-
-
 }
 
 class ExerciseAdapterDiffCallBack : DiffUtil.ItemCallback<ExerciseInfo>() {
@@ -77,7 +74,10 @@ class ExerciseAdapterDiffCallBack : DiffUtil.ItemCallback<ExerciseInfo>() {
     }
 
     override fun areContentsTheSame(oldItem: ExerciseInfo, newItem: ExerciseInfo): Boolean {
-        return oldItem.exercise.name == newItem.exercise.name && oldItem.approaches == newItem.approaches
+        return oldItem.exercise.name == newItem.exercise.name
+                && oldItem.approaches == newItem.approaches
+                && oldItem.exercise.comment == newItem.exercise.comment
     }
 
 }
+

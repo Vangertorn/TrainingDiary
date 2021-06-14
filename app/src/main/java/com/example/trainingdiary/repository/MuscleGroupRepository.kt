@@ -17,4 +17,10 @@ class MuscleGroupRepository(private val muscleGroupDao: MuscleGroupDao) {
 
     val currentMuscleGroupFlow: Flow<List<MuscleGroup>> =
         muscleGroupDao.getMuscleGroupsFlow().map { it ?: listOf() }
+
+    suspend fun getMuscleGroups(): List<MuscleGroup> {
+        return withContext(Dispatchers.IO) {
+            return@withContext muscleGroupDao.getMuscleGroups() ?: emptyList()
+        }
+    }
 }

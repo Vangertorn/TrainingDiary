@@ -53,15 +53,16 @@ class ExerciseListFragment :
         exerciseHelper.attachToRecyclerView(viewBinding.recyclerView)
 
 
-        args.training.let {
-            viewBinding.commentExerciseList.text = it.comment
-            viewBinding.dateTrainingExerciseList.text = it.date
-            viewBinding.muscleGroupsExerciseList.text = it.muscleGroups
-            viewBinding.weightExerciseList.text = it.weight
+        args.training.let { training ->
+            viewBinding.commentExerciseList.text = training.comment
+            viewBinding.dateTrainingExerciseList.text = training.date
+            viewBinding.muscleGroupsExerciseList.text = training.muscleGroups
+            viewBinding.weightExerciseList.text =
+                if (!training.weight.isNullOrEmpty()) if (training.muscleGroups.isNullOrEmpty()) "${training.weight} kg" else "${training.weight} kg |" else ""
         }
         viewBinding.toolbarExerciseList.setNavigationOnClickListener {
             viewModel.forgotIdTraining()
-            findNavController().popBackStack()
+            findNavController().navigateSave(ExerciseListFragmentDirections.actionExerciseListFragmentToTrainingListFragment())
         }
         viewBinding.btnAdd.setOnClickListener {
             findNavController().navigateSave(
@@ -70,9 +71,13 @@ class ExerciseListFragment :
                 )
             )
         }
-//        viewBinding.ivEditTrainingExerciseList.setOnClickListener {
-//            findNavController().navigateSave(ExerciseListFragmentDirections.actionExerciseListFragmentToTrainingCreateBottomDialog(args.training))
-//        }
+        viewBinding.ivEditTrainingExerciseList.setOnClickListener {
+            findNavController().navigateSave(
+                ExerciseListFragmentDirections.actionExerciseListFragmentToTrainingCreateBottomDialog(
+                    args.training
+                )
+            )
+        }
     }
 
     private fun deleteExercise(position: Int) {
@@ -82,13 +87,13 @@ class ExerciseListFragment :
             .setAction("Undo") {
                 viewModel.deletedExerciseFalse(exercise)
             }.apply {
-                this.view.translationY =- savedInsets.bottom.toFloat()
+                this.view.translationY = -savedInsets.bottom.toFloat()
             }.show()
     }
 
 
     override fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean) {
-        viewBinding.toolbarExerciseList.setPadding(0,top,0,0)
+        viewBinding.toolbarExerciseList.setPadding(0, top, 0, 0)
         viewBinding.btnAdd.setVerticalMargin(0, bottom)
     }
 

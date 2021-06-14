@@ -6,6 +6,7 @@ import com.example.trainingdiary.models.Training
 import com.example.trainingdiary.models.info.ExerciseInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
@@ -14,9 +15,10 @@ class TrainingRepository(
     private val appSettings: AppSettings,
 ) {
 
-    val currentTrainingFlow: Flow<List<Training>> = trainingDao.getTrainingDeletedFalseFlow(false).map {
-        it ?: listOf()
-    }
+    val currentTrainingFlow: Flow<List<Training>> =
+        trainingDao.getTrainingDeletedFalseFlow(false).map {
+            it ?: listOf()
+        }
 
     suspend fun saveTraining(training: Training) {
         withContext(Dispatchers.IO) {
@@ -30,10 +32,17 @@ class TrainingRepository(
                         muscleGroups = training.muscleGroups,
                         comment = training.comment,
                         weight = training.weight,
-                        position = listPositions[0] - 1
+                        position = listPositions[0] - 1,
+                        selectedMuscleGroup = training.selectedMuscleGroup
                     )
                 )
             }
+        }
+    }
+
+    suspend fun updateTraining(training: Training) {
+        withContext(Dispatchers.IO) {
+            trainingDao.updateTraining(training)
         }
     }
 
@@ -53,6 +62,7 @@ class TrainingRepository(
             )
         }
     }
+
     suspend fun deletedTrainingFalse(training: Training) {
         withContext(Dispatchers.IO) {
             trainingDao.deletedTrainingFlags(
@@ -76,10 +86,21 @@ class TrainingRepository(
     }
 
 
-
     suspend fun getExercisesInfoByTrainingId(id: Long): List<ExerciseInfo> {
         return withContext(Dispatchers.IO) {
             return@withContext trainingDao.getExercisesInfoByTrainingId(id)
+        }
+    }
+
+    suspend fun getTrainingById(trainingId: Long): Training {
+        return withContext(Dispatchers.IO) {
+            return@withContext trainingDao.getTrainingInfo(trainingId).training
+        }
+    }
+
+    suspend fun deletedTrainingsByFlags() {
+        withContext(Dispatchers.IO) {
+            trainingDao.deletedTrainingsByFlags(true)
         }
     }
 

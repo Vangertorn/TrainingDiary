@@ -10,6 +10,8 @@ import com.example.trainingdiary.databinding.ActivityMainBinding
 import androidx.fragment.app.Fragment
 import com.example.myapplication.support.SupportActivityInset
 import com.example.myapplication.support.setWindowTransparency
+import com.example.trainingdiary.screen.training_list.TrainingListViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : SupportActivityInset<ActivityMainBinding>() {
 
@@ -18,13 +20,18 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>() {
     private val navController: NavController by lazy { navHostFragment.navController }
     private val handler = Handler(Looper.getMainLooper())
     private var doubleBackToExitPressedOnce = false
+    private val viewModel: MainActivityViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
         setWindowTransparency(this)
+        viewModel.deletedTrainings()
+        viewModel.deletedExercises()
     }
+
+
 
     override fun onBackPressed() {
         if (navHostFragment.childFragmentManager.backStackEntryCount == 0) {
@@ -49,56 +56,3 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>() {
 }
 
 
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//        setContentView(R.layout.activity_main)
-//        val button = findViewById<Button>(R.id.button)
-//        val root_layout = findViewById<LinearLayout>(R.id.root_layout)
-//        button.setOnClickListener {
-//            // Initialize a new CardView instance
-//            val cardView = CardView(this)
-//
-//            // Initialize a new LayoutParams instance, CardView width and height
-//            val layoutParams = LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.MATCH_PARENT, // CardView width
-//                LinearLayout.LayoutParams.WRAP_CONTENT // CardView height
-//            )
-//
-//            // Set margins for card view
-//            layoutParams.setMargins(20, 20, 20, 20)
-//
-//            // Set the card view layout params
-//            cardView.layoutParams = layoutParams
-//
-//            // Set the card view corner radius
-//            cardView.radius = 16F
-//
-//            // Set the card view content padding
-//            cardView.setContentPadding(25,25,25,25)
-//
-//            // Set the card view background color
-//            cardView.setCardBackgroundColor(Color.LTGRAY)
-//
-//            // Set card view elevation
-//            cardView.cardElevation = 8F
-//
-//            // Set card view maximum elevation
-//            cardView.maxCardElevation = 12F
-//
-//            // Set a click listener for card view
-//            cardView.setOnClickListener{
-//                Toast.makeText(
-//                    applicationContext,
-//                    "Card clicked.",
-//                    Toast.LENGTH_SHORT).show()
-//            }
-//
-//            // Add an ImageView to the CardView
-////            cardView.addView(generateImageView())
-//
-//            // Finally, add the CardView in root layout
-//            root_layout.addView(cardView)
-//        }
-//    }

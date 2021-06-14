@@ -45,20 +45,20 @@ class TrainingRecyclerViewAdapter(private val onClick: (Training) -> Unit) :
 
         fun bind(item: Training) {
             tvDate.text = item.date
-            if (item.comment == null || item.comment == "") {
+            if (item.comment.isNullOrBlank()) {
                 tvComment.visibility = View.GONE
             } else {
                 tvComment.text = item.comment
             }
-            if (item.muscleGroups == null) {
+            if (item.muscleGroups.isNullOrBlank()) {
                 tvMuscleGroups.visibility = View.GONE
             } else {
                 tvMuscleGroups.text = item.muscleGroups
             }
-            if (item.weight == null || item.weight == "") {
+            if (item.weight.isNullOrBlank()) {
                 tvWeight.visibility = View.GONE
             } else {
-                tvWeight.text = item.weight
+                tvWeight.text = "${item.weight} kg"
             }
 
         }

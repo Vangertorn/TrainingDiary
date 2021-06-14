@@ -6,37 +6,40 @@
     android:layout_height="match_parent">
 
 
-<com.example.trainingdiary.support.CalendarView
-    android:id="@+id/calendar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintBottom_toTopOf="@id/cgMuscleGroup"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:layout_marginEnd="10dp"
-    android:layout_marginStart="10dp"
-    app:month_text_size="20sp"
-    app:month_text_color="@color/crimson"
-    app:ivLeft_color="@color/crimson"
-    app:ivRight_color="@color/crimson"
-    app:today_background="@drawable/background_today_calendar"
-    app:selected_day_background="@drawable/background_color"
-    app:selected_day_text_color="@color/white"/>
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/cgMuscleGroup"
-        app:chipSpacing="5dp"
+    <com.example.trainingdiary.support.CalendarView
+        android:id="@+id/calendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/tvText1"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:ivLeft_color="@color/crimson"
+        app:ivRight_color="@color/crimson"
+        app:layout_constraintBottom_toTopOf="@+id/rvMuscleCroups"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:month_text_color="@color/crimson"
+        app:month_text_size="20sp"
+        app:selected_day_background="@drawable/background_color"
+        app:selected_day_text_color="@color/white"
+        app:today_background="@drawable/background_today_calendar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMuscleCroups"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/tvText1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_muscle_groups" />
 
     <EditText
         android:id="@+id/etComment_create_training"
+        style="@style/EditTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/EditWeightStyle"
         android:hint="Optional"
         android:inputType="textAutoCorrect"
         app:layout_constraintBottom_toTopOf="@id/confirm_create_training"
@@ -67,6 +70,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Optional"
+        android:gravity="start"
         app:layout_constraintBottom_toTopOf="@id/tvText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

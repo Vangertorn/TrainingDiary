@@ -40,7 +40,7 @@ class ApproachRecyclerViewAdapter(private val onClick: (Approach) -> Unit) :
         }
 
         fun bind(item: Approach) {
-            tvText.text = "${item.weight}kg x ${item.reoccurrences}"
+            tvText.text = "${item.weight} kg x ${item.reoccurrences}"
         }
     }
 

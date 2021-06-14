@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.BottomSheetAddApproachBinding
 import com.example.trainingdiary.models.Approach
@@ -23,6 +24,13 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
     private val adapter = ApproachRecyclerViewAdapter(onClick = { approach ->
         viewModel.deleteApproach(approach)
     })
+    private val dataObserver = object : RecyclerView.AdapterDataObserver() {
+        override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+            super.onItemRangeInserted(positionStart, itemCount)
+            viewBinding.rvApproach.scrollToPosition(adapter.itemCount - 1);
+
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,9 +50,20 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
         viewBinding.rvApproach.adapter = adapter
         viewModel.approachLiveData.observe(this.viewLifecycleOwner) {
             adapter.submitList(it)
+            if (it.isNotEmpty()) {
+                viewBinding.etWeight.setText(it[it.size - 1].weight)
+                viewBinding.etReoccurrence.setText(it[it.size - 1].reoccurrences)
+            }
         }
+        adapter.registerAdapterDataObserver(dataObserver)
 
         viewBinding.btnAddApproach.setOnClickListener {
+            if (viewBinding.etWeight.text.isBlank()) {
+                viewBinding.etWeight.setText("0.0")
+            }
+            if (viewBinding.etReoccurrence.text.isBlank()) {
+                viewBinding.etReoccurrence.setText("0")
+            }
             viewModel.addNewApproach(
                 Approach(
                     weight = viewBinding.etWeight.text.toString(),
@@ -57,10 +76,6 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
             viewBinding.autoCompleteTvExerciseName.setText(it.name)
             viewBinding.etCommentExercise.setText(it.comment)
         }
-
-
-
-
 
 
         viewBinding.ibAddQuantity.setOnClickListener {
@@ -114,7 +129,6 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
     }
 
 
-
     override fun onPause() {
         super.onPause()
         if (viewBinding.autoCompleteTvExerciseName.text.isNotBlank()) {
@@ -133,7 +147,10 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
         }
     }
 
-
+    override fun onDestroyView() {
+        adapter.unregisterAdapterDataObserver(dataObserver)
+        super.onDestroyView()
+    }
 
 
 }

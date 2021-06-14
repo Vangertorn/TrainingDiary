@@ -8,7 +8,9 @@ import com.example.trainingdiary.repository.ExerciseRepository
 import com.example.trainingdiary.repository.TrainingRepository
 import com.example.trainingdiary.support.CoroutineViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class ExerciseListViewModel(
     private val exerciseRepository: ExerciseRepository,
@@ -21,8 +23,7 @@ class ExerciseListViewModel(
     @ExperimentalCoroutinesApi
     val exerciseLiveData = exerciseRepository.currentExerciseFlow.asLiveData()
 
-
-    fun getExerciseFromPosition(position: Int): Exercise{
+    fun getExerciseFromPosition(position: Int): Exercise {
         return exerciseLiveData.value?.get(position)!!.exercise
     }
 
@@ -31,6 +32,7 @@ class ExerciseListViewModel(
             exerciseRepository.deletedExerciseTrue(exercise)
         }
     }
+
     fun deletedExerciseFalse(exercise: Exercise) {
         launch {
             exerciseRepository.deletedExerciseFalse(exercise)
@@ -43,7 +45,13 @@ class ExerciseListViewModel(
         }
     }
 
-    fun rememberIdExercise(exercise: Exercise){
+    fun getTrainingFromId(trainingId: Long): Training {
+        return runBlocking {
+            trainingRepository.getTrainingById(trainingId)
+        }
+    }
+
+    fun rememberIdExercise(exercise: Exercise) {
         launch {
             appSettings.setIdExercise(exercise.id)
         }

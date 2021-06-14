@@ -43,9 +43,9 @@ class ExerciseRepository(
         }
     }
 
-    suspend fun deleteExercise(exercise: Exercise) {
+    suspend fun deleteExercises() {
         withContext(Dispatchers.IO) {
-            exerciseDao.deleteExercise((exercise))
+            exerciseDao.deletedExercisesByFlags(true)
         }
     }
 
@@ -54,8 +54,9 @@ class ExerciseRepository(
             exerciseDao.updateExercise(exercise)
         }
     }
-    suspend fun getExerciseFromId(id: Long): Exercise{
-        return withContext(Dispatchers.IO){
+
+    suspend fun getExerciseFromId(id: Long): Exercise {
+        return withContext(Dispatchers.IO) {
             exerciseDao.getExerciseFromId(id)
         }
     }

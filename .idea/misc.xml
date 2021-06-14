@@ -4,8 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3828125" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/backgound_item_muscle_groups.xml" value="0.36574074074074076" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/background_color.xml" value="0.3828125" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/background_edit_text.xml" value="0.3828125" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/background_item_approach_in_exercise.xml" value="0.37037037037037035" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/background_item_muscle_groups_selected.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/background_today_calendar.xml" value="0.36574074074074076" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/background_toolbar_color.xml" value="0.3828125" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/button_back_background.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/button_background.xml" value="0.22135416666666666" />
@@ -16,6 +20,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/ic_bac.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/ic_calendar.xml" value="0.3828125" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/ic_customer_support.xml" value="0.3828125" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/ic_information.xml" value="0.3611111111111111" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3828125" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/ic_left.xml" value="0.3769230769230769" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/ic_minus.xml" value="0.3828125" />
@@ -23,6 +28,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/ic_pencil_edit.xml" value="0.3828125" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/ic_plus.xml" value="0.3828125" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/ic_plus_rv.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/ic_return_settings.xml" value="0.35555555555555557" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/ic_right.xml" value="0.24322916666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/ic_season_ticket.xml" value="0.3828125" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/drawable/ic_settings.xml" value="0.3828125" />
@@ -40,10 +46,13 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/fragment_create_approach.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/fragment_create_training.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/fragment_exercise_list.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/fragment_settings.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/fragment_training_list.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/item_approach.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/item_approach_exercise.xml" value="0.9" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/item_approache.xml" value="0.67" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/item_exercise_list.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/item_muscle_groups.xml" value="0.67" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/layout/item_training_list.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3828125" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Trainingdiary/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3828125" />

@@ -14,6 +14,20 @@ abstract class ExerciseDao {
 
     @Insert
     abstract fun insertExercises(exercises: List<Exercise>): List<Long>
+    @Delete
+    abstract fun deleteExercises(exercises: List<Exercise>)
+
+    @Query("SELECT * FROM table_exercise WHERE deleted ==:flags")
+    abstract fun getExercisesByFlags(
+        flags: Boolean
+    ): List<Exercise>
+
+    @Transaction
+    open fun deletedExercisesByFlags(flags: Boolean) {
+
+        deleteExercises(getExercisesByFlags(flags))
+    }
+
 
     @Update
     abstract fun updateExercise(exercise: Exercise)

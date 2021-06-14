@@ -13,8 +13,10 @@ abstract class TrainingDao {
     abstract fun insertTraining(training: Training): Long
 
     @Delete
-    abstract fun deleteTraining(training: Training)
+    abstract fun deleteTrainings(trainings: List<Training>)
 
+    @Update
+    abstract fun updateTraining(training: Training)
 
     @Update
     abstract fun deletedTrainingFlags(training: Training)
@@ -51,12 +53,23 @@ abstract class TrainingDao {
         flags: Boolean
     ): Flow<List<ExerciseInfo>>
 
+    @Query("SELECT * FROM table_trainings WHERE deleted ==:flags")
+    abstract fun getTrainingByFlags(
+        flags: Boolean
+    ): List<Training>
+
+    @Transaction
+    open fun deletedTrainingsByFlags(flags: Boolean) {
+        val list = getTrainingByFlags(flags)
+        deleteTrainings(list)
+    }
+
     @Query("SELECT * FROM table_exercise WHERE idTraining == :id")
     abstract fun getExercisesInfoByTrainingId(id: Long): List<ExerciseInfo>
 
 
     @Query("SELECT * FROM table_trainings WHERE id == :id LIMIT 1")
-    abstract fun getTrainingInfo(id: Long): TrainingInfo?
+    abstract fun getTrainingInfo(id: Long): TrainingInfo
 
     @Query("UPDATE table_trainings SET position =:pos WHERE id = :id")
     abstract fun updateTrainingPosition(id: Long, pos: Int)
