@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingdiary.R
@@ -48,6 +49,19 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.rvApproach.adapter = adapter
+
+        viewModel.reoccurrencesLiveData.observe(this.viewLifecycleOwner){
+            if(viewBinding.etReoccurrence.text.isBlank()){
+                viewBinding.etReoccurrence.setText(it)
+            }
+        }
+
+        viewModel.weightLiveData.observe(this.viewLifecycleOwner){
+            if(viewBinding.etWeight.text.isBlank()){
+                viewBinding.etWeight.setText(it)
+            }
+        }
+
         viewModel.approachLiveData.observe(this.viewLifecycleOwner) {
             adapter.submitList(it)
             if (it.isNotEmpty()) {
@@ -55,7 +69,31 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
                 viewBinding.etReoccurrence.setText(it[it.size - 1].reoccurrences)
             }
         }
+
         adapter.registerAdapterDataObserver(dataObserver)
+
+        viewBinding.btnEditExercise.setOnClickListener {
+            if (viewBinding.autoCompleteTvExerciseName.text.isNotBlank()) {
+                args.exercise.let {
+                    viewModel.updateExercise(
+                        Exercise(
+                            id = it.id,
+                            name = viewBinding.autoCompleteTvExerciseName.text.toString(),
+                            idTraining = it.idTraining,
+                            position = it.position,
+                            comment = viewBinding.etCommentExercise.text.toString(),
+                            deleted = it.deleted
+                        )
+                    )
+                }
+            } else{
+                Toast.makeText(
+                    this.context,
+                    "Exercise name is empty",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
 
         viewBinding.btnAddApproach.setOnClickListener {
             if (viewBinding.etWeight.text.isBlank()) {
@@ -129,23 +167,6 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
     }
 
 
-    override fun onPause() {
-        super.onPause()
-        if (viewBinding.autoCompleteTvExerciseName.text.isNotBlank()) {
-            args.exercise.let {
-                viewModel.updateExercise(
-                    Exercise(
-                        id = it.id,
-                        name = viewBinding.autoCompleteTvExerciseName.text.toString(),
-                        idTraining = it.idTraining,
-                        position = it.position,
-                        comment = viewBinding.etCommentExercise.text.toString(),
-                        deleted = it.deleted
-                    )
-                )
-            }
-        }
-    }
 
     override fun onDestroyView() {
         adapter.unregisterAdapterDataObserver(dataObserver)

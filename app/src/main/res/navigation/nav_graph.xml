@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_trainingListFragment_to_trainingCreateBottomDialog"
             app:destination="@id/trainingCreateBottomDialog" />
+        <action
+            android:id="@+id/action_trainingListFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/exerciseListFragment"
@@ -81,5 +84,10 @@
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true"/>
     </dialog>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.trainingdiary.screen.settings.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings"/>
 
 </navigation>

@@ -25,8 +25,11 @@ abstract class TrainingDao {
     abstract fun getTrainingFlow(): Flow<List<Training>?>
 
 
-    @Query("SELECT * FROM table_trainings WHERE deleted == :flags")
-    abstract fun getTrainingDeletedFalseFlow(flags: Boolean): Flow<List<Training>?>
+    @Query("SELECT * FROM table_trainings WHERE deleted == :flags ORDER BY position ASC")
+    abstract fun getTrainingDeletedFalseAscFlow(flags: Boolean): Flow<List<Training>?>
+
+    @Query("SELECT * FROM table_trainings WHERE deleted == :flags ORDER BY position DESC")
+    abstract fun getTrainingDeletedFalseDescFlow(flags: Boolean): Flow<List<Training>?>
 
     @Query("SELECT * FROM table_trainings")
     abstract fun getTrainings(): List<Training>?
@@ -47,7 +50,7 @@ abstract class TrainingDao {
     @Query("SELECT * FROM table_trainings WHERE id == :id LIMIT 1")
     abstract fun getTrainingInfoFlow(id: Long): Flow<TrainingInfo?>
 
-    @Query("SELECT * FROM table_exercise WHERE idTraining == :id AND deleted ==:flags")
+    @Query("SELECT * FROM table_exercise WHERE idTraining == :id AND deleted ==:flags ")
     abstract fun getExercisesInfoByTrainingIdAndFlagsFlow(
         id: Long,
         flags: Boolean

@@ -8,13 +8,16 @@ import com.example.trainingdiary.repository.MuscleGroupRepository
 import com.example.trainingdiary.repository.TrainingRepository
 import com.example.trainingdiary.support.CoroutineViewModel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class TrainingListViewModel(
     private val trainingRepository: TrainingRepository,
     private val appSettings: AppSettings,
     private val muscleGroupRepository: MuscleGroupRepository,
 ) : CoroutineViewModel() {
-    val trainingLiveData = trainingRepository.currentTrainingFlow.asLiveData()
+    val trainingAscLiveData = trainingRepository.currentTrainingAscFlow.asLiveData()
+    val trainingDescLiveData = trainingRepository.currentTrainingDescFlow.asLiveData()
+    val switchOrderLiveData = appSettings.orderAddedFlow().asLiveData()
 
     fun deletedTrainingTrue(training: Training) {
         launch {
@@ -23,10 +26,17 @@ class TrainingListViewModel(
     }
 
     fun getTrainingFromPosition(position: Int): Training? {
-        return trainingLiveData.value?.get(position)
+        return runBlocking {
+            if (appSettings.orderAdded()) {
+                return@runBlocking trainingAscLiveData.value?.get(position)
+            } else {
+                return@runBlocking trainingDescLiveData.value?.get(position)
+            }
+        }
+
     }
 
-    fun deletedTrainingFalse(training: Training){
+    fun deletedTrainingFalse(training: Training) {
 
         launch {
 

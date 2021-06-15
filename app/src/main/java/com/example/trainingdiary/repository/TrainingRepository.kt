@@ -15,12 +15,17 @@ class TrainingRepository(
     private val appSettings: AppSettings,
 ) {
 
-    val currentTrainingFlow: Flow<List<Training>> =
-        trainingDao.getTrainingDeletedFalseFlow(false).map {
+    val currentTrainingAscFlow: Flow<List<Training>> =
+        trainingDao.getTrainingDeletedFalseAscFlow(false).map {
+            it ?: listOf()
+        }
+    val currentTrainingDescFlow: Flow<List<Training>> =
+        trainingDao.getTrainingDeletedFalseDescFlow(false).map {
             it ?: listOf()
         }
 
     suspend fun saveTraining(training: Training) {
+
         withContext(Dispatchers.IO) {
             if (training.id == 0L) {
                 val listPositions: MutableList<Int> =
