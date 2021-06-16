@@ -16,6 +16,9 @@ class TrainingCreateViewModel(
 ) :
     CoroutineViewModel() {
 
+    val muscleGroupLiveData = muscleGroupRepository.currentMuscleGroupFlow.asLiveData()
+
+
     fun addNewTraining(training: Training) {
         launch {
             trainingRepository.saveTraining(training)
@@ -26,9 +29,6 @@ class TrainingCreateViewModel(
             trainingRepository.updateTraining(training)
         }
     }
-
-    val muscleGroupLiveData = muscleGroupRepository.currentMuscleGroupFlow.asLiveData()
-
 
     fun addMuscleGroups(selectedPositions: List<Int>): String {
         val stringBuilder = StringBuilder()

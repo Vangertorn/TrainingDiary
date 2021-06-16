@@ -13,7 +13,6 @@ import kotlinx.coroutines.runBlocking
 class TrainingListViewModel(
     private val trainingRepository: TrainingRepository,
     private val appSettings: AppSettings,
-    private val muscleGroupRepository: MuscleGroupRepository,
 ) : CoroutineViewModel() {
     val trainingAscLiveData = trainingRepository.currentTrainingAscFlow.asLiveData()
     val trainingDescLiveData = trainingRepository.currentTrainingDescFlow.asLiveData()
@@ -51,21 +50,4 @@ class TrainingListViewModel(
         }
     }
 
-
-    init {
-        launch {
-            muscleGroupRepository.saveDefaultValues(
-                listOf(
-                    MuscleGroup(nameMuscleGroup = "Legs", factorySettings = true),
-                    MuscleGroup(nameMuscleGroup = "All muscle groups", factorySettings = true),
-                    MuscleGroup(nameMuscleGroup = "Breast", factorySettings = true),
-                    MuscleGroup(nameMuscleGroup = "Biceps", factorySettings = true),
-                    MuscleGroup(nameMuscleGroup = "Shoulders", factorySettings = true),
-                    MuscleGroup(nameMuscleGroup = "Back", factorySettings = true),
-                    MuscleGroup(nameMuscleGroup = "Triceps", factorySettings = true)
-                )
-            )
-        }
-
-    }
 }

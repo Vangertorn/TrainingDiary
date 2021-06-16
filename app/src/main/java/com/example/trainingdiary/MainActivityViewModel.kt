@@ -1,13 +1,15 @@
 package com.example.trainingdiary
 
 import com.example.trainingdiary.repository.ExerciseRepository
+import com.example.trainingdiary.repository.MuscleGroupRepository
 import com.example.trainingdiary.repository.TrainingRepository
 import com.example.trainingdiary.support.CoroutineViewModel
 import kotlinx.coroutines.launch
 
 class MainActivityViewModel(
     private val trainingRepository: TrainingRepository,
-    private val exerciseRepository: ExerciseRepository
+    private val exerciseRepository: ExerciseRepository,
+    private val muscleGroupRepository: MuscleGroupRepository
 ) : CoroutineViewModel() {
 
     fun deletedTrainings() {
@@ -19,5 +21,12 @@ class MainActivityViewModel(
         launch {
             exerciseRepository.deleteExercises()
         }
+    }
+    init {
+        launch {
+            muscleGroupRepository.saveDefaultValues(
+            )
+        }
+
     }
 }

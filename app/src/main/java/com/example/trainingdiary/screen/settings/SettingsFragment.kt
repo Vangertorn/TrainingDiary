@@ -2,23 +2,74 @@ package com.example.trainingdiary.screen.settings
 
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.myapplication.support.SupportFragmentInset
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentSettingsBinding
+import com.example.trainingdiary.models.MuscleGroup
+import com.example.trainingdiary.support.hideKeyboard
 import com.example.trainingdiary.support.navigateSave
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.fragment_settings) {
     override val viewBinding: FragmentSettingsBinding by viewBinding()
     private val viewModel: SettingsViewModel by viewModel()
+    private val adapter = SettingsMuscleGroupsRecyclerViewAdapter(onClick = { muscleGroup ->
+        viewModel.deleteMuscleGroup(
+            MuscleGroup(
+                id = muscleGroup.id,
+                nameMuscleGroup = muscleGroup.nameMuscleGroup,
+                factorySettings = muscleGroup.factorySettings,
+                deleted = true
+            )
+        )
+    })
+    private val dataObserver = object : RecyclerView.AdapterDataObserver() {
+        override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+            super.onItemRangeInserted(positionStart, itemCount)
+            viewBinding.rvMuscleCroupsSettings.scrollToPosition(0);
+
+        }
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewBinding.ivReturnSettings.setOnClickListener {
+            showRecoverDialog()
+        }
+        viewBinding.rvMuscleCroupsSettings.adapter = adapter
+        viewModel.muscleGroupLiveData.observe(this.viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
+        adapter.registerAdapterDataObserver(dataObserver)
+        viewBinding.etMuscleGroups.setOnEditorActionListener { v, actionId, event ->
+            if (viewBinding.etMuscleGroups.text.isNotBlank()) {
+                viewModel.saveMuscleGroup(
+                    MuscleGroup(
+                        nameMuscleGroup = viewBinding.etMuscleGroups.text.toString(),
+                        factorySettings = false
+                    )
+                )
+                viewBinding.etMuscleGroups.setText("")
+                this.hideKeyboard()
+            } else {
+                Toast.makeText(
+                    this.context,
+                    "The name muscle group is empty",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            actionId == EditorInfo.IME_ACTION_DONE
+        }
 
         viewBinding.tvAutofill.setOnClickListener {
             findNavController().navigateSave(
@@ -144,6 +195,22 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
                 Toast.LENGTH_SHORT
             ).show()
         }
+    }
+    private fun showRecoverDialog(){
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("You sure that you want to recover muscle groups default values?")
+            .setMessage("The current settings will be lost")
+            .setPositiveButton("Yes") { dialog, _ ->
+                viewModel.recoverValuesMuscleGroups()
+                dialog.cancel()
+            }.setNegativeButton("No") { dialog, _ ->
+                dialog.cancel()
+            }.show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        adapter.unregisterAdapterDataObserver(dataObserver)
     }
 
 

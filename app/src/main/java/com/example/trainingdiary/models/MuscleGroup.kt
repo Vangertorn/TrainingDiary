@@ -17,5 +17,6 @@ data class MuscleGroup(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val nameMuscleGroup: String,
-    val factorySettings: Boolean
+    val factorySettings: Boolean,
+    val deleted: Boolean = false
 ) : Parcelable

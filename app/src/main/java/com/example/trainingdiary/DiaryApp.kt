@@ -29,13 +29,13 @@ class DiaryApp : Application() {
     }
 
     private val viewModel = module {
-        viewModel { TrainingListViewModel(get(), get(), get()) }
+        viewModel { TrainingListViewModel(get(), get()) }
         viewModel { TrainingCreateViewModel(get(), get()) }
         viewModel { ApproachCreateViewModel(get(), get(),get(),get()) }
         viewModel { ExerciseCreateViewModel(get(),get()) }
         viewModel { ExerciseListViewModel(get(), get(), get()) }
-        viewModel { MainActivityViewModel(get(),get()) }
-        viewModel { SettingsViewModel(get()) }
+        viewModel { MainActivityViewModel(get(),get(),get()) }
+        viewModel { SettingsViewModel(get(),get()) }
         viewModel { ExerciseAutofillViewModel(get()) }
     }
     private val repositoryModel = module {

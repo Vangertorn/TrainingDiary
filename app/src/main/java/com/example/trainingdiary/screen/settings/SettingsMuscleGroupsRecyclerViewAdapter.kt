@@ -8,21 +8,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingdiary.R
-import com.example.trainingdiary.models.Approach
 import com.example.trainingdiary.models.MuscleGroup
-import com.example.trainingdiary.screen.approach_create.ApproachRecyclerViewAdapter
 
 class SettingsMuscleGroupsRecyclerViewAdapter(private val onClick: (MuscleGroup) -> Unit) :
-    ListAdapter<Approach, ApproachRecyclerViewAdapter.ApproachViewHolder>(
-        ApproachAdapterDiffCallBack()
+    ListAdapter<MuscleGroup, SettingsMuscleGroupsRecyclerViewAdapter.MuscleGroupViewHolder>(
+        MuscleGroupAdapterDiffCallBack()
     ) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ApproachViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MuscleGroupViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.item_approach, parent, false),
         ::onItemClick
     )
 
-    override fun onBindViewHolder(holder: ApproachViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MuscleGroupViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
@@ -30,7 +28,7 @@ class SettingsMuscleGroupsRecyclerViewAdapter(private val onClick: (MuscleGroup)
         onClick(getItem(position))
     }
 
-    inner class ApproachViewHolder(itemView: View, private val itemClick: (Int) -> Unit) :
+    inner class MuscleGroupViewHolder(itemView: View, private val itemClick: (Int) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         private val tvText = itemView.findViewById<TextView>(R.id.tvApproach)
 
@@ -40,18 +38,18 @@ class SettingsMuscleGroupsRecyclerViewAdapter(private val onClick: (MuscleGroup)
             }
         }
 
-        fun bind(item: Approach) {
-            tvText.text = "${item.weight} kg x ${item.reoccurrences}"
+        fun bind(item: MuscleGroup) {
+            tvText.text = item.nameMuscleGroup
         }
     }
 
-    class ApproachAdapterDiffCallBack : DiffUtil.ItemCallback<Approach>() {
-        override fun areItemsTheSame(oldItem: Approach, newItem: Approach): Boolean {
+    class MuscleGroupAdapterDiffCallBack : DiffUtil.ItemCallback<MuscleGroup>() {
+        override fun areItemsTheSame(oldItem: MuscleGroup, newItem: MuscleGroup): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Approach, newItem: Approach): Boolean {
-            return oldItem.reoccurrences == newItem.reoccurrences && oldItem.weight == newItem.weight
+        override fun areContentsTheSame(oldItem: MuscleGroup, newItem: MuscleGroup): Boolean {
+            return oldItem.nameMuscleGroup == newItem.nameMuscleGroup
         }
     }
 }
