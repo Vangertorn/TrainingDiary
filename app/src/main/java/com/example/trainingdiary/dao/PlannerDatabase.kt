@@ -5,14 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.trainingdiary.dao.database.ApproachDao
-import com.example.trainingdiary.dao.database.ExerciseDao
-import com.example.trainingdiary.dao.database.MuscleGroupDao
-import com.example.trainingdiary.dao.database.TrainingDao
-import com.example.trainingdiary.models.Approach
-import com.example.trainingdiary.models.Exercise
-import com.example.trainingdiary.models.MuscleGroup
-import com.example.trainingdiary.models.Training
+import com.example.trainingdiary.dao.database.*
+import com.example.trainingdiary.models.*
 import com.example.trainingdiary.support.Converters
 
 @Database(
@@ -20,7 +14,8 @@ import com.example.trainingdiary.support.Converters
         Training::class,
         Approach::class,
         Exercise::class,
-        MuscleGroup::class
+        MuscleGroup::class,
+        ExerciseAutofill::class
     ],
     version = 1,
     exportSchema = false
@@ -32,6 +27,7 @@ abstract class PlannerDatabase : RoomDatabase() {
     abstract fun approachDao(): ApproachDao
     abstract fun exerciseDao(): ExerciseDao
     abstract fun muscleGroupDao(): MuscleGroupDao
+    abstract fun exerciseAutofillDao(): ExerciseAutofillDao
 }
 
 object DatabaseConstructor {

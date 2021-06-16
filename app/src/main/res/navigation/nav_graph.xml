@@ -88,6 +88,28 @@
         android:id="@+id/settingsFragment"
         android:name="com.example.trainingdiary.screen.settings.SettingsFragment"
         android:label="SettingsFragment"
-        tools:layout="@layout/fragment_settings"/>
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_exerciseAutofillFragment"
+            app:destination="@id/exerciseAutofillFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exerciseAutofillFragment"
+        android:name="com.example.trainingdiary.screen.exercise_autofill.ExerciseAutofillFragment"
+        android:label="ExerciseAutofillFragment"
+        tools:layout="@layout/fragment_exercise_autofill">
+        <action
+            android:id="@+id/action_exerciseAutofillFragment_to_exerciseAutofillBottomDialog"
+            app:destination="@id/exerciseAutofillBottomDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/exerciseAutofillBottomDialog"
+        android:name="com.example.trainingdiary.screen.exercise_autofill.ExerciseAutofillBottomDialog"
+        android:label="ExerciseAutofillBottomDialog"
+        tools:layout="@layout/bottom_sheet_exercise_autofill">
+        <argument
+            android:name="exerciseAutofill"
+            app:argType="com.example.trainingdiary.models.ExerciseAutofill" />
+    </dialog>
 
 </navigation>

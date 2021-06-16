@@ -4,11 +4,9 @@ import android.app.Application
 import com.example.trainingdiary.dao.DatabaseConstructor
 import com.example.trainingdiary.dao.PlannerDatabase
 import com.example.trainingdiary.datastore.AppSettings
-import com.example.trainingdiary.repository.ApproachRepository
-import com.example.trainingdiary.repository.ExerciseRepository
-import com.example.trainingdiary.repository.MuscleGroupRepository
-import com.example.trainingdiary.repository.TrainingRepository
+import com.example.trainingdiary.repository.*
 import com.example.trainingdiary.screen.approach_create.ApproachCreateViewModel
+import com.example.trainingdiary.screen.exercise_autofill.ExerciseAutofillViewModel
 import com.example.trainingdiary.screen.exercise_create.ExerciseCreateViewModel
 import com.example.trainingdiary.screen.exercise_list.ExerciseListViewModel
 import com.example.trainingdiary.screen.settings.SettingsFragment
@@ -33,17 +31,19 @@ class DiaryApp : Application() {
     private val viewModel = module {
         viewModel { TrainingListViewModel(get(), get(), get()) }
         viewModel { TrainingCreateViewModel(get(), get()) }
-        viewModel { ApproachCreateViewModel(get(), get(),get()) }
-        viewModel { ExerciseCreateViewModel(get()) }
+        viewModel { ApproachCreateViewModel(get(), get(),get(),get()) }
+        viewModel { ExerciseCreateViewModel(get(),get()) }
         viewModel { ExerciseListViewModel(get(), get(), get()) }
         viewModel { MainActivityViewModel(get(),get()) }
         viewModel { SettingsViewModel(get()) }
+        viewModel { ExerciseAutofillViewModel(get()) }
     }
     private val repositoryModel = module {
         factory { TrainingRepository(get(), get()) }
         factory { ApproachRepository(get(), get(), get()) }
         factory { ExerciseRepository(get(), get(), get()) }
         factory { MuscleGroupRepository(get()) }
+        factory { ExerciseAutofillRepository(get()) }
     }
 
     private val barnModel = module {
@@ -52,6 +52,7 @@ class DiaryApp : Application() {
         factory { get<PlannerDatabase>().approachDao() }
         factory { get<PlannerDatabase>().exerciseDao() }
         factory { get<PlannerDatabase>().muscleGroupDao() }
+        factory { get<PlannerDatabase>().exerciseAutofillDao() }
         single { AppSettings(get()) }
     }
 }

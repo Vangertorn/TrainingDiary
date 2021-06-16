@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,7 @@ import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.BottomSheetAddApproachBinding
 import com.example.trainingdiary.models.Approach
 import com.example.trainingdiary.models.Exercise
+import com.example.trainingdiary.models.ExerciseAutofill
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -48,16 +50,23 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.autoCompleteExerciseLiveData.observe(this.viewLifecycleOwner) {
+            val arrayAdapter: ArrayAdapter<String> =
+                ArrayAdapter(requireContext(), R.layout.item_select_dialog, it)
+            viewBinding.autoCompleteTvExerciseName.setAdapter(arrayAdapter)
+        }
+
         viewBinding.rvApproach.adapter = adapter
 
-        viewModel.reoccurrencesLiveData.observe(this.viewLifecycleOwner){
-            if(viewBinding.etReoccurrence.text.isBlank()){
+        viewModel.reoccurrencesLiveData.observe(this.viewLifecycleOwner) {
+            if (viewBinding.etReoccurrence.text.isBlank()) {
                 viewBinding.etReoccurrence.setText(it)
             }
         }
 
-        viewModel.weightLiveData.observe(this.viewLifecycleOwner){
-            if(viewBinding.etWeight.text.isBlank()){
+        viewModel.weightLiveData.observe(this.viewLifecycleOwner) {
+            if (viewBinding.etWeight.text.isBlank()) {
                 viewBinding.etWeight.setText(it)
             }
         }
@@ -86,7 +95,12 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
                         )
                     )
                 }
-            } else{
+                viewModel.addNewExerciseAutofill(
+                    ExerciseAutofill(
+                        nameExercise = viewBinding.autoCompleteTvExerciseName.text.toString()
+                    )
+                )
+            } else {
                 Toast.makeText(
                     this.context,
                     "Exercise name is empty",
@@ -165,7 +179,6 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
             }
         }
     }
-
 
 
     override fun onDestroyView() {

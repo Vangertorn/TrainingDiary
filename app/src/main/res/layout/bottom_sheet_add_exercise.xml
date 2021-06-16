@@ -5,16 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
+    <TextView
+        android:id="@+id/tvText1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/autoCompleteTvExerciseName"/>
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTvExerciseName"
         style="@style/EditTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:dropDownAnchor="@id/tvText1"
         android:hint="Names exercise"
+        android:maxLength="30"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tvText1" />
 
     <EditText
         android:id="@+id/etCommentExercise"

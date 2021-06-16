@@ -8,6 +8,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.myapplication.support.SupportFragmentInset
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentSettingsBinding
+import com.example.trainingdiary.support.navigateSave
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -18,6 +19,13 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewBinding.tvAutofill.setOnClickListener {
+            findNavController().navigateSave(
+                SettingsFragmentDirections.actionSettingsFragmentToExerciseAutofillFragment()
+            )
+        }
+
         viewBinding.toolbarSettings.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
@@ -55,15 +63,15 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
             }
         }
 
-        viewModel.switchOrderLiveData.observe(this.viewLifecycleOwner){
+        viewModel.switchOrderLiveData.observe(this.viewLifecycleOwner) {
             viewBinding.switchSortTraining.isChecked = it
         }
         viewBinding.switchSortTraining.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(isChecked){
+            if (isChecked) {
                 viewBinding.tvTrainingsLayout.text = "Last training above"
                 viewModel.saveOrderAdded(true)
 
-            } else{
+            } else {
                 viewBinding.tvTrainingsLayout.text = "Last training below"
                 viewModel.saveOrderAdded(false)
             }

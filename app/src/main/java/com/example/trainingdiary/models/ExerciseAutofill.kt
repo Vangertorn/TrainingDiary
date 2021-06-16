@@ -2,20 +2,18 @@ package com.example.trainingdiary.models
 
 import android.os.Parcelable
 import androidx.room.Entity
-import androidx.room.Index
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity(
-    tableName = "table_muscle_group", indices = [Index(
-        value = ["nameMuscleGroup"],
+    tableName = "table_exercise_autofill", indices = [androidx.room.Index(
+        value = ["nameExercise"],
         unique = true
     )]
 )
-data class MuscleGroup(
+data class ExerciseAutofill(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    val nameMuscleGroup: String,
-    val factorySettings: Boolean
+    val nameExercise: String
 ) : Parcelable
