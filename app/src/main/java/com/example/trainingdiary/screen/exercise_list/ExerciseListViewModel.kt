@@ -57,5 +57,11 @@ class ExerciseListViewModel(
         }
     }
 
+    fun switchExercisePosition(exercise1: Exercise, exercise2: Exercise) {
+        launch {
+            exerciseRepository.switchExercisePosition(exercise1, exercise2)
+        }
+    }
+
 
 }

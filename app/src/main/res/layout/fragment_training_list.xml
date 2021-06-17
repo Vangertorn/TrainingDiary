@@ -26,20 +26,24 @@
             app:tint="@color/white" />
 
         <ImageView
-            android:id="@+id/calendar_training_list"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_gravity="end"
-            android:scaleType="center"
-            android:src="@drawable/ic_calendar" />
-
-        <ImageView
             android:id="@+id/subscription_training_list"
             android:layout_width="?attr/actionBarSize"
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="end"
             android:scaleType="center"
-            android:src="@drawable/ic_season_ticket" />
+            android:src="@drawable/ic_season_ticket"/>
+        <TextView
+            android:id="@+id/tvNumberTraining"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:scaleType="center"
+            tools:text="99"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_margin="2dp"
+            android:background="@drawable/ic_circle"/>
 
     </androidx.appcompat.widget.Toolbar>
 

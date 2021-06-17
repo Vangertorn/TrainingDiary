@@ -37,9 +37,26 @@ class AppSettings(context: Context) {
         preferences[booleanPreferencesKey(ORDER_ADDED)] ?: true
     }
 
+    fun numberOfTrainingSessionsFlow(): Flow<Int> = dataStore.data.map { preferences ->
+        preferences[intPreferencesKey(NUMBER_OF_TRAINING_SESSIONS)] ?: -1
+    }
+
+    fun subscriptionEndDateFlow(): Flow<String> = dataStore.data.map { preferences ->
+        preferences[stringPreferencesKey(SUBSCRIPTION_END_DATE)] ?: ""
+    }
+    fun dateCreatedTicketFlow(): Flow<String> = dataStore.data.map { preferences ->
+        preferences[stringPreferencesKey(DATE_CREATED_TICKET)] ?: ""
+    }
+
     suspend fun idTraining(): Long = idTrainingFlow().first()
 
+    suspend fun getNumberOfTrainingSessions(): Int = numberOfTrainingSessionsFlow().first()
+
+    suspend fun getSubscriptionEndDate(): String = subscriptionEndDateFlow().first()
+
     suspend fun orderAdded(): Boolean = orderAddedFlow().first()
+
+    suspend fun getDateCreatedTicket(): String = dateCreatedTicketFlow().first()
 
 
     suspend fun setIdTraining(idTraining: Long) {
@@ -65,9 +82,27 @@ class AppSettings(context: Context) {
             preferences[stringPreferencesKey(WEIGHT_KEY)] = weight
         }
     }
-    suspend fun setOrderAdded(order:Boolean) {
+
+    suspend fun setOrderAdded(order: Boolean) {
         dataStore.edit { preferences ->
             preferences[booleanPreferencesKey(ORDER_ADDED)] = order
+        }
+    }
+
+    suspend fun setNumberOfTrainingSessions(number: Int) {
+        dataStore.edit { preferences ->
+            preferences[intPreferencesKey(NUMBER_OF_TRAINING_SESSIONS)] = number
+        }
+    }
+
+    suspend fun setSubscriptionEndDate(date: String) {
+        dataStore.edit { preferences ->
+            preferences[stringPreferencesKey(SUBSCRIPTION_END_DATE)] = date
+        }
+    }
+    suspend fun setDateCreatedTicket(date: String) {
+        dataStore.edit { preferences ->
+            preferences[stringPreferencesKey(DATE_CREATED_TICKET)] = date
         }
     }
 
@@ -77,5 +112,8 @@ class AppSettings(context: Context) {
         private const val REOCCURRENCES_KEY = "REOCCURRENCES_KEY"
         private const val WEIGHT_KEY = "WEIGHT_KEY"
         private const val ORDER_ADDED = "ORDER_ADDED"
+        private const val NUMBER_OF_TRAINING_SESSIONS = "NUMBER_OF_TRAINING_SESSIONS"
+        private const val SUBSCRIPTION_END_DATE = "SUBSCRIPTION_END_DATE"
+        private const val DATE_CREATED_TICKET = "DATE_CREATED_TICKET"
     }
 }

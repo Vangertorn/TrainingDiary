@@ -6,6 +6,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.fragment.findNavController
 import com.beloo.widget.chipslayoutmanager.ChipsLayoutManager
@@ -77,16 +78,17 @@ class TrainingCreateBottomDialog : BottomSheetDialogFragment() {
         }
 
         viewBinding.confirmCreateTraining.setOnClickListener {
+
             if (args.training == null) {
-                viewModel.addNewTraining(
-                    Training(
-                        date = dateFormatter.format(selectedDate),
-                        comment = viewBinding.etCommentCreateTraining.text.toString(),
-                        weight = viewBinding.etWeightCreateTraining.text.toString(),
-                        muscleGroups = viewModel.addMuscleGroups(adapter.selectedPositions),
-                        selectedMuscleGroup = adapter.selectedPositions
-                    )
+                val training = Training(
+                    date = dateFormatter.format(selectedDate),
+                    comment = viewBinding.etCommentCreateTraining.text.toString(),
+                    weight = viewBinding.etWeightCreateTraining.text.toString(),
+                    muscleGroups = viewModel.addMuscleGroups(adapter.selectedPositions),
+                    selectedMuscleGroup = adapter.selectedPositions
                 )
+                viewModel.addNewTraining(training)
+                viewModel.takeAwayTraining(training)
                 hideKeyboard()
                 findNavController().popBackStack()
             } else {

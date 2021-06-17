@@ -9,6 +9,8 @@ import com.example.trainingdiary.repository.TrainingRepository
 import com.example.trainingdiary.support.CoroutineViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.text.SimpleDateFormat
+import java.util.*
 
 class TrainingListViewModel(
     private val trainingRepository: TrainingRepository,
@@ -17,9 +19,17 @@ class TrainingListViewModel(
     val trainingAscLiveData = trainingRepository.currentTrainingAscFlow.asLiveData()
     val trainingDescLiveData = trainingRepository.currentTrainingDescFlow.asLiveData()
     val switchOrderLiveData = appSettings.orderAddedFlow().asLiveData()
+    val numberTrainingLiveData = appSettings.numberOfTrainingSessionsFlow().asLiveData()
 
     fun deletedTrainingTrue(training: Training) {
+
         launch {
+            if (appSettings.getDateCreatedTicket().isNotEmpty()) {
+                if (monthFormatter.parse(training.date)!! >= monthFormatter.parse(appSettings.getDateCreatedTicket())) {
+                    appSettings.setNumberOfTrainingSessions(appSettings.getNumberOfTrainingSessions() + 1)
+                }
+            }
+
             trainingRepository.deletedTrainingTrue(training)
         }
     }
@@ -35,9 +45,26 @@ class TrainingListViewModel(
 
     }
 
+    fun numberOfTrainingSessions(): Int {
+        return runBlocking {
+            return@runBlocking appSettings.getNumberOfTrainingSessions()
+        }
+    }
+
+    fun subscriptionEndDate(): String {
+        return runBlocking {
+            return@runBlocking appSettings.getSubscriptionEndDate()
+        }
+    }
+
     fun deletedTrainingFalse(training: Training) {
 
         launch {
+            if (appSettings.getDateCreatedTicket().isNotEmpty()) {
+                if (monthFormatter.parse(training.date)!! >= monthFormatter.parse(appSettings.getDateCreatedTicket())) {
+                    appSettings.setNumberOfTrainingSessions(appSettings.getNumberOfTrainingSessions() -1)
+                }
+            }
 
             trainingRepository.deletedTrainingFalse(training)
 
@@ -48,6 +75,10 @@ class TrainingListViewModel(
         launch {
             appSettings.setIdTraining(training.id)
         }
+    }
+
+    companion object {
+        val monthFormatter = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
     }
 
 }

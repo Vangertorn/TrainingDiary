@@ -90,4 +90,10 @@ class ExerciseRepository(
             )
         }
     }
+
+    suspend fun switchExercisePosition(exercise1: Exercise, exercise2: Exercise) {
+        withContext(Dispatchers.IO) {
+            exerciseDao.switchExercisePositions(exercise1, exercise2)
+        }
+    }
 }

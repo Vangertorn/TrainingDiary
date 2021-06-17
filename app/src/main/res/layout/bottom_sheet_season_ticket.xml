@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSave_season_ticket"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:background="@drawable/background_color"
+        android:paddingVertical="12dp"
+        android:text="Save"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckedTextView
+        android:id="@+id/ctvPerpetual"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="false"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_margin="10dp"
+        android:text="Perpetual"
+        app:layout_constraintBottom_toTopOf="@id/btnSave_season_ticket"
+        app:layout_constraintEnd_toStartOf="@id/ctvUnlimited"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckedTextView
+        android:id="@+id/ctvUnlimited"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="false"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:text="Unlimited"
+        app:layout_constraintBottom_toTopOf="@id/btnSave_season_ticket"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ctvPerpetual" />
+
+    <ImageButton
+        android:id="@+id/ibAddQuantity"
+        style="@style/AddRemoveImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_plus"
+        app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etReoccurrence" />
+
+    <ImageButton
+        android:id="@+id/ibRemoveQuantity"
+        style="@style/AddRemoveImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_minus"
+        app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
+        app:layout_constraintEnd_toStartOf="@+id/etReoccurrence"
+        app:layout_constraintTop_toTopOf="@id/etReoccurrence" />
+
+    <EditText
+        android:id="@+id/etReoccurrence"
+        style="@style/EditNumberStyle"
+        android:maxLength="2"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/ctvPerpetual"
+        app:layout_constraintEnd_toStartOf="@id/ibAddQuantity" />
+
+    <TextView
+        style="@style/MyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Number of training sessions"
+        app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etReoccurrence" />
+
+    <com.example.trainingdiary.support.CalendarView
+        android:id="@+id/calendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:ivLeft_color="@color/crimson"
+        app:ivRight_color="@color/crimson"
+        app:layout_constraintBottom_toTopOf="@id/etReoccurrence"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:month_text_color="@color/crimson"
+        app:month_text_size="20sp"
+        app:selected_day_background="@drawable/background_color"
+        app:selected_day_text_color="@color/white"
+        app:today_background="@drawable/background_today_calendar" />
+
+    <TextView
+        android:id="@+id/tvText"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Valid until"
+        app:layout_constraintBottom_toTopOf="@id/calendar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/tvText1"
+        style="@style/MyTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/crimson"
+        android:text="Season ticket"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@id/tvText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

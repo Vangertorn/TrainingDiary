@@ -73,6 +73,16 @@ class TrainingListFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.numberTrainingLiveData.observe(this.viewLifecycleOwner) {
+            if (it >= 0) {
+                viewBinding.tvNumberTraining.visibility = View.VISIBLE
+                viewBinding.tvNumberTraining.text = it.toString()
+            } else{
+                viewBinding.tvNumberTraining.visibility = View.GONE
+            }
+        }
+
+
         viewBinding.recyclerViewTraining.adapter = adapter
 
 
@@ -83,22 +93,36 @@ class TrainingListFragment :
                 )
             )
         }
+
+        viewBinding.subscriptionTrainingList.setOnClickListener {
+            if (viewModel.numberOfTrainingSessions() == -1 && viewModel.subscriptionEndDate()
+                    .isEmpty()
+            ) {
+                findNavController().navigateSave(TrainingListFragmentDirections.actionTrainingListFragmentToSeasonTicketBottomDialog())
+            } else {
+                findNavController().navigateSave(TrainingListFragmentDirections.actionTrainingListFragmentToSeasonTicketInfoBottomDialog())
+            }
+
+        }
         viewBinding.settingsTrainingList.setOnClickListener {
             findNavController().navigateSave(TrainingListFragmentDirections.actionTrainingListFragmentToSettingsFragment())
         }
         viewModel.switchOrderLiveData.observe(this.viewLifecycleOwner) { boolean ->
             if (boolean) {
+                if (dataObserverChek == null) {
+                    adapter.registerAdapterDataObserver(dataObserverAsc)
+                    dataObserverChek = DATA_OBSERVER_ASC
+                }
 
-                adapter.registerAdapterDataObserver(dataObserverAsc)
-                dataObserverChek = DATA_OBSERVER_ASC
 
                 viewModel.trainingAscLiveData.observe(this.viewLifecycleOwner) {
                     adapter.submitList(it)
                 }
             } else {
-
-                adapter.registerAdapterDataObserver(dataObserverDesc)
-                dataObserverChek = DATA_OBSERVER_DESC
+                if (dataObserverChek == null) {
+                    adapter.registerAdapterDataObserver(dataObserverDesc)
+                    dataObserverChek = DATA_OBSERVER_DESC
+                }
 
                 viewModel.trainingDescLiveData.observe(this.viewLifecycleOwner) {
                     adapter.submitList(it)

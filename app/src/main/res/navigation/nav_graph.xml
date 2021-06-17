@@ -22,6 +22,12 @@
         <action
             android:id="@+id/action_trainingListFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_trainingListFragment_to_seasonTicketBottomDialog"
+            app:destination="@id/seasonTicketBottomDialog" />
+        <action
+            android:id="@+id/action_trainingListFragment_to_seasonTicketInfoBottomDialog"
+            app:destination="@id/seasonTicketInfoBottomDialog" />
     </fragment>
     <fragment
         android:id="@+id/exerciseListFragment"
@@ -111,5 +117,15 @@
             android:name="exerciseAutofill"
             app:argType="com.example.trainingdiary.models.ExerciseAutofill" />
     </dialog>
+    <dialog
+        android:id="@+id/seasonTicketBottomDialog"
+        android:name="com.example.trainingdiary.screen.season_ticket.SeasonTicketBottomDialog"
+        android:label="SeasonTicketBottomDialog"
+        tools:layout="@layout/bottom_sheet_season_ticket"/>
+    <dialog
+        android:id="@+id/seasonTicketInfoBottomDialog"
+        android:name="com.example.trainingdiary.screen.season_ticket_info.SeasonTicketInfoBottomDialog"
+        android:label="SeasonTicketInfoBottomDialog"
+        tools:layout="@layout/bottom_sheet_season_ticket_information"/>
 
 </navigation>

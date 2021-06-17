@@ -1,10 +1,12 @@
 package com.example.trainingdiary.screen.training_create
 
 import androidx.lifecycle.asLiveData
+import com.example.trainingdiary.datastore.AppSettings
 import com.example.trainingdiary.models.MuscleGroup
 import com.example.trainingdiary.models.Training
 import com.example.trainingdiary.repository.MuscleGroupRepository
 import com.example.trainingdiary.repository.TrainingRepository
+import com.example.trainingdiary.screen.training_list.TrainingListViewModel
 import com.example.trainingdiary.support.CoroutineViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -12,7 +14,8 @@ import java.lang.StringBuilder
 
 class TrainingCreateViewModel(
     private val trainingRepository: TrainingRepository,
-    private val muscleGroupRepository: MuscleGroupRepository
+    private val muscleGroupRepository: MuscleGroupRepository,
+    private val appSettings: AppSettings
 ) :
     CoroutineViewModel() {
 
@@ -24,7 +27,8 @@ class TrainingCreateViewModel(
             trainingRepository.saveTraining(training)
         }
     }
-    fun updateTraining(training: Training){
+
+    fun updateTraining(training: Training) {
         launch {
             trainingRepository.updateTraining(training)
         }
@@ -42,6 +46,21 @@ class TrainingCreateViewModel(
             }
         }
         return stringBuilder.toString().removeSuffix(", ")
+    }
+
+    fun takeAwayTraining(training: Training) {
+        launch {
+            if (appSettings.getDateCreatedTicket().isNotEmpty()) {
+                if (TrainingListViewModel.monthFormatter.parse(training.date)!! >= TrainingListViewModel.monthFormatter.parse(appSettings.getDateCreatedTicket())) {
+                    if (appSettings.getNumberOfTrainingSessions() == 0) {
+                        appSettings.setNumberOfTrainingSessions(-1)
+                        appSettings.setSubscriptionEndDate("")
+                    }else{
+                        appSettings.setNumberOfTrainingSessions(appSettings.getNumberOfTrainingSessions() - 1)
+                    }
+                }
+            }
+        }
     }
 
 }

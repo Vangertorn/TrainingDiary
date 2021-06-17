@@ -10,7 +10,8 @@ import com.example.myapplication.support.SupportFragmentInset
 import com.example.myapplication.support.setVerticalMargin
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentExerciseListBinding
-import com.example.trainingdiary.support.SwipeCallback
+import com.example.trainingdiary.support.SwipeAndMoveCallback
+
 import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.snackbar.Snackbar
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -30,16 +31,22 @@ class ExerciseListFragment :
             )
         }
     )
-    private val simpleCallback = SwipeCallback { position, direction ->
-        when (direction) {
-            ItemTouchHelper.LEFT -> {
-                deleteExercise(position)
+    private val simpleCallback = SwipeAndMoveCallback({ p1, p2 ->
+        viewModel.switchExercisePosition(
+            viewModel.getExerciseFromPosition(p1),
+            viewModel.getExerciseFromPosition(p2)
+        )
+    },
+        { position, direction ->
+            when (direction) {
+                ItemTouchHelper.LEFT -> {
+                    deleteExercise(position)
+                }
+                ItemTouchHelper.RIGHT -> {
+                    deleteExercise(position)
+                }
             }
-            ItemTouchHelper.RIGHT -> {
-                deleteExercise(position)
-            }
-        }
-    }
+        })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

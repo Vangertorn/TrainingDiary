@@ -9,6 +9,8 @@ import com.example.trainingdiary.screen.approach_create.ApproachCreateViewModel
 import com.example.trainingdiary.screen.exercise_autofill.ExerciseAutofillViewModel
 import com.example.trainingdiary.screen.exercise_create.ExerciseCreateViewModel
 import com.example.trainingdiary.screen.exercise_list.ExerciseListViewModel
+import com.example.trainingdiary.screen.season_ticket.SeasonTicketViewModel
+import com.example.trainingdiary.screen.season_ticket_info.SeasonTicketInfoViewModel
 import com.example.trainingdiary.screen.settings.SettingsFragment
 import com.example.trainingdiary.screen.settings.SettingsViewModel
 import com.example.trainingdiary.screen.training_create.TrainingCreateViewModel
@@ -30,13 +32,15 @@ class DiaryApp : Application() {
 
     private val viewModel = module {
         viewModel { TrainingListViewModel(get(), get()) }
-        viewModel { TrainingCreateViewModel(get(), get()) }
-        viewModel { ApproachCreateViewModel(get(), get(),get(),get()) }
-        viewModel { ExerciseCreateViewModel(get(),get()) }
+        viewModel { TrainingCreateViewModel(get(), get(),get()) }
+        viewModel { ApproachCreateViewModel(get(), get(), get(), get()) }
+        viewModel { ExerciseCreateViewModel(get(), get()) }
         viewModel { ExerciseListViewModel(get(), get(), get()) }
-        viewModel { MainActivityViewModel(get(),get(),get()) }
-        viewModel { SettingsViewModel(get(),get()) }
+        viewModel { MainActivityViewModel(get(), get(), get()) }
+        viewModel { SettingsViewModel(get(), get()) }
         viewModel { ExerciseAutofillViewModel(get()) }
+        viewModel { SeasonTicketViewModel(get()) }
+        viewModel { SeasonTicketInfoViewModel(get()) }
     }
     private val repositoryModel = module {
         factory { TrainingRepository(get(), get()) }

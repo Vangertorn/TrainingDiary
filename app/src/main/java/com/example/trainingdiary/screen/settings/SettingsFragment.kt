@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.myapplication.support.SupportFragmentInset
+import com.example.myapplication.support.setVerticalMargin
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentSettingsBinding
 import com.example.trainingdiary.models.MuscleGroup
@@ -216,5 +217,6 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
 
     override fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean) {
         viewBinding.toolbarSettings.setPadding(0, top, 0, 0)
+        viewBinding.tvDateSave.setVerticalMargin(marginBottom = bottom)
     }
 }

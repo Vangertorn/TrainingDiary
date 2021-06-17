@@ -55,4 +55,15 @@ abstract class ExerciseDao {
     @Query("SELECT position FROM table_exercise ORDER BY position ASC")
     abstract fun getExercisePositions(): MutableList<Int>?
 
+    @Query("UPDATE table_exercise SET position =:pos WHERE id = :id")
+    abstract fun updateExercisePosition(id: Long, pos: Int)
+
+    @Transaction
+    open fun switchExercisePositions(exercise1: Exercise, exercise2: Exercise) {
+        val exercise1Pos = exercise1.position
+        val exercise2Pos = exercise2.position
+        updateExercisePosition(exercise1.id, exercise2Pos)
+        updateExercisePosition(exercise2.id, exercise1Pos)
+    }
+
 }
