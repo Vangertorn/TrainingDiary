@@ -30,6 +30,7 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>() {
         viewModel.deletedTrainings()
         viewModel.deletedExercises()
         viewModel.deletedSuperSets()
+        viewModel.setLeftDays()
     }
 
 

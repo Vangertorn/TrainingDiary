@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.BottomSheetSeasonTicketBinding
 import com.example.trainingdiary.support.CalendarView
+import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -73,9 +74,10 @@ class SeasonTicketBottomDialog : BottomSheetDialogFragment() {
                 viewModel.saveNumberOfTrainingSessions(amount)
                 viewModel.saveSubscriptionEndDate(dateFormatter.format(date))
                 viewModel.saveDateCreatedTicket(dateFormatter.format(Date()))
-                findNavController().popBackStack()
+                viewModel.saveDaysAmount(dateFormatter.format(date))
+                this.dismiss()
+                findNavController().navigateSave(SeasonTicketBottomDialogDirections.actionSeasonTicketBottomDialogToTrainingListFragment())
             }
-
         }
 
         if (viewBinding.etReoccurrence.text.toString().isBlank()) {

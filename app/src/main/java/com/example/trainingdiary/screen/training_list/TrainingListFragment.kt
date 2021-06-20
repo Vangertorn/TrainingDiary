@@ -77,9 +77,19 @@ class TrainingListFragment :
             if (it >= 0) {
                 viewBinding.tvNumberTraining.visibility = View.VISIBLE
                 viewBinding.tvNumberTraining.text = it.toString()
-            } else{
+            } else {
                 viewBinding.tvNumberTraining.visibility = View.GONE
             }
+        }
+
+        viewModel.numberLeftDaysLiveData.observe(this.viewLifecycleOwner) {
+            if (it >= 0) {
+                viewBinding.tvNumberDays.visibility = View.VISIBLE
+                viewBinding.tvNumberDays.text = it.toString()
+            } else {
+                viewBinding.tvNumberDays.visibility = View.GONE
+            }
+
         }
 
 

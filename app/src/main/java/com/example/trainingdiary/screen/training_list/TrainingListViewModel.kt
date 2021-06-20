@@ -20,6 +20,7 @@ class TrainingListViewModel(
     val trainingDescLiveData = trainingRepository.currentTrainingDescFlow.asLiveData()
     val switchOrderLiveData = appSettings.orderAddedFlow().asLiveData()
     val numberTrainingLiveData = appSettings.numberOfTrainingSessionsFlow().asLiveData()
+    val numberLeftDaysLiveData = appSettings.leftDaysFlow().asLiveData()
 
     fun deletedTrainingTrue(training: Training) {
 

@@ -37,7 +37,7 @@ class DiaryApp : Application() {
         viewModel { ApproachCreateViewModel(get(), get(), get(), get()) }
         viewModel { ExerciseCreateViewModel(get(), get(),get(),get()) }
         viewModel { ExerciseListViewModel(get(), get(), get()) }
-        viewModel { MainActivityViewModel(get(), get(), get(),get()) }
+        viewModel { MainActivityViewModel(get(), get(), get(),get(), get()) }
         viewModel { SettingsViewModel(get(), get()) }
         viewModel { ExerciseAutofillViewModel(get()) }
         viewModel { SeasonTicketViewModel(get()) }

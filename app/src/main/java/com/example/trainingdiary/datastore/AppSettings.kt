@@ -44,11 +44,17 @@ class AppSettings(context: Context) {
     fun subscriptionEndDateFlow(): Flow<String> = dataStore.data.map { preferences ->
         preferences[stringPreferencesKey(SUBSCRIPTION_END_DATE)] ?: ""
     }
+
     fun dateCreatedTicketFlow(): Flow<String> = dataStore.data.map { preferences ->
         preferences[stringPreferencesKey(DATE_CREATED_TICKET)] ?: ""
     }
+
     fun idSuperSetFlow(): Flow<Long> = dataStore.data.map { preferences ->
         preferences[longPreferencesKey(SUPERSET_ID_KEY)] ?: -1
+    }
+
+    fun leftDaysFlow(): Flow<Int> = dataStore.data.map { preferences ->
+        preferences[intPreferencesKey(DAYS_LEFT)] ?: -1
     }
 
     suspend fun getIdTraining(): Long = idTrainingFlow().first()
@@ -103,16 +109,23 @@ class AppSettings(context: Context) {
             preferences[stringPreferencesKey(SUBSCRIPTION_END_DATE)] = date
         }
     }
+
     suspend fun setDateCreatedTicket(date: String) {
         dataStore.edit { preferences ->
             preferences[stringPreferencesKey(DATE_CREATED_TICKET)] = date
         }
     }
+
     suspend fun setSuperSetId(superSetId: Long) {
         dataStore.edit { preferences ->
             preferences[longPreferencesKey(SUPERSET_ID_KEY)] = superSetId
         }
     }
+
+    suspend fun setDayLeft(amount: Int) {
+        dataStore.edit { preferences -> preferences[intPreferencesKey(DAYS_LEFT)] = amount }
+    }
+
 
     companion object {
         private const val TRAINING_ID_KEY = "TRAINING_ID_KEY"
@@ -124,5 +137,6 @@ class AppSettings(context: Context) {
         private const val NUMBER_OF_TRAINING_SESSIONS = "NUMBER_OF_TRAINING_SESSIONS"
         private const val SUBSCRIPTION_END_DATE = "SUBSCRIPTION_END_DATE"
         private const val DATE_CREATED_TICKET = "DATE_CREATED_TICKET"
+        private const val DAYS_LEFT = "DAYS_LEFT"
     }
 }

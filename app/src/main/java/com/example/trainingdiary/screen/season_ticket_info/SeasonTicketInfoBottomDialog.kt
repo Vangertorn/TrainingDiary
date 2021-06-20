@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.BottomSheetSeasonTicketInformationBinding
+import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -42,8 +43,10 @@ class SeasonTicketInfoBottomDialog : BottomSheetDialogFragment() {
         }
         viewBinding.btnReset.setOnClickListener {
             viewModel.resetSeasonTicket()
-            findNavController().popBackStack()
+            this.dismiss()
+            findNavController().navigateSave(SeasonTicketInfoBottomDialogDirections.actionSeasonTicketInfoBottomDialogToTrainingListFragment())
         }
+        viewBinding.tvDaysAmount.text = viewModel.daysAmount()
 
     }
 
