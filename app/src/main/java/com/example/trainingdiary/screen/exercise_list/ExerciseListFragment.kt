@@ -14,6 +14,7 @@ import com.example.trainingdiary.support.SwipeAndMoveCallback
 
 import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ExerciseListFragment :
@@ -31,6 +32,8 @@ class ExerciseListFragment :
             )
         }
     )
+
+    @ExperimentalCoroutinesApi
     private val simpleCallback = SwipeAndMoveCallback({ p1, p2 ->
         viewModel.switchExercisePosition(
             viewModel.getExerciseFromPosition(p1),
@@ -48,6 +51,7 @@ class ExerciseListFragment :
             }
         })
 
+    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.recyclerView.adapter = adapter
@@ -65,7 +69,9 @@ class ExerciseListFragment :
             viewBinding.dateTrainingExerciseList.text = training.date
             viewBinding.muscleGroupsExerciseList.text = training.muscleGroups
             viewBinding.weightExerciseList.text =
-                if (!training.weight.isNullOrEmpty()) if (training.muscleGroups.isNullOrEmpty()) "${training.weight} kg" else "${training.weight} kg |" else ""
+                if (!training.weight.isNullOrEmpty()) if (training.muscleGroups.isNullOrEmpty()) getString(
+                    R.string.weight, training.weight
+                ) else getString(R.string.weight1, training.weight) else ""
         }
         viewBinding.toolbarExerciseList.setNavigationOnClickListener {
             viewModel.forgotIdTraining()
@@ -87,17 +93,21 @@ class ExerciseListFragment :
         }
     }
 
+    @ExperimentalCoroutinesApi
     private fun deleteExercise(position: Int) {
         val exercise = viewModel.getExerciseFromPosition(position)
         viewModel.deletedExerciseTrue(exercise)
-        Snackbar.make(viewBinding.recyclerView, "Exercise was delete", Snackbar.LENGTH_LONG)
-            .setAction("Undo") {
+        Snackbar.make(
+            viewBinding.recyclerView,
+            getString(R.string.exercise_was_delete),
+            Snackbar.LENGTH_LONG
+        )
+            .setAction(getString(R.string.undo)) {
                 viewModel.deletedExerciseFalse(exercise)
             }.apply {
                 this.view.translationY = -savedInsets.bottom.toFloat()
             }.show()
     }
-
 
     override fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean) {
         viewBinding.toolbarExerciseList.setPadding(0, top, 0, 0)

@@ -44,8 +44,6 @@ class ExerciseAutofillRecyclerViewAdapter (private val onClick: (ExerciseAutofil
           tvNameExercise.text = item.nameExercise
 
         }
-
-
     }
 }
 

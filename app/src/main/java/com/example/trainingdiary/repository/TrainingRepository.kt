@@ -2,12 +2,10 @@ package com.example.trainingdiary.repository
 
 import com.example.trainingdiary.dao.database.TrainingDao
 import com.example.trainingdiary.datastore.AppSettings
-import com.example.trainingdiary.models.Exercise
 import com.example.trainingdiary.models.Training
 import com.example.trainingdiary.models.info.ExerciseInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
@@ -88,13 +86,6 @@ class TrainingRepository(
     suspend fun forgotIdTraining() {
         withContext(Dispatchers.IO) {
             appSettings.setIdTraining(-1)
-        }
-    }
-
-
-    suspend fun getExercisesInfoByTrainingId(id: Long): List<ExerciseInfo> {
-        return withContext(Dispatchers.IO) {
-            return@withContext trainingDao.getExercisesInfoByTrainingId(id)
         }
     }
 

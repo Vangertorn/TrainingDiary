@@ -2,7 +2,6 @@ package com.example.trainingdiary.dao.database
 
 import androidx.room.*
 import com.example.trainingdiary.models.Exercise
-import com.example.trainingdiary.models.Training
 import com.example.trainingdiary.models.info.ExerciseInfo
 import kotlinx.coroutines.flow.Flow
 
@@ -12,11 +11,8 @@ abstract class ExerciseDao {
     @Insert
     abstract fun insertExercise(exercise: Exercise): Long
 
-    @Insert
-    abstract fun insertExercises(exercises: List<Exercise>): List<Long>
     @Delete
     abstract fun deleteExercises(exercises: List<Exercise>)
-
 
     @Query("SELECT * FROM table_exercise WHERE deleted ==:flags")
     abstract fun getExercisesByFlags(
@@ -25,10 +21,8 @@ abstract class ExerciseDao {
 
     @Transaction
     open fun deletedExercisesByFlags(flags: Boolean) {
-
         deleteExercises(getExercisesByFlags(flags))
     }
-
 
     @Update
     abstract fun updateExercise(exercise: Exercise)
@@ -41,13 +35,6 @@ abstract class ExerciseDao {
 
     @Delete
     abstract fun deleteExercise(exercise: Exercise)
-
-    @Query("SELECT * FROM table_exercise")
-    abstract fun getExerciseFlow(): Flow<List<Exercise>?>
-
-    @Transaction
-    @Query("SELECT * FROM table_exercise WHERE id == :id LIMIT 1")
-    abstract fun getExerciseInfo(id: Long): ExerciseInfo?
 
     @Transaction
     @Query("SELECT * FROM table_exercise WHERE id == :id LIMIT 1")
@@ -66,6 +53,7 @@ abstract class ExerciseDao {
         updateExercisePosition(exercise1.id, exercise2Pos)
         updateExercisePosition(exercise2.id, exercise1Pos)
     }
+
     @Query("SELECT * FROM table_exercise WHERE  deleted ==:flags AND idSet == :idSuperSet ORDER BY position DESC")
     abstract fun getExercisesInfoByBySuperSetIdAndFlagsFlow(
         idSuperSet: Long,

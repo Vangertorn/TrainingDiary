@@ -2,7 +2,6 @@ package com.example.trainingdiary.models
 
 import android.os.Parcelable
 import androidx.room.*
-import com.example.trainingdiary.support.Converters
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

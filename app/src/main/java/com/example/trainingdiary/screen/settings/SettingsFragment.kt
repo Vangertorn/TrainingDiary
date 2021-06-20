@@ -31,10 +31,11 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
             )
         )
     })
+    private var observerChek: Boolean = false
     private val dataObserver = object : RecyclerView.AdapterDataObserver() {
         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
             super.onItemRangeInserted(positionStart, itemCount)
-            viewBinding.rvMuscleCroupsSettings.scrollToPosition(0);
+            viewBinding.rvMuscleCroupsSettings.scrollToPosition(0)
 
         }
     }
@@ -50,8 +51,11 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
         viewModel.muscleGroupLiveData.observe(this.viewLifecycleOwner) {
             adapter.submitList(it)
         }
-        adapter.registerAdapterDataObserver(dataObserver)
-        viewBinding.etMuscleGroups.setOnEditorActionListener { v, actionId, event ->
+        if (!observerChek) {
+            adapter.registerAdapterDataObserver(dataObserver)
+            observerChek = true
+        }
+        viewBinding.etMuscleGroups.setOnEditorActionListener { _, actionId, _ ->
             if (viewBinding.etMuscleGroups.text.isNotBlank()) {
                 viewModel.saveMuscleGroup(
                     MuscleGroup(
@@ -64,7 +68,7 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
             } else {
                 Toast.makeText(
                     this.context,
-                    "The name muscle group is empty",
+                    getString(R.string.the_name_muscle_group_is_empty),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -118,13 +122,13 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
         viewModel.switchOrderLiveData.observe(this.viewLifecycleOwner) {
             viewBinding.switchSortTraining.isChecked = it
         }
-        viewBinding.switchSortTraining.setOnCheckedChangeListener { buttonView, isChecked ->
+        viewBinding.switchSortTraining.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                viewBinding.tvTrainingsLayout.text = "Last training above"
+                viewBinding.tvTrainingsLayout.text = getString(R.string.Last_training_above)
                 viewModel.saveOrderAdded(true)
 
             } else {
-                viewBinding.tvTrainingsLayout.text = "Last training below"
+                viewBinding.tvTrainingsLayout.text = getString(R.string.Last_training_below)
                 viewModel.saveOrderAdded(false)
             }
         }
@@ -161,7 +165,7 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
         ) {
             Toast.makeText(
                 this.context,
-                "The weight and reoccurrence fields are empty",
+                getString(R.string.the_weight_and_reoccurrence_fields_are_empty),
                 Toast.LENGTH_SHORT
             ).show()
         } else if (viewBinding.etReoccurrence.text.toString()
@@ -173,7 +177,7 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
 
             Toast.makeText(
                 this.context,
-                "Reoccurrences were saved",
+                getString(R.string.reoccurrences_were_saved),
                 Toast.LENGTH_SHORT
             ).show()
         } else if (viewBinding.etWeight.text.toString()
@@ -184,7 +188,7 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
 
             Toast.makeText(
                 this.context,
-                "Weight was saved",
+                getString(R.string.weight_was_saved),
                 Toast.LENGTH_SHORT
             ).show()
         } else {
@@ -192,19 +196,20 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
             viewModel.saveReoccurrences(viewBinding.etReoccurrence.text.toString())
             Toast.makeText(
                 this.context,
-                "Default values were saved",
+                getString(R.string.default_values_were_saved),
                 Toast.LENGTH_SHORT
             ).show()
         }
     }
-    private fun showRecoverDialog(){
+
+    private fun showRecoverDialog() {
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle("You sure that you want to recover muscle groups default values?")
-            .setMessage("The current settings will be lost")
-            .setPositiveButton("Yes") { dialog, _ ->
+            .setTitle(getString(R.string.title_recover_dialog))
+            .setMessage(getString(R.string.message_recover_dialog))
+            .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
                 viewModel.recoverValuesMuscleGroups()
                 dialog.cancel()
-            }.setNegativeButton("No") { dialog, _ ->
+            }.setNegativeButton(getString(R.string.no)) { dialog, _ ->
                 dialog.cancel()
             }.show()
     }
@@ -212,6 +217,7 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
     override fun onDestroy() {
         super.onDestroy()
         adapter.unregisterAdapterDataObserver(dataObserver)
+        observerChek = false
     }
 
 

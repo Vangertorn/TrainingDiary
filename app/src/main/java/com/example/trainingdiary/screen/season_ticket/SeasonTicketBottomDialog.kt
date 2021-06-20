@@ -56,7 +56,7 @@ class SeasonTicketBottomDialog : BottomSheetDialogFragment() {
             } else {
                 Toast.makeText(
                     this.context,
-                    "Term in  season ticket cannot be less current date",
+                    getString(R.string.Term_season_ticket),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -66,7 +66,7 @@ class SeasonTicketBottomDialog : BottomSheetDialogFragment() {
             } else {
                 Toast.makeText(
                     this.context,
-                    "The number of trainings can not be less than 1",
+                    getString(R.string.number_of_training),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -104,7 +104,6 @@ class SeasonTicketBottomDialog : BottomSheetDialogFragment() {
                 } else {
                     viewBinding.etReoccurrence.setText("0")
                 }
-
             }
         }
     }

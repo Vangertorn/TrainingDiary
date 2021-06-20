@@ -2,11 +2,9 @@ package com.example.trainingdiary.repository
 
 import com.example.trainingdiary.dao.database.ExerciseDao
 import com.example.trainingdiary.dao.database.SuperSetDao
-import com.example.trainingdiary.dao.database.TrainingDao
 import com.example.trainingdiary.datastore.AppSettings
 import com.example.trainingdiary.models.Exercise
 import com.example.trainingdiary.models.SuperSet
-import com.example.trainingdiary.models.info.ExerciseInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -16,7 +14,7 @@ import kotlinx.coroutines.withContext
 class SuperSetRepository(
     private val superSetDao: SuperSetDao,
     private val exerciseRepository: ExerciseRepository,
-    private val appSettings: AppSettings,
+    appSettings: AppSettings,
     private val exerciseDao: ExerciseDao
 ) {
     @ExperimentalCoroutinesApi
@@ -40,8 +38,8 @@ class SuperSetRepository(
         }
     }
 
-    suspend fun deleteInvisibleSuperSet(){
-        withContext(Dispatchers.IO){
+    suspend fun deleteInvisibleSuperSet() {
+        withContext(Dispatchers.IO) {
             superSetDao.deletedSuperSetByVisible()
         }
     }

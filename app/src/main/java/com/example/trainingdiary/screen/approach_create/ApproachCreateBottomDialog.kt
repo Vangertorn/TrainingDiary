@@ -30,8 +30,7 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
     private val dataObserver = object : RecyclerView.AdapterDataObserver() {
         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
             super.onItemRangeInserted(positionStart, itemCount)
-            viewBinding.rvApproach.scrollToPosition(adapter.itemCount - 1);
-
+            viewBinding.rvApproach.scrollToPosition(adapter.itemCount - 1)
         }
     }
 
@@ -103,7 +102,7 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
             } else {
                 Toast.makeText(
                     this.context,
-                    "Exercise name is empty",
+                    getString(R.string.exercise_name_is_empty),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -175,7 +174,6 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
                 } else {
                     viewBinding.etWeight.setText("0.0")
                 }
-
             }
         }
     }

@@ -9,45 +9,43 @@
         style="@style/EditTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Name exercise"
-        app:layout_constraintBottom_toTopOf="@id/btnСlose"
+        android:hint="@string/names_exercise"
+        android:importantForAutofill="no"
+        app:layout_constraintBottom_toTopOf="@id/btnClose"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSave"
+        style="@style/MyButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        android:background="@drawable/background_color"
-        android:paddingVertical="12dp"
-        android:text="Save"
+        android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnСlose"
+        app:layout_constraintEnd_toStartOf="@id/btnClose"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnСlose"
+        android:id="@+id/btnClose"
+        style="@style/MyButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        android:background="@drawable/background_color"
-        android:paddingVertical="12dp"
-        android:text="Сlose"
+        android:text="@string/close"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnDelete"
         app:layout_constraintStart_toEndOf="@id/btnSave" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnDelete"
+        style="@style/MyButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        android:background="@drawable/background_color"
-        android:paddingVertical="12dp"
-        android:text="Delete"
+        android:text="@string/delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btnСlose" />
+        app:layout_constraintStart_toEndOf="@id/btnClose" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

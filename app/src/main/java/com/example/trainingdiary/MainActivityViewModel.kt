@@ -1,11 +1,11 @@
 package com.example.trainingdiary
 
+import android.annotation.SuppressLint
 import com.example.trainingdiary.datastore.AppSettings
 import com.example.trainingdiary.repository.ExerciseRepository
 import com.example.trainingdiary.repository.MuscleGroupRepository
 import com.example.trainingdiary.repository.SuperSetRepository
 import com.example.trainingdiary.repository.TrainingRepository
-import com.example.trainingdiary.screen.season_ticket_info.SeasonTicketInfoViewModel
 import com.example.trainingdiary.support.CoroutineViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -74,7 +74,9 @@ class MainActivityViewModel(
     }
 
     companion object {
+        @SuppressLint("ConstantLocale")
         private val dateFormatter = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+        @SuppressLint("ConstantLocale")
         private val dayFormatter = SimpleDateFormat("d", Locale.getDefault())
     }
 }

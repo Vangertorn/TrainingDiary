@@ -62,13 +62,17 @@ class SuperSetCreateBottomDialog : BottomSheetDialogFragment() {
                         idSet = args.superSetId
                     )
                 )
-                viewModel.addNewExerciseAutofill(ExerciseAutofill(nameExercise = viewBinding.autoCompleteTvExerciseName.text.toString()))
+                viewModel.addNewExerciseAutofill(
+                    ExerciseAutofill(
+                        nameExercise = viewBinding.autoCompleteTvExerciseName.text.toString()
+                    )
+                )
                 viewBinding.autoCompleteTvExerciseName.setText("")
                 viewBinding.etCommentExercise.setText("")
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "Exercise name  is empty",
+                    getString(R.string.exercise_name_is_empty),
                     Toast.LENGTH_SHORT
                 )
                     .show()

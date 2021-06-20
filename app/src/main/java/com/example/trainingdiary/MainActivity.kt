@@ -10,7 +10,6 @@ import com.example.trainingdiary.databinding.ActivityMainBinding
 import androidx.fragment.app.Fragment
 import com.example.myapplication.support.SupportActivityInset
 import com.example.myapplication.support.setWindowTransparency
-import com.example.trainingdiary.screen.training_list.TrainingListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : SupportActivityInset<ActivityMainBinding>() {
@@ -34,16 +33,16 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>() {
     }
 
 
-
     override fun onBackPressed() {
         if (navHostFragment.childFragmentManager.backStackEntryCount == 0) {
             if (doubleBackToExitPressedOnce) {
                 finish()
                 return
             }
+
             this.doubleBackToExitPressedOnce = true
-            Toast.makeText(this, "Press \"back\" again to exit", Toast.LENGTH_SHORT).show()
-            handler.postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+            Toast.makeText(this, getString(R.string.press_back), Toast.LENGTH_SHORT).show()
+            handler.postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
         } else navController.popBackStack()
     }
 

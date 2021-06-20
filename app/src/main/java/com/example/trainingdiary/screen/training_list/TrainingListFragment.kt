@@ -46,14 +46,14 @@ class TrainingListFragment :
     private val dataObserverAsc = object : RecyclerView.AdapterDataObserver() {
         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
             super.onItemRangeInserted(positionStart, itemCount)
-            viewBinding.recyclerViewTraining.scrollToPosition(0);
+            viewBinding.recyclerViewTraining.scrollToPosition(0)
 
         }
     }
     private val dataObserverDesc = object : RecyclerView.AdapterDataObserver() {
         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
             super.onItemRangeInserted(positionStart, itemCount)
-            viewBinding.recyclerViewTraining.scrollToPosition(adapter.itemCount - 1);
+            viewBinding.recyclerViewTraining.scrollToPosition(adapter.itemCount - 1)
 
         }
     }
@@ -148,10 +148,12 @@ class TrainingListFragment :
     }
 
     override fun onDestroyView() {
-        if (dataObserverChek == DATA_OBSERVER_ASC) {
+        dataObserverChek = if (dataObserverChek == DATA_OBSERVER_ASC) {
             adapter.unregisterAdapterDataObserver(dataObserverAsc)
+            null
         } else {
             adapter.unregisterAdapterDataObserver(dataObserverDesc)
+            null
         }
 
         super.onDestroyView()
@@ -160,8 +162,9 @@ class TrainingListFragment :
     private fun deleteTraining(position: Int) {
         val training = viewModel.getTrainingFromPosition(position)!!
         viewModel.deletedTrainingTrue(training)
-        Snackbar.make(viewBinding.recyclerViewTraining, "Training was delete", Snackbar.LENGTH_LONG)
-            .setAction("Undo") {
+
+        Snackbar.make(viewBinding.recyclerViewTraining, getString(R.string.training_was_delete), Snackbar.LENGTH_LONG)
+            .setAction(getString(R.string.undo)) {
                 viewModel.deletedTrainingFalse(training)
             }.apply {
                 this.view.translationY = -savedInsets.bottom.toFloat()

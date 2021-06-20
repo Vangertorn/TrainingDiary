@@ -47,7 +47,6 @@ class SeasonTicketInfoBottomDialog : BottomSheetDialogFragment() {
             findNavController().navigateSave(SeasonTicketInfoBottomDialogDirections.actionSeasonTicketInfoBottomDialogToTrainingListFragment())
         }
         viewBinding.tvDaysAmount.text = viewModel.daysAmount()
-
     }
 
 }

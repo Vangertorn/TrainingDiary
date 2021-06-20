@@ -10,6 +10,7 @@ import com.example.trainingdiary.repository.ExerciseRepository
 import com.example.trainingdiary.repository.SuperSetRepository
 import com.example.trainingdiary.repository.TrainingRepository
 import com.example.trainingdiary.support.CoroutineViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -22,6 +23,7 @@ class SuperSetCreateViewModel(
 ) :
     CoroutineViewModel() {
 
+    @ExperimentalCoroutinesApi
     val exerciseInfoLiveDate = superSetRepository.currentExerciseInSuperSetFlow.asLiveData()
 
     fun addNewExercise(exercise: Exercise) {

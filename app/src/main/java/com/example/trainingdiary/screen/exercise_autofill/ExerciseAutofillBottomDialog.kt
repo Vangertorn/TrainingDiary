@@ -9,7 +9,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.BottomSheetExerciseAutofillBinding
 import com.example.trainingdiary.models.ExerciseAutofill
-import com.example.trainingdiary.screen.exercise_create.ExerciseCreateBottomDialogArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -39,7 +38,7 @@ class ExerciseAutofillBottomDialog : BottomSheetDialogFragment() {
         args.exerciseAutofill.let {
             viewBinding.etCommentExercise.setText(it.nameExercise)
         }
-        viewBinding.btnLose.setOnClickListener {
+        viewBinding.btnClose.setOnClickListener {
             findNavController().popBackStack()
         }
         viewBinding.btnDelete.setOnClickListener {

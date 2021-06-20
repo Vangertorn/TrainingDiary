@@ -1,7 +1,6 @@
 package com.example.trainingdiary.dao.database
 
 import androidx.room.*
-import com.example.trainingdiary.models.Exercise
 import com.example.trainingdiary.models.MuscleGroup
 import kotlinx.coroutines.flow.Flow
 

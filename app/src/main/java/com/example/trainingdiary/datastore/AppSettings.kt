@@ -45,7 +45,7 @@ class AppSettings(context: Context) {
         preferences[stringPreferencesKey(SUBSCRIPTION_END_DATE)] ?: ""
     }
 
-    fun dateCreatedTicketFlow(): Flow<String> = dataStore.data.map { preferences ->
+    private fun dateCreatedTicketFlow(): Flow<String> = dataStore.data.map { preferences ->
         preferences[stringPreferencesKey(DATE_CREATED_TICKET)] ?: ""
     }
 

@@ -13,7 +13,6 @@ import com.example.trainingdiary.databinding.BottomSheetAddExerciseBinding
 import com.example.trainingdiary.models.Exercise
 import com.example.trainingdiary.models.ExerciseAutofill
 import com.example.trainingdiary.models.SuperSet
-import com.example.trainingdiary.screen.exercise_list.ExerciseListFragmentArgs
 import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -47,6 +46,7 @@ class ExerciseCreateBottomDialog : BottomSheetDialogFragment() {
                 ArrayAdapter(requireContext(), R.layout.item_select_dialog, it)
             viewBinding.autoCompleteTvExerciseName.setAdapter(arrayAdapter)
         }
+
 
 
         viewBinding.btnAddToSet.setOnClickListener {
@@ -97,7 +97,7 @@ class ExerciseCreateBottomDialog : BottomSheetDialogFragment() {
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "Exercise name  is empty",
+                    getString(R.string.exercise_name_is_empty),
                     Toast.LENGTH_SHORT
                 )
                     .show()

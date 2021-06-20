@@ -4,7 +4,6 @@ import com.example.trainingdiary.dao.database.ExerciseDao
 import com.example.trainingdiary.dao.database.TrainingDao
 import com.example.trainingdiary.datastore.AppSettings
 import com.example.trainingdiary.models.Exercise
-import com.example.trainingdiary.models.Training
 import com.example.trainingdiary.models.info.ExerciseInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -15,7 +14,7 @@ import kotlinx.coroutines.withContext
 class ExerciseRepository(
     private val exerciseDao: ExerciseDao,
     private val trainingDao: TrainingDao,
-    private val appSettings: AppSettings
+     appSettings: AppSettings
 ) {
 
     @ExperimentalCoroutinesApi
@@ -58,12 +57,6 @@ class ExerciseRepository(
     suspend fun updateExercise(exercise: Exercise) {
         withContext(Dispatchers.IO) {
             exerciseDao.updateExercise(exercise)
-        }
-    }
-
-    suspend fun getExerciseFromId(id: Long): Exercise {
-        return withContext(Dispatchers.IO) {
-            exerciseDao.getExerciseFromId(id)
         }
     }
 

@@ -9,10 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.beloo.widget.chipslayoutmanager.ChipsLayoutManager
-import com.beloo.widget.chipslayoutmanager.gravity.IChildGravityResolver
 import com.example.trainingdiary.R
 import com.example.trainingdiary.models.info.ExerciseInfo
-import com.example.trainingdiary.screen.approach_create.ApproachRecyclerViewAdapter
 
 class ExerciseRecyclerViewAdapter(private val onClick: (ExerciseInfo) -> Unit) :
     ListAdapter<ExerciseInfo, ExerciseRecyclerViewAdapter.ExerciseViewHolder>(

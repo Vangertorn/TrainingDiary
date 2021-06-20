@@ -1,9 +1,9 @@
 package com.example.trainingdiary.screen.season_ticket
 
+import android.annotation.SuppressLint
 import com.example.trainingdiary.datastore.AppSettings
 import com.example.trainingdiary.support.CoroutineViewModel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -37,7 +37,9 @@ class SeasonTicketViewModel(private val appSettings: AppSettings) : CoroutineVie
     }
 
     companion object {
+        @SuppressLint("ConstantLocale")
         private val dateFormatter = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+        @SuppressLint("ConstantLocale")
         private val dayFormatter = SimpleDateFormat("d", Locale.getDefault())
     }
 }

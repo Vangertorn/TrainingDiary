@@ -2,7 +2,6 @@ package com.example.trainingdiary.screen.training_create
 
 import androidx.lifecycle.asLiveData
 import com.example.trainingdiary.datastore.AppSettings
-import com.example.trainingdiary.models.MuscleGroup
 import com.example.trainingdiary.models.Training
 import com.example.trainingdiary.repository.MuscleGroupRepository
 import com.example.trainingdiary.repository.TrainingRepository
@@ -51,12 +50,16 @@ class TrainingCreateViewModel(
     fun takeAwayTraining(training: Training) {
         launch {
             if (appSettings.getDateCreatedTicket().isNotEmpty()) {
-                if (TrainingListViewModel.monthFormatter.parse(training.date)!! >= TrainingListViewModel.monthFormatter.parse(appSettings.getDateCreatedTicket())) {
+                if (TrainingListViewModel.monthFormatter.parse(training.date)!!
+                    >= TrainingListViewModel.monthFormatter.parse(
+                        appSettings.getDateCreatedTicket()
+                    )
+                ) {
                     if (appSettings.getNumberOfTrainingSessions() == 0) {
                         appSettings.setNumberOfTrainingSessions(-1)
                         appSettings.setSubscriptionEndDate("")
                         appSettings.setDateCreatedTicket("")
-                    }else{
+                    } else {
                         appSettings.setNumberOfTrainingSessions(appSettings.getNumberOfTrainingSessions() - 1)
                     }
                 }

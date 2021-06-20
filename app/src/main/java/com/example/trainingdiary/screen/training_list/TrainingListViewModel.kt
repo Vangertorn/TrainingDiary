@@ -1,10 +1,9 @@
 package com.example.trainingdiary.screen.training_list
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.asLiveData
 import com.example.trainingdiary.datastore.AppSettings
-import com.example.trainingdiary.models.MuscleGroup
 import com.example.trainingdiary.models.Training
-import com.example.trainingdiary.repository.MuscleGroupRepository
 import com.example.trainingdiary.repository.TrainingRepository
 import com.example.trainingdiary.support.CoroutineViewModel
 import kotlinx.coroutines.launch
@@ -62,8 +61,10 @@ class TrainingListViewModel(
 
         launch {
             if (appSettings.getDateCreatedTicket().isNotEmpty()) {
-                if (monthFormatter.parse(training.date)!! >= monthFormatter.parse(appSettings.getDateCreatedTicket())) {
-                    appSettings.setNumberOfTrainingSessions(appSettings.getNumberOfTrainingSessions() -1)
+                if (monthFormatter.parse(training.date)!!
+                    >= monthFormatter.parse(appSettings.getDateCreatedTicket())
+                ) {
+                    appSettings.setNumberOfTrainingSessions(appSettings.getNumberOfTrainingSessions() - 1)
                 }
             }
 
@@ -79,6 +80,7 @@ class TrainingListViewModel(
     }
 
     companion object {
+        @SuppressLint("ConstantLocale")
         val monthFormatter = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
     }
 

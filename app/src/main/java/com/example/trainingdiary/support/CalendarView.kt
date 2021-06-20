@@ -1,5 +1,6 @@
 package com.example.trainingdiary.support
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
@@ -229,7 +230,10 @@ class CalendarView @JvmOverloads constructor(
         }
 
         companion object {
+            @SuppressLint("ConstantLocale")
             val monthDayFormatter = SimpleDateFormat("dd", Locale.getDefault())
+
+            @SuppressLint("ConstantLocale")
             val weekDayFormatter = SimpleDateFormat("EE", Locale.getDefault())
 
         }
@@ -241,6 +245,7 @@ class CalendarView @JvmOverloads constructor(
     }
 
     companion object {
+        @SuppressLint("ConstantLocale")
         val monthFormatter = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
     }
 }

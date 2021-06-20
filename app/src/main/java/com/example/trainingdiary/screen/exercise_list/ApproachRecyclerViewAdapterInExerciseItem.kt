@@ -1,18 +1,18 @@
 package com.example.trainingdiary.screen.exercise_list
 
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
-
 import com.example.trainingdiary.models.Approach
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingdiary.R
 
-class ApproachRecyclerViewAdapterInExerciseItem() :
+class ApproachRecyclerViewAdapterInExerciseItem :
     ListAdapter<Approach, ApproachRecyclerViewAdapterInExerciseItem.ApproachViewHolder>(
         ApproachDiffCallBack()
     ) {
@@ -32,7 +32,8 @@ class ApproachRecyclerViewAdapterInExerciseItem() :
     inner class ApproachViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvText = itemView.findViewById<TextView>(R.id.tvApproachInExerciseItem)
         fun bind(item: Approach) {
-            tvText.text = "${item.weight}kg x ${item.reoccurrences}"
+            tvText.text =
+               itemView.context.getString(R.string.approach, item.weight, item.reoccurrences)
         }
     }
 

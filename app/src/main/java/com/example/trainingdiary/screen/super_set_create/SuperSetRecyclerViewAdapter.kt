@@ -1,5 +1,6 @@
 package com.example.trainingdiary.screen.super_set_create
 
+import android.content.res.Resources
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -10,14 +11,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingdiary.R
 import com.example.trainingdiary.models.Exercise
-import com.example.trainingdiary.models.MuscleGroup
-import com.example.trainingdiary.screen.training_create.MuscleGroupsRecyclerViewAdapter
 
 class SuperSetRecyclerViewAdapter(private val onClick: (Exercise) -> Unit) :
     ListAdapter<Exercise, RecyclerView.ViewHolder>(
         SuperSetAdapterDiffCallBack()
     ) {
-     var selectedPositions: Int = 0
+    var selectedPositions: Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
@@ -43,9 +42,12 @@ class SuperSetRecyclerViewAdapter(private val onClick: (Exercise) -> Unit) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        when(holder){
+        when (holder) {
             is AddViewHolder -> holder.bind(getItem(position), position == selectedPositions)
-            else ->(holder as ExerciseViewHolder).bind(getItem(position), position == selectedPositions)
+            else -> (holder as ExerciseViewHolder).bind(
+                getItem(position),
+                position == selectedPositions
+            )
         }
     }
 
@@ -100,8 +102,7 @@ class SuperSetRecyclerViewAdapter(private val onClick: (Exercise) -> Unit) :
                 tvText.setBackgroundResource(R.drawable.backgound_item_muscle_groups)
                 tvText.setTextColor(Color.BLACK)
             }
-
-            tvText.text = "Add exercise"
+            tvText.text = Resources.getSystem().getString(R.string.add_exercise)
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.trainingdiary.screen.approach_create
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,7 +41,8 @@ class ApproachRecyclerViewAdapter(private val onClick: (Approach) -> Unit) :
         }
 
         fun bind(item: Approach) {
-            tvText.text = "${item.weight} kg x ${item.reoccurrences}"
+            tvText.text =
+                Resources.getSystem().getString(R.string.approach, item.weight, item.reoccurrences)
         }
     }
 
@@ -50,7 +52,8 @@ class ApproachRecyclerViewAdapter(private val onClick: (Approach) -> Unit) :
         }
 
         override fun areContentsTheSame(oldItem: Approach, newItem: Approach): Boolean {
-            return oldItem.reoccurrences == newItem.reoccurrences && oldItem.weight == newItem.weight
+            return oldItem.reoccurrences == newItem.reoccurrences
+                    && oldItem.weight == newItem.weight
         }
     }
 

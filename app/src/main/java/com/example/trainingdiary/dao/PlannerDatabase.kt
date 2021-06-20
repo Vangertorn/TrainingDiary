@@ -30,6 +30,7 @@ abstract class PlannerDatabase : RoomDatabase() {
     abstract fun muscleGroupDao(): MuscleGroupDao
     abstract fun exerciseAutofillDao(): ExerciseAutofillDao
     abstract fun superSetDao():SuperSetDao
+
 }
 
 object DatabaseConstructor {

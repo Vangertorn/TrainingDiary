@@ -1,6 +1,9 @@
 package com.example.trainingdiary.screen.season_ticket_info
 
+import android.annotation.SuppressLint
+import android.content.res.Resources
 import androidx.lifecycle.asLiveData
+import com.example.trainingdiary.R
 import com.example.trainingdiary.datastore.AppSettings
 import com.example.trainingdiary.support.CoroutineViewModel
 import kotlinx.coroutines.launch
@@ -29,7 +32,7 @@ class SeasonTicketInfoViewModel(private val appSettings: AppSettings) : Coroutin
             val currentDate = Date().time
             val result = dateEnd - currentDate
             return@runBlocking if (dayFormatter.format(result).equals("0")) {
-                "last day"
+                Resources.getSystem().getString(R.string.last_day)
             } else {
                 dayFormatter.format(result)
             }
@@ -37,7 +40,10 @@ class SeasonTicketInfoViewModel(private val appSettings: AppSettings) : Coroutin
     }
 
     companion object {
+        @SuppressLint("ConstantLocale")
         private val dateFormatter = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+
+        @SuppressLint("ConstantLocale")
         private val dayFormatter = SimpleDateFormat("d", Locale.getDefault())
     }
 }
