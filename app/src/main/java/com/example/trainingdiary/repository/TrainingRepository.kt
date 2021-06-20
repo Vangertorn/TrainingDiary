@@ -100,7 +100,7 @@ class TrainingRepository(
 
     suspend fun getTrainingById(trainingId: Long): Training {
         return withContext(Dispatchers.IO) {
-            return@withContext trainingDao.getTrainingInfo(trainingId).training
+            return@withContext trainingDao.getTraining(trainingId)
         }
     }
 

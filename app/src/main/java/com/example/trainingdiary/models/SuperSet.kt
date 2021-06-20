@@ -4,10 +4,9 @@ import android.os.Parcelable
 import androidx.room.*
 import kotlinx.parcelize.Parcelize
 
-
 @Parcelize
 @Entity(
-    tableName = "table_exercise", indices = [Index(value = ["id"], unique = true)],
+    tableName = "table_super_set", indices = [Index(value = ["id"], unique = true)],
     foreignKeys = [ForeignKey(
         entity = Training::class,
         parentColumns = arrayOf("id"),
@@ -16,16 +15,12 @@ import kotlinx.parcelize.Parcelize
         onUpdate = ForeignKey.CASCADE
     )]
 )
-
-data class Exercise(
+data class SuperSet(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
     val id: Long = 0,
-    val name: String,
     @ColumnInfo(index = true, name = "idTraining")
-    val idTraining: Long? = null,
-    val position: Int = 0,
-    val comment: String? = null,
+    val idTraining: Long,
     val deleted: Boolean = false,
-    val idSet: Long? = null
+    val visibility: Boolean = false,
+    val position: Int = 0
 ) : Parcelable

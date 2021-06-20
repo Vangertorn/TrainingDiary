@@ -2,6 +2,7 @@ package com.example.trainingdiary
 
 import com.example.trainingdiary.repository.ExerciseRepository
 import com.example.trainingdiary.repository.MuscleGroupRepository
+import com.example.trainingdiary.repository.SuperSetRepository
 import com.example.trainingdiary.repository.TrainingRepository
 import com.example.trainingdiary.support.CoroutineViewModel
 import kotlinx.coroutines.launch
@@ -9,7 +10,8 @@ import kotlinx.coroutines.launch
 class MainActivityViewModel(
     private val trainingRepository: TrainingRepository,
     private val exerciseRepository: ExerciseRepository,
-    private val muscleGroupRepository: MuscleGroupRepository
+    private val muscleGroupRepository: MuscleGroupRepository,
+    private val superSetRepository: SuperSetRepository
 ) : CoroutineViewModel() {
 
     fun deletedTrainings() {
@@ -20,6 +22,11 @@ class MainActivityViewModel(
     fun deletedExercises(){
         launch {
             exerciseRepository.deleteExercises()
+        }
+    }
+    fun deletedSuperSets(){
+        launch {
+            superSetRepository.deleteInvisibleSuperSet()
         }
     }
     init {

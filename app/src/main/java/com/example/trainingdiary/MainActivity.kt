@@ -29,6 +29,7 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>() {
         setWindowTransparency(this)
         viewModel.deletedTrainings()
         viewModel.deletedExercises()
+        viewModel.deletedSuperSets()
     }
 
 

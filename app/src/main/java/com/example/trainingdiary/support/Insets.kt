@@ -35,6 +35,7 @@ fun Activity.setWindowTransparency(listener: OnSystemBarsSizeChangedListener) {
 }
 
 
+@Suppress("DEPRECATION")
 private fun View.overrideSystemInsets(listener: OnSystemBarsSizeChangedListener) {
     ViewCompat.setOnApplyWindowInsetsListener(this) { _, insets ->
 

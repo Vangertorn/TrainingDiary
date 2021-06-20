@@ -16,7 +16,7 @@ abstract class MuscleGroupDao {
     @Query("DELETE FROM table_muscle_group")
     abstract fun clearMuscleGroupTable()
 
-    @Query("SELECT * FROM table_muscle_group WHERE deleted ==:flags ORDER BY id DESC ")
+    @Query("SELECT * FROM table_muscle_group WHERE deleted ==:flags ORDER BY id ASC ")
     abstract fun getMuscleGroupsByFlagsFlow(flags: Boolean): Flow<List<MuscleGroup>?>
 
     @Query("SELECT * FROM table_muscle_group")

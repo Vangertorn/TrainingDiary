@@ -17,6 +17,7 @@ abstract class ExerciseDao {
     @Delete
     abstract fun deleteExercises(exercises: List<Exercise>)
 
+
     @Query("SELECT * FROM table_exercise WHERE deleted ==:flags")
     abstract fun getExercisesByFlags(
         flags: Boolean
@@ -65,5 +66,10 @@ abstract class ExerciseDao {
         updateExercisePosition(exercise1.id, exercise2Pos)
         updateExercisePosition(exercise2.id, exercise1Pos)
     }
+    @Query("SELECT * FROM table_exercise WHERE  deleted ==:flags AND idSet == :idSuperSet ORDER BY position DESC")
+    abstract fun getExercisesInfoByBySuperSetIdAndFlagsFlow(
+        idSuperSet: Long,
+        flags: Boolean
+    ): Flow<MutableList<Exercise>>
 
 }

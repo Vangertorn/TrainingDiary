@@ -3,7 +3,6 @@ package com.example.trainingdiary.dao.database
 import androidx.room.*
 import com.example.trainingdiary.models.Training
 import com.example.trainingdiary.models.info.ExerciseInfo
-import com.example.trainingdiary.models.info.TrainingInfo
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -47,14 +46,13 @@ abstract class TrainingDao {
 
     }
 
-    @Query("SELECT * FROM table_trainings WHERE id == :id LIMIT 1")
-    abstract fun getTrainingInfoFlow(id: Long): Flow<TrainingInfo?>
-
-    @Query("SELECT * FROM table_exercise WHERE idTraining == :id AND deleted ==:flags ORDER BY position DESC")
+    @Query("SELECT * FROM table_exercise WHERE idTraining == :id AND deleted ==:flags AND idSet is null ORDER BY position DESC")
     abstract fun getExercisesInfoByTrainingIdAndFlagsFlow(
         id: Long,
         flags: Boolean
     ): Flow<List<ExerciseInfo>>
+
+
 
     @Query("SELECT * FROM table_trainings WHERE deleted ==:flags")
     abstract fun getTrainingByFlags(
@@ -72,8 +70,7 @@ abstract class TrainingDao {
 
 
     @Query("SELECT * FROM table_trainings WHERE id == :id LIMIT 1")
-    abstract fun getTrainingInfo(id: Long): TrainingInfo
-
+    abstract fun getTraining(id: Long): Training
 
 
     @Query("SELECT position FROM table_trainings ORDER BY position ASC")

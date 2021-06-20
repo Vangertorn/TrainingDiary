@@ -8,6 +8,9 @@ import com.example.trainingdiary.models.Exercise
 class ExerciseInfo(
     @Embedded
     val exercise: Exercise,
-    @Relation(parentColumn = "id", entityColumn = "idExercise")
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "idExercise"
+    )
     val approaches: List<Approach>?
 )

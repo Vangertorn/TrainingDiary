@@ -15,7 +15,8 @@ import com.example.trainingdiary.support.Converters
         Approach::class,
         Exercise::class,
         MuscleGroup::class,
-        ExerciseAutofill::class
+        ExerciseAutofill::class,
+        SuperSet::class
     ],
     version = 1,
     exportSchema = false
@@ -28,6 +29,7 @@ abstract class PlannerDatabase : RoomDatabase() {
     abstract fun exerciseDao(): ExerciseDao
     abstract fun muscleGroupDao(): MuscleGroupDao
     abstract fun exerciseAutofillDao(): ExerciseAutofillDao
+    abstract fun superSetDao():SuperSetDao
 }
 
 object DatabaseConstructor {

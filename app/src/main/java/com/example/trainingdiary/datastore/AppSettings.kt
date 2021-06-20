@@ -47,8 +47,11 @@ class AppSettings(context: Context) {
     fun dateCreatedTicketFlow(): Flow<String> = dataStore.data.map { preferences ->
         preferences[stringPreferencesKey(DATE_CREATED_TICKET)] ?: ""
     }
+    fun idSuperSetFlow(): Flow<Long> = dataStore.data.map { preferences ->
+        preferences[longPreferencesKey(SUPERSET_ID_KEY)] ?: -1
+    }
 
-    suspend fun idTraining(): Long = idTrainingFlow().first()
+    suspend fun getIdTraining(): Long = idTrainingFlow().first()
 
     suspend fun getNumberOfTrainingSessions(): Int = numberOfTrainingSessionsFlow().first()
 
@@ -105,10 +108,16 @@ class AppSettings(context: Context) {
             preferences[stringPreferencesKey(DATE_CREATED_TICKET)] = date
         }
     }
+    suspend fun setSuperSetId(superSetId: Long) {
+        dataStore.edit { preferences ->
+            preferences[longPreferencesKey(SUPERSET_ID_KEY)] = superSetId
+        }
+    }
 
     companion object {
         private const val TRAINING_ID_KEY = "TRAINING_ID_KEY"
         private const val EXERCISE_ID_KEY = "EXERCISE_ID_KEY"
+        private const val SUPERSET_ID_KEY = "SUPERSET_ID_KEY"
         private const val REOCCURRENCES_KEY = "REOCCURRENCES_KEY"
         private const val WEIGHT_KEY = "WEIGHT_KEY"
         private const val ORDER_ADDED = "ORDER_ADDED"

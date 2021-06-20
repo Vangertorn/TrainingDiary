@@ -55,6 +55,7 @@ class TrainingCreateViewModel(
                     if (appSettings.getNumberOfTrainingSessions() == 0) {
                         appSettings.setNumberOfTrainingSessions(-1)
                         appSettings.setSubscriptionEndDate("")
+                        appSettings.setDateCreatedTicket("")
                     }else{
                         appSettings.setNumberOfTrainingSessions(appSettings.getNumberOfTrainingSessions() - 1)
                     }

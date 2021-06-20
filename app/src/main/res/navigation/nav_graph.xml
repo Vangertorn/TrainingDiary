@@ -63,6 +63,9 @@
         <argument
             android:name="training"
             app:argType="com.example.trainingdiary.models.Training" />
+        <action
+            android:id="@+id/action_exerciseCreateBottomDialog_to_superSetCreateBottomDialog"
+            app:destination="@id/superSetCreateBottomDialog" />
     </dialog>
     <dialog
         android:id="@+id/approachCreateBottomDialog2"
@@ -127,5 +130,19 @@
         android:name="com.example.trainingdiary.screen.season_ticket_info.SeasonTicketInfoBottomDialog"
         android:label="SeasonTicketInfoBottomDialog"
         tools:layout="@layout/bottom_sheet_season_ticket_information"/>
+    <dialog
+        android:id="@+id/superSetCreateBottomDialog"
+        android:name="com.example.trainingdiary.screen.super_set_create.SuperSetCreateBottomDialog"
+        android:label="SuperSetCreateBottomDialog"
+        tools:layout="@layout/bottom_sheet_add_set">
+        <argument
+            android:name="superSetId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_superSetCreateBottomDialog_to_exerciseListFragment"
+            app:destination="@id/exerciseListFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"/>
+    </dialog>
 
 </navigation>

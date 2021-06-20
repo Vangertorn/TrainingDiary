@@ -13,6 +13,7 @@ import com.example.trainingdiary.screen.season_ticket.SeasonTicketViewModel
 import com.example.trainingdiary.screen.season_ticket_info.SeasonTicketInfoViewModel
 import com.example.trainingdiary.screen.settings.SettingsFragment
 import com.example.trainingdiary.screen.settings.SettingsViewModel
+import com.example.trainingdiary.screen.super_set_create.SuperSetCreateViewModel
 import com.example.trainingdiary.screen.training_create.TrainingCreateViewModel
 import com.example.trainingdiary.screen.training_list.TrainingListViewModel
 import org.koin.android.ext.koin.androidContext
@@ -34,13 +35,14 @@ class DiaryApp : Application() {
         viewModel { TrainingListViewModel(get(), get()) }
         viewModel { TrainingCreateViewModel(get(), get(),get()) }
         viewModel { ApproachCreateViewModel(get(), get(), get(), get()) }
-        viewModel { ExerciseCreateViewModel(get(), get()) }
+        viewModel { ExerciseCreateViewModel(get(), get(),get(),get()) }
         viewModel { ExerciseListViewModel(get(), get(), get()) }
-        viewModel { MainActivityViewModel(get(), get(), get()) }
+        viewModel { MainActivityViewModel(get(), get(), get(),get()) }
         viewModel { SettingsViewModel(get(), get()) }
         viewModel { ExerciseAutofillViewModel(get()) }
         viewModel { SeasonTicketViewModel(get()) }
         viewModel { SeasonTicketInfoViewModel(get()) }
+        viewModel { SuperSetCreateViewModel(get(),get(),get(),get(),get()) }
     }
     private val repositoryModel = module {
         factory { TrainingRepository(get(), get()) }
@@ -48,6 +50,7 @@ class DiaryApp : Application() {
         factory { ExerciseRepository(get(), get(), get()) }
         factory { MuscleGroupRepository(get()) }
         factory { ExerciseAutofillRepository(get()) }
+        factory { SuperSetRepository(get(),get(),get(),get()) }
     }
 
     private val barnModel = module {
@@ -57,6 +60,7 @@ class DiaryApp : Application() {
         factory { get<PlannerDatabase>().exerciseDao() }
         factory { get<PlannerDatabase>().muscleGroupDao() }
         factory { get<PlannerDatabase>().exerciseAutofillDao() }
+        factory { get<PlannerDatabase>().superSetDao() }
         single { AppSettings(get()) }
     }
 }

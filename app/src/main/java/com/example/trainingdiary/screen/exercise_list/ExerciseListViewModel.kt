@@ -45,11 +45,7 @@ class ExerciseListViewModel(
         }
     }
 
-    fun getTrainingFromId(trainingId: Long): Training {
-        return runBlocking {
-            trainingRepository.getTrainingById(trainingId)
-        }
-    }
+
 
     fun rememberIdExercise(exercise: Exercise) {
         launch {

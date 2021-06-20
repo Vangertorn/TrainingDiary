@@ -36,7 +36,8 @@ class ExerciseRepository(
                         name = exercise.name,
                         idTraining = exercise.idTraining,
                         position = listPositions[0] - 1,
-                        comment = exercise.comment
+                        comment = exercise.comment,
+                        idSet = exercise.idSet
                     )
                 )
             }
@@ -46,6 +47,11 @@ class ExerciseRepository(
     suspend fun deleteExercises() {
         withContext(Dispatchers.IO) {
             exerciseDao.deletedExercisesByFlags(true)
+        }
+    }
+    suspend fun deleteExercise(exercise: Exercise) {
+        withContext(Dispatchers.IO) {
+            exerciseDao.deleteExercise(exercise)
         }
     }
 

@@ -12,7 +12,9 @@ import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.BottomSheetAddExerciseBinding
 import com.example.trainingdiary.models.Exercise
 import com.example.trainingdiary.models.ExerciseAutofill
+import com.example.trainingdiary.models.SuperSet
 import com.example.trainingdiary.screen.exercise_list.ExerciseListFragmentArgs
+import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -45,6 +47,38 @@ class ExerciseCreateBottomDialog : BottomSheetDialogFragment() {
                 ArrayAdapter(requireContext(), R.layout.item_select_dialog, it)
             viewBinding.autoCompleteTvExerciseName.setAdapter(arrayAdapter)
         }
+
+
+        viewBinding.btnAddToSet.setOnClickListener {
+            if (viewBinding.autoCompleteTvExerciseName.text.isNotEmpty()) {
+                val id = viewModel.saveSuperSet(
+                    SuperSet(idTraining = args.training.id), Exercise(
+                        name = viewBinding.autoCompleteTvExerciseName.text.toString(),
+                        comment = viewBinding.etCommentExercise.text.toString(),
+                        idTraining = args.training.id
+                    ), Exercise(
+                        name = "",
+                        comment = "",
+                        idTraining = args.training.id
+                    )
+                )
+                viewModel.saveSuperSetId(id)
+                viewModel.addNewExerciseAutofill(
+                    ExerciseAutofill(
+                        nameExercise = viewBinding.autoCompleteTvExerciseName.text.toString()
+                    )
+                )
+                this.dismiss()
+                findNavController().navigateSave(
+                    ExerciseCreateBottomDialogDirections.actionExerciseCreateBottomDialogToSuperSetCreateBottomDialog(
+                        id
+                    )
+                )
+            }
+        }
+
+
+
         viewBinding.btnSave.setOnClickListener {
             if (viewBinding.autoCompleteTvExerciseName.text.isNotEmpty()) {
                 viewModel.addNewExercise(
