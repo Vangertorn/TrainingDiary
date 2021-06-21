@@ -10,7 +10,7 @@
     <string name="weight_kg">Вес, кг</string>
     <string name="add_quantity">Добавить колличество</string>
     <string name="remove_quantity">Уменьшить колличество</string>
-    <string name="reoccurrences">Колличество повторений</string>
+    <string name="reoccurrences">Колличество\n повторений</string>
     <string name="add_approach">Добавить подход</string>
     <string name="edit_exercise">Редактировать упражнение</string>
     <string name="save">Сохранить</string>
@@ -36,7 +36,7 @@
     <string name="exercises">Упражнения</string>
     <string name="muscle_groups">Группы мышц</string>
     <string name="backup_data">Резервное копирование данных</string>
-    <string name="add_n_default_n_values">Добавить значения по умолчанию</string>
+    <string name="add_n_default_n_values">Добавить\n значения\n по\n умолчанию</string>
     <string name="set_up_exercises_for_autofill">Настроить упражнения для автозаполнения</string>
     <string name="return_settings">Сбросить настройки</string>
     <string name="add_muscle_groups">Добавить группу мышц</string>
@@ -67,4 +67,15 @@
     <string name="number_of_training">Количество тренировок не может быть меньше 1</string>
     <string name="exercise_was_delete">Упражение было удалено</string>
     <string name="approach">%1s кг x %2s</string>
+    <string name="exercise_autofill">Упражнения для автозаполнения</string>
+    <string name="Settings">Настройки</string>
+    <string name="list_trainings">Список тренировок</string>
+    <string name="about_application">О приложении</string>
+    <string name="subject">Про приложение \"Дневник тренировок\"</string>
+    <string name="Chose_an_email_client">Выбрать почтовое приложение</string>
+    <string name="application_label">заставка</string>
+    <string name="training_diary">Дневник тренировок</string>
+    <string name="version_1_0">Версия 1.0</string>
+    <string name="leave_a_review_in_google_play">Оставить отзыв в Google Play</string>
+    <string name="developed_by_k_yankin">© Разработано К.В.Янкин</string>
 </resources>

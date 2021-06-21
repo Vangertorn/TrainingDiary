@@ -102,7 +102,8 @@ class SuperSetRecyclerViewAdapter(private val onClick: (Exercise) -> Unit) :
                 tvText.setBackgroundResource(R.drawable.backgound_item_muscle_groups)
                 tvText.setTextColor(Color.BLACK)
             }
-            tvText.text = Resources.getSystem().getString(R.string.add_exercise)
+            tvText.text = itemView.context.getString(R.string.add_exercise)
+//            tvText.text = Resources.getSystem().getString(R.string.add_exercise)
         }
     }
 

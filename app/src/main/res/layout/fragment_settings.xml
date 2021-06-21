@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_bac"
-        app:title="Settings"
+        app:title="@string/Settings"
         app:titleTextColor="@color/white">
 
         <ImageView
@@ -104,7 +104,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:lines="3"
+        android:lines="4"
         android:text="@string/add_n_default_n_values"
         android:textColor="@color/crimson"
         android:textSize="18sp"

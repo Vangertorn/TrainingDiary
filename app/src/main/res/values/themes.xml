@@ -60,9 +60,7 @@
         <item name="android:tint">@color/crimson</item>
         <item name="android:layout_margin">10dp</item>
         <item name="android:padding">2dp</item>
-        <item name="android:background">@android:color/transparent</item>
-
-
+        <item name="android:background">@drawable/background_iv_action</item>
     </style>
 
     <style name="MyFloatingActionButton" parent="Widget.Design.FloatingActionButton">
@@ -81,7 +79,11 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:letterSpacing">0.06</item>
-
+    </style>
+    <style name="DialogStyle" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
 

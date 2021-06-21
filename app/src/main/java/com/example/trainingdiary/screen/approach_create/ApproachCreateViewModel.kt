@@ -9,6 +9,7 @@ import com.example.trainingdiary.repository.ApproachRepository
 import com.example.trainingdiary.repository.ExerciseAutofillRepository
 import com.example.trainingdiary.repository.ExerciseRepository
 import com.example.trainingdiary.support.CoroutineViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
 class ApproachCreateViewModel(
@@ -19,6 +20,7 @@ class ApproachCreateViewModel(
 ) :
     CoroutineViewModel() {
 
+    @ExperimentalCoroutinesApi
     val approachLiveData = approachRepository.currentApproachFlow.asLiveData()
     val reoccurrencesLiveData = appSettings.reoccurrencesFlow().asLiveData()
     val weightLiveData = appSettings.weightFlow().asLiveData()

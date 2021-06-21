@@ -14,6 +14,7 @@ import com.example.trainingdiary.models.ExerciseAutofill
 import com.example.trainingdiary.support.navigateSave
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SuperSetCreateBottomDialog : BottomSheetDialogFragment() {
@@ -47,6 +48,7 @@ class SuperSetCreateBottomDialog : BottomSheetDialogFragment() {
         return viewBinding.root
     }
 
+    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewBinding.rvExerciseInSuperSet.adapter = adapter

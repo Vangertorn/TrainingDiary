@@ -101,6 +101,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_exerciseAutofillFragment"
             app:destination="@id/exerciseAutofillFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_informationFragment"
+            app:destination="@id/informationFragment" />
     </fragment>
     <fragment
         android:id="@+id/exerciseAutofillFragment"
@@ -156,5 +159,10 @@
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true"/>
     </dialog>
+    <fragment
+        android:id="@+id/informationFragment"
+        android:name="com.example.trainingdiary.screen.information.InformationFragment"
+        android:label="InformationFragment"
+        tools:layout="@layout/fragment_information"/>
 
 </navigation>

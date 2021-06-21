@@ -18,6 +18,13 @@ class MuscleGroupRepository(private val muscleGroupDao: MuscleGroupDao) {
         MuscleGroup(nameMuscleGroup = "Back", factorySettings = true),
         MuscleGroup(nameMuscleGroup = "Triceps", factorySettings = true)
     )
+    //    MuscleGroup(nameMuscleGroup = context.getString(R.string.legs), factorySettings = true),
+//    MuscleGroup(nameMuscleGroup = context.getString(R.string.All_muscle_groups), factorySettings = true),
+//    MuscleGroup(nameMuscleGroup = context.getString(R.string.breast), factorySettings = true),
+//    MuscleGroup(nameMuscleGroup = context.getString(R.string.biceps), factorySettings = true),
+//    MuscleGroup(nameMuscleGroup = context.getString(R.string.shoulders), factorySettings = true),
+//    MuscleGroup(nameMuscleGroup = context.getString(R.string.back), factorySettings = true),
+//    MuscleGroup(nameMuscleGroup = context.getString(R.string.triceps), factorySettings = true)
 
 
     val currentMuscleGroupFlow: Flow<List<MuscleGroup>> =

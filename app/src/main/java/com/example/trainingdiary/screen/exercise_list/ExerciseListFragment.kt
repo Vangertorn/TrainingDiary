@@ -5,6 +5,7 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.myapplication.support.SupportFragmentInset
 import com.example.myapplication.support.setVerticalMargin
@@ -32,6 +33,13 @@ class ExerciseListFragment :
             )
         }
     )
+    private val dataObserverDesc = object : RecyclerView.AdapterDataObserver() {
+        override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+            super.onItemRangeInserted(positionStart, itemCount)
+            viewBinding.recyclerView.scrollToPosition(adapter.itemCount - 1)
+
+        }
+    }
 
     @ExperimentalCoroutinesApi
     private val simpleCallback = SwipeAndMoveCallback({ p1, p2 ->
@@ -57,8 +65,8 @@ class ExerciseListFragment :
         viewBinding.recyclerView.adapter = adapter
         viewModel.exerciseLiveData.observe(this.viewLifecycleOwner) {
             adapter.submitList(it)
-
         }
+        adapter.registerAdapterDataObserver(dataObserverDesc)
 
         val exerciseHelper = ItemTouchHelper(simpleCallback)
         exerciseHelper.attachToRecyclerView(viewBinding.recyclerView)
@@ -91,6 +99,11 @@ class ExerciseListFragment :
                 )
             )
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        adapter.unregisterAdapterDataObserver(dataObserverDesc)
     }
 
     @ExperimentalCoroutinesApi

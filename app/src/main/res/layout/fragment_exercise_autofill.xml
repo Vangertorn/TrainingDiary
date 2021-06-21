@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_bac"
-        app:title="Exercise autofill"
+        app:title="@string/exercise_autofill"
         app:titleTextColor="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView

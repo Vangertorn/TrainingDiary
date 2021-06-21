@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingdiary.R
 
@@ -119,20 +120,27 @@ class CalendarView @JvmOverloads constructor(
 
 
     private fun setMonthDay(date: Date = Date()) {
+        var currentPosition = 0
         val calendar = Calendar.getInstance()
         calendar.time = date
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
 
         val list = arrayListOf<Date>()
 
         for (i in 1..calendar.getActualMaximum(Calendar.DAY_OF_MONTH)) {
             calendar.set(Calendar.DAY_OF_MONTH, i)
             list.add(calendar.time)
+            if (DateUtils.isToday(calendar.time.time)) {
+                currentPosition = i - 1
+            }
         }
-        rvDays.adapter = DaysAdapter(calendarStyleSettings, list, selectedDate) {
+        rvDays.adapter = DaysAdapter(calendarStyleSettings, list, selectedDate, currentPosition) {
             calendar.time = it
             onDateChangedCallback?.onDateChanged(it)
         }
-
     }
 
 
@@ -145,11 +153,30 @@ class CalendarView @JvmOverloads constructor(
         private val settings: CalendarStyleSettings,
         private val items: List<Date>,
         selected: Date? = null,
-        private val onDateChangedCallback: (Date) -> Unit,
+        private val currentPosition: Int,
+        private val onDateChangedCallback: (Date) -> Unit
 
-        ) : RecyclerView.Adapter<DayViewHolder>() {
+    ) : RecyclerView.Adapter<DayViewHolder>() {
+        private var recyclerView: RecyclerView? = null
 
         var selectedDate: Date? = null
+            set(value) {
+                val calendar = Calendar.getInstance()
+                calendar.time = value!!
+                calendar.set(Calendar.HOUR_OF_DAY, 0)
+                calendar.set(Calendar.MINUTE, 0)
+                calendar.set(Calendar.SECOND, 0)
+                calendar.set(Calendar.MILLISECOND, 0)
+                field = calendar.time
+                val activeIndex = items.indexOf(field)
+                if (activeIndex >= 0) {
+                    notifyItemChanged(activeIndex)
+                    (recyclerView?.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(
+                        activeIndex,
+                        recyclerView!!.resources.displayMetrics.widthPixels / 2
+                    )
+                }
+            }
 
         init {
             selected?.let {
@@ -157,9 +184,19 @@ class CalendarView @JvmOverloads constructor(
             }
         }
 
+
         override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
             super.onAttachedToRecyclerView(recyclerView)
-            recyclerView.scrollToPosition(items.indexOf(selectedDate))
+            this.recyclerView = recyclerView
+            (recyclerView.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(
+                currentPosition,
+                recyclerView.resources.displayMetrics.widthPixels / 2
+            )
+        }
+
+        override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+            super.onDetachedFromRecyclerView(recyclerView)
+            this.recyclerView = null
         }
 
 
@@ -182,6 +219,7 @@ class CalendarView @JvmOverloads constructor(
 
         override fun onBindViewHolder(holder: DayViewHolder, position: Int) {
             holder.bind(items[position], selectedDate == items[position], settings)
+//            holder.itemView.width
         }
 
         override fun getItemCount(): Int = items.size
@@ -246,6 +284,6 @@ class CalendarView @JvmOverloads constructor(
 
     companion object {
         @SuppressLint("ConstantLocale")
-        val monthFormatter = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
+        val monthFormatter = SimpleDateFormat("LLLL yyyy", Locale.getDefault())
     }
 }

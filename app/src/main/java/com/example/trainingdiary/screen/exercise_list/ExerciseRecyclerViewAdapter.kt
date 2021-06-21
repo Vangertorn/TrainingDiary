@@ -54,6 +54,8 @@ class ExerciseRecyclerViewAdapter(private val onClick: (ExerciseInfo) -> Unit) :
             }
             rvApproach.layoutManager = chipsLayoutManager
             rvApproach.adapter = adapter
+//            rvApproach.suppressLayout(true)
+
         }
 
         fun bind(item: ExerciseInfo) {

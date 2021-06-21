@@ -44,6 +44,10 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewBinding.ivInformation.setOnClickListener {
+            findNavController().navigateSave(SettingsFragmentDirections.actionSettingsFragmentToInformationFragment())
+        }
+
         viewBinding.ivReturnSettings.setOnClickListener {
             showRecoverDialog()
         }

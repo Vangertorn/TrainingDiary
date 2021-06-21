@@ -66,6 +66,18 @@
     <string name="exercise_was_delete">Exercise was delete</string>
     <string name="approach">%1s kg x %2s</string>
     <string name="exercise_name_is_empty">Exercise name  is empty</string>
+    <string name="exercise_autofill">Exercise autofill</string>
+    <string name="Settings">Settings</string>
+    <string name="list_trainings">List trainings</string>
+    <string name="about_application">About application</string>
+    <string name="email_address" translatable="false"><u>Vangertorn@yandex.ru</u></string>
+    <string name="subject">About Training diary application</string>
+    <string name="Chose_an_email_client">Chose an email client</string>
+    <string name="application_label">application label</string>
+    <string name="training_diary">Training diary</string>
+    <string name="version_1_0">Version 1.0</string>
+    <string name="leave_a_review_in_google_play">Leave a review in Google Play</string>
+    <string name="developed_by_k_yankin">© Developed by K. Yankin</string>
 
 
 </resources>

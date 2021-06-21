@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -17,13 +16,13 @@
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTvExerciseName"
         style="@style/EditTextStyle"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:dropDownAnchor="@id/tvText1"
         android:hint="@string/names_exercise"
         android:maxLength="30"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/etCommentExercise"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvText1" />
 
@@ -34,6 +33,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/comment"
         android:importantForAutofill="no"
+        app:layout_constraintBottom_toTopOf="@id/btnSave"
         app:layout_constraintEnd_toEndOf="@id/autoCompleteTvExerciseName"
         app:layout_constraintStart_toStartOf="@id/autoCompleteTvExerciseName"
         app:layout_constraintTop_toBottomOf="@id/autoCompleteTvExerciseName" />
@@ -48,20 +48,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btnAddToSet"
-        app:layout_constraintTop_toBottomOf="@id/etCommentExercise"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintTop_toBottomOf="@id/etCommentExercise" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAddToSet"
         style="@style/MyButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:text="@string/add_to_set"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/btnSave"
         app:layout_constraintEnd_toStartOf="@id/btnSave"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etCommentExercise" />
+        app:layout_constraintTop_toTopOf="@id/btnSave" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
