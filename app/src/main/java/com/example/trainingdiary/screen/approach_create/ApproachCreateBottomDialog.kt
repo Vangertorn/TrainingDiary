@@ -13,7 +13,9 @@ import com.example.trainingdiary.databinding.BottomSheetAddApproachBinding
 import com.example.trainingdiary.models.Approach
 import com.example.trainingdiary.models.Exercise
 import com.example.trainingdiary.models.ExerciseAutofill
+import com.example.trainingdiary.support.*
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
@@ -47,6 +49,7 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
     }
 
 
+    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -109,12 +112,9 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
         }
 
         viewBinding.btnAddApproach.setOnClickListener {
-            if (viewBinding.etWeight.text.isBlank()) {
-                viewBinding.etWeight.setText("0.0")
-            }
-            if (viewBinding.etReoccurrence.text.isBlank()) {
-                viewBinding.etReoccurrence.setText("0")
-            }
+            viewBinding.etWeight.chekDoubleEmpty()
+            viewBinding.etReoccurrence.chekIntEmpty()
+
             viewModel.addNewApproach(
                 Approach(
                     weight = viewBinding.etWeight.text.toString(),
@@ -130,51 +130,17 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
 
 
         viewBinding.ibAddQuantity.setOnClickListener {
-            if (viewBinding.etReoccurrence.text.toString().isEmpty()) {
-                viewBinding.etReoccurrence.setText("1")
-            } else {
-                viewBinding.etReoccurrence.setText(
-                    (viewBinding.etReoccurrence.text.toString().toInt() + 1).toString()
-                )
-            }
-
+            viewBinding.etReoccurrence.addInt(1)
         }
         viewBinding.ibRemoveQuantity.setOnClickListener {
-            if (viewBinding.etReoccurrence.text.toString().isEmpty()) {
-                viewBinding.etReoccurrence.setText("0")
-            } else {
-                if (viewBinding.etReoccurrence.text.toString().toDouble() > 0) {
-                    viewBinding.etReoccurrence.setText(
-                        (viewBinding.etReoccurrence.text.toString().toInt() - 1).toString()
-                    )
-                } else {
-                    viewBinding.etReoccurrence.setText("0")
-                }
-
-            }
+            viewBinding.etReoccurrence.removeInt(1)
         }
 
         viewBinding.ibAddWeight.setOnClickListener {
-            if (viewBinding.etWeight.text.toString().isEmpty()) {
-                viewBinding.etWeight.setText("1")
-            } else {
-                viewBinding.etWeight.setText(
-                    (viewBinding.etWeight.text.toString().toDouble() + 1).toString()
-                )
-            }
+            viewBinding.etWeight.addDouble(1.0)
         }
         viewBinding.ibRemoveWeight.setOnClickListener {
-            if (viewBinding.etWeight.text.toString().isEmpty()) {
-                viewBinding.etWeight.setText("0.0")
-            } else {
-                if (viewBinding.etWeight.text.toString().toDouble() >= 1) {
-                    viewBinding.etWeight.setText(
-                        (viewBinding.etWeight.text.toString().toDouble() - 1).toString()
-                    )
-                } else {
-                    viewBinding.etWeight.setText("0.0")
-                }
-            }
+            viewBinding.etWeight.removeDouble(1.0)
         }
     }
 

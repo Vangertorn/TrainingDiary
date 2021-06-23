@@ -7,13 +7,10 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.trainingdiary.support.SupportFragmentInset
-import com.example.trainingdiary.support.setVerticalMargin
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentSettingsBinding
 import com.example.trainingdiary.models.MuscleGroup
-import com.example.trainingdiary.support.hideKeyboard
-import com.example.trainingdiary.support.navigateSave
+import com.example.trainingdiary.support.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -99,28 +96,11 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
             viewBinding.etWeight.setText(it)
         }
         viewBinding.ibAddQuantity.setOnClickListener {
-            if (viewBinding.etReoccurrence.text.toString().isEmpty()) {
-                viewBinding.etReoccurrence.setText("1")
-            } else {
-                viewBinding.etReoccurrence.setText(
-                    (viewBinding.etReoccurrence.text.toString().toInt() + 1).toString()
-                )
-            }
+            viewBinding.etReoccurrence.addInt(1)
 
         }
         viewBinding.ibRemoveQuantity.setOnClickListener {
-            if (viewBinding.etReoccurrence.text.toString().isEmpty()) {
-                viewBinding.etReoccurrence.setText("0")
-            } else {
-                if (viewBinding.etReoccurrence.text.toString().toDouble() > 0) {
-                    viewBinding.etReoccurrence.setText(
-                        (viewBinding.etReoccurrence.text.toString().toInt() - 1).toString()
-                    )
-                } else {
-                    viewBinding.etReoccurrence.setText("0")
-                }
-
-            }
+            viewBinding.etReoccurrence.removeInt(1)
         }
 
         viewModel.switchOrderLiveData.observe(this.viewLifecycleOwner) {
@@ -139,27 +119,10 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
 
 
         viewBinding.ibAddWeight.setOnClickListener {
-            if (viewBinding.etWeight.text.toString().isEmpty()) {
-                viewBinding.etWeight.setText("1")
-            } else {
-                viewBinding.etWeight.setText(
-                    (viewBinding.etWeight.text.toString().toDouble() + 1).toString()
-                )
-            }
+            viewBinding.etWeight.addDouble(1.0)
         }
         viewBinding.ibRemoveWeight.setOnClickListener {
-            if (viewBinding.etWeight.text.toString().isEmpty()) {
-                viewBinding.etWeight.setText("0.0")
-            } else {
-                if (viewBinding.etWeight.text.toString().toDouble() >= 1) {
-                    viewBinding.etWeight.setText(
-                        (viewBinding.etWeight.text.toString().toDouble() - 1).toString()
-                    )
-                } else {
-                    viewBinding.etWeight.setText("0.0")
-                }
-
-            }
+            viewBinding.etWeight.removeDouble(1.0)
         }
     }
 
