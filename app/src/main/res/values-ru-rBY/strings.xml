@@ -78,4 +78,11 @@
     <string name="version_1_0">Версия 1.0</string>
     <string name="leave_a_review_in_google_play">Оставить отзыв в Google Play</string>
     <string name="developed_by_k_yankin">© Разработано К.В.Янкин</string>
+    <string name="legs">Ноги</string>
+    <string name="all_muscle_groups">Все группы мышц</string>
+    <string name="breast">Грудь</string>
+    <string name="biceps">Бицепс</string>
+    <string name="shoulders">Плечи</string>
+    <string name="back">Спина</string>
+    <string name="triceps">Трицепс</string>
 </resources>

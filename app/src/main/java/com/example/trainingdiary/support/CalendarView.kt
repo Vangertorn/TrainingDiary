@@ -28,7 +28,8 @@ class CalendarStyleSettings(
     val selectedDayBackground: Drawable?,
     val toDayBackground: Drawable?,
     val dayTextSizeInPx: Float,
-    val weekTextSizeInPx: Float
+    val weekTextSizeInPx: Float,
+    val enabledBackground: Drawable?
 )
 
 
@@ -40,12 +41,38 @@ class CalendarView @JvmOverloads constructor(
 
     private val rvDays: RecyclerView by lazy { findViewById(R.id.rvDays) }
     private val tvMonth: TextView by lazy { findViewById(R.id.tvMonths) }
-
     private val ivLeft: ImageView by lazy { findViewById(R.id.ivLeft) }
     private val ivRight: ImageView by lazy { findViewById(R.id.ivRight) }
+    private val tvInvisible: TextView by lazy { findViewById(R.id.tvInvisible) }
 
 
     var onDateChangedCallback: DateChangeListener? = null
+
+    var active: Boolean = true
+        set(value) {
+            field = value
+            if (!value) {
+                tvInvisible.visibility = View.VISIBLE
+            } else {
+                tvInvisible.visibility = View.GONE
+            }
+            if (value) {
+                ivLeft.setOnClickListener {
+                    calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1)
+                    setMonth(calendar.time)
+                }
+                ivRight.setOnClickListener {
+                    calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1)
+                    setMonth(calendar.time)
+                }
+            } else {
+                ivLeft.isClickable = false
+                ivRight.isClickable = false
+
+            }
+            setMonthDay()
+        }
+
 
     private val calendar = Calendar.getInstance().apply {
         time = Date()
@@ -57,7 +84,6 @@ class CalendarView @JvmOverloads constructor(
         }
         set(value) {
             (rvDays.adapter as? DaysAdapter)?.selectedDate = value
-//            setMonthDay()
         }
 
     private lateinit var calendarStyleSettings: CalendarStyleSettings
@@ -88,6 +114,8 @@ class CalendarView @JvmOverloads constructor(
             val weekTextSizeInPx =
                 attr.getDimensionPixelSize(R.styleable.CalendarView_week_text_size, 40).toFloat()
 
+            val enabledBackground = attr.getDrawable(R.styleable.CalendarView_enabled_background)
+
             tvMonth.setTextColor(monthTextColor)
             tvMonth.setTextSize(TypedValue.COMPLEX_UNIT_PX, monthTextSizeInPx)
 
@@ -102,12 +130,11 @@ class CalendarView @JvmOverloads constructor(
                     selectedDayBackground = selectedDayBackground,
                     toDayBackground = toDayBackground,
                     dayTextSizeInPx = dayTextSizeInPx,
-                    weekTextSizeInPx = weekTextSizeInPx
+                    weekTextSizeInPx = weekTextSizeInPx,
+                    enabledBackground = enabledBackground
                 )
             attr.recycle()
         }
-        setMonth()
-
         ivLeft.setOnClickListener {
             calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1)
             setMonth(calendar.time)
@@ -116,6 +143,7 @@ class CalendarView @JvmOverloads constructor(
             calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1)
             setMonth(calendar.time)
         }
+        setMonth()
     }
 
 
@@ -137,9 +165,16 @@ class CalendarView @JvmOverloads constructor(
                 currentPosition = i - 1
             }
         }
-        rvDays.adapter = DaysAdapter(calendarStyleSettings, list, selectedDate, currentPosition) {
-            calendar.time = it
-            onDateChangedCallback?.onDateChanged(it)
+        if (active) {
+            rvDays.adapter =
+                DaysAdapter(calendarStyleSettings, list, selectedDate, currentPosition) {
+                    calendar.time = it
+                    onDateChangedCallback?.onDateChanged(it)
+                }
+            rvDays.background = null
+        } else {
+            rvDays.adapter = InactiveDaysAdapter(list)
+            rvDays.background = calendarStyleSettings.enabledBackground
         }
     }
 
@@ -147,6 +182,23 @@ class CalendarView @JvmOverloads constructor(
     private fun setMonth(date: Date = Date()) {
         tvMonth.text = monthFormatter.format(date)
         setMonthDay(date)
+    }
+
+    class InactiveDaysAdapter(private val items: List<Date>) :
+        RecyclerView.Adapter<InactiveDayViewHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InactiveDayViewHolder {
+            return InactiveDayViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.calendar_day_list_item, parent, false)
+            )
+        }
+
+        override fun onBindViewHolder(holder: InactiveDayViewHolder, position: Int) {
+            holder.bind(items[position])
+        }
+
+        override fun getItemCount(): Int = items.size
+
     }
 
     class DaysAdapter(
@@ -219,11 +271,19 @@ class CalendarView @JvmOverloads constructor(
 
         override fun onBindViewHolder(holder: DayViewHolder, position: Int) {
             holder.bind(items[position], selectedDate == items[position], settings)
-//            holder.itemView.width
         }
 
         override fun getItemCount(): Int = items.size
 
+    }
+
+    class InactiveDayViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val tvDay = itemView.findViewById<TextView>(R.id.tvDate)
+        private val tvWeekDay = itemView.findViewById<TextView>(R.id.tvWeekday)
+        fun bind(date: Date) {
+            tvDay.text = monthDayFormatter.format(date)
+            tvWeekDay.text = weekDayFormatter.format(date)
+        }
     }
 
     class DayViewHolder(itemView: View, onClick: (Int) -> Unit) :
@@ -246,9 +306,11 @@ class CalendarView @JvmOverloads constructor(
             val backgroundRes = when {
                 selected -> calendarStyleSettings.selectedDayBackground
                 DateUtils.isToday(date.time) -> calendarStyleSettings.toDayBackground
+
                 else -> null
             }
             itemView.background = backgroundRes
+
 
             val textColor = when {
                 selected -> calendarStyleSettings.selectedTextColor
@@ -267,14 +329,6 @@ class CalendarView @JvmOverloads constructor(
 
         }
 
-        companion object {
-            @SuppressLint("ConstantLocale")
-            val monthDayFormatter = SimpleDateFormat("dd", Locale.getDefault())
-
-            @SuppressLint("ConstantLocale")
-            val weekDayFormatter = SimpleDateFormat("EE", Locale.getDefault())
-
-        }
 
     }
 
@@ -283,6 +337,12 @@ class CalendarView @JvmOverloads constructor(
     }
 
     companion object {
+        @SuppressLint("ConstantLocale")
+        val monthDayFormatter = SimpleDateFormat("dd", Locale.getDefault())
+
+        @SuppressLint("ConstantLocale")
+        val weekDayFormatter = SimpleDateFormat("EE", Locale.getDefault())
+
         @SuppressLint("ConstantLocale")
         val monthFormatter = SimpleDateFormat("LLLL yyyy", Locale.getDefault())
     }

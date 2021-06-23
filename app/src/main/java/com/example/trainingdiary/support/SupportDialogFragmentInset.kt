@@ -3,15 +3,15 @@ package com.example.trainingdiary.support
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.DialogFragment
 import androidx.viewbinding.ViewBinding
 
-abstract class SupportFragmentInset<T : ViewBinding>(@LayoutRes layoutResId: Int) :
-    Fragment(layoutResId), ViewBindable<T> {
+abstract class SupportDialogFragmentInset<T : ViewBinding>(@LayoutRes layoutResId: Int) :
+    DialogFragment(layoutResId), ViewBindable<T> {
 
     abstract fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean)
 
-    protected var savedInsets: VerticalInset = VerticalInset.empty()
+    protected var saveInsets: VerticalInset = VerticalInset.empty()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -21,8 +21,8 @@ abstract class SupportFragmentInset<T : ViewBinding>(@LayoutRes layoutResId: Int
         }
     }
 
-    private fun activityChangedInsets(lastVerticalInsets: VerticalInset) {
-        savedInsets = lastVerticalInsets
-        onInsetsReceived(lastVerticalInsets.top, lastVerticalInsets.bottom, savedInsets.hasKeyboard)
+    private fun activityChangedInsets(lastVerticalInset: VerticalInset) {
+        saveInsets = lastVerticalInset
+        onInsetsReceived(lastVerticalInset.top, lastVerticalInset.bottom, saveInsets.hasKeyboard)
     }
 }

@@ -8,8 +8,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.trainingdiary.databinding.ActivityMainBinding
 import androidx.fragment.app.Fragment
-import com.example.myapplication.support.SupportActivityInset
-import com.example.myapplication.support.setWindowTransparency
+import com.example.trainingdiary.support.SupportActivityInset
+import com.example.trainingdiary.support.setWindowTransparency
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : SupportActivityInset<ActivityMainBinding>() {

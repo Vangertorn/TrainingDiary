@@ -29,16 +29,22 @@ class SeasonTicketViewModel(private val appSettings: AppSettings) : CoroutineVie
 
     fun saveDaysAmount(endDate: String) {
         launch {
+
             val dateEnd = dateFormatter.parse(endDate)!!.time
-            val currentDate = Date().time
-            val result = dateEnd - currentDate
-            appSettings.setDayLeft(dayFormatter.format(result).toInt())
+            if (dateEnd == 0L) {
+                appSettings.setDayLeft(365)
+            } else {
+                val currentDate = Date().time
+                val result = dateEnd - currentDate
+                appSettings.setDayLeft(dayFormatter.format(result).toInt())
+            }
         }
     }
 
     companion object {
         @SuppressLint("ConstantLocale")
         private val dateFormatter = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+
         @SuppressLint("ConstantLocale")
         private val dayFormatter = SimpleDateFormat("d", Locale.getDefault())
     }

@@ -1,4 +1,4 @@
-package com.example.myapplication.support
+package com.example.trainingdiary.support
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment

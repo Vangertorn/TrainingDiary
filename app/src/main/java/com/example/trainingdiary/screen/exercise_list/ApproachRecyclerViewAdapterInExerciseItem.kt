@@ -1,7 +1,6 @@
 package com.example.trainingdiary.screen.exercise_list
 
 
-import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +32,7 @@ class ApproachRecyclerViewAdapterInExerciseItem :
         private val tvText = itemView.findViewById<TextView>(R.id.tvApproachInExerciseItem)
         fun bind(item: Approach) {
             tvText.text =
-               itemView.context.getString(R.string.approach, item.weight, item.reoccurrences)
+                itemView.context.getString(R.string.approach, item.weight, item.reoccurrences)
         }
     }
 

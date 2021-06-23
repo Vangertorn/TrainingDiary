@@ -12,6 +12,11 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <!-- makes all dialogs in your app use your dialog theme by default -->
+        <item name="alertDialogTheme">@style/DialogTheme</item>
+        <item name="android:alertDialogTheme">?alertDialogTheme</item>
+        <item name="dialogTheme">?alertDialogTheme</item>
+        <item name="android:dialogTheme">?alertDialogTheme</item>
     </style>
 
     <style name="EditTextStyle" parent="@android:style/Widget.EditText">
@@ -80,10 +85,17 @@
         <item name="android:textStyle">bold</item>
         <item name="android:letterSpacing">0.06</item>
     </style>
+
     <style name="DialogStyle" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <style name="DialogTheme" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+        <item name="android:buttonStyle">@color/crimson</item>
+        <item name="android:textColorHint">@color/black</item>
+
     </style>
 
 

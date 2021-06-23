@@ -1,9 +1,11 @@
 package com.example.trainingdiary.screen.season_ticket
 
+import android.icu.util.LocaleData
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckedTextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.trainingdiary.R
@@ -11,6 +13,8 @@ import com.example.trainingdiary.databinding.BottomSheetSeasonTicketBinding
 import com.example.trainingdiary.support.CalendarView
 import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -47,36 +51,66 @@ class SeasonTicketBottomDialog : BottomSheetDialogFragment() {
             }
         }
 
+        viewBinding.ctvPerpetual.setOnClickListener {
+            it as CheckedTextView
+            it.toggle()
+            viewBinding.calendar.active = !it.isChecked
+
+        }
+        viewBinding.ctvUnlimited.setOnClickListener {
+            it as CheckedTextView
+            it.toggle()
+            if (it.isChecked) {
+                viewBinding.ivCloseNumber.visibility = View.VISIBLE
+            } else {
+                viewBinding.ivCloseNumber.visibility = View.GONE
+            }
+        }
+
 
         viewBinding.btnSaveSeasonTicket.setOnClickListener {
             var amount: Int? = null
             var date: Date? = null
-            if (selectedDate >= Date()) {
-                date = selectedDate
+            if (viewBinding.ctvPerpetual.isChecked) {
+                date = Date(0)
             } else {
-                Toast.makeText(
-                    this.context,
-                    getString(R.string.Term_season_ticket),
-                    Toast.LENGTH_SHORT
-                ).show()
+                if (selectedDate >= Date()) {
+                    date = selectedDate
+                } else {
+                    Toast.makeText(
+                        this.context,
+                        getString(R.string.Term_season_ticket),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
-            if (viewBinding.etReoccurrence.text.toString().toInt() >= 1) {
-                amount = viewBinding.etReoccurrence.text.toString().toInt()
+
+            if (viewBinding.ctvUnlimited.isChecked) {
+                amount = 100
 
             } else {
-                Toast.makeText(
-                    this.context,
-                    getString(R.string.number_of_training),
-                    Toast.LENGTH_SHORT
-                ).show()
+                if (viewBinding.etReoccurrence.text.toString().toInt() >= 1) {
+                    amount = viewBinding.etReoccurrence.text.toString().toInt()
+                } else {
+                    Toast.makeText(
+                        this.context,
+                        getString(R.string.number_of_training),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
+
             if (amount != null && date != null) {
-                viewModel.saveNumberOfTrainingSessions(amount)
-                viewModel.saveSubscriptionEndDate(dateFormatter.format(date))
-                viewModel.saveDateCreatedTicket(dateFormatter.format(Date()))
-                viewModel.saveDaysAmount(dateFormatter.format(date))
-                this.dismiss()
-                findNavController().navigateSave(SeasonTicketBottomDialogDirections.actionSeasonTicketBottomDialogToTrainingListFragment())
+                runBlocking {
+                    viewModel.saveNumberOfTrainingSessions(amount)
+                    viewModel.saveSubscriptionEndDate(dateFormatter.format(date))
+                    viewModel.saveDateCreatedTicket(dateFormatter.format(Date()))
+                    viewModel.saveDaysAmount(dateFormatter.format(date))
+                    delay(50)
+                    findNavController().navigateSave(SeasonTicketBottomDialogDirections.actionSeasonTicketBottomDialogToTrainingListFragment())
+                }
+
+
             }
         }
 

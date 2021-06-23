@@ -1,4 +1,4 @@
-package com.example.myapplication.support
+package com.example.trainingdiary.support
 
 import android.app.Activity
 import android.app.Dialog

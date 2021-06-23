@@ -33,24 +33,24 @@ class DiaryApp : Application() {
 
     private val viewModel = module {
         viewModel { TrainingListViewModel(get(), get()) }
-        viewModel { TrainingCreateViewModel(get(), get(),get()) }
+        viewModel { TrainingCreateViewModel(get(), get(), get()) }
         viewModel { ApproachCreateViewModel(get(), get(), get(), get()) }
-        viewModel { ExerciseCreateViewModel(get(), get(),get(),get()) }
+        viewModel { ExerciseCreateViewModel(get(), get(), get(), get()) }
         viewModel { ExerciseListViewModel(get(), get(), get()) }
-        viewModel { MainActivityViewModel(get(), get(), get(),get(), get()) }
+        viewModel { MainActivityViewModel(get(), get(), get(), get(), get()) }
         viewModel { SettingsViewModel(get(), get()) }
         viewModel { ExerciseAutofillViewModel(get()) }
         viewModel { SeasonTicketViewModel(get()) }
         viewModel { SeasonTicketInfoViewModel(get()) }
-        viewModel { SuperSetCreateViewModel(get(),get(),get(),get(),get()) }
+        viewModel { SuperSetCreateViewModel(get(), get(), get(), get(), get()) }
     }
     private val repositoryModel = module {
         factory { TrainingRepository(get(), get()) }
         factory { ApproachRepository(get(), get(), get()) }
         factory { ExerciseRepository(get(), get(), get()) }
-        factory { MuscleGroupRepository(get()) }
+        factory { MuscleGroupRepository(get(), get()) }
         factory { ExerciseAutofillRepository(get()) }
-        factory { SuperSetRepository(get(),get(),get(),get()) }
+        factory { SuperSetRepository(get(), get(), get(), get()) }
     }
 
     private val barnModel = module {

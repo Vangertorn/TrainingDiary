@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.myapplication.support.SupportFragmentInset
-import com.example.myapplication.support.setVerticalMargin
+import com.example.trainingdiary.support.SupportFragmentInset
+import com.example.trainingdiary.support.setVerticalMargin
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentInformationBinding
 import org.koin.android.viewmodel.ext.android.viewModel

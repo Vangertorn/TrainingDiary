@@ -49,19 +49,22 @@ class TrainingCreateViewModel(
 
     fun takeAwayTraining(training: Training) {
         launch {
-            if (appSettings.getDateCreatedTicket().isNotEmpty()) {
-                if (TrainingListViewModel.monthFormatter.parse(training.date)!!
-                    >= TrainingListViewModel.monthFormatter.parse(
-                        appSettings.getDateCreatedTicket()
-                    )
-                ) {
-                    if (appSettings.getNumberOfTrainingSessions() == 0) {
-                        appSettings.setNumberOfTrainingSessions(-1)
-                        appSettings.setSubscriptionEndDate("")
-                        appSettings.setDateCreatedTicket("")
-                        appSettings.setDayLeft(-1)
-                    } else {
-                        appSettings.setNumberOfTrainingSessions(appSettings.getNumberOfTrainingSessions() - 1)
+            val numberTraining = appSettings.getNumberOfTrainingSessions()
+            if (numberTraining < 100) {
+                if (appSettings.getDateCreatedTicket().isNotEmpty()) {
+                    if (TrainingListViewModel.monthFormatter.parse(training.date)!!
+                        >= TrainingListViewModel.monthFormatter.parse(
+                            appSettings.getDateCreatedTicket()
+                        )
+                    ) {
+                        if (numberTraining == 0) {
+                            appSettings.setNumberOfTrainingSessions(-1)
+                            appSettings.setSubscriptionEndDate("")
+                            appSettings.setDateCreatedTicket("")
+                            appSettings.setDayLeft(-1)
+                        } else {
+                            appSettings.setNumberOfTrainingSessions(numberTraining - 1)
+                        }
                     }
                 }
             }

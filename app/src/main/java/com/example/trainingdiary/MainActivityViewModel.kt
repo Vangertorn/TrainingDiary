@@ -49,26 +49,35 @@ class MainActivityViewModel(
     fun setLeftDays() {
         launch {
             val leftDays = daysAmount()
-            if (leftDays.toInt() < 0) {
-                appSettings.setNumberOfTrainingSessions(-1)
-                appSettings.setSubscriptionEndDate("")
-                appSettings.setDayLeft(-1)
-                appSettings.setDateCreatedTicket("")
-            } else {
-                appSettings.setDayLeft(leftDays.toInt())
+            if (leftDays.toInt() < 365) {
+                if (leftDays.toInt() < 0) {
+                    appSettings.setNumberOfTrainingSessions(-1)
+                    appSettings.setSubscriptionEndDate("")
+                    appSettings.setDayLeft(-1)
+                    appSettings.setDateCreatedTicket("")
+                } else {
+                    appSettings.setDayLeft(leftDays.toInt())
+                }
             }
         }
+
     }
 
     private fun daysAmount(): String {
         return runBlocking {
-            if(appSettings.getSubscriptionEndDate().isEmpty()){
+            if (appSettings.getSubscriptionEndDate().isEmpty()) {
                 return@runBlocking "-1"
-            }else{
+            } else {
+
                 val dateEnd = dateFormatter.parse(appSettings.getSubscriptionEndDate())!!.time
-                val currentDate = Date().time
-                val result = dateEnd - currentDate
-                return@runBlocking dayFormatter.format(result)
+                if (dateEnd == 0L) {
+                    return@runBlocking "365"
+                } else {
+                    val currentDate = Date().time
+                    val result = dateEnd - currentDate
+                    return@runBlocking dayFormatter.format(result)
+                }
+
             }
         }
     }
@@ -76,6 +85,7 @@ class MainActivityViewModel(
     companion object {
         @SuppressLint("ConstantLocale")
         private val dateFormatter = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+
         @SuppressLint("ConstantLocale")
         private val dayFormatter = SimpleDateFormat("d", Locale.getDefault())
     }

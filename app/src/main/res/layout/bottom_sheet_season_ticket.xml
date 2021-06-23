@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSave_season_ticket"
-        android:layout_width="0dp"
         style="@style/MyButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,35 +49,36 @@
         style="@style/AddRemoveImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/add_quantity"
         android:src="@drawable/ic_plus"
         app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/etReoccurrence"
-        android:contentDescription="@string/add_quantity" />
+        app:layout_constraintTop_toTopOf="@id/etReoccurrence" />
 
     <ImageButton
         android:id="@+id/ibRemoveQuantity"
         style="@style/AddRemoveImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/remove_quantity"
         android:src="@drawable/ic_minus"
         app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
         app:layout_constraintEnd_toStartOf="@+id/etReoccurrence"
-        app:layout_constraintTop_toTopOf="@id/etReoccurrence"
-        android:contentDescription="@string/remove_quantity" />
+        app:layout_constraintTop_toTopOf="@id/etReoccurrence" />
 
     <EditText
         android:id="@+id/etReoccurrence"
         style="@style/EditNumberStyle"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
+        android:importantForAutofill="no"
         android:maxLength="2"
         app:layout_constraintBottom_toTopOf="@id/ctvPerpetual"
         app:layout_constraintEnd_toStartOf="@id/ibAddQuantity"
-        android:importantForAutofill="no"
         tools:ignore="LabelFor" />
 
     <TextView
+        android:id="@+id/tvNumber"
         style="@style/MyTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,6 +93,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        app:active="true"
+        app:enabled_background="@color/inactive"
         app:ivLeft_color="@color/crimson"
         app:ivRight_color="@color/crimson"
         app:layout_constraintBottom_toTopOf="@id/etReoccurrence"
@@ -127,5 +131,17 @@
         app:layout_constraintBottom_toTopOf="@id/tvText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivClose_number"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#56000000"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
+        app:layout_constraintEnd_toEndOf="@id/ibAddQuantity"
+        app:layout_constraintStart_toStartOf="@id/tvNumber"
+        app:layout_constraintTop_toTopOf="@id/etReoccurrence"
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,7 +34,12 @@ class SeasonTicketInfoViewModel(private val appSettings: AppSettings) : Coroutin
             return@runBlocking if (dayFormatter.format(result).equals("0")) {
                 Resources.getSystem().getString(R.string.last_day)
             } else {
-                dayFormatter.format(result)
+                if (dayFormatter.format(dateEnd).equals("1")) {
+                    "ထ"
+                } else {
+                    dayFormatter.format(result)
+                }
+
             }
         }
     }

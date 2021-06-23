@@ -7,8 +7,8 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.myapplication.support.SupportFragmentInset
-import com.example.myapplication.support.setVerticalMargin
+import com.example.trainingdiary.support.SupportFragmentInset
+import com.example.trainingdiary.support.setVerticalMargin
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentExerciseListBinding
 import com.example.trainingdiary.support.SwipeAndMoveCallback

@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.support.SupportFragmentInset
-import com.example.myapplication.support.VerticalInset
-import com.example.myapplication.support.setVerticalMargin
+import com.example.trainingdiary.support.SupportFragmentInset
+import com.example.trainingdiary.support.VerticalInset
+import com.example.trainingdiary.support.setVerticalMargin
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentTrainingListBinding
 import com.example.trainingdiary.support.SwipeCallback
@@ -76,7 +76,12 @@ class TrainingListFragment :
         viewModel.numberTrainingLiveData.observe(this.viewLifecycleOwner) {
             if (it >= 0) {
                 viewBinding.tvNumberTraining.visibility = View.VISIBLE
-                viewBinding.tvNumberTraining.text = it.toString()
+                if (it > 99) {
+                    viewBinding.tvNumberTraining.text = "ထ"
+                } else {
+                    viewBinding.tvNumberTraining.text = it.toString()
+                }
+
             } else {
                 viewBinding.tvNumberTraining.visibility = View.GONE
             }
@@ -85,7 +90,11 @@ class TrainingListFragment :
         viewModel.numberLeftDaysLiveData.observe(this.viewLifecycleOwner) {
             if (it >= 0) {
                 viewBinding.tvNumberDays.visibility = View.VISIBLE
-                viewBinding.tvNumberDays.text = it.toString()
+                if (it >= 365) {
+                    viewBinding.tvNumberDays.text = "ထ"
+                } else {
+                    viewBinding.tvNumberDays.text = it.toString()
+                }
             } else {
                 viewBinding.tvNumberDays.visibility = View.GONE
             }
@@ -163,7 +172,11 @@ class TrainingListFragment :
         val training = viewModel.getTrainingFromPosition(position)!!
         viewModel.deletedTrainingTrue(training)
 
-        Snackbar.make(viewBinding.recyclerViewTraining, getString(R.string.training_was_delete), Snackbar.LENGTH_LONG)
+        Snackbar.make(
+            viewBinding.recyclerViewTraining,
+            getString(R.string.training_was_delete),
+            Snackbar.LENGTH_LONG
+        )
             .setAction(getString(R.string.undo)) {
                 viewModel.deletedTrainingFalse(training)
             }.apply {

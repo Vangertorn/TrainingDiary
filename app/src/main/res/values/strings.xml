@@ -78,6 +78,13 @@
     <string name="version_1_0">Version 1.0</string>
     <string name="leave_a_review_in_google_play">Leave a review in Google Play</string>
     <string name="developed_by_k_yankin">© Developed by K. Yankin</string>
+    <string name="legs">Legs</string>
+    <string name="all_muscle_groups">All muscle groups</string>
+    <string name="breast">Breast</string>
+    <string name="biceps">Biceps</string>
+    <string name="shoulders">Shoulders</string>
+    <string name="back">Back</string>
+    <string name="triceps">Triceps</string>
 
 
 </resources>

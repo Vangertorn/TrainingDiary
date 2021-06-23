@@ -7,8 +7,8 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.myapplication.support.SupportFragmentInset
-import com.example.myapplication.support.setVerticalMargin
+import com.example.trainingdiary.support.SupportFragmentInset
+import com.example.trainingdiary.support.setVerticalMargin
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentSettingsBinding
 import com.example.trainingdiary.models.MuscleGroup

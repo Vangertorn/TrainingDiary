@@ -9,6 +9,8 @@ import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.BottomSheetSeasonTicketInformationBinding
 import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SeasonTicketInfoBottomDialog : BottomSheetDialogFragment() {
@@ -36,15 +38,28 @@ class SeasonTicketInfoBottomDialog : BottomSheetDialogFragment() {
             findNavController().popBackStack()
         }
         viewModel.numberOfTrainingSessionLiveData.observe(this.viewLifecycleOwner) {
-            viewBinding.tvTrainingsAmount.text = it.toString()
+            if (it > 99) {
+                viewBinding.tvTrainingsAmount.text = "ထ"
+            } else {
+                viewBinding.tvTrainingsAmount.text = it.toString()
+            }
+
         }
         viewModel.subscriptionEndDate.observe(this.viewLifecycleOwner) {
-            viewBinding.tvDateValid.text = it.toString()
+            if (it.equals("01.01.70")) {
+                viewBinding.tvDateValid.text = "ထ"
+            } else {
+                viewBinding.tvDateValid.text = it.toString()
+            }
+
         }
         viewBinding.btnReset.setOnClickListener {
-            viewModel.resetSeasonTicket()
-            this.dismiss()
-            findNavController().navigateSave(SeasonTicketInfoBottomDialogDirections.actionSeasonTicketInfoBottomDialogToTrainingListFragment())
+            runBlocking {
+                viewModel.resetSeasonTicket()
+                delay(50)
+                findNavController().navigateSave(SeasonTicketInfoBottomDialogDirections.actionSeasonTicketInfoBottomDialogToTrainingListFragment())
+            }
+
         }
         viewBinding.tvDaysAmount.text = viewModel.daysAmount()
     }

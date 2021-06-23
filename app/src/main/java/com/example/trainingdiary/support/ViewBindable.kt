@@ -1,4 +1,4 @@
-package com.example.myapplication.support
+package com.example.trainingdiary.support
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -16,6 +16,5 @@ inline fun <reified T : ViewBinding> ViewGroup.viewBinding(method: KCallable<*>)
     }
 
 abstract class BindingViewHolder<T : ViewBinding>(override val viewBinding: T) :
-    RecyclerView.ViewHolder(viewBinding.root), ViewBindable<T>
-{
+    RecyclerView.ViewHolder(viewBinding.root), ViewBindable<T> {
 }
