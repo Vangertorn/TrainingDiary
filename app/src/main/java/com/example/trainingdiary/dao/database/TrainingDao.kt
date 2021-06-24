@@ -2,7 +2,6 @@ package com.example.trainingdiary.dao.database
 
 import androidx.room.*
 import com.example.trainingdiary.models.Training
-import com.example.trainingdiary.models.info.SuperSetInfo
 import com.example.trainingdiary.models.info.ViewHolderTypes
 import kotlinx.coroutines.flow.Flow
 

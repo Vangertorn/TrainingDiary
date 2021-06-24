@@ -85,4 +85,5 @@
     <string name="shoulders">Плечи</string>
     <string name="back">Спина</string>
     <string name="triceps">Трицепс</string>
+    <string name="super_set_was_deleted">Супер сет был удален</string>
 </resources>

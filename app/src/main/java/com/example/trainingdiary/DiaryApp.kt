@@ -44,7 +44,7 @@ class DiaryApp : Application() {
         viewModel { SeasonTicketViewModel(get()) }
         viewModel { SeasonTicketInfoViewModel(get()) }
         viewModel { SuperSetCreateViewModel(get(), get(), get(), get(), get()) }
-        viewModel { SuperSetApproachCreateViewModel(get(), get(), get(), get()) }
+        viewModel { SuperSetApproachCreateViewModel(get(), get(), get()) }
     }
     private val repositoryModel = module {
         factory { TrainingRepository(get(), get()) }

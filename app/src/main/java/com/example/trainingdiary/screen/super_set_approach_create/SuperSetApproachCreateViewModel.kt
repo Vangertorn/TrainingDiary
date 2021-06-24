@@ -6,15 +6,14 @@ import com.example.trainingdiary.models.Approach
 import com.example.trainingdiary.models.Exercise
 import com.example.trainingdiary.models.info.ViewHolderTypes
 import com.example.trainingdiary.repository.ApproachRepository
-import com.example.trainingdiary.repository.ExerciseRepository
 import com.example.trainingdiary.repository.SuperSetRepository
 import com.example.trainingdiary.support.CoroutineViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class SuperSetApproachCreateViewModel(
-    exerciseRepository: ExerciseRepository,
     private val superSetRepository: SuperSetRepository,
     private val appSettings: AppSettings,
     private val approachRepository: ApproachRepository
@@ -25,6 +24,7 @@ class SuperSetApproachCreateViewModel(
 
     val reoccurrencesLiveData = appSettings.reoccurrencesFlow().asLiveData()
     val weightLiveData = appSettings.weightFlow().asLiveData()
+    @ExperimentalCoroutinesApi
     val approachLiveData = approachRepository.currentApproachFlow.asLiveData()
 
 

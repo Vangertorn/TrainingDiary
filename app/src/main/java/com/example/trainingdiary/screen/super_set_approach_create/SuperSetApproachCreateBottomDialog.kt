@@ -4,17 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.BottomSheetAddApproachSuperSetBinding
 import com.example.trainingdiary.models.Approach
-import com.example.trainingdiary.models.Exercise
 import com.example.trainingdiary.models.info.ViewHolderTypes
 import com.example.trainingdiary.screen.approach_create.ApproachRecyclerViewAdapter
-import com.example.trainingdiary.screen.super_set_create.SuperSetRecyclerViewAdapter
 import com.example.trainingdiary.support.*
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SuperSetApproachCreateBottomDialog : BottomSheetDialogFragment() {
@@ -22,8 +20,6 @@ class SuperSetApproachCreateBottomDialog : BottomSheetDialogFragment() {
     private lateinit var viewBinding: BottomSheetAddApproachSuperSetBinding
 
     private val viewModel: SuperSetApproachCreateViewModel by viewModel()
-
-    private val args: SuperSetApproachCreateBottomDialogArgs by navArgs()
 
     private lateinit var selectedExercise: ViewHolderTypes.ExerciseInfo
 
@@ -57,6 +53,7 @@ class SuperSetApproachCreateBottomDialog : BottomSheetDialogFragment() {
         return viewBinding.root
     }
 
+    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

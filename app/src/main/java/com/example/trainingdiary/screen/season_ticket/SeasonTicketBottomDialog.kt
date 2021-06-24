@@ -1,6 +1,5 @@
 package com.example.trainingdiary.screen.season_ticket
 
-import android.icu.util.LocaleData
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
