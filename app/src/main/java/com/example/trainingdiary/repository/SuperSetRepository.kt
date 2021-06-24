@@ -5,10 +5,13 @@ import com.example.trainingdiary.dao.database.SuperSetDao
 import com.example.trainingdiary.datastore.AppSettings
 import com.example.trainingdiary.models.Exercise
 import com.example.trainingdiary.models.SuperSet
+import com.example.trainingdiary.models.info.ViewHolderTypes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class SuperSetRepository(
@@ -21,6 +24,23 @@ class SuperSetRepository(
     val currentExerciseInSuperSetFlow: Flow<MutableList<Exercise>> =
         appSettings.idSuperSetFlow().flatMapLatest {
             exerciseDao.getExercisesInfoByBySuperSetIdAndFlagsFlow(it, false)
+        }
+    val currentExerciseInfoInSuperSetFlow: Flow<List<ViewHolderTypes.ExerciseInfo>> =
+        appSettings.idSuperSetFlow().flatMapLatest {
+            exerciseDao.getExercisesInfoBySuperSetIdAndFlagsFlow(it, false)
+        }
+
+    val currentSuperSetDateFlow: Flow<List<ViewHolderTypes.SuperSetDate>> =
+        appSettings.idTrainingFlow().flatMapLatest { idTraining ->
+            superSetDao.getSuperSetInfoByTrainingIdAndFlagsFlow(idTraining, false, true).map {
+                it.map {
+                    ViewHolderTypes.SuperSetDate(
+                        superSet = it.superSet,
+                        exercise = it.exercise!!.map {
+                            exerciseDao.getExerciseInfo(it.id)
+                        })
+                }
+            }.flowOn(Dispatchers.IO)
         }
 
     suspend fun updateFlagVisibilitySuperSet(idSuperSet: Long) {
@@ -75,6 +95,42 @@ class SuperSetRepository(
             )
 
             return@withContext id
+        }
+    }
+
+    suspend fun deletedSuperSetTrue(superSet: SuperSet) {
+        withContext(Dispatchers.IO) {
+            superSetDao.updateSuperSet(
+                SuperSet(
+                    id = superSet.id,
+                    idTraining = superSet.idTraining,
+                    position = superSet.position,
+                    deleted = true,
+                    visibility = superSet.visibility
+                )
+            )
+        }
+    }
+
+    suspend fun deletedSuperSetFalse(superSet: SuperSet) {
+        withContext(Dispatchers.IO) {
+            withContext(Dispatchers.IO) {
+                superSetDao.updateSuperSet(
+                    SuperSet(
+                        id = superSet.id,
+                        idTraining = superSet.idTraining,
+                        position = superSet.position,
+                        deleted = false,
+                        visibility = superSet.visibility
+                    )
+                )
+            }
+        }
+    }
+
+    suspend fun getListExerciseInfoById(idSuperSet: Long): List<ViewHolderTypes.ExerciseInfo> {
+        return withContext(Dispatchers.IO) {
+            return@withContext exerciseDao.getListExerciseInfo(idSuperSet)
         }
     }
 }

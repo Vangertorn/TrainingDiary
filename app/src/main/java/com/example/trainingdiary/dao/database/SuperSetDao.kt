@@ -2,6 +2,8 @@ package com.example.trainingdiary.dao.database
 
 import androidx.room.*
 import com.example.trainingdiary.models.SuperSet
+import com.example.trainingdiary.models.info.SuperSetInfo
+import kotlinx.coroutines.flow.Flow
 
 
 @Dao
@@ -40,5 +42,13 @@ abstract class SuperSetDao {
         val list = getSuperSetByVisible(false)
         deleteSuperSets(list ?: listOf())
     }
+
+    @Query("SELECT * FROM table_super_set WHERE idTraining == :id AND deleted ==:flags AND visibility==:visibility")
+    abstract fun getSuperSetInfoByTrainingIdAndFlagsFlow(
+        id: Long,
+        flags: Boolean,
+        visibility: Boolean
+    ): Flow<List<SuperSetInfo>>
+
 
 }

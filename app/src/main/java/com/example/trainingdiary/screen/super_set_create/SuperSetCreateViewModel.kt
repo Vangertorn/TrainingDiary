@@ -45,6 +45,7 @@ class SuperSetCreateViewModel(
     fun createSuperSet(idSuperSet: Long) {
         launch {
             superSetRepository.updateFlagVisibilitySuperSet(idSuperSet)
+            exerciseRepository.deleteEmptyExercise()
         }
     }
 

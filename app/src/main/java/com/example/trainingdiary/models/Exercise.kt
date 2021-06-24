@@ -14,6 +14,12 @@ import kotlinx.parcelize.Parcelize
         childColumns = arrayOf("idTraining"),
         onDelete = ForeignKey.CASCADE,
         onUpdate = ForeignKey.CASCADE
+    ), ForeignKey(
+        entity = SuperSet::class,
+        parentColumns = arrayOf("id"),
+        childColumns = arrayOf("idSet"),
+        onDelete = ForeignKey.CASCADE,
+        onUpdate = ForeignKey.CASCADE
     )]
 )
 
@@ -27,5 +33,6 @@ data class Exercise(
     val position: Int = 0,
     val comment: String? = null,
     val deleted: Boolean = false,
+    @ColumnInfo(index = true, name = "idSet")
     val idSet: Long? = null
 ) : Parcelable

@@ -1,6 +1,5 @@
 package com.example.trainingdiary.screen.super_set_create
 
-import android.content.res.Resources
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -43,7 +42,7 @@ class SuperSetRecyclerViewAdapter(private val onClick: (Exercise) -> Unit) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         when (holder) {
-            is AddViewHolder -> holder.bind(getItem(position), position == selectedPositions)
+            is AddViewHolder -> holder.bind( position == selectedPositions)
             else -> (holder as ExerciseViewHolder).bind(
                 getItem(position),
                 position == selectedPositions
@@ -93,7 +92,7 @@ class SuperSetRecyclerViewAdapter(private val onClick: (Exercise) -> Unit) :
             }
         }
 
-        fun bind(item: Exercise, selected: Boolean) {
+        fun bind( selected: Boolean) {
             if (selected) {
                 tvText.setBackgroundResource(R.drawable.background_item_muscle_groups_selected)
                 tvText.setTextColor(Color.WHITE)
@@ -103,7 +102,6 @@ class SuperSetRecyclerViewAdapter(private val onClick: (Exercise) -> Unit) :
                 tvText.setTextColor(Color.BLACK)
             }
             tvText.text = itemView.context.getString(R.string.add_exercise)
-//            tvText.text = Resources.getSystem().getString(R.string.add_exercise)
         }
     }
 

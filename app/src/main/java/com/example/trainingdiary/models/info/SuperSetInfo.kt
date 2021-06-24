@@ -9,7 +9,7 @@ class SuperSetInfo(
     @Embedded
     val superSet: SuperSet,
     @Relation(
-        parentColumn = "idSuperSet",
+        parentColumn = "id",
         entityColumn = "idSet"
     )
     val exercise: List<Exercise>?

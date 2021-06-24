@@ -13,6 +13,7 @@ import com.example.trainingdiary.screen.season_ticket.SeasonTicketViewModel
 import com.example.trainingdiary.screen.season_ticket_info.SeasonTicketInfoViewModel
 import com.example.trainingdiary.screen.settings.SettingsFragment
 import com.example.trainingdiary.screen.settings.SettingsViewModel
+import com.example.trainingdiary.screen.super_set_approach_create.SuperSetApproachCreateViewModel
 import com.example.trainingdiary.screen.super_set_create.SuperSetCreateViewModel
 import com.example.trainingdiary.screen.training_create.TrainingCreateViewModel
 import com.example.trainingdiary.screen.training_list.TrainingListViewModel
@@ -36,13 +37,14 @@ class DiaryApp : Application() {
         viewModel { TrainingCreateViewModel(get(), get(), get()) }
         viewModel { ApproachCreateViewModel(get(), get(), get(), get()) }
         viewModel { ExerciseCreateViewModel(get(), get(), get(), get()) }
-        viewModel { ExerciseListViewModel(get(), get(), get()) }
+        viewModel { ExerciseListViewModel(get(), get(), get(), get()) }
         viewModel { MainActivityViewModel(get(), get(), get(), get(), get()) }
         viewModel { SettingsViewModel(get(), get()) }
         viewModel { ExerciseAutofillViewModel(get()) }
         viewModel { SeasonTicketViewModel(get()) }
         viewModel { SeasonTicketInfoViewModel(get()) }
         viewModel { SuperSetCreateViewModel(get(), get(), get(), get(), get()) }
+        viewModel { SuperSetApproachCreateViewModel(get(), get(), get(), get()) }
     }
     private val repositoryModel = module {
         factory { TrainingRepository(get(), get()) }

@@ -2,7 +2,7 @@ package com.example.trainingdiary.dao.database
 
 import androidx.room.*
 import com.example.trainingdiary.models.Exercise
-import com.example.trainingdiary.models.info.ExerciseInfo
+import com.example.trainingdiary.models.info.ViewHolderTypes
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -24,6 +24,15 @@ abstract class ExerciseDao {
         deleteExercises(getExercisesByFlags(flags))
     }
 
+
+    @Query("SELECT * FROM table_exercise WHERE name==:emptyName LIMIT 1")
+    abstract fun getEmptyExercise(emptyName: String): Exercise
+
+    @Transaction
+    open fun deletedEmptyExercise(emptyName: String) {
+        deleteExercise(getEmptyExercise(emptyName))
+    }
+
     @Update
     abstract fun updateExercise(exercise: Exercise)
 
@@ -38,7 +47,13 @@ abstract class ExerciseDao {
 
     @Transaction
     @Query("SELECT * FROM table_exercise WHERE id == :id LIMIT 1")
-    abstract fun getExerciseInfoFlow(id: Long): Flow<ExerciseInfo?>
+    abstract fun getExerciseInfoFlow(id: Long): Flow<ViewHolderTypes.ExerciseInfo?>
+
+    @Query("SELECT * FROM table_exercise WHERE id == :id LIMIT 1")
+    abstract fun getExerciseInfo(id: Long): ViewHolderTypes.ExerciseInfo
+
+    @Query("SELECT * FROM table_exercise WHERE idSet == :id ")
+    abstract fun getListExerciseInfo(id: Long): List<ViewHolderTypes.ExerciseInfo>
 
     @Query("SELECT position FROM table_exercise ORDER BY position ASC")
     abstract fun getExercisePositions(): MutableList<Int>?
@@ -59,5 +74,11 @@ abstract class ExerciseDao {
         idSuperSet: Long,
         flags: Boolean
     ): Flow<MutableList<Exercise>>
+
+    @Query("SELECT * FROM table_exercise WHERE  deleted ==:flags AND idSet == :idSuperSet ORDER BY position DESC")
+    abstract fun getExercisesInfoBySuperSetIdAndFlagsFlow(
+        idSuperSet: Long,
+        flags: Boolean
+    ): Flow<List<ViewHolderTypes.ExerciseInfo>>
 
 }

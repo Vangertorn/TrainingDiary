@@ -3,7 +3,6 @@ package com.example.trainingdiary.repository
 import com.example.trainingdiary.dao.database.TrainingDao
 import com.example.trainingdiary.datastore.AppSettings
 import com.example.trainingdiary.models.Training
-import com.example.trainingdiary.models.info.ExerciseInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

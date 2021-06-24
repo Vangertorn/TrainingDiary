@@ -54,6 +54,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_exerciseListFragment_to_superSetApproachCreateBottomDialog"
+            app:destination="@id/superSetApproachCreateBottomDialog" />
     </fragment>
     <dialog
         android:id="@+id/exerciseCreateBottomDialog"
@@ -164,5 +167,15 @@
         android:name="com.example.trainingdiary.screen.information.InformationFragment"
         android:label="InformationFragment"
         tools:layout="@layout/fragment_information"/>
+    <dialog
+        android:id="@+id/superSetApproachCreateBottomDialog"
+        android:name="com.example.trainingdiary.screen.super_set_approach_create.SuperSetApproachCreateBottomDialog"
+        android:label="SuperSetApproachCreateBottomDialog"
+        tools:layout="@layout/bottom_sheet_add_approach_super_set">
+
+        <argument
+            android:name="idSuperSet"
+            app:argType="long" />
+    </dialog>
 
 </navigation>
