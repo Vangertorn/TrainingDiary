@@ -4,80 +4,114 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.beloo.widget.chipslayoutmanager.ChipsLayoutManager
-import com.beloo.widget.chipslayoutmanager.gravity.IChildGravityResolver
 import com.example.trainingdiary.R
-import com.example.trainingdiary.models.info.ExerciseInfo
-import com.example.trainingdiary.screen.approach_create.ApproachRecyclerViewAdapter
+import com.example.trainingdiary.models.info.ViewHolderTypes
 
-class ExerciseRecyclerViewAdapter(private val onClick: (ExerciseInfo) -> Unit) :
-    ListAdapter<ExerciseInfo, ExerciseRecyclerViewAdapter.ExerciseViewHolder>(
-        ExerciseAdapterDiffCallBack()
-    ) {
+class ExerciseRecyclerViewAdapter(
+    private val list: List<ViewHolderTypes>,
+    private val onClick: (ViewHolderTypes) -> Unit
+) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ExerciseViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_exercise_list, parent, false),
-        ::onItemClick
-    )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType == 0) {
+            ExerciseViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_exercise_list, parent, false),
+                ::onItemClick
+            )
+        } else {
+            SuperSetViewHolder(
+                LayoutInflater.from(parent.context).inflate(R.layout.item_super_set, parent, false),
+                ::onItemClick
+            )
+        }
+    }
 
-    override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
-        holder.bind(getItem(position))
+
+    override fun getItemCount(): Int = list.size
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (getItemViewType(position) == 0) {
+            (holder as ExerciseViewHolder).bind(list[position] as ViewHolderTypes.ExerciseInfo)
+        } else {
+            (holder as SuperSetViewHolder).bind(list[position] as ViewHolderTypes.SuperSetDate)
+        }
     }
 
     private fun onItemClick(position: Int) {
-        onClick(getItem(position))
+        onClick(list[position])
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when (list[position]) {
+            is ViewHolderTypes.ExerciseInfo -> 0
+            is ViewHolderTypes.SuperSetDate -> 1
+        }
     }
 
     inner class ExerciseViewHolder(itemView: View, private val itemClick: (Int) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         private val tvExerciseName =
             itemView.findViewById<TextView>(R.id.tvNameExercise_exercise_item)
+        private val tvComment =
+            itemView.findViewById<TextView>(R.id.tvCommentExercise_exercise_item)
         private val rvApproach = itemView.findViewById<RecyclerView>(R.id.rvApproachInExerciseItem)
+        private val chipsLayoutManager =
+            ChipsLayoutManager.newBuilder(itemView.context).setChildGravity(Gravity.TOP)
+                .setScrollingEnabled(false)
+                .setGravityResolver { Gravity.CENTER }
+                .setRowBreaker { adapterPosition == 6 }
+                .setOrientation(ChipsLayoutManager.HORIZONTAL)
+                .setRowStrategy(ChipsLayoutManager.STRATEGY_FILL_VIEW)
+                .withLastRow(true)
+                .build()
+        private val adapter = ApproachRecyclerViewAdapterInExerciseItem()
 
         init {
             itemView.setOnClickListener {
                 itemClick(adapterPosition)
             }
+            rvApproach.layoutManager = chipsLayoutManager
+            rvApproach.adapter = adapter
+
         }
 
-        fun bind(item: ExerciseInfo) {
-//            val chipsLayoutManager = ChipsLayoutManager.newBuilder().setChildGravity(Gravity.TOP)
-//                .setScrollingEnabled(false).setMaxViewsInRow(3).setGravityResolver(
-//                    object : IChildGravityResolver {
-//                        override fun getItemGravity(p0: Int): Int {
-//                            return Gravity.CENTER
-//                        }
-//                    }).setRowBreaker { adapterPosition == 6 }
-//                .setOrientation(ChipsLayoutManager.HORIZONTAL)
-//                .setRowStrategy(ChipsLayoutManager.STRATEGY_FILL_SPACE)
-//                .withLastRow(true)
-//                .build()
-            val adapter = ApproachRecyclerViewAdapter(onClick = { approach ->
-                Unit
-            })
+        fun bind(item: ViewHolderTypes.ExerciseInfo) {
 
             tvExerciseName.text = item.exercise.name
-            rvApproach.adapter = adapter
+            tvComment.text = item.exercise.comment
             adapter.submitList(item.approaches)
-//            rvApproach.layoutManager = chipsLayoutManager
+
+        }
+    }
+
+    inner class SuperSetViewHolder(itemView: View, private val itemClick: (Int) -> Unit) :
+
+        RecyclerView.ViewHolder(itemView) {
+
+        private val rvExerciseInfo =
+            itemView.findViewById<RecyclerView>(R.id.rvExerciseInfoInSuperSet)
+        private val adapter = ExerciseRecyclerViewAdapterInSuperSet()
+
+        init {
+            itemView.setOnClickListener {
+                itemClick(adapterPosition)
+            }
+
+            rvExerciseInfo.adapter = adapter
+
         }
 
-    }
+        fun bind(item: ViewHolderTypes.SuperSetDate) {
+            adapter.submitList(item.exercise)
 
-
-}
-
-class ExerciseAdapterDiffCallBack : DiffUtil.ItemCallback<ExerciseInfo>() {
-    override fun areItemsTheSame(oldItem: ExerciseInfo, newItem: ExerciseInfo): Boolean {
-        return oldItem.exercise.id == newItem.exercise.id
-    }
-
-    override fun areContentsTheSame(oldItem: ExerciseInfo, newItem: ExerciseInfo): Boolean {
-        return oldItem.exercise.name == newItem.exercise.name && oldItem.approaches == newItem.approaches
+        }
     }
 
 }
+
+

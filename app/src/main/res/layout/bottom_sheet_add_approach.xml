@@ -11,7 +11,7 @@
         style="@style/EditTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Names exercise"
+        android:hint="@string/names_exercise"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,7 +21,8 @@
         style="@style/EditTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Comment"
+        android:hint="@string/comment"
+        android:importantForAutofill="no"
         app:layout_constraintEnd_toEndOf="@id/autoCompleteTvExerciseName"
         app:layout_constraintStart_toStartOf="@id/autoCompleteTvExerciseName"
         app:layout_constraintTop_toBottomOf="@id/autoCompleteTvExerciseName" />
@@ -35,7 +36,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etCommentExercise"
+        app:layout_constraintTop_toBottomOf="@id/btnEdit_exercise"
 
         tools:listitem="@layout/item_approach" />
 
@@ -44,8 +45,9 @@
         style="@style/AddRemoveImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_plus"
+        android:contentDescription="@string/add_weight"
 
+        android:src="@drawable/ic_plus"
         app:layout_constraintBottom_toBottomOf="@id/etWeight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/etWeight" />
@@ -56,6 +58,7 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/remove_weight"
         android:src="@drawable/ic_minus"
         app:layout_constraintBottom_toBottomOf="@id/etWeight"
         app:layout_constraintEnd_toStartOf="@+id/etWeight"
@@ -66,6 +69,7 @@
         style="@style/EditWeightStyle"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
+        android:importantForAutofill="no"
         app:layout_constraintEnd_toStartOf="@id/ibAddWeight"
         app:layout_constraintTop_toBottomOf="@id/rvApproach" />
 
@@ -73,7 +77,7 @@
         style="@style/MyTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Weight, kg"
+        android:text="@string/weight_kg"
         app:layout_constraintBottom_toBottomOf="@id/etWeight"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/etWeight" />
@@ -83,6 +87,7 @@
         style="@style/AddRemoveImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/add_quantity"
         android:src="@drawable/ic_plus"
         app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,6 +98,7 @@
         style="@style/AddRemoveImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/remove_quantity"
         android:src="@drawable/ic_minus"
         app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
         app:layout_constraintEnd_toStartOf="@+id/etReoccurrence"
@@ -103,6 +109,7 @@
         style="@style/EditNumberStyle"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
+        android:importantForAutofill="no"
         app:layout_constraintEnd_toEndOf="@id/etWeight"
         app:layout_constraintStart_toStartOf="@id/etWeight"
         app:layout_constraintTop_toBottomOf="@id/etWeight" />
@@ -111,7 +118,7 @@
         style="@style/MyTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reoccurrences"
+        android:text="@string/reoccurrences"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,21 +126,28 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAddApproach"
-        android:layout_width="match_parent"
+        style="@style/MyButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@drawable/background_color"
-        android:letterSpacing="0.06"
-        android:text="Add approach"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        android:textStyle="bold"
+        android:text="@string/add_approach"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etReoccurrence"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintTop_toBottomOf="@id/etReoccurrence" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnEdit_exercise"
+        style="@style/MyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/edit_exercise"
+        app:layout_constraintBottom_toTopOf="@id/rvApproach"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etCommentExercise" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

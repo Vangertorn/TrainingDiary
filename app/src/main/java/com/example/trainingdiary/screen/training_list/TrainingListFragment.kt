@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
-import com.example.myapplication.support.SupportFragmentInset
-import com.example.myapplication.support.VerticalInset
-import com.example.myapplication.support.setVerticalMargin
+import androidx.recyclerview.widget.RecyclerView
+import com.example.trainingdiary.support.SupportFragmentInset
+import com.example.trainingdiary.support.VerticalInset
+import com.example.trainingdiary.support.setVerticalMargin
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentTrainingListBinding
 import com.example.trainingdiary.support.SwipeCallback
@@ -42,6 +43,21 @@ class TrainingListFragment :
             }
         }
     }
+    private val dataObserverAsc = object : RecyclerView.AdapterDataObserver() {
+        override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+            super.onItemRangeInserted(positionStart, itemCount)
+            viewBinding.recyclerViewTraining.scrollToPosition(0)
+
+        }
+    }
+    private val dataObserverDesc = object : RecyclerView.AdapterDataObserver() {
+        override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+            super.onItemRangeInserted(positionStart, itemCount)
+            viewBinding.recyclerViewTraining.scrollToPosition(adapter.itemCount - 1)
+
+        }
+    }
+    private var dataObserverChek: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,7 +72,39 @@ class TrainingListFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.numberTrainingLiveData.observe(this.viewLifecycleOwner) {
+            if (it >= 0) {
+                viewBinding.tvNumberTraining.visibility = View.VISIBLE
+                if (it > 99) {
+                    viewBinding.tvNumberTraining.text = "ထ"
+                } else {
+                    viewBinding.tvNumberTraining.text = it.toString()
+                }
+
+            } else {
+                viewBinding.tvNumberTraining.visibility = View.GONE
+            }
+        }
+
+        viewModel.numberLeftDaysLiveData.observe(this.viewLifecycleOwner) {
+            if (it >= 0) {
+                viewBinding.tvNumberDays.visibility = View.VISIBLE
+                if (it >= 365) {
+                    viewBinding.tvNumberDays.text = "ထ"
+                } else {
+                    viewBinding.tvNumberDays.text = it.toString()
+                }
+            } else {
+                viewBinding.tvNumberDays.visibility = View.GONE
+            }
+
+        }
+
+
         viewBinding.recyclerViewTraining.adapter = adapter
+
+
         viewBinding.btnAdd.setOnClickListener {
             findNavController().navigateSave(
                 TrainingListFragmentDirections.actionTrainingListFragmentToTrainingCreateBottomDialog(
@@ -64,8 +112,43 @@ class TrainingListFragment :
                 )
             )
         }
-        viewModel.trainingLiveData.observe(this.viewLifecycleOwner) {
-            adapter.submitList(it)
+
+        viewBinding.subscriptionTrainingList.setOnClickListener {
+            if (viewModel.numberOfTrainingSessions() == -1 && viewModel.subscriptionEndDate()
+                    .isEmpty()
+            ) {
+                findNavController().navigateSave(TrainingListFragmentDirections.actionTrainingListFragmentToSeasonTicketBottomDialog())
+            } else {
+                findNavController().navigateSave(TrainingListFragmentDirections.actionTrainingListFragmentToSeasonTicketInfoBottomDialog())
+            }
+
+        }
+        viewBinding.settingsTrainingList.setOnClickListener {
+            findNavController().navigateSave(TrainingListFragmentDirections.actionTrainingListFragmentToSettingsFragment())
+        }
+        viewModel.switchOrderLiveData.observe(this.viewLifecycleOwner) { boolean ->
+            if (boolean) {
+                if (dataObserverChek == null) {
+                    adapter.registerAdapterDataObserver(dataObserverAsc)
+                    dataObserverChek = DATA_OBSERVER_ASC
+                }
+
+
+                viewModel.trainingAscLiveData.observe(this.viewLifecycleOwner) {
+                    adapter.submitList(it)
+                }
+            } else {
+                if (dataObserverChek == null) {
+                    adapter.registerAdapterDataObserver(dataObserverDesc)
+                    dataObserverChek = DATA_OBSERVER_DESC
+                }
+
+                viewModel.trainingDescLiveData.observe(this.viewLifecycleOwner) {
+                    adapter.submitList(it)
+
+                }
+            }
+
         }
         val trainingHelper = ItemTouchHelper(simpleCallback)
         trainingHelper.attachToRecyclerView(viewBinding.recyclerViewTraining)
@@ -73,21 +156,43 @@ class TrainingListFragment :
 
     }
 
+    override fun onDestroyView() {
+        dataObserverChek = if (dataObserverChek == DATA_OBSERVER_ASC) {
+            adapter.unregisterAdapterDataObserver(dataObserverAsc)
+            null
+        } else {
+            adapter.unregisterAdapterDataObserver(dataObserverDesc)
+            null
+        }
+
+        super.onDestroyView()
+    }
+
     private fun deleteTraining(position: Int) {
         val training = viewModel.getTrainingFromPosition(position)!!
         viewModel.deletedTrainingTrue(training)
-        Snackbar.make(viewBinding.recyclerViewTraining, "Training was delete", Snackbar.LENGTH_LONG)
-            .setAction("Undo") {
+
+        Snackbar.make(
+            viewBinding.recyclerViewTraining,
+            getString(R.string.training_was_delete),
+            Snackbar.LENGTH_LONG
+        )
+            .setAction(getString(R.string.undo)) {
                 viewModel.deletedTrainingFalse(training)
             }.apply {
-                this.view.translationY =- savedInsets.bottom.toFloat()
+                this.view.translationY = -savedInsets.bottom.toFloat()
             }.show()
     }
 
     override fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean) {
-        this.savedInsets = VerticalInset(top,bottom,hasKeyboard)
-        viewBinding.toolbarTrainingList.setPadding(0,top,0,0)
+        this.savedInsets = VerticalInset(top, bottom, hasKeyboard)
+        viewBinding.toolbarTrainingList.setPadding(0, top, 0, 0)
         viewBinding.btnAdd.setVerticalMargin(0, bottom)
-        viewBinding.recyclerViewTraining.setPadding(0,0,0,bottom)
+        viewBinding.recyclerViewTraining.setPadding(0, 0, 0, bottom)
+    }
+
+    companion object {
+        private const val DATA_OBSERVER_ASC = 1
+        private const val DATA_OBSERVER_DESC = 2
     }
 }

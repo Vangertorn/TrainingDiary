@@ -4,8 +4,7 @@ import com.example.trainingdiary.dao.database.ExerciseDao
 import com.example.trainingdiary.dao.database.TrainingDao
 import com.example.trainingdiary.datastore.AppSettings
 import com.example.trainingdiary.models.Exercise
-import com.example.trainingdiary.models.Training
-import com.example.trainingdiary.models.info.ExerciseInfo
+import com.example.trainingdiary.models.info.ViewHolderTypes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -15,11 +14,11 @@ import kotlinx.coroutines.withContext
 class ExerciseRepository(
     private val exerciseDao: ExerciseDao,
     private val trainingDao: TrainingDao,
-    private val appSettings: AppSettings
+    appSettings: AppSettings
 ) {
 
     @ExperimentalCoroutinesApi
-    val currentExerciseFlow: Flow<List<ExerciseInfo>> =
+    val currentExerciseFlow: Flow<List<ViewHolderTypes.ExerciseInfo>> =
         appSettings.idTrainingFlow().flatMapLatest { idTraining ->
             trainingDao.getExercisesInfoByTrainingIdAndFlagsFlow(idTraining, false)
         }
@@ -36,27 +35,29 @@ class ExerciseRepository(
                         name = exercise.name,
                         idTraining = exercise.idTraining,
                         position = listPositions[0] - 1,
-                        comment = exercise.comment
+                        comment = exercise.comment,
+                        idSet = exercise.idSet
                     )
                 )
             }
         }
     }
 
+    suspend fun deleteExercises() {
+        withContext(Dispatchers.IO) {
+            exerciseDao.deletedExercisesByFlags(true)
+        }
+    }
+
     suspend fun deleteExercise(exercise: Exercise) {
         withContext(Dispatchers.IO) {
-            exerciseDao.deleteExercise((exercise))
+            exerciseDao.deleteExercise(exercise)
         }
     }
 
     suspend fun updateExercise(exercise: Exercise) {
         withContext(Dispatchers.IO) {
             exerciseDao.updateExercise(exercise)
-        }
-    }
-    suspend fun getExerciseFromId(id: Long): Exercise{
-        return withContext(Dispatchers.IO){
-            exerciseDao.getExerciseFromId(id)
         }
     }
 
@@ -87,6 +88,18 @@ class ExerciseRepository(
                     comment = exercise.comment
                 )
             )
+        }
+    }
+
+    suspend fun switchExercisePosition(exercise1: Exercise, exercise2: Exercise) {
+        withContext(Dispatchers.IO) {
+            exerciseDao.switchExercisePositions(exercise1, exercise2)
+        }
+    }
+
+    suspend fun deleteEmptyExercise() {
+        withContext(Dispatchers.IO) {
+            exerciseDao.deletedEmptyExercise("")
         }
     }
 }

@@ -45,25 +45,22 @@ class TrainingRecyclerViewAdapter(private val onClick: (Training) -> Unit) :
 
         fun bind(item: Training) {
             tvDate.text = item.date
-            if (item.comment == null || item.comment == "") {
-                tvComment.visibility = View.GONE
+            if (item.comment.isNullOrBlank()) {
+                tvComment.visibility = View.INVISIBLE
             } else {
                 tvComment.text = item.comment
             }
-            if (item.muscleGroups == null) {
-                tvMuscleGroups.visibility = View.GONE
+            if (item.muscleGroups.isNullOrBlank()) {
+                tvMuscleGroups.visibility = View.INVISIBLE
             } else {
                 tvMuscleGroups.text = item.muscleGroups
             }
-            if (item.weight == null || item.weight == "") {
-                tvWeight.visibility = View.GONE
+            if (item.weight.isNullOrBlank()) {
+                tvWeight.visibility = View.INVISIBLE
             } else {
-                tvWeight.text = item.weight
+                tvWeight.text = itemView.context.getString(R.string.weight,item.weight)
             }
-
         }
-
-
     }
 
     class TrainingAdapterDiffCallBack : DiffUtil.ItemCallback<Training>() {
@@ -72,9 +69,11 @@ class TrainingRecyclerViewAdapter(private val onClick: (Training) -> Unit) :
         }
 
         override fun areContentsTheSame(oldItem: Training, newItem: Training): Boolean {
-            return oldItem.date == newItem.date && oldItem.comment == newItem.comment && oldItem.muscleGroups == newItem.muscleGroups && oldItem.weight == newItem.weight
+            return oldItem.date == newItem.date
+                    && oldItem.comment == newItem.comment
+                    && oldItem.muscleGroups == newItem.muscleGroups
+                    && oldItem.weight == newItem.weight
         }
-
     }
 
 }

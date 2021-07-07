@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_toolbar_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_bac"
+        app:title="@string/Settings"
+        app:titleTextColor="@color/white">
+
+        <ImageView
+            android:id="@+id/ivInformation"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="end"
+            android:contentDescription="@string/information"
+            android:scaleType="center"
+            android:src="@drawable/ic_information" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/tvText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/default_values"
+        app:layout_constraintBottom_toTopOf="@id/etWeight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_settings" />
+
+    <TextView
+        android:id="@+id/tvText1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/sorting_your_training_sessions"
+        app:layout_constraintBottom_toTopOf="@id/switch_sort_training"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etReoccurrence" />
+
+    <TextView
+        android:id="@+id/tvText2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/exercises"
+        app:layout_constraintBottom_toTopOf="@id/tvAutofill"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/switch_sort_training" />
+
+    <TextView
+        android:id="@+id/tvText3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/muscle_groups"
+        app:layout_constraintBottom_toTopOf="@id/ivReturn_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAutofill" />
+
+    <TextView
+        android:id="@+id/tvText4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/backup_data"
+        app:layout_constraintBottom_toTopOf="@id/tvDateSave"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvMuscleCroups_settings" />
+
+
+    <TextView
+        style="@style/MyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/weight_kg"
+        app:layout_constraintBottom_toBottomOf="@id/etWeight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etWeight" />
+
+    <TextView
+        android:id="@+id/tvAddValues"
+        style="@style/MyTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lines="4"
+        android:text="@string/add_n_default_n_values"
+        android:textColor="@color/crimson"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etWeight" />
+
+
+    <ImageButton
+        android:id="@+id/ibAddWeight"
+        style="@style/AddRemoveImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/add_weight"
+        android:src="@drawable/ic_plus"
+        app:layout_constraintBottom_toBottomOf="@id/etWeight"
+        app:layout_constraintEnd_toStartOf="@id/tvAddValues"
+        app:layout_constraintTop_toTopOf="@id/etWeight" />
+
+    <ImageButton
+        android:id="@+id/ibRemoveWeight"
+        style="@style/AddRemoveImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/remove_weight"
+        android:src="@drawable/ic_minus"
+        app:layout_constraintBottom_toBottomOf="@id/etWeight"
+        app:layout_constraintEnd_toStartOf="@+id/etWeight"
+        app:layout_constraintTop_toTopOf="@id/etWeight" />
+
+    <EditText
+        android:id="@+id/etWeight"
+        style="@style/EditWeightStyle"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        app:layout_constraintBottom_toTopOf="@id/etReoccurrence"
+        app:layout_constraintEnd_toStartOf="@id/ibAddWeight"
+        app:layout_constraintTop_toBottomOf="@id/tvText"
+        tools:ignore="LabelFor" />
+
+    <ImageButton
+        android:id="@+id/ibAddQuantity"
+        style="@style/AddRemoveImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/add_quantity"
+        android:src="@drawable/ic_plus"
+        app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
+        app:layout_constraintEnd_toStartOf="@id/tvAddValues"
+        app:layout_constraintTop_toTopOf="@id/etReoccurrence" />
+
+    <ImageButton
+        android:id="@+id/ibRemoveQuantity"
+        style="@style/AddRemoveImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/remove_quantity"
+        android:src="@drawable/ic_minus"
+        app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
+        app:layout_constraintEnd_toStartOf="@+id/etReoccurrence"
+        app:layout_constraintTop_toTopOf="@id/etReoccurrence" />
+
+    <EditText
+        android:id="@+id/etReoccurrence"
+        style="@style/EditNumberStyle"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        app:layout_constraintBottom_toTopOf="@id/tvText1"
+        app:layout_constraintEnd_toEndOf="@id/etWeight"
+        app:layout_constraintStart_toStartOf="@id/etWeight"
+        app:layout_constraintTop_toBottomOf="@id/etWeight"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        style="@style/MyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reoccurrences"
+        app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etReoccurrence" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switch_sort_training"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        app:layout_constraintBottom_toTopOf="@id/tvText2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvText1" />
+
+    <TextView
+        android:id="@+id/tvTrainings_layout"
+        style="@style/MyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/Last_training_above"
+        app:layout_constraintBottom_toBottomOf="@id/switch_sort_training"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/switch_sort_training" />
+
+    <TextView
+        android:id="@+id/tvAutofill"
+        style="@style/MyTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/set_up_exercises_for_autofill"
+        android:textColor="@color/crimson"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/tvText3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvText2" />
+
+    <ImageView
+        android:id="@+id/ivReturn_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/return_settings"
+        android:src="@drawable/ic_return_settings"
+        app:layout_constraintBottom_toTopOf="@id/rvMuscleCroups_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvText3"
+        app:tint="@color/crimson" />
+
+    <EditText
+        android:id="@+id/etMuscleGroups"
+        style="@style/EditTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/add_muscle_groups"
+        android:importantForAutofill="no"
+        app:layout_constraintBottom_toBottomOf="@id/ivReturn_settings"
+        app:layout_constraintEnd_toStartOf="@id/ivReturn_settings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ivReturn_settings"
+        tools:layout_editor_absoluteY="406dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMuscleCroups_settings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/tvText4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etMuscleGroups"
+        tools:listitem="@layout/item_approach" />
+
+    <TextView
+        android:id="@+id/tvDateSave"
+        style="@style/MyTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/data_save_restore"
+        android:textColor="@color/crimson"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvText4" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.myapplication.support
+package com.example.trainingdiary.support
 
 import android.app.Activity
 import android.app.Dialog
@@ -35,6 +35,7 @@ fun Activity.setWindowTransparency(listener: OnSystemBarsSizeChangedListener) {
 }
 
 
+@Suppress("DEPRECATION")
 private fun View.overrideSystemInsets(listener: OnSystemBarsSizeChangedListener) {
     ViewCompat.setOnApplyWindowInsetsListener(this) { _, insets ->
 

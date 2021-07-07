@@ -3,14 +3,14 @@ package com.example.trainingdiary.models.info
 import androidx.room.Embedded
 import androidx.room.Relation
 import com.example.trainingdiary.models.Exercise
-import com.example.trainingdiary.models.Training
+import com.example.trainingdiary.models.SuperSet
 
-class TrainingInfo(
+class SuperSetInfo(
     @Embedded
-    val training: Training,
+    val superSet: SuperSet,
     @Relation(
         parentColumn = "id",
-        entityColumn = "idTraining"
+        entityColumn = "idSet"
     )
-    val exercises: List<Exercise>?
+    val exercise: List<Exercise>?
 )

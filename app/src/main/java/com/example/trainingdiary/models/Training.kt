@@ -1,10 +1,7 @@
 package com.example.trainingdiary.models
 
 import android.os.Parcelable
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Index
-import androidx.room.PrimaryKey
+import androidx.room.*
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -18,5 +15,6 @@ data class Training(
     val comment: String? = null,
     val weight: String? = null,
     val position: Int = 0,
-    val deleted: Boolean = false
+    val deleted: Boolean = false,
+    val selectedMuscleGroup: MutableList<Int> = mutableListOf()
 ) : Parcelable

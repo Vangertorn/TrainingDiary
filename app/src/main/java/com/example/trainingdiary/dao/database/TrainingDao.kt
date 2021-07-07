@@ -2,8 +2,7 @@ package com.example.trainingdiary.dao.database
 
 import androidx.room.*
 import com.example.trainingdiary.models.Training
-import com.example.trainingdiary.models.info.ExerciseInfo
-import com.example.trainingdiary.models.info.TrainingInfo
+import com.example.trainingdiary.models.info.ViewHolderTypes
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -13,21 +12,19 @@ abstract class TrainingDao {
     abstract fun insertTraining(training: Training): Long
 
     @Delete
-    abstract fun deleteTraining(training: Training)
+    abstract fun deleteTrainings(trainings: List<Training>)
 
+    @Update
+    abstract fun updateTraining(training: Training)
 
     @Update
     abstract fun deletedTrainingFlags(training: Training)
 
-    @Query("SELECT * FROM table_trainings")
-    abstract fun getTrainingFlow(): Flow<List<Training>?>
+    @Query("SELECT * FROM table_trainings WHERE deleted == :flags ORDER BY position ASC")
+    abstract fun getTrainingDeletedFalseAscFlow(flags: Boolean): Flow<List<Training>?>
 
-
-    @Query("SELECT * FROM table_trainings WHERE deleted == :flags")
-    abstract fun getTrainingDeletedFalseFlow(flags: Boolean): Flow<List<Training>?>
-
-    @Query("SELECT * FROM table_trainings")
-    abstract fun getTrainings(): List<Training>?
+    @Query("SELECT * FROM table_trainings WHERE deleted == :flags ORDER BY position DESC")
+    abstract fun getTrainingDeletedFalseDescFlow(flags: Boolean): Flow<List<Training>?>
 
     @Query("DELETE FROM table_trainings")
     abstract fun clearTrainingTable()
@@ -42,32 +39,32 @@ abstract class TrainingDao {
 
     }
 
-    @Query("SELECT * FROM table_trainings WHERE id == :id LIMIT 1")
-    abstract fun getTrainingInfoFlow(id: Long): Flow<TrainingInfo?>
-
-    @Query("SELECT * FROM table_exercise WHERE idTraining == :id AND deleted ==:flags")
+    @Query("SELECT * FROM table_exercise WHERE idTraining == :id AND deleted ==:flags AND idSet is null ORDER BY position DESC")
     abstract fun getExercisesInfoByTrainingIdAndFlagsFlow(
         id: Long,
         flags: Boolean
-    ): Flow<List<ExerciseInfo>>
+    ): Flow<List<ViewHolderTypes.ExerciseInfo>>
+
+    @Query("SELECT * FROM table_trainings WHERE deleted ==:flags")
+    abstract fun getTrainingByFlags(
+        flags: Boolean
+    ): List<Training>
+
+    @Transaction
+    open fun deletedTrainingsByFlags(flags: Boolean) {
+        val list = getTrainingByFlags(flags)
+        deleteTrainings(list)
+    }
 
     @Query("SELECT * FROM table_exercise WHERE idTraining == :id")
-    abstract fun getExercisesInfoByTrainingId(id: Long): List<ExerciseInfo>
+    abstract fun getExercisesInfoByTrainingId(id: Long): List<ViewHolderTypes.ExerciseInfo>
+
+
 
 
     @Query("SELECT * FROM table_trainings WHERE id == :id LIMIT 1")
-    abstract fun getTrainingInfo(id: Long): TrainingInfo?
+    abstract fun getTraining(id: Long): Training
 
-    @Query("UPDATE table_trainings SET position =:pos WHERE id = :id")
-    abstract fun updateTrainingPosition(id: Long, pos: Int)
-
-    @Transaction
-    open fun switchTrainingPositions(training1: Training, training2: Training) {
-        val training1Pos = training1.position
-        val training2Pos = training2.position
-        updateTrainingPosition(training1.id, training2Pos)
-        updateTrainingPosition(training2.id, training1Pos)
-    }
 
     @Query("SELECT position FROM table_trainings ORDER BY position ASC")
     abstract fun getTrainingPositions(): MutableList<Int>?

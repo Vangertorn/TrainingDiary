@@ -5,14 +5,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-
-    app:cardCornerRadius="20dp"
-    app:cardElevation="2dp">
+    app:cardCornerRadius="10dp"
+    app:cardElevation="2dp"
+    android:background="@drawable/background_item_approach">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_color">
+        android:background="@drawable/background_item_approach">
 
         <TextView
             android:id="@+id/tvApproach"
@@ -24,9 +24,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:paddingEnd="10dp"
-
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="31.1 kg x 10" />
+            tools:text="31.1 kg x 10"
+            tools:ignore="RtlSymmetry" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -40,7 +40,8 @@
             app:layout_constraintEnd_toStartOf="@id/tvApproach"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/white" />
+            app:tint="@color/white"
+            android:contentDescription="@string/remove" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,6 +19,15 @@
         <action
             android:id="@+id/action_trainingListFragment_to_trainingCreateBottomDialog"
             app:destination="@id/trainingCreateBottomDialog" />
+        <action
+            android:id="@+id/action_trainingListFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_trainingListFragment_to_seasonTicketBottomDialog"
+            app:destination="@id/seasonTicketBottomDialog" />
+        <action
+            android:id="@+id/action_trainingListFragment_to_seasonTicketInfoBottomDialog"
+            app:destination="@id/seasonTicketInfoBottomDialog" />
     </fragment>
     <fragment
         android:id="@+id/exerciseListFragment"
@@ -37,6 +46,17 @@
         <action
             android:id="@+id/action_exerciseListFragment_to_trainingCreateBottomDialog"
             app:destination="@id/trainingCreateBottomDialog" />
+        <action
+            android:id="@+id/action_exerciseListFragment_to_trainingListFragment"
+            app:destination="@id/trainingListFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_exerciseListFragment_to_superSetApproachCreateBottomDialog"
+            app:destination="@id/superSetApproachCreateBottomDialog" />
     </fragment>
     <dialog
         android:id="@+id/exerciseCreateBottomDialog"
@@ -46,6 +66,9 @@
         <argument
             android:name="training"
             app:argType="com.example.trainingdiary.models.Training" />
+        <action
+            android:id="@+id/action_exerciseCreateBottomDialog_to_superSetCreateBottomDialog"
+            app:destination="@id/superSetCreateBottomDialog" />
     </dialog>
     <dialog
         android:id="@+id/approachCreateBottomDialog2"
@@ -61,11 +84,98 @@
         android:name="com.example.trainingdiary.screen.training_create.TrainingCreateBottomDialog"
         android:label="TrainingCreateBottomDialog"
         tools:layout="@layout/bottom_sheet_add_training">
+
         <argument
             android:name="training"
             app:argType="com.example.trainingdiary.models.Training"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_trainingCreateBottomDialog_to_exerciseListFragment"
+            app:destination="@id/exerciseListFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"/>
+    </dialog>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.trainingdiary.screen.settings.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_exerciseAutofillFragment"
+            app:destination="@id/exerciseAutofillFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_informationFragment"
+            app:destination="@id/informationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exerciseAutofillFragment"
+        android:name="com.example.trainingdiary.screen.exercise_autofill.ExerciseAutofillFragment"
+        android:label="ExerciseAutofillFragment"
+        tools:layout="@layout/fragment_exercise_autofill">
+        <action
+            android:id="@+id/action_exerciseAutofillFragment_to_exerciseAutofillBottomDialog"
+            app:destination="@id/exerciseAutofillBottomDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/exerciseAutofillBottomDialog"
+        android:name="com.example.trainingdiary.screen.exercise_autofill.ExerciseAutofillBottomDialog"
+        android:label="ExerciseAutofillBottomDialog"
+        tools:layout="@layout/bottom_sheet_exercise_autofill">
+        <argument
+            android:name="exerciseAutofill"
+            app:argType="com.example.trainingdiary.models.ExerciseAutofill" />
+    </dialog>
+    <dialog
+        android:id="@+id/seasonTicketBottomDialog"
+        android:name="com.example.trainingdiary.screen.season_ticket.SeasonTicketBottomDialog"
+        android:label="SeasonTicketBottomDialog"
+        tools:layout="@layout/bottom_sheet_season_ticket">
+        <action
+            android:id="@+id/action_seasonTicketBottomDialog_to_trainingListFragment"
+            app:destination="@id/trainingListFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"/>
+    </dialog>
+    <dialog
+        android:id="@+id/seasonTicketInfoBottomDialog"
+        android:name="com.example.trainingdiary.screen.season_ticket_info.SeasonTicketInfoBottomDialog"
+        android:label="SeasonTicketInfoBottomDialog"
+        tools:layout="@layout/bottom_sheet_season_ticket_information">
+        <action
+            android:id="@+id/action_seasonTicketInfoBottomDialog_to_trainingListFragment"
+            app:destination="@id/trainingListFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"/>
+    </dialog>
+    <dialog
+        android:id="@+id/superSetCreateBottomDialog"
+        android:name="com.example.trainingdiary.screen.super_set_create.SuperSetCreateBottomDialog"
+        android:label="SuperSetCreateBottomDialog"
+        tools:layout="@layout/bottom_sheet_add_set">
+        <argument
+            android:name="superSetId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_superSetCreateBottomDialog_to_exerciseListFragment"
+            app:destination="@id/exerciseListFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"/>
+    </dialog>
+    <fragment
+        android:id="@+id/informationFragment"
+        android:name="com.example.trainingdiary.screen.information.InformationFragment"
+        android:label="InformationFragment"
+        tools:layout="@layout/fragment_information"/>
+    <dialog
+        android:id="@+id/superSetApproachCreateBottomDialog"
+        android:name="com.example.trainingdiary.screen.super_set_approach_create.SuperSetApproachCreateBottomDialog"
+        android:label="SuperSetApproachCreateBottomDialog"
+        tools:layout="@layout/bottom_sheet_add_approach_super_set">
+
+        <argument
+            android:name="idSuperSet"
+            app:argType="long" />
     </dialog>
 
 </navigation>

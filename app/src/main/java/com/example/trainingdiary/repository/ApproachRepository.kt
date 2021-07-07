@@ -4,8 +4,8 @@ import com.example.trainingdiary.dao.database.ApproachDao
 import com.example.trainingdiary.dao.database.ExerciseDao
 import com.example.trainingdiary.datastore.AppSettings
 import com.example.trainingdiary.models.Approach
-import com.example.trainingdiary.models.Exercise
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
@@ -14,9 +14,10 @@ import kotlinx.coroutines.withContext
 class ApproachRepository(
     private val approachDao: ApproachDao,
     private val exerciseDao: ExerciseDao,
-    private val appSettings: AppSettings
+    appSettings: AppSettings
 ) {
 
+    @ExperimentalCoroutinesApi
     val currentApproachFlow: Flow<List<Approach>> =
         appSettings.idExerciseFlow().flatMapLatest { idExercise ->
             exerciseDao.getExerciseInfoFlow(idExercise).map {
