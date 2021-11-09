@@ -12,6 +12,7 @@ import com.example.trainingdiary.support.VerticalInset
 import com.example.trainingdiary.support.setVerticalMargin
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentTrainingListBinding
+import com.example.trainingdiary.screen.training_list.adapter.TrainingRecyclerViewAdapter
 import com.example.trainingdiary.support.SwipeCallback
 import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.snackbar.Snackbar

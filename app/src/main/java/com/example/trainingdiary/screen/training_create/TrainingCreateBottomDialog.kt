@@ -14,7 +14,7 @@ import com.example.trainingdiary.databinding.BottomSheetAddTrainingBinding
 import java.util.*
 import com.example.trainingdiary.models.Training
 import com.example.trainingdiary.support.CalendarView
-import com.example.trainingdiary.support.hideKeyboard
+import com.example.trainingdiary.support.extensions.hideKeyboard
 import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.android.viewmodel.ext.android.viewModel
