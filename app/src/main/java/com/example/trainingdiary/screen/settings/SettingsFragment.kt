@@ -11,6 +11,7 @@ import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentSettingsBinding
 import com.example.trainingdiary.models.MuscleGroup
 import com.example.trainingdiary.support.*
+import com.example.trainingdiary.support.extensions.hideKeyboard
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.android.viewmodel.ext.android.viewModel
 

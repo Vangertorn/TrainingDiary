@@ -26,6 +26,7 @@ import org.koin.dsl.module
 class DiaryApp : Application() {
     override fun onCreate() {
         super.onCreate()
+
         startKoin {
             androidContext(this@DiaryApp)
             modules(listOf(viewModel, barnModel, repositoryModel))
