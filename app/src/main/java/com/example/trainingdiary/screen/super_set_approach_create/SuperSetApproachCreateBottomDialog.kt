@@ -53,7 +53,6 @@ class SuperSetApproachCreateBottomDialog : BottomSheetDialogFragment() {
         return viewBinding.root
     }
 
-    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
