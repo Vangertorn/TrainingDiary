@@ -36,6 +36,4 @@ class ApproachRepository(
             approachDao.deleteApproach(approach)
         }
     }
-
-
 }

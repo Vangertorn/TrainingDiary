@@ -1,6 +1,6 @@
 package com.yankin.trainingdiary.support.extensions
 
-import java.util.*
+import java.util.Locale
 
 val Locale.flagEmoji: String
     get() {

@@ -1,25 +1,31 @@
 package com.yankin.trainingdiary.models
 
 import android.os.Parcelable
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity(
     tableName = "table_exercise", indices = [Index(value = ["id"], unique = true)],
-    foreignKeys = [ForeignKey(
-        entity = Training::class,
-        parentColumns = arrayOf("id"),
-        childColumns = arrayOf("idTraining"),
-        onDelete = ForeignKey.CASCADE,
-        onUpdate = ForeignKey.CASCADE
-    ), ForeignKey(
-        entity = SuperSet::class,
-        parentColumns = arrayOf("id"),
-        childColumns = arrayOf("idSet"),
-        onDelete = ForeignKey.CASCADE,
-        onUpdate = ForeignKey.CASCADE
-    )]
+    foreignKeys = [
+        ForeignKey(
+            entity = Training::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("idTraining"),
+            onDelete = ForeignKey.CASCADE,
+            onUpdate = ForeignKey.CASCADE
+        ), ForeignKey(
+            entity = SuperSet::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("idSet"),
+            onDelete = ForeignKey.CASCADE,
+            onUpdate = ForeignKey.CASCADE
+        )
+    ]
 )
 
 data class Exercise(

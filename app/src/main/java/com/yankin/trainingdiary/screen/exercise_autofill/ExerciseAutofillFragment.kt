@@ -17,13 +17,15 @@ class ExerciseAutofillFragment :
     SupportFragmentInset<FragmentExerciseAutofillBinding>(R.layout.fragment_exercise_autofill) {
     override val viewBinding: FragmentExerciseAutofillBinding by viewBinding()
     private val viewModel: ExerciseAutofillViewModel by viewModels()
-    private val adapter = ExerciseAutofillRecyclerViewAdapter(onClick = {
-        findNavController().navigateSave(
-            ExerciseAutofillFragmentDirections.actionExerciseAutofillFragmentToExerciseAutofillBottomDialog(
-                it
+    private val adapter = ExerciseAutofillRecyclerViewAdapter(
+        onClick = {
+            findNavController().navigateSave(
+                ExerciseAutofillFragmentDirections.actionExerciseAutofillFragmentToExerciseAutofillBottomDialog(
+                    it
+                )
             )
-        )
-    })
+        }
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

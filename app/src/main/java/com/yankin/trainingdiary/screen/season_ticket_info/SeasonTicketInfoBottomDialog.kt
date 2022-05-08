@@ -44,7 +44,6 @@ class SeasonTicketInfoBottomDialog : BottomSheetDialogFragment() {
             } else {
                 viewBinding.tvTrainingsAmount.text = it.toString()
             }
-
         }
         viewModel.subscriptionEndDate.observe(this.viewLifecycleOwner) {
             if (it.equals("01.01.70")) {
@@ -52,7 +51,6 @@ class SeasonTicketInfoBottomDialog : BottomSheetDialogFragment() {
             } else {
                 viewBinding.tvDateValid.text = it.toString()
             }
-
         }
         viewBinding.btnReset.setOnClickListener {
             runBlocking {
@@ -60,7 +58,6 @@ class SeasonTicketInfoBottomDialog : BottomSheetDialogFragment() {
                 delay(50)
                 findNavController().navigateSave(SeasonTicketInfoBottomDialogDirections.actionSeasonTicketInfoBottomDialogToTrainingListFragment())
             }
-
         }
         viewBinding.tvDaysAmount.text = viewModel.daysAmount()
     }

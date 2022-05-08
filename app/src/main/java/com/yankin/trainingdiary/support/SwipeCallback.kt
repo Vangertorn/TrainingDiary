@@ -14,6 +14,6 @@ class SwipeCallback(private val onSwipe: (Int, Int) -> Unit) :
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-      onSwipe(viewHolder.adapterPosition, direction)
+        onSwipe(viewHolder.adapterPosition, direction)
     }
 }

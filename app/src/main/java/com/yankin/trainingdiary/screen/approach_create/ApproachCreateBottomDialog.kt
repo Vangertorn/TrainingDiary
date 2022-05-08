@@ -32,9 +32,11 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
 
     private val args: ApproachCreateBottomDialogArgs by navArgs()
 
-    private val adapter = ApproachRecyclerViewAdapter(onClick = { approach ->
-        viewModel.deleteApproach(approach)
-    })
+    private val adapter = ApproachRecyclerViewAdapter(
+        onClick = { approach ->
+            viewModel.deleteApproach(approach)
+        }
+    )
     private val dataObserver = object : RecyclerView.AdapterDataObserver() {
         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
             super.onItemRangeInserted(positionStart, itemCount)
@@ -131,7 +133,6 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
             viewBinding.autoCompleteTvExerciseName.setText(it.name)
             viewBinding.etCommentExercise.setText(it.comment)
         }
-
 
         viewBinding.ibAddQuantity.setOnClickListener {
             viewBinding.etReoccurrence.addInt(1)

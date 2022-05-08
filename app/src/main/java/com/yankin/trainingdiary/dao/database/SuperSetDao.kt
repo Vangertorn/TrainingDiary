@@ -18,19 +18,16 @@ abstract class SuperSetDao {
     @Delete
     abstract fun deleteSuperSets(superSets: List<SuperSet>)
 
-
     @Query("SELECT * FROM table_super_set WHERE deleted ==:flags")
     abstract fun getSuperSetByFlags(
         flags: Boolean
     ): List<SuperSet>
-
 
     @Update
     abstract fun updateSuperSet(superSet: SuperSet)
 
     @Query("SELECT * FROM table_super_set WHERE id==:idSuperSet LIMIT 1")
     abstract fun getSuperSetById(idSuperSet: Long): SuperSet
-
 
     @Transaction
     open fun updateSuperSetById(idSuperSet: Long) {
@@ -53,6 +50,4 @@ abstract class SuperSetDao {
         flags: Boolean,
         visibility: Boolean
     ): Flow<List<SuperSetInfo>>
-
-
 }

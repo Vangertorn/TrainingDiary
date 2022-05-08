@@ -18,7 +18,8 @@ import com.yankin.trainingdiary.support.CalendarView
 import com.yankin.trainingdiary.support.extensions.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 @AndroidEntryPoint
 class TrainingCreateBottomDialog : BottomSheetDialogFragment() {
@@ -29,7 +30,6 @@ class TrainingCreateBottomDialog : BottomSheetDialogFragment() {
     private val args: TrainingCreateBottomDialogArgs by navArgs()
     private val adapter = MuscleGroupsRecyclerViewAdapter(
         onClick = {
-
         }
     )
 

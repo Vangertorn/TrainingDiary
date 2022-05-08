@@ -34,8 +34,7 @@ class ExerciseListViewModel @Inject constructor(
         combine(exerciseInfoFlow, superSetDateFlow) { exerciseInfo, superSetDao ->
 
             exerciseInfo +
-                    superSetDao
-
+                superSetDao
         }.asLiveData()
 
     @ExperimentalCoroutinesApi

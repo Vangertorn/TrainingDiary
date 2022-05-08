@@ -9,10 +9,13 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity(
-    tableName = "table_muscle_group", indices = [Index(
-        value = ["nameMuscleGroup"],
-        unique = true
-    )]
+    tableName = "table_muscle_group",
+    indices = [
+        Index(
+            value = ["nameMuscleGroup"],
+            unique = true
+        )
+    ]
 )
 data class MuscleGroup(
     @PrimaryKey(autoGenerate = true)

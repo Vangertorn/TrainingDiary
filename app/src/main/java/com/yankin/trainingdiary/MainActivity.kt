@@ -34,7 +34,6 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>() {
         viewModel.setLeftDays()
     }
 
-
     override fun onBackPressed() {
         if (navHostFragment.childFragmentManager.backStackEntryCount == 0) {
             if (doubleBackToExitPressedOnce) {
@@ -57,5 +56,3 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>() {
         return navHostFragment.childFragmentManager.fragments[0]
     }
 }
-
-

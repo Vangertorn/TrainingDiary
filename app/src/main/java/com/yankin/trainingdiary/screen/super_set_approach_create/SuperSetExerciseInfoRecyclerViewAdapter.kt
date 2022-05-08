@@ -72,8 +72,8 @@ class SuperSetExerciseInfoRecyclerViewAdapter(private val onClick: (ViewHolderTy
             oldItem: ViewHolderTypes.ExerciseInfo,
             newItem: ViewHolderTypes.ExerciseInfo
         ): Boolean {
-            return oldItem.exercise.name == newItem.exercise.name
-                    && oldItem.exercise.comment == newItem.exercise.comment
+            return oldItem.exercise.name == newItem.exercise.name &&
+                oldItem.exercise.comment == newItem.exercise.comment
         }
     }
 }

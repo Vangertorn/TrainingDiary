@@ -2,7 +2,6 @@ package com.example.trainingdiary.support
 
 import android.widget.EditText
 
-
 fun EditText.removeDouble(amount: Double) {
     if (text.toString().isEmpty()) {
         setText("0.0")
@@ -52,13 +51,13 @@ fun EditText.addInt(amount: Int) {
 }
 
 fun EditText.chekIntEmpty() {
-    if(text.isBlank()){
+    if (text.isBlank()) {
         setText("0")
     }
 }
 
 fun EditText.chekDoubleEmpty() {
-    if(text.isBlank()){
+    if (text.isBlank()) {
         setText("0.0")
     }
 }

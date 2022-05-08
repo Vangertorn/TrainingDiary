@@ -40,7 +40,8 @@ class ExerciseListFragment :
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.listLiveData.observe(this.viewLifecycleOwner) {
-            val adapter = ExerciseRecyclerViewAdapter(it,
+            val adapter = ExerciseRecyclerViewAdapter(
+                it,
                 onClick = { item ->
                     if (item is ViewHolderTypes.ExerciseInfo) {
                         viewModel.rememberIdExercise(item.exercise)
@@ -57,7 +58,6 @@ class ExerciseListFragment :
                             )
                         )
                     }
-
                 }
             )
             viewBinding.recyclerView.adapter = adapter
@@ -65,7 +65,6 @@ class ExerciseListFragment :
 
         val exerciseHelper = ItemTouchHelper(simpleCallback)
         exerciseHelper.attachToRecyclerView(viewBinding.recyclerView)
-
 
         args.training.let { training ->
             viewBinding.commentExerciseList.text = training.comment

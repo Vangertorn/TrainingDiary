@@ -17,7 +17,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 @AndroidEntryPoint
 class SeasonTicketBottomDialog : BottomSheetDialogFragment() {
@@ -53,7 +54,6 @@ class SeasonTicketBottomDialog : BottomSheetDialogFragment() {
             it as CheckedTextView
             it.toggle()
             viewBinding.calendar.active = !it.isChecked
-
         }
         viewBinding.ctvUnlimited.setOnClickListener {
             it as CheckedTextView
@@ -64,7 +64,6 @@ class SeasonTicketBottomDialog : BottomSheetDialogFragment() {
                 viewBinding.ivCloseNumber.visibility = View.GONE
             }
         }
-
 
         viewBinding.btnSaveSeasonTicket.setOnClickListener {
             var amount: Int? = null
@@ -120,7 +119,6 @@ class SeasonTicketBottomDialog : BottomSheetDialogFragment() {
                     (viewBinding.etReoccurrence.text.toString().toInt() + 1).toString()
                 )
             }
-
         }
         viewBinding.ibRemoveQuantity.setOnClickListener {
             if (viewBinding.etReoccurrence.text.toString().isBlank()) {

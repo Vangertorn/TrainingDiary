@@ -29,9 +29,11 @@ class SuperSetApproachCreateBottomDialog : BottomSheetDialogFragment() {
 
     private lateinit var selectedExercise: ViewHolderTypes.ExerciseInfo
 
-    private val adapterApproach = ApproachRecyclerViewAdapter(onClick = { approach ->
-        viewModel.deleteApproach(approach)
-    })
+    private val adapterApproach = ApproachRecyclerViewAdapter(
+        onClick = { approach ->
+            viewModel.deleteApproach(approach)
+        }
+    )
     private val dataObserver = object : RecyclerView.AdapterDataObserver() {
         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
             super.onItemRangeInserted(positionStart, itemCount)
@@ -39,13 +41,14 @@ class SuperSetApproachCreateBottomDialog : BottomSheetDialogFragment() {
         }
     }
 
-    private val adapter = SuperSetExerciseInfoRecyclerViewAdapter(onClick = { exerciseInfo ->
-        selectedExercise = exerciseInfo
-        viewModel.rememberIdExercise(exerciseInfo.exercise)
-        viewBinding.autoCompleteTvExerciseNameSs.setText(exerciseInfo.exercise.name)
-        viewBinding.etCommentExerciseSs.setText(exerciseInfo.exercise.comment)
-
-    })
+    private val adapter = SuperSetExerciseInfoRecyclerViewAdapter(
+        onClick = { exerciseInfo ->
+            selectedExercise = exerciseInfo
+            viewModel.rememberIdExercise(exerciseInfo.exercise)
+            viewBinding.autoCompleteTvExerciseNameSs.setText(exerciseInfo.exercise.name)
+            viewBinding.etCommentExerciseSs.setText(exerciseInfo.exercise.comment)
+        }
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,12 +70,10 @@ class SuperSetApproachCreateBottomDialog : BottomSheetDialogFragment() {
         viewBinding.etCommentExerciseSs.setText(selectedExercise.exercise.comment)
         viewModel.rememberIdExercise(selectedExercise.exercise)
 
-
         viewBinding.rvExerciseInSuperSetAddApproach.adapter = adapter
         viewModel.exerciseInfoLiveData.observe(this.viewLifecycleOwner) {
             adapter.submitList(it)
         }
-
 
         viewBinding.rvApproachSs.adapter = adapterApproach
         viewModel.approachLiveData.observe(this.viewLifecycleOwner) {
@@ -96,17 +97,6 @@ class SuperSetApproachCreateBottomDialog : BottomSheetDialogFragment() {
                 )
             )
         }
-
-
-
-
-
-
-
-
-
-
-
 
         viewModel.reoccurrencesLiveData.observe(this.viewLifecycleOwner) {
             if (viewBinding.etReoccurrenceSs.text.isBlank()) {

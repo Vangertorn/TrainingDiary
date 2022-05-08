@@ -13,5 +13,4 @@ abstract class ApproachDao {
 
     @Delete
     abstract fun deleteApproach(approach: Approach)
-
 }

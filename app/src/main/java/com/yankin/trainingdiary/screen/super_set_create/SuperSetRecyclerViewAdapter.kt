@@ -27,7 +27,6 @@ class SuperSetRecyclerViewAdapter(private val onClick: (Exercise) -> Unit) :
                 LayoutInflater.from(parent.context).inflate(R.layout.item_set, parent, false),
                 ::onItemClick
             )
-
         }
 
     override fun getItemViewType(position: Int): Int {

@@ -23,18 +23,20 @@ class SuperSetCreateBottomDialog : BottomSheetDialogFragment() {
     private val viewModel: SuperSetCreateViewModel by viewModels()
     private val args: SuperSetCreateBottomDialogArgs by navArgs()
     private var selectedExercise: Exercise? = null
-    private val adapter = SuperSetRecyclerViewAdapter(onClick = { exercise ->
-        selectedExercise = exercise
-        viewBinding.autoCompleteTvExerciseName.setText(exercise.name)
-        viewBinding.etCommentExercise.setText(exercise.comment)
-        if (exercise.name.isEmpty()) {
-            viewBinding.btnDeleteFromSet.visibility = View.GONE
-            viewBinding.btnAddToSet.visibility = View.VISIBLE
-        } else {
-            viewBinding.btnAddToSet.visibility = View.GONE
-            viewBinding.btnDeleteFromSet.visibility = View.VISIBLE
+    private val adapter = SuperSetRecyclerViewAdapter(
+        onClick = { exercise ->
+            selectedExercise = exercise
+            viewBinding.autoCompleteTvExerciseName.setText(exercise.name)
+            viewBinding.etCommentExercise.setText(exercise.comment)
+            if (exercise.name.isEmpty()) {
+                viewBinding.btnDeleteFromSet.visibility = View.GONE
+                viewBinding.btnAddToSet.visibility = View.VISIBLE
+            } else {
+                viewBinding.btnAddToSet.visibility = View.GONE
+                viewBinding.btnDeleteFromSet.visibility = View.VISIBLE
+            }
         }
-    })
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -78,7 +80,6 @@ class SuperSetCreateBottomDialog : BottomSheetDialogFragment() {
                 )
                     .show()
             }
-
         }
         viewBinding.btnDeleteFromSet.setOnClickListener {
             viewModel.deletedExercise(selectedExercise!!)
@@ -90,7 +91,6 @@ class SuperSetCreateBottomDialog : BottomSheetDialogFragment() {
             viewBinding.btnAddToSet.visibility = View.VISIBLE
         }
 
-
         viewBinding.btnSave.setOnClickListener {
             viewModel.createSuperSet(args.superSetId)
             val training = viewModel.getTraining()
@@ -100,7 +100,6 @@ class SuperSetCreateBottomDialog : BottomSheetDialogFragment() {
                     training
                 )
             )
-
         }
     }
 }

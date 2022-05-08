@@ -38,11 +38,13 @@ class ExerciseCreateBottomDialog :
         viewBinding.btnAddToSet.setOnClickListener {
             if (viewBinding.autoCompleteTvExerciseName.text.isNotEmpty()) {
                 val id = viewModel.saveSuperSet(
-                    SuperSet(idTraining = args.training.id), Exercise(
+                    SuperSet(idTraining = args.training.id),
+                    Exercise(
                         name = viewBinding.autoCompleteTvExerciseName.text.toString(),
                         comment = viewBinding.etCommentExercise.text.toString(),
                         idTraining = args.training.id
-                    ), Exercise(
+                    ),
+                    Exercise(
                         name = "",
                         comment = "",
                         idTraining = args.training.id
@@ -62,8 +64,6 @@ class ExerciseCreateBottomDialog :
                 )
             }
         }
-
-
 
         viewBinding.btnSave.setOnClickListener {
             if (viewBinding.autoCompleteTvExerciseName.text.isNotEmpty()) {

@@ -55,8 +55,8 @@ class TrainingCreateViewModel @Inject constructor(
                 if (appSettings.getDateCreatedTicket().isNotEmpty()) {
                     if (TrainingListViewModel.monthFormatter.parse(training.date)!!
                         >= TrainingListViewModel.monthFormatter.parse(
-                            appSettings.getDateCreatedTicket()
-                        )
+                                appSettings.getDateCreatedTicket()
+                            )
                     ) {
                         if (numberTraining == 0) {
                             appSettings.setNumberOfTrainingSessions(-1)

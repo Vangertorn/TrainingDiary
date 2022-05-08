@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.text.format.DateUtils
-
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -17,9 +16,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingdiary.R
-
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class CalendarStyleSettings(
     val dayTextColor: Int,
@@ -32,7 +32,6 @@ class CalendarStyleSettings(
     val enabledBackground: Drawable?
 )
 
-
 class CalendarView @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
@@ -44,7 +43,6 @@ class CalendarView @JvmOverloads constructor(
     private val ivLeft: ImageView by lazy { findViewById(R.id.ivLeft) }
     private val ivRight: ImageView by lazy { findViewById(R.id.ivRight) }
     private val tvInvisible: TextView by lazy { findViewById(R.id.tvInvisible) }
-
 
     var onDateChangedCallback: DateChangeListener? = null
 
@@ -68,11 +66,9 @@ class CalendarView @JvmOverloads constructor(
             } else {
                 ivLeft.isClickable = false
                 ivRight.isClickable = false
-
             }
             setMonthDay()
         }
-
 
     private val calendar = Calendar.getInstance().apply {
         time = Date()
@@ -87,7 +83,6 @@ class CalendarView @JvmOverloads constructor(
         }
 
     private lateinit var calendarStyleSettings: CalendarStyleSettings
-
 
     init {
 
@@ -146,7 +141,6 @@ class CalendarView @JvmOverloads constructor(
         setMonth()
     }
 
-
     private fun setMonthDay(date: Date = Date()) {
         var currentPosition = 0
         val calendar = Calendar.getInstance()
@@ -178,7 +172,6 @@ class CalendarView @JvmOverloads constructor(
         }
     }
 
-
     private fun setMonth(date: Date = Date()) {
         tvMonth.text = monthFormatter.format(date)
         setMonthDay(date)
@@ -198,7 +191,6 @@ class CalendarView @JvmOverloads constructor(
         }
 
         override fun getItemCount(): Int = items.size
-
     }
 
     class DaysAdapter(
@@ -236,7 +228,6 @@ class CalendarView @JvmOverloads constructor(
             }
         }
 
-
         override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
             super.onAttachedToRecyclerView(recyclerView)
             this.recyclerView = recyclerView
@@ -251,11 +242,11 @@ class CalendarView @JvmOverloads constructor(
             this.recyclerView = null
         }
 
-
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayViewHolder {
             return DayViewHolder(
                 LayoutInflater.from(parent.context)
-                    .inflate(R.layout.calendar_day_list_item, parent, false), ::onItemClick
+                    .inflate(R.layout.calendar_day_list_item, parent, false),
+                ::onItemClick
 
             )
         }
@@ -266,7 +257,6 @@ class CalendarView @JvmOverloads constructor(
             onDateChangedCallback(items[pos])
             notifyItemChanged(prevPos)
             notifyItemChanged(pos)
-
         }
 
         override fun onBindViewHolder(holder: DayViewHolder, position: Int) {
@@ -274,7 +264,6 @@ class CalendarView @JvmOverloads constructor(
         }
 
         override fun getItemCount(): Int = items.size
-
     }
 
     class InactiveDayViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -295,7 +284,6 @@ class CalendarView @JvmOverloads constructor(
         init {
             itemView.setOnClickListener {
                 onClick(adapterPosition)
-
             }
         }
 
@@ -311,7 +299,6 @@ class CalendarView @JvmOverloads constructor(
             }
             itemView.background = backgroundRes
 
-
             val textColor = when {
                 selected -> calendarStyleSettings.selectedTextColor
                 DateUtils.isToday(date.time) -> calendarStyleSettings.todayTextColor
@@ -325,11 +312,7 @@ class CalendarView @JvmOverloads constructor(
                 calendarStyleSettings.weekTextSizeInPx
             )
             tvDay.setTextSize(TypedValue.COMPLEX_UNIT_PX, calendarStyleSettings.dayTextSizeInPx)
-
-
         }
-
-
     }
 
     interface DateChangeListener {

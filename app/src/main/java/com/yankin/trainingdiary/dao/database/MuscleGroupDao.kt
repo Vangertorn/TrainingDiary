@@ -30,7 +30,7 @@ abstract class MuscleGroupDao {
     abstract fun deletedMuscleGroupFlags(muscleGroup: MuscleGroup)
 
     @Transaction
-    open fun recoverDefaultValues(muscleGroups: List<MuscleGroup>){
+    open fun recoverDefaultValues(muscleGroups: List<MuscleGroup>) {
         clearMuscleGroupTable()
         saveMuscleGroups(muscleGroups)
     }

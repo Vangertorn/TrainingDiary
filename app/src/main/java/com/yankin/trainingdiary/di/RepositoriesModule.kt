@@ -14,7 +14,6 @@ import com.yankin.trainingdiary.repository.ExerciseRepository
 import com.yankin.trainingdiary.repository.MuscleGroupRepository
 import com.yankin.trainingdiary.repository.SuperSetRepository
 import com.yankin.trainingdiary.repository.TrainingRepository
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

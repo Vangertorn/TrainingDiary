@@ -27,14 +27,16 @@ class TrainingListFragment :
 
     private val viewModel: TrainingListViewModel by viewModels()
 
-    private val adapter = TrainingRecyclerViewAdapter(onClick = { training ->
-        viewModel.rememberIdTraining(training)
-        findNavController().navigateSave(
-            TrainingListFragmentDirections.actionTrainingListFragmentToExerciseListFragment(
-                training
+    private val adapter = TrainingRecyclerViewAdapter(
+        onClick = { training ->
+            viewModel.rememberIdTraining(training)
+            findNavController().navigateSave(
+                TrainingListFragmentDirections.actionTrainingListFragmentToExerciseListFragment(
+                    training
+                )
             )
-        )
-    })
+        }
+    )
 
     private val simpleCallback = SwipeCallback { position, direction ->
         when (direction) {
@@ -98,12 +100,9 @@ class TrainingListFragment :
             } else {
                 viewBinding.tvNumberDays.visibility = View.GONE
             }
-
         }
 
-
         viewBinding.recyclerViewTraining.adapter = adapter
-
 
         viewBinding.btnAdd.setOnClickListener {
             findNavController().navigateSave(
@@ -115,13 +114,12 @@ class TrainingListFragment :
 
         viewBinding.subscriptionTrainingList.setOnClickListener {
             if (viewModel.numberOfTrainingSessions() == -1 && viewModel.subscriptionEndDate()
-                    .isEmpty()
+                .isEmpty()
             ) {
                 findNavController().navigateSave(TrainingListFragmentDirections.actionTrainingListFragmentToSeasonTicketBottomDialog())
             } else {
                 findNavController().navigateSave(TrainingListFragmentDirections.actionTrainingListFragmentToSeasonTicketInfoBottomDialog())
             }
-
         }
         viewBinding.settingsTrainingList.setOnClickListener {
             findNavController().navigateSave(TrainingListFragmentDirections.actionTrainingListFragmentToSettingsFragment())
@@ -132,7 +130,6 @@ class TrainingListFragment :
                     adapter.registerAdapterDataObserver(dataObserverAsc)
                     dataObserverChek = DATA_OBSERVER_ASC
                 }
-
 
                 viewModel.trainingAscLiveData.observe(this.viewLifecycleOwner) {
                     adapter.submitList(it)
@@ -145,10 +142,8 @@ class TrainingListFragment :
 
                 viewModel.trainingDescLiveData.observe(this.viewLifecycleOwner) {
                     adapter.submitList(it)
-
                 }
             }
-
         }
         val trainingHelper = ItemTouchHelper(simpleCallback)
         trainingHelper.attachToRecyclerView(viewBinding.recyclerViewTraining)

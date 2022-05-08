@@ -2,7 +2,12 @@ package com.yankin.trainingdiary.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.*
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.longPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.trainingdiary.BuildConfig
 import kotlinx.coroutines.flow.Flow
@@ -67,7 +72,6 @@ class AppSettings(context: Context) {
 
     suspend fun getDateCreatedTicket(): String = dateCreatedTicketFlow().first()
 
-
     suspend fun setIdTraining(idTraining: Long) {
         dataStore.edit { preferences ->
             preferences[longPreferencesKey(TRAINING_ID_KEY)] = idTraining
@@ -125,7 +129,6 @@ class AppSettings(context: Context) {
     suspend fun setDayLeft(amount: Int) {
         dataStore.edit { preferences -> preferences[intPreferencesKey(DAYS_LEFT)] = amount }
     }
-
 
     companion object {
         private const val TRAINING_ID_KEY = "TRAINING_ID_KEY"

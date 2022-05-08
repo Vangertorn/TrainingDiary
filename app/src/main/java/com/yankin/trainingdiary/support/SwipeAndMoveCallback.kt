@@ -2,7 +2,6 @@ package com.yankin.trainingdiary.support
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import java.util.*
 
 class SwipeAndMoveCallback(
     private val onMove: (Int, Int) -> Unit,
@@ -10,7 +9,8 @@ class SwipeAndMoveCallback(
 
 ) :
     ItemTouchHelper.SimpleCallback(
-        ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT.or(
+        ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+        ItemTouchHelper.LEFT.or(
             ItemTouchHelper.RIGHT
         )
     ) {

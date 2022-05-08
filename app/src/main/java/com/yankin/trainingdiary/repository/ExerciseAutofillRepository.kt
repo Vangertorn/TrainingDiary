@@ -9,7 +9,6 @@ import kotlinx.coroutines.withContext
 
 class ExerciseAutofillRepository(private val exerciseAutofillDao: ExerciseAutofillDao) {
 
-
     val currentExerciseAutofillStringFlow: Flow<List<String>> =
         exerciseAutofillDao.getExerciseAutofillStringFlow().map {
             it ?: emptyList()
@@ -18,7 +17,6 @@ class ExerciseAutofillRepository(private val exerciseAutofillDao: ExerciseAutofi
         exerciseAutofillDao.getExerciseAutofillFlow().map {
             it ?: emptyList()
         }
-
 
     suspend fun saveExerciseAutofill(exerciseAutofill: ExerciseAutofill) {
         withContext(Dispatchers.IO) {

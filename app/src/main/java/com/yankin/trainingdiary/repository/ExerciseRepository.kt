@@ -23,7 +23,6 @@ class ExerciseRepository(
             trainingDao.getExercisesInfoByTrainingIdAndFlagsFlow(idTraining, false)
         }
 
-
     suspend fun saveExercise(exercise: Exercise) {
         withContext(Dispatchers.IO) {
             if (exercise.id == 0L) {

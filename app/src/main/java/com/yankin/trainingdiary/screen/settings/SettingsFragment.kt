@@ -26,16 +26,18 @@ import dagger.hilt.android.AndroidEntryPoint
 class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.fragment_settings) {
     override val viewBinding: FragmentSettingsBinding by viewBinding()
     private val viewModel: SettingsViewModel by viewModels()
-    private val adapter = SettingsMuscleGroupsRecyclerViewAdapter(onClick = { muscleGroup ->
-        viewModel.deleteMuscleGroup(
-            MuscleGroup(
-                id = muscleGroup.id,
-                nameMuscleGroup = muscleGroup.nameMuscleGroup,
-                factorySettings = muscleGroup.factorySettings,
-                deleted = true
+    private val adapter = SettingsMuscleGroupsRecyclerViewAdapter(
+        onClick = { muscleGroup ->
+            viewModel.deleteMuscleGroup(
+                MuscleGroup(
+                    id = muscleGroup.id,
+                    nameMuscleGroup = muscleGroup.nameMuscleGroup,
+                    factorySettings = muscleGroup.factorySettings,
+                    deleted = true
+                )
             )
-        )
-    })
+        }
+    )
     private var observerChek: Boolean = false
     private val dataObserver = object : RecyclerView.AdapterDataObserver() {
         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
@@ -103,7 +105,6 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
         }
         viewBinding.ibAddQuantity.setOnClickListener {
             viewBinding.etReoccurrence.addInt(1)
-
         }
         viewBinding.ibRemoveQuantity.setOnClickListener {
             viewBinding.etReoccurrence.removeInt(1)
@@ -122,7 +123,6 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
             }
         }
 
-
         viewBinding.ibAddWeight.setOnClickListener {
             viewBinding.etWeight.addDouble(1.0)
         }
@@ -133,7 +133,7 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
 
     private fun addValues() {
         if (viewBinding.etReoccurrence.text.toString()
-                .isBlank() && viewBinding.etWeight.text.toString().isBlank()
+            .isBlank() && viewBinding.etWeight.text.toString().isBlank()
         ) {
             Toast.makeText(
                 this.context,
@@ -141,7 +141,7 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
                 Toast.LENGTH_SHORT
             ).show()
         } else if (viewBinding.etReoccurrence.text.toString()
-                .isNotBlank() && viewBinding.etWeight.text.toString()
+            .isNotBlank() && viewBinding.etWeight.text.toString()
                 .isBlank()
         ) {
 
@@ -153,7 +153,7 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
                 Toast.LENGTH_SHORT
             ).show()
         } else if (viewBinding.etWeight.text.toString()
-                .isNotBlank() && viewBinding.etReoccurrence.text.toString().isBlank()
+            .isNotBlank() && viewBinding.etReoccurrence.text.toString().isBlank()
         ) {
 
             viewModel.saveWeight(viewBinding.etWeight.text.toString())

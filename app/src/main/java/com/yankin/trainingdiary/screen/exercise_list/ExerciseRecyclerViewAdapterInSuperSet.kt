@@ -29,10 +29,10 @@ class ExerciseRecyclerViewAdapterInSuperSet :
             oldItem: ViewHolderTypes.ExerciseInfo,
             newItem: ViewHolderTypes.ExerciseInfo
         ): Boolean {
-            return oldItem.exercise.deleted == newItem.exercise.deleted
-                    && oldItem.exercise.name == newItem.exercise.name
-                    && oldItem.exercise.comment == newItem.exercise.comment
-                    && oldItem.approaches!!.size == newItem.approaches!!.size
+            return oldItem.exercise.deleted == newItem.exercise.deleted &&
+                oldItem.exercise.name == newItem.exercise.name &&
+                oldItem.exercise.comment == newItem.exercise.comment &&
+                oldItem.approaches!!.size == newItem.approaches!!.size
         }
     }
 

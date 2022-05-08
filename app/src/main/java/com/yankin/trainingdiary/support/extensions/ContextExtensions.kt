@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment
 import com.example.trainingdiary.R
 import kotlin.math.roundToInt
 
-
 fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboard(it) }
 }

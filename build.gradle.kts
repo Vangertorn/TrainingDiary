@@ -15,10 +15,18 @@ buildscript {
     }
 }
 
+plugins {
+    id("org.jmailen.kotlinter") version ("3.4.4")
+}
+
 allprojects {
     repositories {
         google()
         mavenCentral()
         jcenter() // Warning: this repository is going to shut down soon
+    }
+
+    apply{
+        plugin("org.jmailen.kotlinter")
     }
 }

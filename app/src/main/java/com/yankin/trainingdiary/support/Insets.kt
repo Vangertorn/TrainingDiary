@@ -34,7 +34,6 @@ fun Activity.setWindowTransparency(listener: OnSystemBarsSizeChangedListener) {
     window.statusBarColor = Color.TRANSPARENT
 }
 
-
 @Suppress("DEPRECATION")
 private fun View.overrideSystemInsets(listener: OnSystemBarsSizeChangedListener) {
     ViewCompat.setOnApplyWindowInsetsListener(this) { _, insets ->

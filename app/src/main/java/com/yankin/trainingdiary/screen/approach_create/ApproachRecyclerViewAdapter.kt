@@ -50,8 +50,8 @@ class ApproachRecyclerViewAdapter(private val onClick: (Approach) -> Unit) :
         }
 
         override fun areContentsTheSame(oldItem: Approach, newItem: Approach): Boolean {
-            return oldItem.reoccurrences == newItem.reoccurrences
-                    && oldItem.weight == newItem.weight
+            return oldItem.reoccurrences == newItem.reoccurrences &&
+                oldItem.weight == newItem.weight
         }
     }
 }

@@ -7,17 +7,18 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
-
 @Parcelize
 @Entity(
     tableName = "table_approach",
-    foreignKeys = [ForeignKey(
-        entity = Exercise::class,
-        parentColumns = arrayOf("id"),
-        childColumns = arrayOf("idExercise"),
-        onDelete = ForeignKey.CASCADE,
-        onUpdate = ForeignKey.CASCADE
-    )]
+    foreignKeys = [
+        ForeignKey(
+            entity = Exercise::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("idExercise"),
+            onDelete = ForeignKey.CASCADE,
+            onUpdate = ForeignKey.CASCADE
+        )
+    ]
 )
 
 data class Approach(

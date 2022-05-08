@@ -38,7 +38,8 @@ class SuperSetRepository(
                         superSet = it.superSet,
                         exercise = it.exercise!!.map {
                             exerciseDao.getExerciseInfo(it.id)
-                        })
+                        }
+                    )
                 }
             }.flowOn(Dispatchers.IO)
         }

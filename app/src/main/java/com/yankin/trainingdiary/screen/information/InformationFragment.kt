@@ -26,7 +26,6 @@ class InformationFragment :
         }
         viewBinding.tvLink.text = getString(R.string.email_address)
 
-
         viewBinding.tvLink.setOnClickListener {
             sendMail()
         }

@@ -11,7 +11,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -43,10 +44,8 @@ class MainActivityViewModel @Inject constructor(
 
     init {
         launch {
-            muscleGroupRepository.saveDefaultValues(
-            )
+            muscleGroupRepository.saveDefaultValues()
         }
-
     }
 
     fun setLeftDays() {
@@ -63,7 +62,6 @@ class MainActivityViewModel @Inject constructor(
                 }
             }
         }
-
     }
 
     private fun daysAmount(): String {
@@ -80,7 +78,6 @@ class MainActivityViewModel @Inject constructor(
                     val result = dateEnd - currentDate
                     return@runBlocking dayFormatter.format(result)
                 }
-
             }
         }
     }

@@ -14,7 +14,6 @@ class Converters {
             value.split(",").forEach { list.add(it.toInt()) }
             list
         }
-
     }
 
     @TypeConverter

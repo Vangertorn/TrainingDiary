@@ -47,7 +47,6 @@ class ApproachCreateViewModel @Inject constructor(
             exerciseRepository.updateExercise(
                 exercise
             )
-
         }
     }
 

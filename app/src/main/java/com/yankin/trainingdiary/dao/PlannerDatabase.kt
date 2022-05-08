@@ -1,8 +1,6 @@
 package com.yankin.trainingdiary.dao
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.yankin.trainingdiary.dao.database.ApproachDao
@@ -42,7 +40,6 @@ abstract class PlannerDatabase : RoomDatabase() {
     abstract fun muscleGroupDao(): MuscleGroupDao
     abstract fun exerciseAutofillDao(): ExerciseAutofillDao
     abstract fun superSetDao(): SuperSetDao
-
 }
 
 // object DatabaseConstructor {

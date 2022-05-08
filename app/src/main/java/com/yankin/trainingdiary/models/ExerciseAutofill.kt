@@ -7,10 +7,13 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity(
-    tableName = "table_exercise_autofill", indices = [androidx.room.Index(
-        value = ["nameExercise"],
-        unique = true
-    )]
+    tableName = "table_exercise_autofill",
+    indices = [
+        androidx.room.Index(
+            value = ["nameExercise"],
+            unique = true
+        )
+    ]
 )
 data class ExerciseAutofill(
     @PrimaryKey(autoGenerate = true)
