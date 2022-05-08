@@ -6,23 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckedTextView
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.BottomSheetSeasonTicketBinding
 import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.yankin.trainingdiary.support.CalendarView
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
-import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
+@AndroidEntryPoint
 class SeasonTicketBottomDialog : BottomSheetDialogFragment() {
 
     private lateinit var viewBinding: BottomSheetSeasonTicketBinding
 
-    private val viewModel: SeasonTicketViewModel by viewModel()
+    private val viewModel: SeasonTicketViewModel by viewModels()
     private val dateFormatter = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
     private var selectedDate: Date = Date()
 

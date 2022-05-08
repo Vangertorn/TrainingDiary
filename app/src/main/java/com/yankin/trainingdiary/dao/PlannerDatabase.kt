@@ -19,6 +19,8 @@ import com.yankin.trainingdiary.models.SuperSet
 import com.yankin.trainingdiary.models.Training
 import com.yankin.trainingdiary.support.Converters
 
+const val DATABASE_NAME = "com.yankin.trainingdiary.dp"
+
 @Database(
     entities = [
         Training::class,
@@ -43,12 +45,12 @@ abstract class PlannerDatabase : RoomDatabase() {
 
 }
 
-object DatabaseConstructor {
-    fun create(context: Context): PlannerDatabase {
-        return Room.databaseBuilder(
-            context,
-            PlannerDatabase::class.java,
-            "com.example.myapplication.dp"
-        ).build()
-    }
-}
+// object DatabaseConstructor {
+//     fun create(context: Context): PlannerDatabase {
+//         return Room.databaseBuilder(
+//             context,
+//             PlannerDatabase::class.java,
+//             "com.example.myapplication.dp"
+//         ).build()
+//     }
+// }

@@ -7,10 +7,13 @@ import com.yankin.trainingdiary.repository.MuscleGroupRepository
 import com.yankin.trainingdiary.repository.TrainingRepository
 import com.yankin.trainingdiary.screen.training_list.TrainingListViewModel
 import com.yankin.trainingdiary.support.CoroutineViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
-class TrainingCreateViewModel(
+@HiltViewModel
+class TrainingCreateViewModel @Inject constructor(
     private val trainingRepository: TrainingRepository,
     private val muscleGroupRepository: MuscleGroupRepository,
     private val appSettings: AppSettings

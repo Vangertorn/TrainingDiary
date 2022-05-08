@@ -4,14 +4,16 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.trainingdiary.databinding.ActivityMainBinding
 import com.yankin.trainingdiary.support.SupportActivityInset
 import com.yankin.trainingdiary.support.setWindowTransparency
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : SupportActivityInset<ActivityMainBinding>() {
 
     override lateinit var viewBinding: ActivityMainBinding
@@ -19,7 +21,7 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>() {
     private val navController: NavController by lazy { navHostFragment.navController }
     private val handler = Handler(Looper.getMainLooper())
     private var doubleBackToExitPressedOnce = false
-    private val viewModel: com.yankin.trainingdiary.MainActivityViewModel by viewModel()
+    private val viewModel: MainActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

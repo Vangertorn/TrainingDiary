@@ -7,12 +7,15 @@ import com.yankin.trainingdiary.repository.MuscleGroupRepository
 import com.yankin.trainingdiary.repository.SuperSetRepository
 import com.yankin.trainingdiary.repository.TrainingRepository
 import com.yankin.trainingdiary.support.CoroutineViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class MainActivityViewModel(
+@HiltViewModel
+class MainActivityViewModel @Inject constructor(
     private val trainingRepository: TrainingRepository,
     private val exerciseRepository: ExerciseRepository,
     private val muscleGroupRepository: MuscleGroupRepository,
@@ -69,13 +72,13 @@ class MainActivityViewModel(
                 return@runBlocking "-1"
             } else {
 
-                val dateEnd = com.yankin.trainingdiary.MainActivityViewModel.Companion.dateFormatter.parse(appSettings.getSubscriptionEndDate())!!.time
+                val dateEnd = dateFormatter.parse(appSettings.getSubscriptionEndDate())!!.time
                 if (dateEnd == 0L) {
                     return@runBlocking "365"
                 } else {
                     val currentDate = Date().time
                     val result = dateEnd - currentDate
-                    return@runBlocking com.yankin.trainingdiary.MainActivityViewModel.Companion.dayFormatter.format(result)
+                    return@runBlocking dayFormatter.format(result)
                 }
 
             }

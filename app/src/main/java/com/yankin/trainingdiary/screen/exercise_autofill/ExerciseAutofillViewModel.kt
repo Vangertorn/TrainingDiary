@@ -4,9 +4,12 @@ import androidx.lifecycle.asLiveData
 import com.yankin.trainingdiary.models.ExerciseAutofill
 import com.yankin.trainingdiary.repository.ExerciseAutofillRepository
 import com.yankin.trainingdiary.support.CoroutineViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ExerciseAutofillViewModel(
+@HiltViewModel
+class ExerciseAutofillViewModel @Inject constructor(
     private val exerciseAutofillRepository: ExerciseAutofillRepository
 ) :
     CoroutineViewModel() {

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -19,11 +20,12 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.yankin.trainingdiary.models.MuscleGroup
 import com.yankin.trainingdiary.support.SupportFragmentInset
 import com.yankin.trainingdiary.support.extensions.hideKeyboard
-import org.koin.android.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.fragment_settings) {
     override val viewBinding: FragmentSettingsBinding by viewBinding()
-    private val viewModel: SettingsViewModel by viewModel()
+    private val viewModel: SettingsViewModel by viewModels()
     private val adapter = SettingsMuscleGroupsRecyclerViewAdapter(onClick = { muscleGroup ->
         viewModel.deleteMuscleGroup(
             MuscleGroup(

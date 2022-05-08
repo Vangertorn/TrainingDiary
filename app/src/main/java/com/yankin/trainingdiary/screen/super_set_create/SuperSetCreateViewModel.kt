@@ -10,11 +10,14 @@ import com.yankin.trainingdiary.repository.ExerciseRepository
 import com.yankin.trainingdiary.repository.SuperSetRepository
 import com.yankin.trainingdiary.repository.TrainingRepository
 import com.yankin.trainingdiary.support.CoroutineViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
-class SuperSetCreateViewModel(
+@HiltViewModel
+class SuperSetCreateViewModel @Inject constructor(
     private val superSetRepository: SuperSetRepository,
     private val exerciseRepository: ExerciseRepository,
     private val exerciseAutofillRepository: ExerciseAutofillRepository,

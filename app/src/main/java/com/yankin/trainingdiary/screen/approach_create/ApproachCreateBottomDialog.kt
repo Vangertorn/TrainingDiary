@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingdiary.R
@@ -20,13 +21,14 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.yankin.trainingdiary.models.Approach
 import com.yankin.trainingdiary.models.Exercise
 import com.yankin.trainingdiary.models.ExerciseAutofill
-import org.koin.android.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
 
     private lateinit var viewBinding: BottomSheetAddApproachBinding
 
-    private val viewModel: ApproachCreateViewModel by viewModel()
+    private val viewModel: ApproachCreateViewModel by viewModels()
 
     private val args: ApproachCreateBottomDialogArgs by navArgs()
 

@@ -6,12 +6,16 @@ import androidx.lifecycle.asLiveData
 import com.example.trainingdiary.R
 import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.support.CoroutineViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class SeasonTicketInfoViewModel(private val appSettings: AppSettings) : CoroutineViewModel() {
+@HiltViewModel
+class SeasonTicketInfoViewModel @Inject constructor(private val appSettings: AppSettings) :
+    CoroutineViewModel() {
 
     val numberOfTrainingSessionLiveData = appSettings.numberOfTrainingSessionsFlow().asLiveData()
 

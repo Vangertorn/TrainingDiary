@@ -4,6 +4,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-kapt")
     id("kotlin-parcelize")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -50,6 +51,10 @@ dependencies {
     androidTestImplementation(Dependencies.Test.testEspresso)
 
     implementation(Dependencies.Kotlin.kotlin)
+
+    implementation(Dependencies.Hilt.android)
+    kapt(Dependencies.Hilt.compiler)
+
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
     implementation("com.google.android.material:material:1.6.0")
@@ -58,9 +63,6 @@ dependencies {
 
     implementation(Dependencies.KotlinX.coroutineCore)
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
-
-    implementation("org.koin:koin-android-ext:2.2.2")
-    implementation("org.koin:koin-androidx-viewmodel:2.2.2")
 
     implementation(Dependencies.Navigation.navigationFragment)
     implementation(Dependencies.Navigation.navigationUi)
@@ -93,4 +95,8 @@ dependencies {
 
     implementation("com.beloo.widget:ChipsLayoutManager:0.3.7@aar")
 
+}
+
+kapt{
+    correctErrorTypes = true
 }

@@ -6,12 +6,15 @@ import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.models.Training
 import com.yankin.trainingdiary.repository.TrainingRepository
 import com.yankin.trainingdiary.support.CoroutineViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class TrainingListViewModel(
+@HiltViewModel
+class TrainingListViewModel @Inject constructor(
     private val trainingRepository: TrainingRepository,
     private val appSettings: AppSettings,
 ) : CoroutineViewModel() {

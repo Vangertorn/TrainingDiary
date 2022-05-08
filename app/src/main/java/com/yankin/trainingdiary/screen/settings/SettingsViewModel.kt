@@ -5,9 +5,12 @@ import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.models.MuscleGroup
 import com.yankin.trainingdiary.repository.MuscleGroupRepository
 import com.yankin.trainingdiary.support.CoroutineViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SettingsViewModel(
+@HiltViewModel
+class SettingsViewModel @Inject constructor(
     private val appSettings: AppSettings,
     private val muscleGroupRepository: MuscleGroupRepository
 ) : CoroutineViewModel() {

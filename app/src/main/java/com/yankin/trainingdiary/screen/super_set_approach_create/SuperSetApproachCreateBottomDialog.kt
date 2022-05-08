@@ -4,21 +4,28 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.BottomSheetAddApproachSuperSetBinding
-import com.example.trainingdiary.support.*
+import com.example.trainingdiary.support.addDouble
+import com.example.trainingdiary.support.addInt
+import com.example.trainingdiary.support.chekDoubleEmpty
+import com.example.trainingdiary.support.chekIntEmpty
+import com.example.trainingdiary.support.removeDouble
+import com.example.trainingdiary.support.removeInt
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.yankin.trainingdiary.models.Approach
 import com.yankin.trainingdiary.models.info.ViewHolderTypes
 import com.yankin.trainingdiary.screen.approach_create.ApproachRecyclerViewAdapter
-import org.koin.android.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SuperSetApproachCreateBottomDialog : BottomSheetDialogFragment() {
 
     private lateinit var viewBinding: BottomSheetAddApproachSuperSetBinding
 
-    private val viewModel: SuperSetApproachCreateViewModel by viewModel()
+    private val viewModel: SuperSetApproachCreateViewModel by viewModels()
 
     private lateinit var selectedExercise: ViewHolderTypes.ExerciseInfo
 

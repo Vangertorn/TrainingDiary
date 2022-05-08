@@ -3,11 +3,14 @@ package com.yankin.trainingdiary.screen.season_ticket
 import android.annotation.SuppressLint
 import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.support.CoroutineViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class SeasonTicketViewModel(private val appSettings: AppSettings) : CoroutineViewModel() {
+@HiltViewModel
+class SeasonTicketViewModel @Inject constructor (private val appSettings: AppSettings) : CoroutineViewModel() {
 
     fun saveNumberOfTrainingSessions(number: Int) {
         launch {

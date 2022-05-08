@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.trainingdiary.R
@@ -13,12 +14,13 @@ import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.yankin.trainingdiary.models.Exercise
 import com.yankin.trainingdiary.models.ExerciseAutofill
-import org.koin.android.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SuperSetCreateBottomDialog : BottomSheetDialogFragment() {
 
     private lateinit var viewBinding: BottomSheetAddSetBinding
-    private val viewModel: SuperSetCreateViewModel by viewModel()
+    private val viewModel: SuperSetCreateViewModel by viewModels()
     private val args: SuperSetCreateBottomDialogArgs by navArgs()
     private var selectedExercise: Exercise? = null
     private val adapter = SuperSetRecyclerViewAdapter(onClick = { exercise ->

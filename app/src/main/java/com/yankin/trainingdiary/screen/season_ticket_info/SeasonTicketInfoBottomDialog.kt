@@ -4,21 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.BottomSheetSeasonTicketInformationBinding
 import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
-import org.koin.android.viewmodel.ext.android.viewModel
 
+@AndroidEntryPoint
 class SeasonTicketInfoBottomDialog : BottomSheetDialogFragment() {
-
 
     private lateinit var viewBinding: BottomSheetSeasonTicketInformationBinding
 
-    private val viewModel: SeasonTicketInfoViewModel by viewModel()
+    private val viewModel: SeasonTicketInfoViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,5 +64,4 @@ class SeasonTicketInfoBottomDialog : BottomSheetDialogFragment() {
         }
         viewBinding.tvDaysAmount.text = viewModel.daysAmount()
     }
-
 }

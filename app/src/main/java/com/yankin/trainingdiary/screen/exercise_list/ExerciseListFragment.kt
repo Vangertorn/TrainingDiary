@@ -2,24 +2,26 @@ package com.yankin.trainingdiary.screen.exercise_list
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.FragmentExerciseListBinding
-import com.example.trainingdiary.support.*
+import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.snackbar.Snackbar
 import com.yankin.trainingdiary.models.info.ViewHolderTypes
 import com.yankin.trainingdiary.support.SupportFragmentInset
 import com.yankin.trainingdiary.support.SwipeCallback
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.koin.android.viewmodel.ext.android.viewModel
 
+@AndroidEntryPoint
 class ExerciseListFragment :
     SupportFragmentInset<FragmentExerciseListBinding>(R.layout.fragment_exercise_list) {
     override val viewBinding: FragmentExerciseListBinding by viewBinding()
-    private val viewModel: ExerciseListViewModel by viewModel()
+    private val viewModel: ExerciseListViewModel by viewModels()
     private val args: ExerciseListFragmentArgs by navArgs()
 
     @ExperimentalCoroutinesApi

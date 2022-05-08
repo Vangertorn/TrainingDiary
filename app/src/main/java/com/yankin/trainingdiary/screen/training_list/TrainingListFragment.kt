@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -16,14 +17,15 @@ import com.yankin.trainingdiary.screen.training_list.adapter.TrainingRecyclerVie
 import com.yankin.trainingdiary.support.SupportFragmentInset
 import com.yankin.trainingdiary.support.SwipeCallback
 import com.yankin.trainingdiary.support.VerticalInset
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TrainingListFragment :
     SupportFragmentInset<FragmentTrainingListBinding>(R.layout.fragment_training_list) {
 
     override lateinit var viewBinding: FragmentTrainingListBinding
 
-    private val viewModel: TrainingListViewModel by viewModel()
+    private val viewModel: TrainingListViewModel by viewModels()
 
     private val adapter = TrainingRecyclerViewAdapter(onClick = { training ->
         viewModel.rememberIdTraining(training)

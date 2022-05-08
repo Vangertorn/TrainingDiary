@@ -27,4 +27,12 @@ object Dependencies {
     object KotlinX{
         const val coroutineCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3"
     }
+
+    object Hilt{
+        private const val version = "2.38.1"
+
+        const val plugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
+        const val android = "com.google.dagger:hilt-android:$version"
+        const val compiler = "com.google.dagger:hilt-android-compiler:$version"
+    }
 }

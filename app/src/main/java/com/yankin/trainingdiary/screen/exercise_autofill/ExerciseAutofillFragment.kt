@@ -2,6 +2,7 @@ package com.yankin.trainingdiary.screen.exercise_autofill
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.trainingdiary.R
@@ -9,12 +10,13 @@ import com.example.trainingdiary.databinding.FragmentExerciseAutofillBinding
 import com.example.trainingdiary.support.navigateSave
 import com.example.trainingdiary.support.setVerticalMargin
 import com.yankin.trainingdiary.support.SupportFragmentInset
-import org.koin.android.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ExerciseAutofillFragment :
     SupportFragmentInset<FragmentExerciseAutofillBinding>(R.layout.fragment_exercise_autofill) {
     override val viewBinding: FragmentExerciseAutofillBinding by viewBinding()
-    private val viewModel: ExerciseAutofillViewModel by viewModel()
+    private val viewModel: ExerciseAutofillViewModel by viewModels()
     private val adapter = ExerciseAutofillRecyclerViewAdapter(onClick = {
         findNavController().navigateSave(
             ExerciseAutofillFragmentDirections.actionExerciseAutofillFragmentToExerciseAutofillBottomDialog(
@@ -40,5 +42,4 @@ class ExerciseAutofillFragment :
         viewBinding.toolbarExerciseList.setPadding(0, top, 0, 0)
         viewBinding.recyclerView.setVerticalMargin(marginBottom = bottom)
     }
-
 }

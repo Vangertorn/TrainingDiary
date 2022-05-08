@@ -4,18 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.trainingdiary.R
 import com.example.trainingdiary.databinding.BottomSheetExerciseAutofillBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.yankin.trainingdiary.models.ExerciseAutofill
-import org.koin.android.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ExerciseAutofillBottomDialog : BottomSheetDialogFragment() {
 
     private lateinit var viewBinding: BottomSheetExerciseAutofillBinding
-    private val viewModel: ExerciseAutofillViewModel by viewModel()
+    private val viewModel: ExerciseAutofillViewModel by viewModels()
     private val args: ExerciseAutofillBottomDialogArgs by navArgs()
 
     override fun onCreateView(

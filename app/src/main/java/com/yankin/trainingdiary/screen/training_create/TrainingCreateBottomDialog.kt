@@ -5,6 +5,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.beloo.widget.chipslayoutmanager.ChipsLayoutManager
@@ -15,13 +16,14 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.yankin.trainingdiary.models.Training
 import com.yankin.trainingdiary.support.CalendarView
 import com.yankin.trainingdiary.support.extensions.hideKeyboard
-import org.koin.android.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
 
+@AndroidEntryPoint
 class TrainingCreateBottomDialog : BottomSheetDialogFragment() {
     private lateinit var viewBinding: BottomSheetAddTrainingBinding
-    private val viewModel: TrainingCreateViewModel by viewModel()
+    private val viewModel: TrainingCreateViewModel by viewModels()
     private var selectedDate: Date = Date()
     private val dateFormatter = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
     private val args: TrainingCreateBottomDialogArgs by navArgs()

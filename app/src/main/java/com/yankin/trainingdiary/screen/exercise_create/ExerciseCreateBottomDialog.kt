@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -15,13 +16,14 @@ import com.yankin.trainingdiary.models.Exercise
 import com.yankin.trainingdiary.models.ExerciseAutofill
 import com.yankin.trainingdiary.models.SuperSet
 import com.yankin.trainingdiary.support.SupportDialogFragmentInset
-import org.koin.android.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ExerciseCreateBottomDialog :
     SupportDialogFragmentInset<BottomSheetAddExerciseBinding>(R.layout.bottom_sheet_add_exercise) {
 
     override val viewBinding: BottomSheetAddExerciseBinding by viewBinding()
-    private val viewModel: ExerciseCreateViewModel by viewModel()
+    private val viewModel: ExerciseCreateViewModel by viewModels()
     private val args: ExerciseCreateBottomDialogArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

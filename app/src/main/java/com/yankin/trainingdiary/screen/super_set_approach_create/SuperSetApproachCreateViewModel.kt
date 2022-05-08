@@ -8,12 +8,15 @@ import com.yankin.trainingdiary.models.info.ViewHolderTypes
 import com.yankin.trainingdiary.repository.ApproachRepository
 import com.yankin.trainingdiary.repository.SuperSetRepository
 import com.yankin.trainingdiary.support.CoroutineViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
-class SuperSetApproachCreateViewModel(
+@HiltViewModel
+class SuperSetApproachCreateViewModel @Inject constructor(
     private val superSetRepository: SuperSetRepository,
     private val appSettings: AppSettings,
     private val approachRepository: ApproachRepository
