@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/trainingListFragment"
-        android:name="com.example.trainingdiary.screen.training_list.TrainingListFragment"
+        android:name="com.yankin.trainingdiary.screen.training_list.TrainingListFragment"
         android:label="TrainingListFragment"
         tools:layout="@layout/fragment_training_list">
         <action
@@ -31,12 +31,12 @@
     </fragment>
     <fragment
         android:id="@+id/exerciseListFragment"
-        android:name="com.example.trainingdiary.screen.exercise_list.ExerciseListFragment"
+        android:name="com.yankin.trainingdiary.screen.exercise_list.ExerciseListFragment"
         android:label="ExerciseListFragment"
         tools:layout="@layout/fragment_exercise_list">
         <argument
             android:name="training"
-            app:argType="com.example.trainingdiary.models.Training" />
+            app:argType="com.yankin.trainingdiary.models.Training" />
         <action
             android:id="@+id/action_exerciseListFragment_to_exerciseCreateBottomDialog"
             app:destination="@id/exerciseCreateBottomDialog" />
@@ -60,34 +60,34 @@
     </fragment>
     <dialog
         android:id="@+id/exerciseCreateBottomDialog"
-        android:name="com.example.trainingdiary.screen.exercise_create.ExerciseCreateBottomDialog"
+        android:name="com.yankin.trainingdiary.screen.exercise_create.ExerciseCreateBottomDialog"
         android:label="ExerciseCreateBottomDialog"
         tools:layout="@layout/bottom_sheet_add_exercise">
         <argument
             android:name="training"
-            app:argType="com.example.trainingdiary.models.Training" />
+            app:argType="com.yankin.trainingdiary.models.Training" />
         <action
             android:id="@+id/action_exerciseCreateBottomDialog_to_superSetCreateBottomDialog"
             app:destination="@id/superSetCreateBottomDialog" />
     </dialog>
     <dialog
         android:id="@+id/approachCreateBottomDialog2"
-        android:name="com.example.trainingdiary.screen.approach_create.ApproachCreateBottomDialog"
+        android:name="com.yankin.trainingdiary.screen.approach_create.ApproachCreateBottomDialog"
         android:label="ApproachCreateBottomDialog"
         tools:layout="@layout/bottom_sheet_add_approach">
         <argument
             android:name="exercise"
-            app:argType="com.example.trainingdiary.models.Exercise" />
+            app:argType="com.yankin.trainingdiary.models.Exercise" />
     </dialog>
     <dialog
         android:id="@+id/trainingCreateBottomDialog"
-        android:name="com.example.trainingdiary.screen.training_create.TrainingCreateBottomDialog"
+        android:name="com.yankin.trainingdiary.screen.training_create.TrainingCreateBottomDialog"
         android:label="TrainingCreateBottomDialog"
         tools:layout="@layout/bottom_sheet_add_training">
 
         <argument
             android:name="training"
-            app:argType="com.example.trainingdiary.models.Training"
+            app:argType="com.yankin.trainingdiary.models.Training"
             app:nullable="true"
             android:defaultValue="@null" />
         <action
@@ -98,7 +98,7 @@
     </dialog>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.trainingdiary.screen.settings.SettingsFragment"
+        android:name="com.yankin.trainingdiary.screen.settings.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings">
         <action
@@ -110,7 +110,7 @@
     </fragment>
     <fragment
         android:id="@+id/exerciseAutofillFragment"
-        android:name="com.example.trainingdiary.screen.exercise_autofill.ExerciseAutofillFragment"
+        android:name="com.yankin.trainingdiary.screen.exercise_autofill.ExerciseAutofillFragment"
         android:label="ExerciseAutofillFragment"
         tools:layout="@layout/fragment_exercise_autofill">
         <action
@@ -119,16 +119,16 @@
     </fragment>
     <dialog
         android:id="@+id/exerciseAutofillBottomDialog"
-        android:name="com.example.trainingdiary.screen.exercise_autofill.ExerciseAutofillBottomDialog"
+        android:name="com.yankin.trainingdiary.screen.exercise_autofill.ExerciseAutofillBottomDialog"
         android:label="ExerciseAutofillBottomDialog"
         tools:layout="@layout/bottom_sheet_exercise_autofill">
         <argument
             android:name="exerciseAutofill"
-            app:argType="com.example.trainingdiary.models.ExerciseAutofill" />
+            app:argType="com.yankin.trainingdiary.models.ExerciseAutofill" />
     </dialog>
     <dialog
         android:id="@+id/seasonTicketBottomDialog"
-        android:name="com.example.trainingdiary.screen.season_ticket.SeasonTicketBottomDialog"
+        android:name="com.yankin.trainingdiary.screen.season_ticket.SeasonTicketBottomDialog"
         android:label="SeasonTicketBottomDialog"
         tools:layout="@layout/bottom_sheet_season_ticket">
         <action
@@ -139,7 +139,7 @@
     </dialog>
     <dialog
         android:id="@+id/seasonTicketInfoBottomDialog"
-        android:name="com.example.trainingdiary.screen.season_ticket_info.SeasonTicketInfoBottomDialog"
+        android:name="com.yankin.trainingdiary.screen.season_ticket_info.SeasonTicketInfoBottomDialog"
         android:label="SeasonTicketInfoBottomDialog"
         tools:layout="@layout/bottom_sheet_season_ticket_information">
         <action
@@ -150,7 +150,7 @@
     </dialog>
     <dialog
         android:id="@+id/superSetCreateBottomDialog"
-        android:name="com.example.trainingdiary.screen.super_set_create.SuperSetCreateBottomDialog"
+        android:name="com.yankin.trainingdiary.screen.super_set_create.SuperSetCreateBottomDialog"
         android:label="SuperSetCreateBottomDialog"
         tools:layout="@layout/bottom_sheet_add_set">
         <argument
@@ -164,12 +164,12 @@
     </dialog>
     <fragment
         android:id="@+id/informationFragment"
-        android:name="com.example.trainingdiary.screen.information.InformationFragment"
+        android:name="com.yankin.trainingdiary.screen.information.InformationFragment"
         android:label="InformationFragment"
         tools:layout="@layout/fragment_information"/>
     <dialog
         android:id="@+id/superSetApproachCreateBottomDialog"
-        android:name="com.example.trainingdiary.screen.super_set_approach_create.SuperSetApproachCreateBottomDialog"
+        android:name="com.yankin.trainingdiary.screen.super_set_approach_create.SuperSetApproachCreateBottomDialog"
         android:label="SuperSetApproachCreateBottomDialog"
         tools:layout="@layout/bottom_sheet_add_approach_super_set">
 

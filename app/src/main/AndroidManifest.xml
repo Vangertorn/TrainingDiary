@@ -3,7 +3,7 @@
     package="com.example.trainingdiary">
 
     <application
-        android:name=".DiaryApp"
+        android:name="com.yankin.trainingdiary.DiaryApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_my_launcher"
         android:label="@string/app_name"
@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrainingDiary">
         <activity
-            android:name=".MainActivity"
+            android:name="com.yankin.trainingdiary.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

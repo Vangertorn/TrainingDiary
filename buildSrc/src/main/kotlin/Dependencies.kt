@@ -19,4 +19,12 @@ object Dependencies {
         const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:$version"
         const val navigationUi = "androidx.navigation:navigation-ui-ktx:$version"
     }
+
+    object Kotlin {
+        const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:1.6.21"
+    }
+
+    object KotlinX{
+        const val coroutineCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3"
+    }
 }
