@@ -1,4 +1,4 @@
-package com.yankin.trainingdiary.support
+package com.yankin.storage.room
 
 import androidx.room.TypeConverter
 import java.lang.StringBuilder

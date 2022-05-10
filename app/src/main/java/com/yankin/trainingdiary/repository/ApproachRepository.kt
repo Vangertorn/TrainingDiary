@@ -1,9 +1,11 @@
 package com.yankin.trainingdiary.repository
 
-import com.yankin.trainingdiary.dao.database.ApproachDao
-import com.yankin.trainingdiary.dao.database.ExerciseDao
+import com.yankin.storage.ApproachStorage
+import com.yankin.storage.ExerciseStorage
 import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.models.Approach
+import com.yankin.trainingdiary.models.converters.toDomain
+import com.yankin.trainingdiary.models.converters.toModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -12,28 +14,30 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class ApproachRepository(
-    private val approachDao: ApproachDao,
-    private val exerciseDao: ExerciseDao,
+    private val approachStorage: ApproachStorage,
+    private val exerciseStorage: ExerciseStorage,
     appSettings: AppSettings
 ) {
 
     @ExperimentalCoroutinesApi
     val currentApproachFlow: Flow<List<Approach>> =
         appSettings.idExerciseFlow().flatMapLatest { idExercise ->
-            exerciseDao.getExerciseInfoFlow(idExercise).map {
-                it?.approaches ?: emptyList()
+            exerciseStorage.getExerciseInfoFlow(idExercise).map {
+                it?.approachDomains?.map {
+                    it.toModel()
+                } ?: emptyList()
             }
         }
 
     suspend fun saveApproach(approach: Approach) {
         withContext(Dispatchers.IO) {
-            approachDao.insertApproach(approach)
+            approachStorage.insertApproach(approach.toDomain())
         }
     }
 
     suspend fun deleteApproach(approach: Approach) {
         withContext(Dispatchers.IO) {
-            approachDao.deleteApproach(approach)
+            approachStorage.deleteApproach(approach.toDomain())
         }
     }
 }

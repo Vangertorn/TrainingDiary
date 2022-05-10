@@ -2,14 +2,19 @@ package com.yankin.trainingdiary.repository
 
 import android.content.Context
 import com.example.trainingdiary.R
-import com.yankin.trainingdiary.dao.database.MuscleGroupDao
+import com.yankin.storage.MuscleGroupStorage
 import com.yankin.trainingdiary.models.MuscleGroup
+import com.yankin.trainingdiary.models.converters.toDomain
+import com.yankin.trainingdiary.models.converters.toModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
-class MuscleGroupRepository(private val muscleGroupDao: MuscleGroupDao, context: Context) {
+class MuscleGroupRepository(
+    private val muscleGroupStorage: MuscleGroupStorage,
+    context: Context
+) {
 
     private val list = listOf(
         MuscleGroup(nameMuscleGroup = context.getString(R.string.legs), factorySettings = true),
@@ -28,35 +33,39 @@ class MuscleGroupRepository(private val muscleGroupDao: MuscleGroupDao, context:
     )
 
     val currentMuscleGroupFlow: Flow<List<MuscleGroup>> =
-        muscleGroupDao.getMuscleGroupsByFlagsFlow(false).map { it ?: listOf() }
+        muscleGroupStorage.getMuscleGroupsByFlagsFlow(false)
+            .map { it?.map { it.toModel() } ?: listOf() }
 
     suspend fun getMuscleGroups(): List<MuscleGroup> {
         return withContext(Dispatchers.IO) {
-            return@withContext muscleGroupDao.getMuscleGroups() ?: emptyList()
+            return@withContext muscleGroupStorage.getMuscleGroups()?.map { it.toModel() }
+                ?: emptyList()
         }
     }
 
     suspend fun deleteMuscleGroup(muscleGroup: MuscleGroup) {
         withContext(Dispatchers.IO) {
-            muscleGroupDao.deletedMuscleGroupFlags(muscleGroup)
+            muscleGroupStorage.deletedMuscleGroupFlags(muscleGroup.toDomain())
         }
     }
 
     suspend fun saveMuscleGroup(muscleGroup: MuscleGroup) {
         withContext(Dispatchers.IO) {
-            muscleGroupDao.saveMuscleGroup(muscleGroup)
+            muscleGroupStorage.saveMuscleGroup(muscleGroup.toDomain())
         }
     }
 
     suspend fun saveDefaultValues() {
         withContext(Dispatchers.IO) {
-            muscleGroupDao.saveMuscleGroups(list)
+            muscleGroupStorage.saveMuscleGroups(list.map { it.toDomain() })
         }
     }
 
     suspend fun recoverDefaultValues() {
         withContext(Dispatchers.IO) {
-            muscleGroupDao.recoverDefaultValues(list)
+            muscleGroupStorage.recoverDefaultValues(list.map {
+                it.toDomain()
+            })
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.yankin.trainingdiary.dao.database
+package com.yankin.storage.room.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -6,23 +6,23 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
-import com.yankin.trainingdiary.models.Exercise
-import com.yankin.trainingdiary.models.info.ViewHolderTypes
+import com.yankin.storage.room.entity.ExerciseEntity
+import com.yankin.storage.room.entity.info.ViewHolderTypesEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 abstract class ExerciseDao {
 
     @Insert
-    abstract fun insertExercise(exercise: Exercise): Long
+    abstract fun insertExercise(exerciseEntity: ExerciseEntity): Long
 
     @Delete
-    abstract fun deleteExercises(exercises: List<Exercise>)
+    abstract fun deleteExercises(exerciseEntities: List<ExerciseEntity>)
 
     @Query("SELECT * FROM table_exercise WHERE deleted ==:flags")
     abstract fun getExercisesByFlags(
         flags: Boolean
-    ): List<Exercise>
+    ): List<ExerciseEntity>
 
     @Transaction
     open fun deletedExercisesByFlags(flags: Boolean) {
@@ -30,7 +30,7 @@ abstract class ExerciseDao {
     }
 
     @Query("SELECT * FROM table_exercise WHERE name==:emptyName LIMIT 1")
-    abstract fun getEmptyExercise(emptyName: String): Exercise
+    abstract fun getEmptyExercise(emptyName: String): ExerciseEntity
 
     @Transaction
     open fun deletedEmptyExercise(emptyName: String) {
@@ -38,26 +38,26 @@ abstract class ExerciseDao {
     }
 
     @Update
-    abstract fun updateExercise(exercise: Exercise)
+    abstract fun updateExercise(exerciseEntity: ExerciseEntity)
 
     @Update
-    abstract fun deletedExerciseFlags(exercise: Exercise)
+    abstract fun deletedExerciseFlags(exerciseEntity: ExerciseEntity)
 
     @Query("SELECT * FROM table_exercise WHERE id == :id LIMIT 1")
-    abstract fun getExerciseFromId(id: Long): Exercise
+    abstract fun getExerciseFromId(id: Long): ExerciseEntity
 
     @Delete
-    abstract fun deleteExercise(exercise: Exercise)
+    abstract fun deleteExercise(exerciseEntity: ExerciseEntity)
 
     @Transaction
     @Query("SELECT * FROM table_exercise WHERE id == :id LIMIT 1")
-    abstract fun getExerciseInfoFlow(id: Long): Flow<ViewHolderTypes.ExerciseInfo?>
+    abstract fun getExerciseInfoFlow(id: Long): Flow<ViewHolderTypesEntity.ExerciseInfo?>
 
     @Query("SELECT * FROM table_exercise WHERE id == :id LIMIT 1")
-    abstract fun getExerciseInfo(id: Long): ViewHolderTypes.ExerciseInfo
+    abstract fun getExerciseInfo(id: Long): ViewHolderTypesEntity.ExerciseInfo
 
     @Query("SELECT * FROM table_exercise WHERE idSet == :id ")
-    abstract fun getListExerciseInfo(id: Long): List<ViewHolderTypes.ExerciseInfo>
+    abstract fun getListExerciseInfo(id: Long): List<ViewHolderTypesEntity.ExerciseInfo>
 
     @Query("SELECT position FROM table_exercise ORDER BY position ASC")
     abstract fun getExercisePositions(): MutableList<Int>?
@@ -66,22 +66,22 @@ abstract class ExerciseDao {
     abstract fun updateExercisePosition(id: Long, pos: Int)
 
     @Transaction
-    open fun switchExercisePositions(exercise1: Exercise, exercise2: Exercise) {
-        val exercise1Pos = exercise1.position
-        val exercise2Pos = exercise2.position
-        updateExercisePosition(exercise1.id, exercise2Pos)
-        updateExercisePosition(exercise2.id, exercise1Pos)
+    open fun switchExercisePositions(exerciseEntity1: ExerciseEntity, exerciseEntity2: ExerciseEntity) {
+        val exercise1Pos = exerciseEntity1.position
+        val exercise2Pos = exerciseEntity2.position
+        updateExercisePosition(exerciseEntity1.id, exercise2Pos)
+        updateExercisePosition(exerciseEntity2.id, exercise1Pos)
     }
 
     @Query("SELECT * FROM table_exercise WHERE  deleted ==:flags AND idSet == :idSuperSet ORDER BY position DESC")
     abstract fun getExercisesInfoByBySuperSetIdAndFlagsFlow(
         idSuperSet: Long,
         flags: Boolean
-    ): Flow<MutableList<Exercise>>
+    ): Flow<MutableList<ExerciseEntity>>
 
     @Query("SELECT * FROM table_exercise WHERE  deleted ==:flags AND idSet == :idSuperSet ORDER BY position DESC")
     abstract fun getExercisesInfoBySuperSetIdAndFlagsFlow(
         idSuperSet: Long,
         flags: Boolean
-    ): Flow<List<ViewHolderTypes.ExerciseInfo>>
+    ): Flow<List<ViewHolderTypesEntity.ExerciseInfo>>
 }

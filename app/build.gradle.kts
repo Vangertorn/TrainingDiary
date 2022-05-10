@@ -46,6 +46,9 @@ android {
 
 dependencies {
 
+    implementation(project(":external:storage:api"))
+    implementation(project(":external:storage"))
+
     testImplementation(Dependencies.Test.testJunit)
     androidTestImplementation(Dependencies.Test.testExtension)
     androidTestImplementation(Dependencies.Test.testEspresso)
@@ -68,10 +71,6 @@ dependencies {
     implementation(Dependencies.Navigation.navigationUi)
 
     implementation("com.github.florent37:singledateandtimepicker:2.2.7")
-
-    kapt("androidx.room:room-compiler:2.4.2")
-    implementation("androidx.room:room-runtime:2.4.2")
-    implementation("androidx.room:room-ktx:2.4.2")
 
     implementation("com.google.code.gson:gson:2.9.0")
 

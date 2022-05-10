@@ -1,38 +1,44 @@
 package com.yankin.trainingdiary.repository
 
-import com.yankin.trainingdiary.dao.database.ExerciseAutofillDao
+import com.yankin.storage.AutofillStorage
 import com.yankin.trainingdiary.models.ExerciseAutofill
+import com.yankin.trainingdiary.models.converters.toDomain
+import com.yankin.trainingdiary.models.converters.toModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
-class ExerciseAutofillRepository(private val exerciseAutofillDao: ExerciseAutofillDao) {
+class ExerciseAutofillRepository(
+    private val autofillStorage: AutofillStorage
+) {
 
     val currentExerciseAutofillStringFlow: Flow<List<String>> =
-        exerciseAutofillDao.getExerciseAutofillStringFlow().map {
+        autofillStorage.getExerciseAutofillStringFlow().map {
             it ?: emptyList()
         }
     val currentExerciseAutofillFlow: Flow<List<ExerciseAutofill>> =
-        exerciseAutofillDao.getExerciseAutofillFlow().map {
-            it ?: emptyList()
+        autofillStorage.getExerciseAutofillFlow().map {
+            it?.map { entity ->
+                entity.toModel()
+            } ?: emptyList()
         }
 
     suspend fun saveExerciseAutofill(exerciseAutofill: ExerciseAutofill) {
         withContext(Dispatchers.IO) {
-            exerciseAutofillDao.insertExerciseAutofill(exerciseAutofill)
+            autofillStorage.insertExerciseAutofill(exerciseAutofill.toDomain())
         }
     }
 
     suspend fun deleteExerciseAutofill(exerciseAutofill: ExerciseAutofill) {
         withContext(Dispatchers.IO) {
-            exerciseAutofillDao.deleteExerciseAutofill(exerciseAutofill)
+            autofillStorage.deleteExerciseAutofill(exerciseAutofill.toDomain())
         }
     }
 
     suspend fun updateExerciseAutofill(exerciseAutofill: ExerciseAutofill) {
         withContext(Dispatchers.IO) {
-            exerciseAutofillDao.updateExerciseAutofill(exerciseAutofill)
+            autofillStorage.updateExerciseAutofill(exerciseAutofill.toDomain())
         }
     }
 }

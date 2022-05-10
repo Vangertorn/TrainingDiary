@@ -1,12 +1,12 @@
 package com.yankin.trainingdiary.di
 
 import android.content.Context
-import com.yankin.trainingdiary.dao.database.ApproachDao
-import com.yankin.trainingdiary.dao.database.ExerciseAutofillDao
-import com.yankin.trainingdiary.dao.database.ExerciseDao
-import com.yankin.trainingdiary.dao.database.MuscleGroupDao
-import com.yankin.trainingdiary.dao.database.SuperSetDao
-import com.yankin.trainingdiary.dao.database.TrainingDao
+import com.yankin.storage.ApproachStorage
+import com.yankin.storage.AutofillStorage
+import com.yankin.storage.ExerciseStorage
+import com.yankin.storage.MuscleGroupStorage
+import com.yankin.storage.SuperSetStorage
+import com.yankin.storage.TrainingStorage
 import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.repository.ApproachRepository
 import com.yankin.trainingdiary.repository.ExerciseAutofillRepository
@@ -28,66 +28,66 @@ internal object RepositoriesModule {
     @Provides
     @Singleton
     fun provideApproachRepository(
-        approachDao: ApproachDao,
-        exerciseDao: ExerciseDao,
+        approachStorage: ApproachStorage,
+        exerciseStorage: ExerciseStorage,
         appSettings: AppSettings
     ): ApproachRepository = ApproachRepository(
-        approachDao = approachDao,
-        exerciseDao = exerciseDao,
+        approachStorage = approachStorage,
+        exerciseStorage = exerciseStorage,
         appSettings = appSettings
     )
 
     @Provides
     @Singleton
     fun provideExerciseAutofillRepository(
-        exerciseAutofillDao: ExerciseAutofillDao
+        autofillStorage: AutofillStorage
     ): ExerciseAutofillRepository = ExerciseAutofillRepository(
-        exerciseAutofillDao = exerciseAutofillDao
+        autofillStorage = autofillStorage
     )
 
     @Provides
     @Singleton
     fun provideExerciseRepository(
-        exerciseDao: ExerciseDao,
-        trainingDao: TrainingDao,
+        exerciseStorage: ExerciseStorage,
+        trainingStorage: TrainingStorage,
         appSettings: AppSettings
     ): ExerciseRepository = ExerciseRepository(
-        exerciseDao = exerciseDao,
-        trainingDao = trainingDao,
+        exerciseStorage = exerciseStorage,
+        trainingStorage = trainingStorage,
         appSettings = appSettings
     )
 
     @Provides
     @Singleton
     fun provideMuscleGroupRepository(
-        muscleGroupDao: MuscleGroupDao,
+        muscleGroupStorage: MuscleGroupStorage,
         @ApplicationContext context: Context
     ): MuscleGroupRepository = MuscleGroupRepository(
-        muscleGroupDao = muscleGroupDao,
+        muscleGroupStorage = muscleGroupStorage,
         context = context
     )
 
     @Provides
     @Singleton
     fun provideSuperSetRepository(
-        superSetDao: SuperSetDao,
+        superSetStorage: SuperSetStorage,
         exerciseRepository: ExerciseRepository,
         appSettings: AppSettings,
-        exerciseDao: ExerciseDao
+        exerciseStorage: ExerciseStorage
     ): SuperSetRepository = SuperSetRepository(
-        superSetDao = superSetDao,
+        superSetStorage = superSetStorage,
         exerciseRepository = exerciseRepository,
         appSettings = appSettings,
-        exerciseDao = exerciseDao
+        exerciseStorage = exerciseStorage
     )
 
     @Provides
     @Singleton
     fun provideTrainingRepository(
-        trainingDao: TrainingDao,
+        trainingStorage: TrainingStorage,
         appSettings: AppSettings
     ): TrainingRepository = TrainingRepository(
-        trainingDao = trainingDao,
+        trainingStorage = trainingStorage,
         appSettings = appSettings
     )
 }
