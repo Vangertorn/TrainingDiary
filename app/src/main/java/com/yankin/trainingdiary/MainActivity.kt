@@ -34,6 +34,7 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>() {
         viewModel.setLeftDays()
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (navHostFragment.childFragmentManager.backStackEntryCount == 0) {
             if (doubleBackToExitPressedOnce) {

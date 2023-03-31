@@ -8,7 +8,7 @@ object Dependencies {
 
     object Plugins {
         const val androidGradlePlugin = "com.android.tools.build:gradle:7.4.1"
-        const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21"
+        const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.0"
         const val saveArgsGradlePlugin =
             "androidx.navigation:navigation-safe-args-gradle-plugin:2.4.2"
     }
@@ -29,7 +29,7 @@ object Dependencies {
     }
 
     object Hilt{
-        private const val version = "2.38.1"
+        private const val version = "2.45"
 
         const val plugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
         const val android = "com.google.dagger:hilt-android:$version"

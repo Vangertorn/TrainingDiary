@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/external" />
             <option value="$PROJECT_DIR$/external/storage" />
             <option value="$PROJECT_DIR$/external/storage/api" />
+            <option value="$PROJECT_DIR$/external/storage/impl" />
           </set>
         </option>
       </GradleProjectSettings>

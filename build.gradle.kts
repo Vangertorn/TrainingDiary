@@ -16,6 +16,7 @@ buildscript {
 
 plugins {
     id("org.jmailen.kotlinter") version ("3.4.4")
+    id("org.jetbrains.kotlin.jvm") version "1.8.0" apply false
 }
 
 allprojects {

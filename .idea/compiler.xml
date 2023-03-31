@@ -6,7 +6,7 @@
       <module name="Training_diary.buildSrc" target="11" />
       <module name="Training_diary.buildSrc.main" target="11" />
       <module name="Training_diary.buildSrc.test" target="11" />
-      <module name="Training_diary.external.storage" target="11" />
+      <module name="Training_diary.external.storage.impl" target="11" />
       <module name="TrainingDiary.buildSrc" target="11" />
     </bytecodeTargetLevel>
   </component>
