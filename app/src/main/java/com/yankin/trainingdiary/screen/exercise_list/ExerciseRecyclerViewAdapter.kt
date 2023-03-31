@@ -1,12 +1,10 @@
 package com.yankin.trainingdiary.screen.exercise_list
 
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.beloo.widget.chipslayoutmanager.ChipsLayoutManager
 import com.example.trainingdiary.R
 import com.yankin.trainingdiary.models.info.ViewHolderTypes
 
@@ -59,22 +57,23 @@ class ExerciseRecyclerViewAdapter(
         private val tvComment =
             itemView.findViewById<TextView>(R.id.tvCommentExercise_exercise_item)
         private val rvApproach = itemView.findViewById<RecyclerView>(R.id.rvApproachInExerciseItem)
-        private val chipsLayoutManager =
-            ChipsLayoutManager.newBuilder(itemView.context).setChildGravity(Gravity.TOP)
-                .setScrollingEnabled(false)
-                .setGravityResolver { Gravity.CENTER }
-                .setRowBreaker { adapterPosition == 6 }
-                .setOrientation(ChipsLayoutManager.HORIZONTAL)
-                .setRowStrategy(ChipsLayoutManager.STRATEGY_FILL_VIEW)
-                .withLastRow(true)
-                .build()
+        //TODO не получилось обновить либу без мавен репозитория
+//        private val chipsLayoutManager =
+//            ChipsLayoutManager.newBuilder(itemView.context).setChildGravity(Gravity.TOP)
+//                .setScrollingEnabled(false)
+//                .setGravityResolver { Gravity.CENTER }
+//                .setRowBreaker { adapterPosition == 6 }
+//                .setOrientation(ChipsLayoutManager.HORIZONTAL)
+//                .setRowStrategy(ChipsLayoutManager.STRATEGY_FILL_VIEW)
+//                .withLastRow(true)
+//                .build()
         private val adapter = ApproachRecyclerViewAdapterInExerciseItem()
 
         init {
             itemView.setOnClickListener {
                 itemClick(adapterPosition)
             }
-            rvApproach.layoutManager = chipsLayoutManager
+//            rvApproach.layoutManager = chipsLayoutManager
             rvApproach.adapter = adapter
         }
 

@@ -47,18 +47,20 @@ class TrainingCreateBottomDialog : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val chipsLayoutManager =
-            ChipsLayoutManager.newBuilder(requireContext())
-                .setChildGravity(Gravity.TOP)
-                .setScrollingEnabled(false)
-                .setGravityResolver { Gravity.CENTER }
-                .setRowBreaker { false }
-                .setOrientation(ChipsLayoutManager.HORIZONTAL)
-                .setRowStrategy(ChipsLayoutManager.STRATEGY_CENTER)
-                .withLastRow(true)
-                .build()
+        //TODO не получилось обновить либу без мавен репозитория
+
+//        val chipsLayoutManager =
+//            ChipsLayoutManager.newBuilder(requireContext())
+//                .setChildGravity(Gravity.TOP)
+//                .setScrollingEnabled(false)
+//                .setGravityResolver { Gravity.CENTER }
+//                .setRowBreaker { false }
+//                .setOrientation(ChipsLayoutManager.HORIZONTAL)
+//                .setRowStrategy(ChipsLayoutManager.STRATEGY_CENTER)
+//                .withLastRow(true)
+//                .build()
         viewBinding.rvMuscleCroups.adapter = adapter
-        viewBinding.rvMuscleCroups.layoutManager = chipsLayoutManager
+//        viewBinding.rvMuscleCroups.layoutManager = chipsLayoutManager
         viewModel.muscleGroupLiveData.observe(this.viewLifecycleOwner) {
             adapter.submitList(it)
         }
