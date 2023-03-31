@@ -15,7 +15,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trainingdiary.R
+import com.yankin.trainingdiary.R
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date

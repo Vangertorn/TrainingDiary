@@ -6,18 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trainingdiary.R
-import com.example.trainingdiary.databinding.BottomSheetAddApproachSuperSetBinding
-import com.example.trainingdiary.support.addDouble
-import com.example.trainingdiary.support.addInt
-import com.example.trainingdiary.support.chekDoubleEmpty
-import com.example.trainingdiary.support.chekIntEmpty
-import com.example.trainingdiary.support.removeDouble
-import com.example.trainingdiary.support.removeInt
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.yankin.trainingdiary.R
+import com.yankin.trainingdiary.databinding.BottomSheetAddApproachSuperSetBinding
 import com.yankin.trainingdiary.models.Approach
 import com.yankin.trainingdiary.models.info.ViewHolderTypes
 import com.yankin.trainingdiary.screen.approach_create.ApproachRecyclerViewAdapter
+import com.yankin.trainingdiary.support.extensions.addDouble
+import com.yankin.trainingdiary.support.extensions.addInt
+import com.yankin.trainingdiary.support.extensions.chekDoubleEmpty
+import com.yankin.trainingdiary.support.extensions.chekIntEmpty
+import com.yankin.trainingdiary.support.extensions.removeDouble
+import com.yankin.trainingdiary.support.extensions.removeInt
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

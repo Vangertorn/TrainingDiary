@@ -5,11 +5,11 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.trainingdiary.R
-import com.example.trainingdiary.databinding.FragmentExerciseAutofillBinding
-import com.example.trainingdiary.support.navigateSave
-import com.example.trainingdiary.support.setVerticalMargin
+import com.yankin.trainingdiary.R
+import com.yankin.trainingdiary.databinding.FragmentExerciseAutofillBinding
 import com.yankin.trainingdiary.support.SupportFragmentInset
+import com.yankin.trainingdiary.support.extensions.navigateSave
+import com.yankin.trainingdiary.support.extensions.setVerticalMargin
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

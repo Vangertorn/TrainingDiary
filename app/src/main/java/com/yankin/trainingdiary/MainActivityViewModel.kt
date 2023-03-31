@@ -1,6 +1,8 @@
 package com.yankin.trainingdiary
 
 import android.annotation.SuppressLint
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.repository.ExerciseRepository
 import com.yankin.trainingdiary.repository.MuscleGroupRepository
@@ -22,34 +24,34 @@ class MainActivityViewModel @Inject constructor(
     private val muscleGroupRepository: MuscleGroupRepository,
     private val superSetRepository: SuperSetRepository,
     private val appSettings: AppSettings
-) : CoroutineViewModel() {
+) : ViewModel() {
 
     fun deletedTrainings() {
-        launch {
+        viewModelScope.launch {
             trainingRepository.deletedTrainingsByFlags()
         }
     }
 
     fun deletedExercises() {
-        launch {
+        viewModelScope.launch {
             exerciseRepository.deleteExercises()
         }
     }
 
     fun deletedSuperSets() {
-        launch {
+        viewModelScope.launch {
             superSetRepository.deleteInvisibleSuperSet()
         }
     }
 
     init {
-        launch {
+        viewModelScope.launch {
             muscleGroupRepository.saveDefaultValues()
         }
     }
 
     fun setLeftDays() {
-        launch {
+        viewModelScope.launch {
             val leftDays = daysAmount()
             if (leftDays.toInt() < 365) {
                 if (leftDays.toInt() < 0) {

@@ -7,7 +7,7 @@ object Dependencies {
     }
 
     object Plugins {
-        const val androidGradlePlugin = "com.android.tools.build:gradle:7.1.3"
+        const val androidGradlePlugin = "com.android.tools.build:gradle:7.4.1"
         const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21"
         const val saveArgsGradlePlugin =
             "androidx.navigation:navigation-safe-args-gradle-plugin:2.4.2"
@@ -21,7 +21,7 @@ object Dependencies {
     }
 
     object Kotlin {
-        const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:1.6.21"
+        const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:1.8.0"
     }
 
     object KotlinX{

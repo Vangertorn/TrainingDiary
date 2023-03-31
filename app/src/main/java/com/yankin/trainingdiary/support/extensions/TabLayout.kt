@@ -7,8 +7,8 @@ import androidx.annotation.FontRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.forEach
-import com.example.trainingdiary.R
 import com.google.android.material.tabs.TabLayout
+import com.yankin.trainingdiary.R
 
 fun TabLayout.setCustomText(
     text: String,

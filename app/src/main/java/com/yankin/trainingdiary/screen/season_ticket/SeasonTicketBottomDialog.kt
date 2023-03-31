@@ -8,11 +8,11 @@ import android.widget.CheckedTextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.trainingdiary.R
-import com.example.trainingdiary.databinding.BottomSheetSeasonTicketBinding
-import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.yankin.trainingdiary.R
+import com.yankin.trainingdiary.databinding.BottomSheetSeasonTicketBinding
 import com.yankin.trainingdiary.support.CalendarView
+import com.yankin.trainingdiary.support.extensions.navigateSave
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking

@@ -8,10 +8,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.trainingdiary.R
-import com.example.trainingdiary.databinding.BottomSheetAddExerciseBinding
-import com.example.trainingdiary.support.navigateSave
-import com.example.trainingdiary.support.setVerticalMargin
+import com.yankin.trainingdiary.support.extensions.navigateSave
+import com.yankin.trainingdiary.support.extensions.setVerticalMargin
+import com.yankin.trainingdiary.R
+import com.yankin.trainingdiary.databinding.BottomSheetAddExerciseBinding
 import com.yankin.trainingdiary.models.Exercise
 import com.yankin.trainingdiary.models.ExerciseAutofill
 import com.yankin.trainingdiary.models.SuperSet

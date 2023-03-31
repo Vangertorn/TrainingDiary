@@ -1,4 +1,4 @@
-package com.example.trainingdiary.support
+package com.yankin.trainingdiary.support.extensions
 
 import android.widget.EditText
 

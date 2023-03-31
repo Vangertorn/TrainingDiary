@@ -25,7 +25,6 @@ allprojects {
     }
 }
 
-    apply{
-        plugin("org.jmailen.kotlinter")
-    }
+apply {
+    plugin("org.jmailen.kotlinter")
 }

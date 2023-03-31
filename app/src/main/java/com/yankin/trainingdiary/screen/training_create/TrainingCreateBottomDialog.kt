@@ -1,21 +1,19 @@
 package com.yankin.trainingdiary.screen.training_create
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.beloo.widget.chipslayoutmanager.ChipsLayoutManager
-import com.example.trainingdiary.R
-import com.example.trainingdiary.databinding.BottomSheetAddTrainingBinding
-import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.yankin.trainingdiary.R
+import com.yankin.trainingdiary.databinding.BottomSheetAddTrainingBinding
 import com.yankin.trainingdiary.models.Training
 import com.yankin.trainingdiary.support.CalendarView
 import com.yankin.trainingdiary.support.extensions.hideKeyboard
+import com.yankin.trainingdiary.support.extensions.navigateSave
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Date

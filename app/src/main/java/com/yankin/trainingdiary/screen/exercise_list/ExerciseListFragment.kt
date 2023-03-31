@@ -7,13 +7,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.trainingdiary.R
-import com.example.trainingdiary.databinding.FragmentExerciseListBinding
-import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.snackbar.Snackbar
+import com.yankin.trainingdiary.R
+import com.yankin.trainingdiary.databinding.FragmentExerciseListBinding
 import com.yankin.trainingdiary.models.info.ViewHolderTypes
 import com.yankin.trainingdiary.support.SupportFragmentInset
 import com.yankin.trainingdiary.support.SwipeCallback
+import com.yankin.trainingdiary.support.extensions.navigateSave
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 

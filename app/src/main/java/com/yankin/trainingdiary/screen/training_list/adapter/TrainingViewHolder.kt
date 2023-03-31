@@ -3,7 +3,7 @@ package com.yankin.trainingdiary.screen.training_list.adapter
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trainingdiary.R
+import com.yankin.trainingdiary.R
 import com.yankin.trainingdiary.models.Training
 
 class TrainingViewHolder(itemView: View, private val itemClick: (Int) -> Unit) :

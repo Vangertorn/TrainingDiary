@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.example.trainingdiary.R
+import com.yankin.trainingdiary.R
 import com.yankin.trainingdiary.models.Training
 
 class TrainingRecyclerViewAdapter(private val onClick: (Training) -> Unit) :

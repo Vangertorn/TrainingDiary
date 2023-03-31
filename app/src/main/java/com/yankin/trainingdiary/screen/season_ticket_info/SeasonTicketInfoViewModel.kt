@@ -3,7 +3,7 @@ package com.yankin.trainingdiary.screen.season_ticket_info
 import android.annotation.SuppressLint
 import android.content.res.Resources
 import androidx.lifecycle.asLiveData
-import com.example.trainingdiary.R
+import com.yankin.trainingdiary.R
 import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.support.CoroutineViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

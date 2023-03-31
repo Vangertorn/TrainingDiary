@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.trainingdiary.R
-import com.example.trainingdiary.databinding.BottomSheetExerciseAutofillBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.yankin.trainingdiary.R
+import com.yankin.trainingdiary.databinding.BottomSheetExerciseAutofillBinding
 import com.yankin.trainingdiary.models.ExerciseAutofill
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -8,15 +8,15 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trainingdiary.R
-import com.example.trainingdiary.databinding.FragmentTrainingListBinding
-import com.example.trainingdiary.support.navigateSave
-import com.example.trainingdiary.support.setVerticalMargin
 import com.google.android.material.snackbar.Snackbar
+import com.yankin.trainingdiary.R
+import com.yankin.trainingdiary.databinding.FragmentTrainingListBinding
 import com.yankin.trainingdiary.screen.training_list.adapter.TrainingRecyclerViewAdapter
 import com.yankin.trainingdiary.support.SupportFragmentInset
 import com.yankin.trainingdiary.support.SwipeCallback
 import com.yankin.trainingdiary.support.VerticalInset
+import com.yankin.trainingdiary.support.extensions.navigateSave
+import com.yankin.trainingdiary.support.extensions.setVerticalMargin
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

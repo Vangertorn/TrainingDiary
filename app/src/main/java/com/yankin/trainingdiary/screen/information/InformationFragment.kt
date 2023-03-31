@@ -6,10 +6,10 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.trainingdiary.R
-import com.example.trainingdiary.databinding.FragmentInformationBinding
-import com.example.trainingdiary.support.setVerticalMargin
+import com.yankin.trainingdiary.R
+import com.yankin.trainingdiary.databinding.FragmentInformationBinding
 import com.yankin.trainingdiary.support.SupportFragmentInset
+import com.yankin.trainingdiary.support.extensions.setVerticalMargin
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

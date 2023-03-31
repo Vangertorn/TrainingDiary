@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trainingdiary.R
+import com.yankin.trainingdiary.R
 import com.yankin.trainingdiary.models.info.ViewHolderTypes
 
 class ExerciseRecyclerViewAdapter(

@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.trainingdiary.R
-import com.example.trainingdiary.databinding.BottomSheetSeasonTicketInformationBinding
-import com.example.trainingdiary.support.navigateSave
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.yankin.trainingdiary.R
+import com.yankin.trainingdiary.databinding.BottomSheetSeasonTicketInformationBinding
+import com.yankin.trainingdiary.support.extensions.navigateSave
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking

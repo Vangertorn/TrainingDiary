@@ -13,7 +13,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.example.trainingdiary.R
+import com.yankin.trainingdiary.R
 import kotlin.math.roundToInt
 
 fun Fragment.hideKeyboard() {

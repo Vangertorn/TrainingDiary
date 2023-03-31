@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trainingdiary.R
+import com.yankin.trainingdiary.R
 import com.yankin.trainingdiary.models.MuscleGroup
 
 class SettingsMuscleGroupsRecyclerViewAdapter(private val onClick: (MuscleGroup) -> Unit) :

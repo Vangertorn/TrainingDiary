@@ -8,18 +8,18 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.trainingdiary.R
-import com.example.trainingdiary.databinding.FragmentSettingsBinding
-import com.example.trainingdiary.support.addDouble
-import com.example.trainingdiary.support.addInt
-import com.example.trainingdiary.support.navigateSave
-import com.example.trainingdiary.support.removeDouble
-import com.example.trainingdiary.support.removeInt
-import com.example.trainingdiary.support.setVerticalMargin
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.yankin.trainingdiary.R
+import com.yankin.trainingdiary.databinding.FragmentSettingsBinding
 import com.yankin.trainingdiary.models.MuscleGroup
 import com.yankin.trainingdiary.support.SupportFragmentInset
+import com.yankin.trainingdiary.support.extensions.addDouble
+import com.yankin.trainingdiary.support.extensions.addInt
 import com.yankin.trainingdiary.support.extensions.hideKeyboard
+import com.yankin.trainingdiary.support.extensions.navigateSave
+import com.yankin.trainingdiary.support.extensions.removeDouble
+import com.yankin.trainingdiary.support.extensions.removeInt
+import com.yankin.trainingdiary.support.extensions.setVerticalMargin
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

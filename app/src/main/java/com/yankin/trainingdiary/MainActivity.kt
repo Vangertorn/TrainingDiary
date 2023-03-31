@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.example.trainingdiary.databinding.ActivityMainBinding
+import com.yankin.trainingdiary.databinding.ActivityMainBinding
 import com.yankin.trainingdiary.support.SupportActivityInset
 import com.yankin.trainingdiary.support.setWindowTransparency
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : SupportActivityInset<ActivityMainBinding>() {
 
     override lateinit var viewBinding: ActivityMainBinding
-    private val navHostFragment by lazy { supportFragmentManager.findFragmentById(com.example.trainingdiary.R.id.navHostFragment) as NavHostFragment }
+    private val navHostFragment by lazy { supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment }
     private val navController: NavController by lazy { navHostFragment.navController }
     private val handler = Handler(Looper.getMainLooper())
     private var doubleBackToExitPressedOnce = false
@@ -42,7 +42,7 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>() {
             }
 
             this.doubleBackToExitPressedOnce = true
-            Toast.makeText(this, getString(com.example.trainingdiary.R.string.press_back), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.press_back), Toast.LENGTH_SHORT).show()
             handler.postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
         } else navController.popBackStack()
     }

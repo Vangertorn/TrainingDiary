@@ -3,8 +3,8 @@ package com.yankin.trainingdiary.support.extensions
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.core.content.ContextCompat
-import com.example.trainingdiary.R
 import com.google.android.material.textfield.TextInputEditText
+import com.yankin.trainingdiary.R
 
 fun TextInputEditText.onImeActionDone(clickAction: () -> Unit) {
     this.setOnEditorActionListener { _, actionId, _ ->

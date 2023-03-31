@@ -4,7 +4,7 @@ import android.content.Context
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.BackgroundColorSpan
-import com.example.trainingdiary.R
+import com.yankin.trainingdiary.R
 import java.io.File
 
 fun File.makeDirIfNotExist() = if (this.exists()) mkdir() else false

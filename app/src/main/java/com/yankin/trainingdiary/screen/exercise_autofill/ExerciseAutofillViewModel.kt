@@ -11,8 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ExerciseAutofillViewModel @Inject constructor(
     private val exerciseAutofillRepository: ExerciseAutofillRepository
-) :
-    CoroutineViewModel() {
+) : CoroutineViewModel() {
 
     val autoCompleteExerciseLiveData =
         exerciseAutofillRepository.currentExerciseAutofillFlow.asLiveData()

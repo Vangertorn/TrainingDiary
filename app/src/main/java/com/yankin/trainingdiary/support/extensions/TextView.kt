@@ -14,7 +14,7 @@ import androidx.annotation.StyleRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.widget.TextViewCompat
-import com.example.trainingdiary.R
+import com.yankin.trainingdiary.R
 
 fun TextView.setTextAppearanceCompat(@StyleRes id: Int) {
     TextViewCompat.setTextAppearance(this, id)

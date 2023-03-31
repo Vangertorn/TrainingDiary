@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 26
-        targetSdk = 32
+        targetSdk = 33
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -39,12 +39,10 @@ dependencies {
 
     implementation(project(":external:storage:api"))
 
-    implementation(Dependencies.Kotlin.kotlin)
-
     implementation(Dependencies.Hilt.android)
     kapt(Dependencies.Hilt.compiler)
 
-    kapt("androidx.room:room-compiler:2.4.2")
-    implementation("androidx.room:room-runtime:2.4.2")
-    implementation("androidx.room:room-ktx:2.4.2")
+    kapt("androidx.room:room-compiler:2.5.1")
+    implementation("androidx.room:room-runtime:2.5.1")
+    implementation("androidx.room:room-ktx:2.5.1")
 }

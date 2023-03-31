@@ -1,8 +1,8 @@
 package com.yankin.trainingdiary.repository
 
 import android.content.Context
-import com.example.trainingdiary.R
 import com.yankin.storage.MuscleGroupStorage
+import com.yankin.trainingdiary.R
 import com.yankin.trainingdiary.models.MuscleGroup
 import com.yankin.trainingdiary.models.converters.toDomain
 import com.yankin.trainingdiary.models.converters.toModel
