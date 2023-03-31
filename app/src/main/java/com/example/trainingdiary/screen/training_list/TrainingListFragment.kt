@@ -108,7 +108,7 @@ class TrainingListFragment :
         viewBinding.btnAdd.setOnClickListener {
             findNavController().navigateSave(
                 TrainingListFragmentDirections.actionTrainingListFragmentToTrainingCreateBottomDialog(
-                    null
+
                 )
             )
         }

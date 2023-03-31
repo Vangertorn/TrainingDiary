@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.beloo.widget.chipslayoutmanager.ChipsLayoutManager
 import com.example.trainingdiary.R
 import com.example.trainingdiary.models.info.ViewHolderTypes
 
@@ -44,19 +43,21 @@ class ExerciseRecyclerViewAdapterInSuperSet :
         private val tvComment =
             itemView.findViewById<TextView>(R.id.tvCommentExercise_super_set_item)
         private val rvApproach = itemView.findViewById<RecyclerView>(R.id.rvApproachInSuperSetItem)
-        private val chipsLayoutManager =
-            ChipsLayoutManager.newBuilder(itemView.context).setChildGravity(Gravity.TOP)
-                .setScrollingEnabled(false)
-                .setGravityResolver { Gravity.CENTER }
-                .setRowBreaker { adapterPosition == 6 }
-                .setOrientation(ChipsLayoutManager.HORIZONTAL)
-                .setRowStrategy(ChipsLayoutManager.STRATEGY_FILL_VIEW)
-                .withLastRow(true)
-                .build()
+        //TODO не получилось обновить либу без мавен репозитория
+
+//        private val chipsLayoutManager =
+//            ChipsLayoutManager.newBuilder(itemView.context).setChildGravity(Gravity.TOP)
+//                .setScrollingEnabled(false)
+//                .setGravityResolver { Gravity.CENTER }
+//                .setRowBreaker { adapterPosition == 6 }
+//                .setOrientation(ChipsLayoutManager.HORIZONTAL)
+//                .setRowStrategy(ChipsLayoutManager.STRATEGY_FILL_VIEW)
+//                .withLastRow(true)
+//                .build()
         private val adapter = ApproachRecyclerViewAdapterInExerciseItem()
 
         init {
-            rvApproach.layoutManager = chipsLayoutManager
+//            rvApproach.layoutManager = chipsLayoutManager
             rvApproach.adapter = adapter
 
         }

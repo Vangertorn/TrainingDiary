@@ -89,7 +89,7 @@ class ExerciseListFragment :
         viewBinding.ivEditTrainingExerciseList.setOnClickListener {
             findNavController().navigateSave(
                 ExerciseListFragmentDirections.actionExerciseListFragmentToTrainingCreateBottomDialog(
-                    args.training
+
                 )
             )
         }
