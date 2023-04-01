@@ -25,7 +25,7 @@ object Dependencies {
     }
 
     object KotlinX{
-        const val coroutineCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3"
+        const val coroutineCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
     }
 
     object Hilt{
@@ -34,5 +34,12 @@ object Dependencies {
         const val plugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
         const val android = "com.google.dagger:hilt-android:$version"
         const val compiler = "com.google.dagger:hilt-android-compiler:$version"
+    }
+
+    object Room{
+        private const val version = "2.5.1"
+        const val compiler = "androidx.room:room-compiler:$version"
+        const val kotlinExtensions = "androidx.room:room-ktx:$version"
+        const val room = "androidx.room:room-runtime:$version"
     }
 }

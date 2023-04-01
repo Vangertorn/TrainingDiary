@@ -21,7 +21,7 @@ dependencies {
     implementation(Dependencies.Hilt.android)
     kapt(Dependencies.Hilt.compiler)
 
-    kapt("androidx.room:room-compiler:2.5.1")
-    implementation("androidx.room:room-runtime:2.5.1")
-    implementation("androidx.room:room-ktx:2.5.1")
+    kapt(Dependencies.Room.compiler)
+    implementation(Dependencies.Room.room)
+    implementation(Dependencies.Room.kotlinExtensions)
 }
