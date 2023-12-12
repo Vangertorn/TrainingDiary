@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/white" />
 
-        <com.example.trainingdiary.support.FrozenRecyclerView
+        <com.yankin.trainingdiary.support.FrozenRecyclerView
             android:id="@+id/rvExerciseInfoInSuperSet"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

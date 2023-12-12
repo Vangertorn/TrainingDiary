@@ -37,7 +37,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvNameExercise_super_set_item"
             tools:text="Something Comment" />
 
-        <com.example.trainingdiary.support.FrozenRecyclerView
+        <com.yankin.trainingdiary.support.FrozenRecyclerView
             android:id="@+id/rvApproachInSuperSetItem"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
