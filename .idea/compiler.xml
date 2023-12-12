@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="Training_diary.app" target="11" />
+      <module name="Training_diary.buildSrc" target="11" />
+      <module name="Training_diary.buildSrc.main" target="11" />
+      <module name="Training_diary.buildSrc.test" target="11" />
+      <module name="Training_diary.external.storage.impl" target="11" />
+      <module name="TrainingDiary.buildSrc" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
