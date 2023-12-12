@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 34
     namespace = Config.applicationId
     defaultConfig {
         applicationId = Config.applicationId
