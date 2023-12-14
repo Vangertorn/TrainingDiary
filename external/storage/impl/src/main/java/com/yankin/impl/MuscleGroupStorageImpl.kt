@@ -1,6 +1,6 @@
 package com.yankin.impl
 
-import com.yankin.models.MuscleGroupDomain
+import com.yankin.domain.api.model.MuscleGroupDomain
 import com.yankin.room.converters.toEntity
 import com.yankin.room.converters.toModel
 import com.yankin.room.dao.MuscleGroupDao

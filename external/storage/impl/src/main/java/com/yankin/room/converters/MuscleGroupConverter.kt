@@ -1,6 +1,6 @@
 package com.yankin.room.converters
 
-import com.yankin.models.MuscleGroupDomain
+import com.yankin.domain.api.model.MuscleGroupDomain
 import com.yankin.room.entity.MuscleGroupEntity
 
 fun MuscleGroupEntity.toModel() = MuscleGroupDomain(

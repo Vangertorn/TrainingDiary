@@ -7,7 +7,7 @@ plugins {
 
 android {
     compileSdk = 33
-    namespace  = "com.yankin.trainingdiary.storage.impl"
+    namespace  = "com.yankin.trainingdiary.domain.impl"
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -16,7 +16,6 @@ android {
 
 dependencies {
 
-    implementation(project(":external:storage:api"))
     implementation(project(":domain:api"))
 
     implementation(Dependencies.Hilt.android)

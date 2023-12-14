@@ -1,6 +1,6 @@
 package com.yankin.trainingdiary.models.converters
 
-import com.yankin.models.MuscleGroupDomain
+import com.yankin.domain.api.model.MuscleGroupDomain
 import com.yankin.trainingdiary.models.MuscleGroup
 
 fun MuscleGroupDomain.toModel() = MuscleGroup(

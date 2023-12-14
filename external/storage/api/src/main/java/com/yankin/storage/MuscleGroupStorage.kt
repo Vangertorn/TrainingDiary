@@ -1,6 +1,6 @@
 package com.yankin.storage
 
-import com.yankin.models.MuscleGroupDomain
+import com.yankin.domain.api.model.MuscleGroupDomain
 import kotlinx.coroutines.flow.Flow
 
 interface MuscleGroupStorage {

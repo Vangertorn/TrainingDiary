@@ -1,4 +1,4 @@
-package com.yankin.models
+package com.yankin.domain.api.model
 
 data class MuscleGroupDomain(
     val id: Long = 0,

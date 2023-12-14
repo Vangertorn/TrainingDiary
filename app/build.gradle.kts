@@ -48,6 +48,9 @@ dependencies {
 
     implementation(project(":external:storage:api"))
     implementation(project(":external:storage:impl"))
+    implementation(project(":external:repositories"))
+    implementation(project(":domain:api"))
+    implementation(project(":domain:impl"))
 
     testImplementation(Dependencies.Test.testJunit)
     androidTestImplementation(Dependencies.Test.testExtension)
