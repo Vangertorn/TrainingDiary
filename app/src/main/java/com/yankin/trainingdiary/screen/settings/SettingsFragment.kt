@@ -12,6 +12,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.yankin.trainingdiary.R
 import com.yankin.trainingdiary.databinding.FragmentSettingsBinding
 import com.yankin.trainingdiary.models.MuscleGroup
+import com.yankin.trainingdiary.models.converters.toModel
 import com.yankin.trainingdiary.support.SupportFragmentInset
 import com.yankin.trainingdiary.support.extensions.addDouble
 import com.yankin.trainingdiary.support.extensions.addInt
@@ -58,7 +59,7 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
         }
         viewBinding.rvMuscleCroupsSettings.adapter = adapter
         viewModel.muscleGroupLiveData.observe(this.viewLifecycleOwner) {
-            adapter.submitList(it)
+            adapter.submitList(it.map { it.toModel() })
         }
         if (!observerChek) {
             adapter.registerAdapterDataObserver(dataObserver)

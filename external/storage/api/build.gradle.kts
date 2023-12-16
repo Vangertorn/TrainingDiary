@@ -9,7 +9,6 @@ java {
 }
 
 dependencies {
-    implementation(project(":domain:api"))
 
     implementation(Dependencies.KotlinX.coroutineCore)
 }

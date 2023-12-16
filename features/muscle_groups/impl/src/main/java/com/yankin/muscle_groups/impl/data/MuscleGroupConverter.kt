@@ -1,16 +1,16 @@
-package com.yankin.trainingdiary.models.converters
+package com.yankin.muscle_groups.impl.data
 
+import com.yankin.room.entity.MuscleGroupEntity
 import com.yankin.muscle_groups.api.models.MuscleGroupDomain
-import com.yankin.trainingdiary.models.MuscleGroup
 
-fun MuscleGroupDomain.toModel() = MuscleGroup(
+fun MuscleGroupEntity.toDomain() = MuscleGroupDomain(
     id = id,
     nameMuscleGroup = nameMuscleGroup,
     factorySettings = factorySettings,
     deleted = deleted
 )
 
-fun MuscleGroup.toDomain() = MuscleGroupDomain(
+fun MuscleGroupDomain.toEntity() = MuscleGroupEntity(
     id = id,
     nameMuscleGroup = nameMuscleGroup,
     factorySettings = factorySettings,

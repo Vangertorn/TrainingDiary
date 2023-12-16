@@ -11,6 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.yankin.trainingdiary.R
 import com.yankin.trainingdiary.databinding.BottomSheetAddTrainingBinding
 import com.yankin.trainingdiary.models.Training
+import com.yankin.trainingdiary.models.converters.toModel
 import com.yankin.trainingdiary.support.CalendarView
 import com.yankin.trainingdiary.support.extensions.hideKeyboard
 import com.yankin.trainingdiary.support.extensions.navigateSave
@@ -60,7 +61,7 @@ class TrainingCreateBottomDialog : BottomSheetDialogFragment() {
         viewBinding.rvMuscleCroups.adapter = adapter
 //        viewBinding.rvMuscleCroups.layoutManager = chipsLayoutManager
         viewModel.muscleGroupLiveData.observe(this.viewLifecycleOwner) {
-            adapter.submitList(it)
+            adapter.submitList(it.map { it.toModel() })
         }
         viewBinding.calendar.onDateChangedCallback = object : CalendarView.DateChangeListener {
             override fun onDateChanged(date: Date) {

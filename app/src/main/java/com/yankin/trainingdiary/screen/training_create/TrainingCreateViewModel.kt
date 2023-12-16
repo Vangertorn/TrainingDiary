@@ -1,9 +1,10 @@
 package com.yankin.trainingdiary.screen.training_create
 
 import androidx.lifecycle.asLiveData
+import com.yankin.muscle_groups.api.usecases.GetAllMuscleGroupListUseCase
+import com.yankin.muscle_groups.api.usecases.GetCurrentMuscleGroupStreamUseCase
 import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.models.Training
-import com.yankin.trainingdiary.repository.MuscleGroupRepository
 import com.yankin.trainingdiary.repository.TrainingRepository
 import com.yankin.trainingdiary.screen.training_list.TrainingListViewModel
 import com.yankin.trainingdiary.support.CoroutineViewModel
@@ -15,12 +16,13 @@ import javax.inject.Inject
 @HiltViewModel
 class TrainingCreateViewModel @Inject constructor(
     private val trainingRepository: TrainingRepository,
-    private val muscleGroupRepository: MuscleGroupRepository,
+    private val getAllMuscleGroupListUseCase: GetAllMuscleGroupListUseCase,
+    getCurrentMuscleGroupStreamUseCase: GetCurrentMuscleGroupStreamUseCase,
     private val appSettings: AppSettings
 ) :
     CoroutineViewModel() {
 
-    val muscleGroupLiveData = muscleGroupRepository.currentMuscleGroupFlow.asLiveData()
+    val muscleGroupLiveData = getCurrentMuscleGroupStreamUseCase.invoke().asLiveData()
 
     fun addNewTraining(training: Training) {
         launch {
@@ -37,7 +39,7 @@ class TrainingCreateViewModel @Inject constructor(
     fun addMuscleGroups(selectedPositions: List<Int>): String {
         val stringBuilder = StringBuilder()
         val listMuscleGroups = runBlocking {
-            muscleGroupRepository.getMuscleGroups()
+            getAllMuscleGroupListUseCase.invoke()
         }
         for (index in listMuscleGroups.indices) {
             if (index in selectedPositions) {
@@ -55,8 +57,8 @@ class TrainingCreateViewModel @Inject constructor(
                 if (appSettings.getDateCreatedTicket().isNotEmpty()) {
                     if (TrainingListViewModel.monthFormatter.parse(training.date)!!
                         >= TrainingListViewModel.monthFormatter.parse(
-                                appSettings.getDateCreatedTicket()
-                            )
+                            appSettings.getDateCreatedTicket()
+                        )
                     ) {
                         if (numberTraining == 0) {
                             appSettings.setNumberOfTrainingSessions(-1)

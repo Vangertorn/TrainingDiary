@@ -1,24 +1,35 @@
 package com.yankin.trainingdiary.screen.settings
 
+import android.content.Context
 import androidx.lifecycle.asLiveData
+import com.yankin.muscle_groups.api.usecases.DeleteMuscleGroupUseCase
+import com.yankin.muscle_groups.api.usecases.GetCurrentMuscleGroupStreamUseCase
+import com.yankin.muscle_groups.api.usecases.RecoverDefaultMuscleGroupListUseCase
+import com.yankin.muscle_groups.api.usecases.SaveMuscleGroupUseCase
+import com.yankin.trainingdiary.R
 import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.models.MuscleGroup
-import com.yankin.trainingdiary.repository.MuscleGroupRepository
+import com.yankin.trainingdiary.models.converters.toDomain
 import com.yankin.trainingdiary.support.CoroutineViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val appSettings: AppSettings,
-    private val muscleGroupRepository: MuscleGroupRepository
+    private val deleteMuscleGroupUseCase: DeleteMuscleGroupUseCase,
+    private val saveMuscleGroupUseCase: SaveMuscleGroupUseCase,
+    private val recoverDefaultMuscleGroupListUseCase: RecoverDefaultMuscleGroupListUseCase,
+    getCurrentMuscleGroupStreamUseCase: GetCurrentMuscleGroupStreamUseCase,
+    @ApplicationContext private val context: Context,
 ) : CoroutineViewModel() {
 
     val reoccurrencesLiveData = appSettings.reoccurrencesFlow().asLiveData()
     val weightLiveData = appSettings.weightFlow().asLiveData()
     val switchOrderLiveData = appSettings.orderAddedFlow().asLiveData()
-    val muscleGroupLiveData = muscleGroupRepository.currentMuscleGroupFlow.asLiveData()
+    val muscleGroupLiveData = getCurrentMuscleGroupStreamUseCase.invoke().asLiveData()
 
     fun saveReoccurrences(reoccurrences: String) {
         launch {
@@ -40,19 +51,35 @@ class SettingsViewModel @Inject constructor(
 
     fun deleteMuscleGroup(muscleGroup: MuscleGroup) {
         launch {
-            muscleGroupRepository.deleteMuscleGroup(muscleGroup)
+            deleteMuscleGroupUseCase.invoke(muscleGroup.toDomain())
         }
     }
 
     fun saveMuscleGroup(muscleGroup: MuscleGroup) {
         launch {
-            muscleGroupRepository.saveMuscleGroup(muscleGroup)
+            saveMuscleGroupUseCase.invoke(muscleGroup.toDomain())
         }
     }
 
     fun recoverValuesMuscleGroups() {
         launch {
-            muscleGroupRepository.recoverDefaultValues()
+            recoverDefaultMuscleGroupListUseCase.invoke(
+                listOf(
+                    MuscleGroup(nameMuscleGroup = context.getString(R.string.legs), factorySettings = true),
+                    MuscleGroup(
+                        nameMuscleGroup = context.getString(R.string.all_muscle_groups),
+                        factorySettings = true
+                    ),
+                    MuscleGroup(nameMuscleGroup = context.getString(R.string.breast), factorySettings = true),
+                    MuscleGroup(nameMuscleGroup = context.getString(R.string.biceps), factorySettings = true),
+                    MuscleGroup(
+                        nameMuscleGroup = context.getString(R.string.shoulders),
+                        factorySettings = true
+                    ),
+                    MuscleGroup(nameMuscleGroup = context.getString(R.string.back), factorySettings = true),
+                    MuscleGroup(nameMuscleGroup = context.getString(R.string.triceps), factorySettings = true)
+                ).map { it.toDomain() }
+            )
         }
     }
 }

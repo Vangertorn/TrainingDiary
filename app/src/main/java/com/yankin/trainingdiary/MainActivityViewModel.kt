@@ -1,15 +1,18 @@
 package com.yankin.trainingdiary
 
 import android.annotation.SuppressLint
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.yankin.muscle_groups.api.usecases.SaveDefaultMuscleGroupListUseCase
 import com.yankin.trainingdiary.datastore.AppSettings
+import com.yankin.trainingdiary.models.MuscleGroup
+import com.yankin.trainingdiary.models.converters.toDomain
 import com.yankin.trainingdiary.repository.ExerciseRepository
-import com.yankin.trainingdiary.repository.MuscleGroupRepository
 import com.yankin.trainingdiary.repository.SuperSetRepository
 import com.yankin.trainingdiary.repository.TrainingRepository
-import com.yankin.trainingdiary.support.CoroutineViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
@@ -21,9 +24,10 @@ import javax.inject.Inject
 class MainActivityViewModel @Inject constructor(
     private val trainingRepository: TrainingRepository,
     private val exerciseRepository: ExerciseRepository,
-    private val muscleGroupRepository: MuscleGroupRepository,
     private val superSetRepository: SuperSetRepository,
-    private val appSettings: AppSettings
+    private val appSettings: AppSettings,
+    private val saveDefaultMuscleGroupListUseCase: SaveDefaultMuscleGroupListUseCase,
+    @ApplicationContext private val context: Context,
 ) : ViewModel() {
 
     fun deletedTrainings() {
@@ -46,7 +50,23 @@ class MainActivityViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            muscleGroupRepository.saveDefaultValues()
+            saveDefaultMuscleGroupListUseCase.invoke(
+                listOf(
+                    MuscleGroup(nameMuscleGroup = context.getString(R.string.legs), factorySettings = true),
+                    MuscleGroup(
+                        nameMuscleGroup = context.getString(R.string.all_muscle_groups),
+                        factorySettings = true
+                    ),
+                    MuscleGroup(nameMuscleGroup = context.getString(R.string.breast), factorySettings = true),
+                    MuscleGroup(nameMuscleGroup = context.getString(R.string.biceps), factorySettings = true),
+                    MuscleGroup(
+                        nameMuscleGroup = context.getString(R.string.shoulders),
+                        factorySettings = true
+                    ),
+                    MuscleGroup(nameMuscleGroup = context.getString(R.string.back), factorySettings = true),
+                    MuscleGroup(nameMuscleGroup = context.getString(R.string.triceps), factorySettings = true)
+                ).map { it.toDomain() }
+            )
         }
     }
 
