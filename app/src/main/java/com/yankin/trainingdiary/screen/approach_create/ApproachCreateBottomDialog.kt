@@ -20,7 +20,7 @@ import com.yankin.trainingdiary.R
 import com.yankin.trainingdiary.databinding.BottomSheetAddApproachBinding
 import com.yankin.trainingdiary.models.Approach
 import com.yankin.trainingdiary.models.Exercise
-import com.yankin.trainingdiary.models.ExerciseAutofill
+import com.yankin.trainingdiary.models.ExerciseName
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -104,7 +104,7 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
                     )
                 }
                 viewModel.addNewExerciseAutofill(
-                    ExerciseAutofill(
+                    ExerciseName(
                         nameExercise = viewBinding.autoCompleteTvExerciseName.text.toString()
                     )
                 )

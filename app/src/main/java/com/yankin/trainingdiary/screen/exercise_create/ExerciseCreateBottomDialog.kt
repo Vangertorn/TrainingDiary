@@ -13,7 +13,7 @@ import com.yankin.trainingdiary.support.extensions.setVerticalMargin
 import com.yankin.trainingdiary.R
 import com.yankin.trainingdiary.databinding.BottomSheetAddExerciseBinding
 import com.yankin.trainingdiary.models.Exercise
-import com.yankin.trainingdiary.models.ExerciseAutofill
+import com.yankin.trainingdiary.models.ExerciseName
 import com.yankin.trainingdiary.models.SuperSet
 import com.yankin.trainingdiary.support.SupportDialogFragmentInset
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,7 +52,7 @@ class ExerciseCreateBottomDialog :
                 )
                 viewModel.saveSuperSetId(id)
                 viewModel.addNewExerciseAutofill(
-                    ExerciseAutofill(
+                    ExerciseName(
                         nameExercise = viewBinding.autoCompleteTvExerciseName.text.toString()
                     )
                 )
@@ -75,7 +75,7 @@ class ExerciseCreateBottomDialog :
                     )
                 )
                 viewModel.addNewExerciseAutofill(
-                    ExerciseAutofill(
+                    ExerciseName(
                         nameExercise = viewBinding.autoCompleteTvExerciseName.text.toString()
                     )
                 )

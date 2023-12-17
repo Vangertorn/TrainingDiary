@@ -51,6 +51,8 @@ dependencies {
     implementation(project(":features:muscle_groups:api"))
     implementation(project(":features:muscle_groups:impl"))
     implementation(project(":core:coroutine"))
+    implementation(project(":features:exercise_name:api"))
+    implementation(project(":features:exercise_name:impl"))
 
     testImplementation(Dependencies.Test.testJunit)
     androidTestImplementation(Dependencies.Test.testExtension)

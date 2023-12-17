@@ -1,11 +1,13 @@
 package com.yankin.trainingdiary.screen.exercise_create
 
 import androidx.lifecycle.asLiveData
+import com.yankin.exercese_name.api.usecases.GetCurrentExerciseNameAsStringStreamUseCase
+import com.yankin.exercese_name.api.usecases.SaveExerciseNameUseCase
 import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.models.Exercise
-import com.yankin.trainingdiary.models.ExerciseAutofill
+import com.yankin.trainingdiary.models.ExerciseName
 import com.yankin.trainingdiary.models.SuperSet
-import com.yankin.trainingdiary.repository.ExerciseAutofillRepository
+import com.yankin.trainingdiary.models.converters.toDomain
 import com.yankin.trainingdiary.repository.ExerciseRepository
 import com.yankin.trainingdiary.repository.SuperSetRepository
 import com.yankin.trainingdiary.support.CoroutineViewModel
@@ -17,13 +19,13 @@ import javax.inject.Inject
 @HiltViewModel
 class ExerciseCreateViewModel @Inject constructor(
     private val exerciseRepository: ExerciseRepository,
-    private val exerciseAutofillRepository: ExerciseAutofillRepository,
     private val superSetRepository: SuperSetRepository,
-    private val appSettings: AppSettings
+    private val appSettings: AppSettings,
+    getCurrentExerciseNameAsStringStreamUseCase: GetCurrentExerciseNameAsStringStreamUseCase,
+    private val saveExerciseNameUseCase: SaveExerciseNameUseCase,
 ) : CoroutineViewModel() {
 
-    val autoCompleteExerciseStringLiveData =
-        exerciseAutofillRepository.currentExerciseAutofillStringFlow.asLiveData()
+    val autoCompleteExerciseStringLiveData = getCurrentExerciseNameAsStringStreamUseCase.invoke().asLiveData()
 
     fun addNewExercise(exercise: Exercise) {
         launch {
@@ -31,9 +33,9 @@ class ExerciseCreateViewModel @Inject constructor(
         }
     }
 
-    fun addNewExerciseAutofill(exerciseAutofill: ExerciseAutofill) {
+    fun addNewExerciseAutofill(exerciseName: ExerciseName) {
         launch {
-            exerciseAutofillRepository.saveExerciseAutofill(exerciseAutofill)
+            saveExerciseNameUseCase.invoke(exerciseName.toDomain())
         }
     }
 

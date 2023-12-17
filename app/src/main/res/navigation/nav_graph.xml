@@ -123,8 +123,8 @@
         android:label="ExerciseAutofillBottomDialog"
         tools:layout="@layout/bottom_sheet_exercise_autofill">
         <argument
-            android:name="exerciseAutofill"
-            app:argType="com.yankin.trainingdiary.models.ExerciseAutofill" />
+            android:name="exerciseName"
+            app:argType="com.yankin.trainingdiary.models.ExerciseName" />
     </dialog>
     <dialog
         android:id="@+id/seasonTicketBottomDialog"

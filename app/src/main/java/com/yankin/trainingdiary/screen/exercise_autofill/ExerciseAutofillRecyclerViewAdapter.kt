@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.yankin.trainingdiary.R
-import com.yankin.trainingdiary.models.ExerciseAutofill
+import com.yankin.trainingdiary.models.ExerciseName
 
-class ExerciseAutofillRecyclerViewAdapter(private val onClick: (ExerciseAutofill) -> Unit) :
-    ListAdapter<ExerciseAutofill, ExerciseAutofillRecyclerViewAdapter.ExerciseAutofillViewHolder>(
+class ExerciseAutofillRecyclerViewAdapter(private val onClick: (ExerciseName) -> Unit) :
+    ListAdapter<ExerciseName, ExerciseAutofillRecyclerViewAdapter.ExerciseAutofillViewHolder>(
         ExerciseAutofillAdapterDiffCallBack()
     ) {
 
@@ -39,18 +39,18 @@ class ExerciseAutofillRecyclerViewAdapter(private val onClick: (ExerciseAutofill
             }
         }
 
-        fun bind(item: ExerciseAutofill) {
+        fun bind(item: ExerciseName) {
             tvNameExercise.text = item.nameExercise
         }
     }
 }
 
-class ExerciseAutofillAdapterDiffCallBack : DiffUtil.ItemCallback<ExerciseAutofill>() {
-    override fun areItemsTheSame(oldItem: ExerciseAutofill, newItem: ExerciseAutofill): Boolean {
+class ExerciseAutofillAdapterDiffCallBack : DiffUtil.ItemCallback<ExerciseName>() {
+    override fun areItemsTheSame(oldItem: ExerciseName, newItem: ExerciseName): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: ExerciseAutofill, newItem: ExerciseAutofill): Boolean {
+    override fun areContentsTheSame(oldItem: ExerciseName, newItem: ExerciseName): Boolean {
         return oldItem.nameExercise == newItem.nameExercise
     }
 }

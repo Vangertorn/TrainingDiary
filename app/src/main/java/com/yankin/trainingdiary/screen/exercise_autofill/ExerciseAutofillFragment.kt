@@ -5,8 +5,10 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.yankin.exercese_name.api.models.ExerciseNameDomain
 import com.yankin.trainingdiary.R
 import com.yankin.trainingdiary.databinding.FragmentExerciseAutofillBinding
+import com.yankin.trainingdiary.models.converters.toModel
 import com.yankin.trainingdiary.support.SupportFragmentInset
 import com.yankin.trainingdiary.support.extensions.navigateSave
 import com.yankin.trainingdiary.support.extensions.setVerticalMargin
@@ -32,7 +34,7 @@ class ExerciseAutofillFragment :
 
         viewBinding.recyclerView.adapter = adapter
         viewModel.autoCompleteExerciseLiveData.observe(this.viewLifecycleOwner) {
-            adapter.submitList(it)
+            adapter.submitList(it.map(ExerciseNameDomain::toModel))
         }
 
         viewBinding.toolbarExerciseList.setNavigationOnClickListener {

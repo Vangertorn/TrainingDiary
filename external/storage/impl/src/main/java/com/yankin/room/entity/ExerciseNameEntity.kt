@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = "table_exercise_autofill",
+    tableName = "table_exercise_name",
     indices = [
         androidx.room.Index(
             value = ["nameExercise"],
@@ -12,7 +12,7 @@ import androidx.room.PrimaryKey
         )
     ]
 )
-data class ExerciseAutofillEntity(
+data class ExerciseNameEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val nameExercise: String

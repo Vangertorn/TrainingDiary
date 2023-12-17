@@ -4,13 +4,13 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.yankin.room.dao.ApproachDao
-import com.yankin.room.dao.ExerciseAutofillDao
+import com.yankin.room.dao.ExerciseNameDao
 import com.yankin.room.dao.ExerciseDao
 import com.yankin.room.dao.MuscleGroupDao
 import com.yankin.room.dao.SuperSetDao
 import com.yankin.room.dao.TrainingDao
 import com.yankin.room.entity.ApproachEntity
-import com.yankin.room.entity.ExerciseAutofillEntity
+import com.yankin.room.entity.ExerciseNameEntity
 import com.yankin.room.entity.ExerciseEntity
 import com.yankin.room.entity.MuscleGroupEntity
 import com.yankin.room.entity.SuperSetEntity
@@ -24,7 +24,7 @@ const val DATABASE_NAME = "com.yankin.trainingdiary.dp"
         ApproachEntity::class,
         ExerciseEntity::class,
         MuscleGroupEntity::class,
-        ExerciseAutofillEntity::class,
+        ExerciseNameEntity::class,
         SuperSetEntity::class
     ],
     version = 1,
@@ -37,6 +37,6 @@ abstract class PlannerDatabase : RoomDatabase() {
     abstract fun approachDao(): ApproachDao
     abstract fun exerciseDao(): ExerciseDao
     abstract fun muscleGroupDao(): MuscleGroupDao
-    abstract fun exerciseAutofillDao(): ExerciseAutofillDao
+    abstract fun exerciseNameDao(): ExerciseNameDao
     abstract fun superSetDao(): SuperSetDao
 }

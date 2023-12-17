@@ -12,7 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.yankin.trainingdiary.R
 import com.yankin.trainingdiary.databinding.BottomSheetAddSetBinding
 import com.yankin.trainingdiary.models.Exercise
-import com.yankin.trainingdiary.models.ExerciseAutofill
+import com.yankin.trainingdiary.models.ExerciseName
 import com.yankin.trainingdiary.support.extensions.navigateSave
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -66,7 +66,7 @@ class SuperSetCreateBottomDialog : BottomSheetDialogFragment() {
                     )
                 )
                 viewModel.addNewExerciseAutofill(
-                    ExerciseAutofill(
+                    ExerciseName(
                         nameExercise = viewBinding.autoCompleteTvExerciseName.text.toString()
                     )
                 )

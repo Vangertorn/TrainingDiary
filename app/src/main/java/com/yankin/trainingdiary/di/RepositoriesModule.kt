@@ -1,13 +1,11 @@
 package com.yankin.trainingdiary.di
 
 import com.yankin.storage.ApproachStorage
-import com.yankin.storage.AutofillStorage
 import com.yankin.storage.ExerciseStorage
 import com.yankin.storage.SuperSetStorage
 import com.yankin.storage.TrainingStorage
 import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.repository.ApproachRepository
-import com.yankin.trainingdiary.repository.ExerciseAutofillRepository
 import com.yankin.trainingdiary.repository.ExerciseRepository
 import com.yankin.trainingdiary.repository.SuperSetRepository
 import com.yankin.trainingdiary.repository.TrainingRepository
@@ -31,14 +29,6 @@ internal object RepositoriesModule {
         approachStorage = approachStorage,
         exerciseStorage = exerciseStorage,
         appSettings = appSettings
-    )
-
-    @Provides
-    @Singleton
-    fun provideExerciseAutofillRepository(
-        autofillStorage: AutofillStorage
-    ): ExerciseAutofillRepository = ExerciseAutofillRepository(
-        autofillStorage = autofillStorage
     )
 
     @Provides

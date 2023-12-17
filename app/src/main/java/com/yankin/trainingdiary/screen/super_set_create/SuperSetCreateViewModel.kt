@@ -1,11 +1,12 @@
 package com.yankin.trainingdiary.screen.super_set_create
 
 import androidx.lifecycle.asLiveData
+import com.yankin.exercese_name.api.usecases.SaveExerciseNameUseCase
 import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.models.Exercise
-import com.yankin.trainingdiary.models.ExerciseAutofill
+import com.yankin.trainingdiary.models.ExerciseName
 import com.yankin.trainingdiary.models.Training
-import com.yankin.trainingdiary.repository.ExerciseAutofillRepository
+import com.yankin.trainingdiary.models.converters.toDomain
 import com.yankin.trainingdiary.repository.ExerciseRepository
 import com.yankin.trainingdiary.repository.SuperSetRepository
 import com.yankin.trainingdiary.repository.TrainingRepository
@@ -20,9 +21,9 @@ import javax.inject.Inject
 class SuperSetCreateViewModel @Inject constructor(
     private val superSetRepository: SuperSetRepository,
     private val exerciseRepository: ExerciseRepository,
-    private val exerciseAutofillRepository: ExerciseAutofillRepository,
     private val appSettings: AppSettings,
-    private val trainingRepository: TrainingRepository
+    private val trainingRepository: TrainingRepository,
+    private val saveExerciseNameUseCase: SaveExerciseNameUseCase,
 ) :
     CoroutineViewModel() {
 
@@ -35,9 +36,9 @@ class SuperSetCreateViewModel @Inject constructor(
         }
     }
 
-    fun addNewExerciseAutofill(exerciseAutofill: ExerciseAutofill) {
+    fun addNewExerciseAutofill(exerciseName: ExerciseName) {
         launch {
-            exerciseAutofillRepository.saveExerciseAutofill(exerciseAutofill)
+            saveExerciseNameUseCase.invoke(exerciseName.toDomain())
         }
     }
 

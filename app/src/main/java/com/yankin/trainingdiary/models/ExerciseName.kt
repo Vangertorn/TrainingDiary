@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ExerciseAutofill(
+data class ExerciseName(
     val id: Long = 0,
     val nameExercise: String
 ) : Parcelable

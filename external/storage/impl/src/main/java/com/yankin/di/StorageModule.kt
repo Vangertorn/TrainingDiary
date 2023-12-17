@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.yankin.room.DATABASE_NAME
 import com.yankin.room.PlannerDatabase
+import com.yankin.room.dao.ExerciseNameDao
 import com.yankin.room.dao.MuscleGroupDao
 import dagger.Module
 import dagger.Provides
@@ -15,6 +16,11 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 internal object DatabaseModule {
+
+    @Provides
+    @Singleton
+    fun provideExerciseAutofillDao(plannerDatabase: PlannerDatabase): ExerciseNameDao =
+        plannerDatabase.exerciseNameDao()
 
     @Provides
     @Singleton

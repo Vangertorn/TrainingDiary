@@ -10,7 +10,7 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.yankin.trainingdiary.R
 import com.yankin.trainingdiary.databinding.BottomSheetExerciseAutofillBinding
-import com.yankin.trainingdiary.models.ExerciseAutofill
+import com.yankin.trainingdiary.models.ExerciseName
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,7 +35,7 @@ class ExerciseAutofillBottomDialog : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        args.exerciseAutofill.let {
+        args.exerciseName.let {
             viewBinding.etCommentExercise.setText(it.nameExercise)
         }
         viewBinding.btnClose.setOnClickListener {
@@ -43,17 +43,17 @@ class ExerciseAutofillBottomDialog : BottomSheetDialogFragment() {
         }
         viewBinding.btnDelete.setOnClickListener {
             viewModel.deleteExerciseAutofill(
-                ExerciseAutofill(
-                    id = args.exerciseAutofill.id,
-                    nameExercise = args.exerciseAutofill.nameExercise
+                ExerciseName(
+                    id = args.exerciseName.id,
+                    nameExercise = args.exerciseName.nameExercise
                 )
             )
             findNavController().popBackStack()
         }
         viewBinding.btnSave.setOnClickListener {
             viewModel.updateExerciseAutoFill(
-                ExerciseAutofill(
-                    id = args.exerciseAutofill.id,
+                ExerciseName(
+                    id = args.exerciseName.id,
                     nameExercise = viewBinding.etCommentExercise.text.toString()
                 )
             )

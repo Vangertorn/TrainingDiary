@@ -1,8 +1,11 @@
 package com.yankin.trainingdiary.screen.exercise_autofill
 
 import androidx.lifecycle.asLiveData
-import com.yankin.trainingdiary.models.ExerciseAutofill
-import com.yankin.trainingdiary.repository.ExerciseAutofillRepository
+import com.yankin.exercese_name.api.usecases.DeleteExerciseNameUseCase
+import com.yankin.exercese_name.api.usecases.GetCurrentExerciseNameStreamUseCase
+import com.yankin.exercese_name.api.usecases.UpdateExerciseNameUseCase
+import com.yankin.trainingdiary.models.ExerciseName
+import com.yankin.trainingdiary.models.converters.toDomain
 import com.yankin.trainingdiary.support.CoroutineViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -10,21 +13,22 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ExerciseAutofillViewModel @Inject constructor(
-    private val exerciseAutofillRepository: ExerciseAutofillRepository
+    getCurrentExerciseNameStreamUseCase: GetCurrentExerciseNameStreamUseCase,
+    private val updateExerciseNameUseCase: UpdateExerciseNameUseCase,
+    private val deleteExerciseNameUseCase: DeleteExerciseNameUseCase,
 ) : CoroutineViewModel() {
 
-    val autoCompleteExerciseLiveData =
-        exerciseAutofillRepository.currentExerciseAutofillFlow.asLiveData()
+    val autoCompleteExerciseLiveData = getCurrentExerciseNameStreamUseCase.invoke().asLiveData()
 
-    fun updateExerciseAutoFill(exerciseAutofill: ExerciseAutofill) {
+    fun updateExerciseAutoFill(exerciseName: ExerciseName) {
         launch {
-            exerciseAutofillRepository.updateExerciseAutofill(exerciseAutofill)
+            updateExerciseNameUseCase.invoke(exerciseName.toDomain())
         }
     }
 
-    fun deleteExerciseAutofill(exerciseAutofill: ExerciseAutofill) {
+    fun deleteExerciseAutofill(exerciseName: ExerciseName) {
         launch {
-            exerciseAutofillRepository.deleteExerciseAutofill(exerciseAutofill)
+            deleteExerciseNameUseCase.invoke(exerciseName.toDomain())
         }
     }
 }

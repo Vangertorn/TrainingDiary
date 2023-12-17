@@ -1,12 +1,14 @@
 package com.yankin.trainingdiary.screen.approach_create
 
 import androidx.lifecycle.asLiveData
+import com.yankin.exercese_name.api.usecases.GetCurrentExerciseNameAsStringStreamUseCase
+import com.yankin.exercese_name.api.usecases.SaveExerciseNameUseCase
 import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.models.Approach
 import com.yankin.trainingdiary.models.Exercise
-import com.yankin.trainingdiary.models.ExerciseAutofill
+import com.yankin.trainingdiary.models.ExerciseName
+import com.yankin.trainingdiary.models.converters.toDomain
 import com.yankin.trainingdiary.repository.ApproachRepository
-import com.yankin.trainingdiary.repository.ExerciseAutofillRepository
 import com.yankin.trainingdiary.repository.ExerciseRepository
 import com.yankin.trainingdiary.support.CoroutineViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +21,8 @@ class ApproachCreateViewModel @Inject constructor(
     private val approachRepository: ApproachRepository,
     private val exerciseRepository: ExerciseRepository,
     appSettings: AppSettings,
-    private val exerciseAutofillRepository: ExerciseAutofillRepository
+    getCurrentExerciseNameAsStringStreamUseCase: GetCurrentExerciseNameAsStringStreamUseCase,
+    private val saveExerciseNameUseCase: SaveExerciseNameUseCase
 ) :
     CoroutineViewModel() {
 
@@ -27,8 +30,7 @@ class ApproachCreateViewModel @Inject constructor(
     val approachLiveData = approachRepository.currentApproachFlow.asLiveData()
     val reoccurrencesLiveData = appSettings.reoccurrencesFlow().asLiveData()
     val weightLiveData = appSettings.weightFlow().asLiveData()
-    val autoCompleteExerciseLiveData =
-        exerciseAutofillRepository.currentExerciseAutofillStringFlow.asLiveData()
+    val autoCompleteExerciseLiveData = getCurrentExerciseNameAsStringStreamUseCase.invoke().asLiveData()
 
     fun addNewApproach(approach: Approach) {
         launch {
@@ -50,9 +52,9 @@ class ApproachCreateViewModel @Inject constructor(
         }
     }
 
-    fun addNewExerciseAutofill(exerciseAutofill: ExerciseAutofill) {
+    fun addNewExerciseAutofill(exerciseName: ExerciseName) {
         launch {
-            exerciseAutofillRepository.saveExerciseAutofill(exerciseAutofill)
+            saveExerciseNameUseCase.invoke(exerciseName.toDomain())
         }
     }
 }
