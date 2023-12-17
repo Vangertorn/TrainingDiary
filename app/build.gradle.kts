@@ -50,6 +50,7 @@ dependencies {
     implementation(project(":external:storage:impl"))
     implementation(project(":features:muscle_groups:api"))
     implementation(project(":features:muscle_groups:impl"))
+    implementation(project(":core:coroutine"))
 
     testImplementation(Dependencies.Test.testJunit)
     androidTestImplementation(Dependencies.Test.testExtension)

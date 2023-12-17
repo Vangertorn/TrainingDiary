@@ -1,7 +1,7 @@
 package com.yankin.core.mvi
 
 import com.yankin.core.Model
-import com.yankin.coroutine.extentions.AppDispatchers
+import com.yankin.coroutine.CoroutineDispatchers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.BufferOverflow
@@ -33,7 +33,7 @@ data class StoreData<Action, Effect, State, SideEffect>(
     val initState: State,
     val initEffects: List<Effect>,
     val reducer: Reducer<Effect, State>,
-    val dispatchers: AppDispatchers,
+    val dispatchers: CoroutineDispatchers,
     val actionToEffect: (Action) -> Effect,
     val errorHandler: suspend FlowCollector<Effect>.(Throwable) -> Unit = {}
 )

@@ -1,8 +1,8 @@
-package com.yankin.coroutine.extentions
+package com.yankin.coroutine
 
 import kotlinx.coroutines.CoroutineDispatcher
 
-interface AppDispatchers {
+interface CoroutineDispatchers {
     val io: CoroutineDispatcher
 
     val default: CoroutineDispatcher

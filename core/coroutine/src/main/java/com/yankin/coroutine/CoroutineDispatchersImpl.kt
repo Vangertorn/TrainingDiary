@@ -1,9 +1,9 @@
-package com.yankin.coroutine.extentions
+package com.yankin.coroutine
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
-object DefaultDispatchers : AppDispatchers {
+class CoroutineDispatchersImpl : CoroutineDispatchers {
     override val io: CoroutineDispatcher
         get() = Dispatchers.IO
     override val default: CoroutineDispatcher

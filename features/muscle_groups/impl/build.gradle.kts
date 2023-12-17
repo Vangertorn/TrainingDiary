@@ -18,6 +18,7 @@ dependencies {
 
     implementation(project(":external:storage:impl"))
     implementation(project(":features:muscle_groups:api"))
+    implementation(project(":core:coroutine"))
 
     implementation(Dependencies.Hilt.android)
     kapt(Dependencies.Hilt.compiler)
