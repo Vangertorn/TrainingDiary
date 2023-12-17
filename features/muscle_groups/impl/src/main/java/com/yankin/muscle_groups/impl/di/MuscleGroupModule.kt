@@ -24,7 +24,7 @@ import dagger.hilt.components.SingletonComponent
 internal interface MuscleGroupModule {
 
     @Binds
-    fun bindsGetCurrentMuscleGroupStreamUseCaseImpl(
+    fun bindsGetCurrentMuscleGroupStreamUseCase(
         getCurrentMuscleGroupStreamUseCaseImpl: GetCurrentMuscleGroupStreamUseCaseImpl
     ): GetCurrentMuscleGroupStreamUseCase
 
