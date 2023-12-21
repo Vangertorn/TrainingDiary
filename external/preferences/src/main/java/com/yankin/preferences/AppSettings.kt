@@ -1,4 +1,4 @@
-package com.yankin.trainingdiary.datastore
+package com.yankin.preferences
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -9,18 +9,18 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.yankin.trainingdiary.BuildConfig
+import com.yankin.trainingdiary.preferences.BuildConfig
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
-    "${BuildConfig.APPLICATION_ID}_datastore"
+private val Context.getPreferences: DataStore<Preferences> by preferencesDataStore(
+    "${BuildConfig.preferences}_ds"
 )
 
 class AppSettings(context: Context) {
 
-    private val dataStore = context.dataStore
+    private val dataStore = context.getPreferences
 
     fun idTrainingFlow(): Flow<Long> = dataStore.data.map { preferences ->
         preferences[longPreferencesKey(TRAINING_ID_KEY)] ?: -1

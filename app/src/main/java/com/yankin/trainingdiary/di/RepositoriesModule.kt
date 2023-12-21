@@ -3,7 +3,7 @@ package com.yankin.trainingdiary.di
 import com.yankin.storage.ApproachStorage
 import com.yankin.storage.ExerciseStorage
 import com.yankin.storage.SuperSetStorage
-import com.yankin.trainingdiary.datastore.AppSettings
+import com.yankin.preferences.AppSettings
 import com.yankin.trainingdiary.repository.ApproachRepository
 import com.yankin.trainingdiary.repository.ExerciseRepository
 import com.yankin.trainingdiary.repository.SuperSetRepository

@@ -2,11 +2,11 @@ package com.yankin.trainingdiary.screen.training_list
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.asLiveData
+import com.yankin.preferences.AppSettings
 import com.yankin.training.api.usecases.DeleteTrainingFalseUseCase
 import com.yankin.training.api.usecases.DeleteTrainingTrueUseCase
 import com.yankin.training.api.usecases.GetCurrentTrainingAscStreamUseCase
 import com.yankin.training.api.usecases.GetCurrentTrainingDescStreamUseCase
-import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.models.Training
 import com.yankin.trainingdiary.models.converters.toDomain
 import com.yankin.trainingdiary.models.converters.toModel

@@ -7,7 +7,7 @@ import com.yankin.muscle_groups.api.usecases.GetCurrentMuscleGroupStreamUseCase
 import com.yankin.muscle_groups.api.usecases.RecoverDefaultMuscleGroupListUseCase
 import com.yankin.muscle_groups.api.usecases.SaveMuscleGroupUseCase
 import com.yankin.trainingdiary.R
-import com.yankin.trainingdiary.datastore.AppSettings
+import com.yankin.preferences.AppSettings
 import com.yankin.trainingdiary.models.MuscleGroup
 import com.yankin.trainingdiary.models.converters.toDomain
 import com.yankin.trainingdiary.support.CoroutineViewModel

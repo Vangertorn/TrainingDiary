@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yankin.muscle_groups.api.usecases.SaveDefaultMuscleGroupListUseCase
 import com.yankin.training.api.usecases.DeleteTrainingByFlagsUseCase
-import com.yankin.trainingdiary.datastore.AppSettings
+import com.yankin.preferences.AppSettings
 import com.yankin.trainingdiary.models.MuscleGroup
 import com.yankin.trainingdiary.models.converters.toDomain
 import com.yankin.trainingdiary.repository.ExerciseRepository

@@ -1,7 +1,7 @@
 package com.yankin.trainingdiary.screen.season_ticket
 
 import android.annotation.SuppressLint
-import com.yankin.trainingdiary.datastore.AppSettings
+import com.yankin.preferences.AppSettings
 import com.yankin.trainingdiary.support.CoroutineViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

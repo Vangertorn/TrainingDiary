@@ -16,11 +16,8 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/coroutine" />
             <option value="$PROJECT_DIR$/core/mvi" />
-            <option value="$PROJECT_DIR$/domain" />
-            <option value="$PROJECT_DIR$/domain/api" />
-            <option value="$PROJECT_DIR$/domain/impl" />
             <option value="$PROJECT_DIR$/external" />
-            <option value="$PROJECT_DIR$/external/repositories" />
+            <option value="$PROJECT_DIR$/external/preferences" />
             <option value="$PROJECT_DIR$/external/storage" />
             <option value="$PROJECT_DIR$/external/storage/api" />
             <option value="$PROJECT_DIR$/external/storage/impl" />

@@ -2,7 +2,7 @@ package com.yankin.trainingdiary.repository
 
 import com.yankin.storage.ApproachStorage
 import com.yankin.storage.ExerciseStorage
-import com.yankin.trainingdiary.datastore.AppSettings
+import com.yankin.preferences.AppSettings
 import com.yankin.trainingdiary.models.Approach
 import com.yankin.trainingdiary.models.converters.toDomain
 import com.yankin.trainingdiary.models.converters.toModel

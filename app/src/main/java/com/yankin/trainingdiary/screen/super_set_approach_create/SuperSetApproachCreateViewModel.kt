@@ -1,7 +1,7 @@
 package com.yankin.trainingdiary.screen.super_set_approach_create
 
 import androidx.lifecycle.asLiveData
-import com.yankin.trainingdiary.datastore.AppSettings
+import com.yankin.preferences.AppSettings
 import com.yankin.trainingdiary.models.Approach
 import com.yankin.trainingdiary.models.Exercise
 import com.yankin.trainingdiary.models.info.ViewHolderTypes

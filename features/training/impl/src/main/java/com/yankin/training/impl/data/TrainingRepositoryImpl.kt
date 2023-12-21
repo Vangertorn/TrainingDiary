@@ -1,6 +1,7 @@
 package com.yankin.training.impl.data
 
 import com.yankin.coroutine.CoroutineDispatchers
+import com.yankin.preferences.AppSettings
 import com.yankin.room.entity.TrainingEntity
 import com.yankin.training.api.models.TrainingDomain
 import com.yankin.training.impl.domain.repositories.TrainingRepository
@@ -12,6 +13,7 @@ import javax.inject.Inject
 internal class TrainingRepositoryImpl @Inject constructor(
     private val trainingLocalDataSource: TrainingLocalDataSource,
     private val coroutineDispatchers: CoroutineDispatchers,
+    private val appSettings: AppSettings,
 ) : TrainingRepository {
     override val currentTrainingAscFlow: Flow<List<TrainingDomain>> =
         trainingLocalDataSource.getTrainingDeletedFalseAscFlow(false).map { trainingEntityList ->
@@ -94,7 +96,7 @@ internal class TrainingRepositoryImpl @Inject constructor(
 
     override suspend fun forgotIdTraining() {
         withContext(coroutineDispatchers.io) {
-    //        appSettings.setIdTraining(-1)
+           appSettings.setIdTraining(-1)
         }
     }
 }

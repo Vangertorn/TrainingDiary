@@ -3,7 +3,7 @@ package com.yankin.trainingdiary.screen.super_set_create
 import androidx.lifecycle.asLiveData
 import com.yankin.exercese_name.api.usecases.SaveExerciseNameUseCase
 import com.yankin.training.api.usecases.GetTrainingByIdUseCase
-import com.yankin.trainingdiary.datastore.AppSettings
+import com.yankin.preferences.AppSettings
 import com.yankin.trainingdiary.models.Exercise
 import com.yankin.trainingdiary.models.ExerciseName
 import com.yankin.trainingdiary.models.Training

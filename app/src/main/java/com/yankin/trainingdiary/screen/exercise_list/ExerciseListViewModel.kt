@@ -3,7 +3,7 @@ package com.yankin.trainingdiary.screen.exercise_list
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import com.yankin.training.api.usecases.ForgotIdTrainingUseCase
-import com.yankin.trainingdiary.datastore.AppSettings
+import com.yankin.preferences.AppSettings
 import com.yankin.trainingdiary.models.Exercise
 import com.yankin.trainingdiary.models.SuperSet
 import com.yankin.trainingdiary.models.info.ViewHolderTypes

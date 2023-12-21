@@ -1,7 +1,6 @@
-package com.yankin.trainingdiary.di
+package com.yankin.preferences
 
 import android.content.Context
-import com.yankin.trainingdiary.datastore.AppSettings
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,7 +10,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal object StorageModule {
+internal object PreferencesModule {
 
     @Provides
     @Singleton

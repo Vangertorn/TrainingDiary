@@ -55,6 +55,7 @@ dependencies {
     implementation(project(":features:exercise_name:impl"))
     implementation(project(":features:training:api"))
     implementation(project(":features:training:impl"))
+    implementation(project(":external:preferences"))
 
     testImplementation(Dependencies.Test.testJunit)
     androidTestImplementation(Dependencies.Test.testExtension)
@@ -76,8 +77,6 @@ dependencies {
     implementation(Dependencies.Navigation.navigationUi)
 
     implementation("com.google.code.gson:gson:2.10.1")
-
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
