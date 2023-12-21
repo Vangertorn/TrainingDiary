@@ -3,9 +3,11 @@ package com.yankin.trainingdiary.screen.training_create
 import androidx.lifecycle.asLiveData
 import com.yankin.muscle_groups.api.usecases.GetAllMuscleGroupListUseCase
 import com.yankin.muscle_groups.api.usecases.GetCurrentMuscleGroupStreamUseCase
+import com.yankin.training.api.usecases.SaveTrainingUseCase
+import com.yankin.training.api.usecases.UpdateTrainingUseCase
 import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.models.Training
-import com.yankin.trainingdiary.repository.TrainingRepository
+import com.yankin.trainingdiary.models.converters.toDomain
 import com.yankin.trainingdiary.screen.training_list.TrainingListViewModel
 import com.yankin.trainingdiary.support.CoroutineViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,9 +17,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TrainingCreateViewModel @Inject constructor(
-    private val trainingRepository: TrainingRepository,
     private val getAllMuscleGroupListUseCase: GetAllMuscleGroupListUseCase,
     getCurrentMuscleGroupStreamUseCase: GetCurrentMuscleGroupStreamUseCase,
+    private val saveTrainingUseCase: SaveTrainingUseCase,
+    private val updateTrainingUseCase: UpdateTrainingUseCase,
     private val appSettings: AppSettings
 ) :
     CoroutineViewModel() {
@@ -26,13 +29,13 @@ class TrainingCreateViewModel @Inject constructor(
 
     fun addNewTraining(training: Training) {
         launch {
-            trainingRepository.saveTraining(training)
+            saveTrainingUseCase.invoke(training.toDomain())
         }
     }
 
     fun updateTraining(training: Training) {
         launch {
-            trainingRepository.updateTraining(training)
+            updateTrainingUseCase.invoke(training.toDomain())
         }
     }
 

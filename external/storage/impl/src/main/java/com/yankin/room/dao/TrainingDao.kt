@@ -7,7 +7,6 @@ import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
 import com.yankin.room.entity.TrainingEntity
-import com.yankin.room.entity.info.ViewHolderTypesEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -43,12 +42,6 @@ abstract class TrainingDao {
         insertTrainings(trainingEntities)
     }
 
-    @Query("SELECT * FROM table_exercise WHERE idTraining == :id AND deleted ==:flags AND idSet is null ORDER BY position DESC")
-    abstract fun getExercisesInfoByTrainingIdAndFlagsFlow(
-        id: Long,
-        flags: Boolean
-    ): Flow<List<ViewHolderTypesEntity.ExerciseInfo>>
-
     @Query("SELECT * FROM table_trainings WHERE deleted ==:flags")
     abstract fun getTrainingByFlags(
         flags: Boolean
@@ -59,9 +52,6 @@ abstract class TrainingDao {
         val list = getTrainingByFlags(flags)
         deleteTrainings(list)
     }
-
-    @Query("SELECT * FROM table_exercise WHERE idTraining == :id")
-    abstract fun getExercisesInfoByTrainingId(id: Long): List<ViewHolderTypesEntity.ExerciseInfo>
 
     @Query("SELECT * FROM table_trainings WHERE id == :id LIMIT 1")
     abstract fun getTraining(id: Long): TrainingEntity

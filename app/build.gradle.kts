@@ -53,6 +53,8 @@ dependencies {
     implementation(project(":core:coroutine"))
     implementation(project(":features:exercise_name:api"))
     implementation(project(":features:exercise_name:impl"))
+    implementation(project(":features:training:api"))
+    implementation(project(":features:training:impl"))
 
     testImplementation(Dependencies.Test.testJunit)
     androidTestImplementation(Dependencies.Test.testExtension)

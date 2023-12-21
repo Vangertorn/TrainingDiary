@@ -2,13 +2,13 @@ package com.yankin.trainingdiary.screen.exercise_list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
+import com.yankin.training.api.usecases.ForgotIdTrainingUseCase
 import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.models.Exercise
 import com.yankin.trainingdiary.models.SuperSet
 import com.yankin.trainingdiary.models.info.ViewHolderTypes
 import com.yankin.trainingdiary.repository.ExerciseRepository
 import com.yankin.trainingdiary.repository.SuperSetRepository
-import com.yankin.trainingdiary.repository.TrainingRepository
 import com.yankin.trainingdiary.support.CoroutineViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -19,8 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ExerciseListViewModel @Inject constructor(
     private val exerciseRepository: ExerciseRepository,
-    private val trainingRepository: TrainingRepository,
     private val appSettings: AppSettings,
+    private val forgotIdTrainingUseCase: ForgotIdTrainingUseCase,
     private val superSetRepository: SuperSetRepository
 ) :
     CoroutineViewModel() {
@@ -68,7 +68,7 @@ class ExerciseListViewModel @Inject constructor(
 
     fun forgotIdTraining() {
         launch {
-            trainingRepository.forgotIdTraining()
+            forgotIdTrainingUseCase.invoke()
         }
     }
 

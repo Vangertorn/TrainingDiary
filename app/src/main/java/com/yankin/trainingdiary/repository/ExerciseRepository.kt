@@ -1,7 +1,6 @@
 package com.yankin.trainingdiary.repository
 
 import com.yankin.storage.ExerciseStorage
-import com.yankin.storage.TrainingStorage
 import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.models.Exercise
 import com.yankin.trainingdiary.models.converters.toDomain
@@ -16,14 +15,13 @@ import kotlinx.coroutines.withContext
 
 class ExerciseRepository(
     private val exerciseStorage: ExerciseStorage,
-    private val trainingStorage: TrainingStorage,
     appSettings: AppSettings
 ) {
 
     @ExperimentalCoroutinesApi
     val currentExerciseFlow: Flow<List<ViewHolderTypes.ExerciseInfo>> =
         appSettings.idTrainingFlow().flatMapLatest { idTraining ->
-            trainingStorage.getExercisesInfoByTrainingIdAndFlagsFlow(idTraining, false)
+            exerciseStorage.getExercisesInfoByTrainingIdAndFlagsFlow(idTraining, false)
                 .map { list ->
                     list.map {
                         it.toModel()

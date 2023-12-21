@@ -24,6 +24,16 @@
             <option value="$PROJECT_DIR$/external/storage" />
             <option value="$PROJECT_DIR$/external/storage/api" />
             <option value="$PROJECT_DIR$/external/storage/impl" />
+            <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/exercise_name" />
+            <option value="$PROJECT_DIR$/features/exercise_name/api" />
+            <option value="$PROJECT_DIR$/features/exercise_name/impl" />
+            <option value="$PROJECT_DIR$/features/muscle_groups" />
+            <option value="$PROJECT_DIR$/features/muscle_groups/api" />
+            <option value="$PROJECT_DIR$/features/muscle_groups/impl" />
+            <option value="$PROJECT_DIR$/features/training" />
+            <option value="$PROJECT_DIR$/features/training/api" />
+            <option value="$PROJECT_DIR$/features/training/impl" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -84,4 +84,10 @@ abstract class ExerciseDao {
         idSuperSet: Long,
         flags: Boolean
     ): Flow<List<ViewHolderTypesEntity.ExerciseInfo>>
+
+    @Query("SELECT * FROM table_exercise WHERE idTraining == :id AND deleted == :flags AND idSet is null ORDER BY position DESC")
+    abstract fun getExercisesInfoByTrainingIdAndFlagsFlow(
+        id: Long,
+        flags: Boolean
+    ): Flow<List<ViewHolderTypesEntity.ExerciseInfo>>
 }

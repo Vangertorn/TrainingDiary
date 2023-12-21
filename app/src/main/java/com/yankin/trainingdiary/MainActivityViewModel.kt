@@ -5,12 +5,12 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yankin.muscle_groups.api.usecases.SaveDefaultMuscleGroupListUseCase
+import com.yankin.training.api.usecases.DeleteTrainingByFlagsUseCase
 import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.models.MuscleGroup
 import com.yankin.trainingdiary.models.converters.toDomain
 import com.yankin.trainingdiary.repository.ExerciseRepository
 import com.yankin.trainingdiary.repository.SuperSetRepository
-import com.yankin.trainingdiary.repository.TrainingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
@@ -22,17 +22,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
-    private val trainingRepository: TrainingRepository,
     private val exerciseRepository: ExerciseRepository,
     private val superSetRepository: SuperSetRepository,
     private val appSettings: AppSettings,
     private val saveDefaultMuscleGroupListUseCase: SaveDefaultMuscleGroupListUseCase,
     @ApplicationContext private val context: Context,
+    private val deleteTrainingByFlagsUseCase: DeleteTrainingByFlagsUseCase,
 ) : ViewModel() {
 
     fun deletedTrainings() {
         viewModelScope.launch {
-            trainingRepository.deletedTrainingsByFlags()
+            deleteTrainingByFlagsUseCase.invoke()
         }
     }
 

@@ -2,11 +2,17 @@ package com.yankin.trainingdiary.screen.training_list
 
 import android.annotation.SuppressLint
 import androidx.lifecycle.asLiveData
+import com.yankin.training.api.usecases.DeleteTrainingFalseUseCase
+import com.yankin.training.api.usecases.DeleteTrainingTrueUseCase
+import com.yankin.training.api.usecases.GetCurrentTrainingAscStreamUseCase
+import com.yankin.training.api.usecases.GetCurrentTrainingDescStreamUseCase
 import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.models.Training
-import com.yankin.trainingdiary.repository.TrainingRepository
+import com.yankin.trainingdiary.models.converters.toDomain
+import com.yankin.trainingdiary.models.converters.toModel
 import com.yankin.trainingdiary.support.CoroutineViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
@@ -15,11 +21,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TrainingListViewModel @Inject constructor(
-    private val trainingRepository: TrainingRepository,
     private val appSettings: AppSettings,
+    private val deleteTrainingTrueUseCase: DeleteTrainingTrueUseCase,
+    private val deleteTrainingFalseUseCase: DeleteTrainingFalseUseCase,
+    getCurrentTrainingAscStreamUseCase: GetCurrentTrainingAscStreamUseCase,
+    getCurrentTrainingDescStreamUseCase: GetCurrentTrainingDescStreamUseCase,
 ) : CoroutineViewModel() {
-    val trainingAscLiveData = trainingRepository.currentTrainingAscFlow.asLiveData()
-    val trainingDescLiveData = trainingRepository.currentTrainingDescFlow.asLiveData()
+    val trainingAscLiveData = getCurrentTrainingAscStreamUseCase.invoke().map { it.map { it.toModel() } }.asLiveData()
+    val trainingDescLiveData = getCurrentTrainingDescStreamUseCase.invoke().map { it.map { it.toModel() } }.asLiveData()
     val switchOrderLiveData = appSettings.orderAddedFlow().asLiveData()
     val numberTrainingLiveData = appSettings.numberOfTrainingSessionsFlow().asLiveData()
     val numberLeftDaysLiveData = appSettings.leftDaysFlow().asLiveData()
@@ -33,7 +42,7 @@ class TrainingListViewModel @Inject constructor(
                 }
             }
 
-            trainingRepository.deletedTrainingTrue(training)
+            deleteTrainingTrueUseCase.invoke(training.toDomain())
         }
     }
 
@@ -70,7 +79,7 @@ class TrainingListViewModel @Inject constructor(
                 }
             }
 
-            trainingRepository.deletedTrainingFalse(training)
+            deleteTrainingFalseUseCase.invoke(training.toDomain())
         }
     }
 

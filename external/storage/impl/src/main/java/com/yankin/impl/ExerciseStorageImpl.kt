@@ -74,4 +74,15 @@ class ExerciseStorageImpl(
     override fun getListExerciseInfo(id: Long): List<ViewHolderTypesDomain.ExerciseInfoDomain> {
         return db.getListExerciseInfo(id).map { it.toModel() }
     }
+
+    override fun getExercisesInfoByTrainingIdAndFlagsFlow(
+        idTraining: Long,
+        flags: Boolean
+    ): Flow<List<ViewHolderTypesDomain.ExerciseInfoDomain>> {
+        return db.getExercisesInfoByTrainingIdAndFlagsFlow(idTraining, flags).map {
+            it.map {
+                it.toModel()
+            }
+        }
+    }
 }

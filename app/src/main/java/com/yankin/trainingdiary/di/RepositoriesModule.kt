@@ -3,12 +3,10 @@ package com.yankin.trainingdiary.di
 import com.yankin.storage.ApproachStorage
 import com.yankin.storage.ExerciseStorage
 import com.yankin.storage.SuperSetStorage
-import com.yankin.storage.TrainingStorage
 import com.yankin.trainingdiary.datastore.AppSettings
 import com.yankin.trainingdiary.repository.ApproachRepository
 import com.yankin.trainingdiary.repository.ExerciseRepository
 import com.yankin.trainingdiary.repository.SuperSetRepository
-import com.yankin.trainingdiary.repository.TrainingRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,11 +33,9 @@ internal object RepositoriesModule {
     @Singleton
     fun provideExerciseRepository(
         exerciseStorage: ExerciseStorage,
-        trainingStorage: TrainingStorage,
         appSettings: AppSettings
     ): ExerciseRepository = ExerciseRepository(
         exerciseStorage = exerciseStorage,
-        trainingStorage = trainingStorage,
         appSettings = appSettings
     )
 
@@ -55,15 +51,5 @@ internal object RepositoriesModule {
         exerciseRepository = exerciseRepository,
         appSettings = appSettings,
         exerciseStorage = exerciseStorage
-    )
-
-    @Provides
-    @Singleton
-    fun provideTrainingRepository(
-        trainingStorage: TrainingStorage,
-        appSettings: AppSettings
-    ): TrainingRepository = TrainingRepository(
-        trainingStorage = trainingStorage,
-        appSettings = appSettings
     )
 }

@@ -37,4 +37,9 @@ interface ExerciseStorage {
     fun getExerciseInfo(id: Long): ViewHolderTypesDomain.ExerciseInfoDomain
 
     fun getListExerciseInfo(id: Long): List<ViewHolderTypesDomain.ExerciseInfoDomain>
+
+    fun getExercisesInfoByTrainingIdAndFlagsFlow(
+        idTraining: Long,
+        flags: Boolean
+    ): Flow<List<ViewHolderTypesDomain.ExerciseInfoDomain>>
 }

@@ -1,4 +1,4 @@
-package com.yankin.models
+package com.yankin.training.api.models
 
 data class TrainingDomain(
     val id: Long = 0L,

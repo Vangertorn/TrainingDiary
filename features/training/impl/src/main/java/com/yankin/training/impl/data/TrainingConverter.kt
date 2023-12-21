@@ -1,7 +1,7 @@
-package com.yankin.room.converters
+package com.yankin.training.impl.data
 
-import com.yankin.models.TrainingDomain
 import com.yankin.room.entity.TrainingEntity
+import com.yankin.training.api.models.TrainingDomain
 
 fun TrainingDomain.toEntity() = TrainingEntity(
     id = id,
@@ -14,7 +14,7 @@ fun TrainingDomain.toEntity() = TrainingEntity(
     selectedMuscleGroup = selectedMuscleGroup
 )
 
-fun TrainingEntity.toModel() = TrainingDomain(
+fun TrainingEntity.toDomain() = TrainingDomain(
     id = id,
     date = date,
     muscleGroups = muscleGroups,
