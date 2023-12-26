@@ -9,5 +9,5 @@ import javax.inject.Inject
 internal class GetCurrentTrainingAscStreamUseCaseImpl @Inject constructor(
     private val trainingRepository: TrainingRepository,
 ) : GetCurrentTrainingAscStreamUseCase {
-    override fun invoke(): Flow<List<TrainingDomain>> = trainingRepository.currentTrainingAscFlow
+    override fun invoke(): Flow<List<TrainingDomain>> = trainingRepository.currentTrainingAscStream
 }

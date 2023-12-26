@@ -22,7 +22,7 @@ data class ApproachEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val weight: String = "0",
-    val reoccurrences: String = "0",
+    val repeat: String = "0",
     @ColumnInfo(index = true, name = "idExercise")
     val idExercise: Long
 )

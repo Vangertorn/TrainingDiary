@@ -15,11 +15,11 @@ internal class TrainingRepositoryImpl @Inject constructor(
     private val coroutineDispatchers: CoroutineDispatchers,
     private val appSettings: AppSettings,
 ) : TrainingRepository {
-    override val currentTrainingAscFlow: Flow<List<TrainingDomain>> =
+    override val currentTrainingAscStream: Flow<List<TrainingDomain>> =
         trainingLocalDataSource.getTrainingDeletedFalseAscFlow(false).map { trainingEntityList ->
             trainingEntityList?.map { trainingEntity -> trainingEntity.toDomain() } ?: listOf()
         }
-    override val currentTrainingDescFlow: Flow<List<TrainingDomain>> =
+    override val currentTrainingDescStream: Flow<List<TrainingDomain>> =
         trainingLocalDataSource.getTrainingDeletedFalseDescFlow(false).map { trainingEntityList ->
             trainingEntityList?.map { trainingEntity -> trainingEntity.toDomain() } ?: listOf()
         }

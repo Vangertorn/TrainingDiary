@@ -55,6 +55,8 @@ dependencies {
     implementation(project(":features:exercise_name:impl"))
     implementation(project(":features:training:api"))
     implementation(project(":features:training:impl"))
+    implementation(project(":features:approach:api"))
+    implementation(project(":features:approach:impl"))
     implementation(project(":external:preferences"))
 
     testImplementation(Dependencies.Test.testJunit)

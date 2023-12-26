@@ -3,11 +3,11 @@ package com.yankin.training.impl.domain.repositories
 import com.yankin.training.api.models.TrainingDomain
 import kotlinx.coroutines.flow.Flow
 
-interface TrainingRepository {
+internal interface TrainingRepository {
 
-    val currentTrainingAscFlow: Flow<List<TrainingDomain>>
+    val currentTrainingAscStream: Flow<List<TrainingDomain>>
 
-    val currentTrainingDescFlow: Flow<List<TrainingDomain>>
+    val currentTrainingDescStream: Flow<List<TrainingDomain>>
 
     suspend fun saveTraining(training: TrainingDomain)
 

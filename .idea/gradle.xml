@@ -22,6 +22,9 @@
             <option value="$PROJECT_DIR$/external/storage/api" />
             <option value="$PROJECT_DIR$/external/storage/impl" />
             <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/approach" />
+            <option value="$PROJECT_DIR$/features/approach/api" />
+            <option value="$PROJECT_DIR$/features/approach/impl" />
             <option value="$PROJECT_DIR$/features/exercise_name" />
             <option value="$PROJECT_DIR$/features/exercise_name/api" />
             <option value="$PROJECT_DIR$/features/exercise_name/impl" />

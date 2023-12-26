@@ -1,18 +1,18 @@
-package com.yankin.room.converters
+package com.yankin.approach.impl.data
 
-import com.yankin.models.ApproachDomain
+import com.yankin.approach.api.models.ApproachDomain
 import com.yankin.room.entity.ApproachEntity
 
 fun ApproachDomain.toEntity() = ApproachEntity(
     id = id,
     weight = weight,
-    reoccurrences = reoccurrences,
+    repeat = repeat,
     idExercise = idExercise
 )
 
-fun ApproachEntity.toModel() = ApproachDomain(
+fun ApproachEntity.toDomain() = ApproachDomain(
     id = id,
     weight = weight,
-    reoccurrences = reoccurrences,
+    repeat = repeat,
     idExercise = idExercise
 )

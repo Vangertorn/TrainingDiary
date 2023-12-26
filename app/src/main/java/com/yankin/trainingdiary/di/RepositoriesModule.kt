@@ -1,10 +1,8 @@
 package com.yankin.trainingdiary.di
 
-import com.yankin.storage.ApproachStorage
 import com.yankin.storage.ExerciseStorage
 import com.yankin.storage.SuperSetStorage
 import com.yankin.preferences.AppSettings
-import com.yankin.trainingdiary.repository.ApproachRepository
 import com.yankin.trainingdiary.repository.ExerciseRepository
 import com.yankin.trainingdiary.repository.SuperSetRepository
 import dagger.Module
@@ -16,18 +14,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 internal object RepositoriesModule {
-
-    @Provides
-    @Singleton
-    fun provideApproachRepository(
-        approachStorage: ApproachStorage,
-        exerciseStorage: ExerciseStorage,
-        appSettings: AppSettings
-    ): ApproachRepository = ApproachRepository(
-        approachStorage = approachStorage,
-        exerciseStorage = exerciseStorage,
-        appSettings = appSettings
-    )
 
     @Provides
     @Singleton

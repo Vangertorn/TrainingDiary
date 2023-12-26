@@ -8,6 +8,7 @@
       <module name="Training_diary.buildSrc.test" target="11" />
       <module name="Training_diary.external.preferences" target="11" />
       <module name="Training_diary.external.storage.impl" target="11" />
+      <module name="Training_diary.features.approach.impl" target="11" />
       <module name="Training_diary.features.exercise_name.impl" target="11" />
       <module name="Training_diary.features.muscle_groups.impl" target="11" />
       <module name="Training_diary.features.training.impl" target="11" />

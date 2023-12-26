@@ -49,7 +49,6 @@ abstract class ExerciseDao {
     @Delete
     abstract fun deleteExercise(exerciseEntity: ExerciseEntity)
 
-    @Transaction
     @Query("SELECT * FROM table_exercise WHERE id == :id LIMIT 1")
     abstract fun getExerciseInfoFlow(id: Long): Flow<ViewHolderTypesEntity.ExerciseInfo?>
 
