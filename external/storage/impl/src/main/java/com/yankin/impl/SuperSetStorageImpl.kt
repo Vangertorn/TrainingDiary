@@ -2,8 +2,8 @@ package com.yankin.impl
 
 import com.yankin.models.SuperSetDomain
 import com.yankin.models.info.SuperSetInfoDomain
-import com.yankin.room.converters.toEntity
-import com.yankin.room.converters.toModel
+import com.yankin.exercise.impl.data.toEntity
+import com.yankin.exercise.impl.data.toModel
 import com.yankin.room.dao.SuperSetDao
 import com.yankin.storage.SuperSetStorage
 import kotlinx.coroutines.flow.Flow
@@ -29,7 +29,7 @@ class SuperSetStorageImpl(
     }
 
     override fun updateSuperSet(superSetDomainEntity: SuperSetDomain) {
-        db.updateSuperSet(superSetDomainEntity.toEntity())
+        db.updateSuperSet(com.yankin.exercise.impl.data.toEntity())
     }
 
     override fun deletedSuperSetByVisible() {
@@ -37,6 +37,6 @@ class SuperSetStorageImpl(
     }
 
     override fun insertSuperSet(superSetDomainEntity: SuperSetDomain): Long {
-        return db.insertSuperSet(superSetDomainEntity.toEntity())
+        return db.insertSuperSet(com.yankin.exercise.impl.data.toEntity())
     }
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.yankin.exercise.api.usecases.DeleteExercisesUseCase
 import com.yankin.muscle_groups.api.usecases.SaveDefaultMuscleGroupListUseCase
 import com.yankin.training.api.usecases.DeleteTrainingByFlagsUseCase
 import com.yankin.preferences.AppSettings
@@ -22,12 +23,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
-    private val exerciseRepository: ExerciseRepository,
     private val superSetRepository: SuperSetRepository,
     private val appSettings: AppSettings,
     private val saveDefaultMuscleGroupListUseCase: SaveDefaultMuscleGroupListUseCase,
     @ApplicationContext private val context: Context,
     private val deleteTrainingByFlagsUseCase: DeleteTrainingByFlagsUseCase,
+    private val deleteExercisesUseCase: DeleteExercisesUseCase,
 ) : ViewModel() {
 
     fun deletedTrainings() {
@@ -38,7 +39,7 @@ class MainActivityViewModel @Inject constructor(
 
     fun deletedExercises() {
         viewModelScope.launch {
-            exerciseRepository.deleteExercises()
+            deleteExercisesUseCase.invoke()
         }
     }
 

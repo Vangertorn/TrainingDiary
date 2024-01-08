@@ -90,7 +90,7 @@ internal class TrainingRepositoryImpl @Inject constructor(
 
     override suspend fun deleteTrainingsByFlags() {
         withContext(coroutineDispatchers.io) {
-            trainingLocalDataSource.deletedTrainingsByFlags(true)
+            trainingLocalDataSource.deletedTrainingsByFlag(true)
         }
     }
 

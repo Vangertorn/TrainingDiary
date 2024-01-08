@@ -1,6 +1,5 @@
 package com.yankin.trainingdiary.repository
 
-import com.yankin.storage.ExerciseStorage
 import com.yankin.storage.SuperSetStorage
 import com.yankin.preferences.AppSettings
 import com.yankin.trainingdiary.models.Exercise

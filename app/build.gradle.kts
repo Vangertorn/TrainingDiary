@@ -58,6 +58,8 @@ dependencies {
     implementation(project(":features:approach:api"))
     implementation(project(":features:approach:impl"))
     implementation(project(":external:preferences"))
+    implementation(project(":features:exercise:api"))
+    implementation(project(":features:exercise:impl"))
 
     testImplementation(Dependencies.Test.testJunit)
     androidTestImplementation(Dependencies.Test.testExtension)

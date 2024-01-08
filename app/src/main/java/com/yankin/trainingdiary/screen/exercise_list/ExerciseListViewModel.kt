@@ -2,6 +2,9 @@ package com.yankin.trainingdiary.screen.exercise_list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
+import com.yankin.exercise.api.usecases.DeleteExerciseFalseUseCase
+import com.yankin.exercise.api.usecases.DeleteExerciseTrueUseCase
+import com.yankin.exercise.api.usecases.SwitchExercisePositionUseCase
 import com.yankin.training.api.usecases.ForgotIdTrainingUseCase
 import com.yankin.preferences.AppSettings
 import com.yankin.trainingdiary.models.Exercise
@@ -18,10 +21,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ExerciseListViewModel @Inject constructor(
-    private val exerciseRepository: ExerciseRepository,
     private val appSettings: AppSettings,
     private val forgotIdTrainingUseCase: ForgotIdTrainingUseCase,
-    private val superSetRepository: SuperSetRepository
+    private val superSetRepository: SuperSetRepository,
+    private val deleteExerciseTrueUseCase: DeleteExerciseTrueUseCase,
+    private val deleteExerciseFalseUseCase: DeleteExerciseFalseUseCase,
+    private val switchExercisePositionUseCase: SwitchExercisePositionUseCase,
 ) :
     CoroutineViewModel() {
 
@@ -44,13 +49,13 @@ class ExerciseListViewModel @Inject constructor(
 
     fun deletedExerciseTrue(exercise: Exercise) {
         launch {
-            exerciseRepository.deletedExerciseTrue(exercise)
+            deleteExerciseTrueUseCase.invoke(exercise.id)
         }
     }
 
     fun deletedExerciseFalse(exercise: Exercise) {
         launch {
-            exerciseRepository.deletedExerciseFalse(exercise)
+            deleteExerciseFalseUseCase.invoke(exerciseId = exercise.id)
         }
     }
 
@@ -86,7 +91,12 @@ class ExerciseListViewModel @Inject constructor(
 
     fun switchExercisePosition(exercise1: Exercise, exercise2: Exercise) {
         launch {
-            exerciseRepository.switchExercisePosition(exercise1, exercise2)
+            switchExercisePositionUseCase.invoke(
+                firstExerciseId = exercise1.id,
+                firstExercisePosition = exercise2.position,
+                secondExerciseId = exercise2.id,
+                secondExercisePosition = exercise1.position
+            )
         }
     }
 }

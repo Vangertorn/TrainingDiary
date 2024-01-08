@@ -3,6 +3,7 @@ package com.yankin.trainingdiary.screen.exercise_create
 import androidx.lifecycle.asLiveData
 import com.yankin.exercese_name.api.usecases.GetCurrentExerciseNameAsStringStreamUseCase
 import com.yankin.exercese_name.api.usecases.SaveExerciseNameUseCase
+import com.yankin.exercise.api.usecases.SaveExerciseUseCase
 import com.yankin.preferences.AppSettings
 import com.yankin.trainingdiary.models.Exercise
 import com.yankin.trainingdiary.models.ExerciseName
@@ -18,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ExerciseCreateViewModel @Inject constructor(
-    private val exerciseRepository: ExerciseRepository,
+    private val saveExerciseUseCase: SaveExerciseUseCase,
     private val superSetRepository: SuperSetRepository,
     private val appSettings: AppSettings,
     getCurrentExerciseNameAsStringStreamUseCase: GetCurrentExerciseNameAsStringStreamUseCase,
@@ -29,7 +30,7 @@ class ExerciseCreateViewModel @Inject constructor(
 
     fun addNewExercise(exercise: Exercise) {
         launch {
-            exerciseRepository.saveExercise(exercise)
+            saveExerciseUseCase.invoke(exercise.toDomain())
         }
     }
 

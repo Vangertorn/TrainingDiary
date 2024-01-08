@@ -1,6 +1,6 @@
 package com.yankin.trainingdiary.models.converters
 
-import com.yankin.models.ExerciseDomain
+import com.yankin.exercise.api.models.ExerciseDomain
 import com.yankin.trainingdiary.models.Exercise
 
 fun Exercise.toDomain() = ExerciseDomain(

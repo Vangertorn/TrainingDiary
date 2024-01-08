@@ -37,7 +37,7 @@ internal class TrainingLocalDataSource @Inject constructor(
         return db.getTraining(id)
     }
 
-    fun deletedTrainingsByFlags(flags: Boolean) {
-        db.deletedTrainingsByFlags(flags)
+    fun deletedTrainingsByFlag(flag: Boolean) {
+        db.deletedTrainingsByFlag(flag)
     }
 }

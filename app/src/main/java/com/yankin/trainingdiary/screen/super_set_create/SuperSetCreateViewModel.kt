@@ -2,6 +2,9 @@ package com.yankin.trainingdiary.screen.super_set_create
 
 import androidx.lifecycle.asLiveData
 import com.yankin.exercese_name.api.usecases.SaveExerciseNameUseCase
+import com.yankin.exercise.api.usecases.DeleteEmptyExerciseUseCase
+import com.yankin.exercise.api.usecases.DeleteExerciseTrueUseCase
+import com.yankin.exercise.api.usecases.SaveExerciseUseCase
 import com.yankin.training.api.usecases.GetTrainingByIdUseCase
 import com.yankin.preferences.AppSettings
 import com.yankin.trainingdiary.models.Exercise
@@ -21,7 +24,9 @@ import javax.inject.Inject
 @HiltViewModel
 class SuperSetCreateViewModel @Inject constructor(
     private val superSetRepository: SuperSetRepository,
-    private val exerciseRepository: ExerciseRepository,
+    private val saveExerciseUseCase: SaveExerciseUseCase,
+    private val deleteExerciseTrueUseCase: DeleteExerciseTrueUseCase,
+    private val deleteEmptyExerciseUseCase: DeleteEmptyExerciseUseCase,
     private val appSettings: AppSettings,
     private val saveExerciseNameUseCase: SaveExerciseNameUseCase,
     private val getTrainingByIdUseCase: GetTrainingByIdUseCase,
@@ -33,7 +38,7 @@ class SuperSetCreateViewModel @Inject constructor(
 
     fun addNewExercise(exercise: Exercise) {
         launch {
-            exerciseRepository.saveExercise(exercise)
+            saveExerciseUseCase.invoke(exercise.toDomain())
         }
     }
 
@@ -44,13 +49,13 @@ class SuperSetCreateViewModel @Inject constructor(
     }
 
     fun deletedExercise(exercise: Exercise) {
-        launch { exerciseRepository.deleteExercise(exercise) }
+        launch { deleteExerciseTrueUseCase.invoke(exerciseId = exercise.id) }
     }
 
     fun createSuperSet(idSuperSet: Long) {
         launch {
             superSetRepository.updateFlagVisibilitySuperSet(idSuperSet)
-            exerciseRepository.deleteEmptyExercise()
+            deleteEmptyExerciseUseCase.invoke()
         }
     }
 

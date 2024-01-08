@@ -25,23 +25,18 @@ abstract class ExerciseDao {
     ): List<ExerciseEntity>
 
     @Transaction
-    open fun deletedExercisesByFlags(flags: Boolean) {
+    open fun deletedExercisesByFlag(flags: Boolean) {
         deleteExercises(getExercisesByFlags(flags))
     }
 
-    @Query("SELECT * FROM table_exercise WHERE name==:emptyName LIMIT 1")
-    abstract fun getEmptyExercise(emptyName: String): ExerciseEntity
-
-    @Transaction
-    open fun deletedEmptyExercise(emptyName: String) {
-        deleteExercise(getEmptyExercise(emptyName))
-    }
+    @Query("DELETE FROM table_exercise WHERE name=='' LIMIT 1")
+    abstract fun deletedEmptyExercise()
 
     @Update
     abstract fun updateExercise(exerciseEntity: ExerciseEntity)
 
-    @Update
-    abstract fun deletedExerciseFlags(exerciseEntity: ExerciseEntity)
+    @Query("UPDATE table_exercise SET deleted = :deleteFlag WHERE id = :exerciseId")
+    abstract fun updateExerciseDeleteFlagById(exerciseId: Long, deleteFlag: Boolean)
 
     @Query("SELECT * FROM table_exercise WHERE id == :id LIMIT 1")
     abstract fun getExerciseFromId(id: Long): ExerciseEntity
@@ -49,8 +44,11 @@ abstract class ExerciseDao {
     @Delete
     abstract fun deleteExercise(exerciseEntity: ExerciseEntity)
 
+    @Query("DELETE FROM table_exercise WHERE id = :exerciseId")
+    abstract fun deleteExerciseById(exerciseId: Long)
+
     @Query("SELECT * FROM table_exercise WHERE id == :id LIMIT 1")
-    abstract fun getExerciseInfoFlow(id: Long): Flow<ViewHolderTypesEntity.ExerciseInfo?>
+    abstract fun getExerciseFlow(id: Long): Flow<ExerciseEntity?>
 
     @Query("SELECT * FROM table_exercise WHERE id == :id LIMIT 1")
     abstract fun getExerciseInfo(id: Long): ViewHolderTypesEntity.ExerciseInfo
@@ -65,11 +63,14 @@ abstract class ExerciseDao {
     abstract fun updateExercisePosition(id: Long, pos: Int)
 
     @Transaction
-    open fun switchExercisePositions(exerciseEntity1: ExerciseEntity, exerciseEntity2: ExerciseEntity) {
-        val exercise1Pos = exerciseEntity1.position
-        val exercise2Pos = exerciseEntity2.position
-        updateExercisePosition(exerciseEntity1.id, exercise2Pos)
-        updateExercisePosition(exerciseEntity2.id, exercise1Pos)
+    open fun switchExercisePositions(
+        firstExerciseId: Long,
+        firstExercisePosition: Int,
+        secondExerciseId: Long,
+        secondExercisePosition: Int
+    ) {
+        updateExercisePosition(id = firstExerciseId, pos = firstExercisePosition)
+        updateExercisePosition(id = secondExerciseId, pos = secondExercisePosition)
     }
 
     @Query("SELECT * FROM table_exercise WHERE  deleted ==:flags AND idSet == :idSuperSet ORDER BY position DESC")
@@ -78,15 +79,18 @@ abstract class ExerciseDao {
         flags: Boolean
     ): Flow<MutableList<ExerciseEntity>>
 
-    @Query("SELECT * FROM table_exercise WHERE  deleted ==:flags AND idSet == :idSuperSet ORDER BY position DESC")
-    abstract fun getExercisesInfoBySuperSetIdAndFlagsFlow(
-        idSuperSet: Long,
-        flags: Boolean
-    ): Flow<List<ViewHolderTypesEntity.ExerciseInfo>>
+    @Query("SELECT * FROM table_exercise WHERE idTraining == :trainingId AND deleted == :flags AND idSet is null ORDER BY position DESC")
+    abstract fun getExercisesByTrainingIdFlow(trainingId: Long, flags: Boolean): Flow<List<ExerciseEntity>?>
 
-    @Query("SELECT * FROM table_exercise WHERE idTraining == :id AND deleted == :flags AND idSet is null ORDER BY position DESC")
-    abstract fun getExercisesInfoByTrainingIdAndFlagsFlow(
-        id: Long,
-        flags: Boolean
-    ): Flow<List<ViewHolderTypesEntity.ExerciseInfo>>
+    //    @Query("SELECT * FROM table_exercise WHERE  deleted ==:flags AND idSet == :idSuperSet ORDER BY position DESC")
+    //    abstract fun getExercisesInfoBySuperSetIdAndFlagsFlow(
+    //        idSuperSet: Long,
+    //        flags: Boolean
+    //    ): Flow<List<ViewHolderTypesEntity.ExerciseInfo>>
+    //
+    //    @Query("SELECT * FROM table_exercise WHERE idTraining == :id AND deleted == :flags AND idSet is null ORDER BY position DESC")
+    //    abstract fun getExercisesInfoByTrainingIdAndFlagsFlow(
+    //        id: Long,
+    //        flags: Boolean
+    //    ): Flow<List<ViewHolderTypesEntity.ExerciseInfo>>
 }

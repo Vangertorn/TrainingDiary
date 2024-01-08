@@ -48,7 +48,7 @@ abstract class TrainingDao {
     ): List<TrainingEntity>
 
     @Transaction
-    open fun deletedTrainingsByFlags(flags: Boolean) {
+    open fun deletedTrainingsByFlag(flags: Boolean) {
         val list = getTrainingByFlags(flags)
         deleteTrainings(list)
     }

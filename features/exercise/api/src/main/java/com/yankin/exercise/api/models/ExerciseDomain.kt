@@ -1,4 +1,4 @@
-package com.yankin.models
+package com.yankin.exercise.api.models
 
 data class ExerciseDomain(
     val id: Long = 0,
@@ -7,5 +7,5 @@ data class ExerciseDomain(
     val position: Int = 0,
     val comment: String? = null,
     val deleted: Boolean = false,
-    val idSet: Long? = null
+    val idSet: Long? = null,
 )

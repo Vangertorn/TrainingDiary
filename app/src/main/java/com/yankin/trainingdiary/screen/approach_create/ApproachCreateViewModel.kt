@@ -6,13 +6,13 @@ import com.yankin.approach.api.usecases.GetCurrentApproachStreamUseCase
 import com.yankin.approach.api.usecases.SaveApproachUseCase
 import com.yankin.exercese_name.api.usecases.GetCurrentExerciseNameAsStringStreamUseCase
 import com.yankin.exercese_name.api.usecases.SaveExerciseNameUseCase
+import com.yankin.exercise.api.usecases.UpdateExerciseUseCase
 import com.yankin.preferences.AppSettings
 import com.yankin.trainingdiary.models.Approach
 import com.yankin.trainingdiary.models.Exercise
 import com.yankin.trainingdiary.models.ExerciseName
 import com.yankin.trainingdiary.models.converters.toDomain
 import com.yankin.trainingdiary.models.converters.toModel
-import com.yankin.trainingdiary.repository.ExerciseRepository
 import com.yankin.trainingdiary.support.CoroutineViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -22,13 +22,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ApproachCreateViewModel @Inject constructor(
-    private val exerciseRepository: ExerciseRepository,
     appSettings: AppSettings,
     getCurrentExerciseNameAsStringStreamUseCase: GetCurrentExerciseNameAsStringStreamUseCase,
     private val saveExerciseNameUseCase: SaveExerciseNameUseCase,
     getCurrentApproachStreamUseCase: GetCurrentApproachStreamUseCase,
     private val saveApproachUseCase: SaveApproachUseCase,
     private val deleteApproachUseCase: DeleteApproachUseCase,
+    private val updateExerciseUseCase: UpdateExerciseUseCase,
 ) :
     CoroutineViewModel() {
 
@@ -54,9 +54,7 @@ class ApproachCreateViewModel @Inject constructor(
 
     fun updateExercise(exercise: Exercise) {
         launch {
-            exerciseRepository.updateExercise(
-                exercise
-            )
+            updateExerciseUseCase.invoke(exercise.toDomain())
         }
     }
 
