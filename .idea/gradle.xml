@@ -4,10 +4,8 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="testRunner" value="GRADLE" />
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="liberica-11" />
+        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -19,23 +17,28 @@
             <option value="$PROJECT_DIR$/external" />
             <option value="$PROJECT_DIR$/external/preferences" />
             <option value="$PROJECT_DIR$/external/storage" />
-            <option value="$PROJECT_DIR$/external/storage/api" />
-            <option value="$PROJECT_DIR$/external/storage/impl" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/approach" />
             <option value="$PROJECT_DIR$/features/approach/api" />
             <option value="$PROJECT_DIR$/features/approach/impl" />
+            <option value="$PROJECT_DIR$/features/exercise" />
+            <option value="$PROJECT_DIR$/features/exercise/api" />
+            <option value="$PROJECT_DIR$/features/exercise/impl" />
             <option value="$PROJECT_DIR$/features/exercise_name" />
             <option value="$PROJECT_DIR$/features/exercise_name/api" />
             <option value="$PROJECT_DIR$/features/exercise_name/impl" />
             <option value="$PROJECT_DIR$/features/muscle_groups" />
             <option value="$PROJECT_DIR$/features/muscle_groups/api" />
             <option value="$PROJECT_DIR$/features/muscle_groups/impl" />
+            <option value="$PROJECT_DIR$/features/super_set" />
+            <option value="$PROJECT_DIR$/features/super_set/api" />
+            <option value="$PROJECT_DIR$/features/super_set/impl" />
             <option value="$PROJECT_DIR$/features/training" />
             <option value="$PROJECT_DIR$/features/training/api" />
             <option value="$PROJECT_DIR$/features/training/impl" />
           </set>
         </option>
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

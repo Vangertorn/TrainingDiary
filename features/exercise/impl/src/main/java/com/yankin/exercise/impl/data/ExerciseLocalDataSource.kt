@@ -9,9 +9,6 @@ import javax.inject.Inject
 internal class ExerciseLocalDataSource @Inject constructor(
     private val db: ExerciseDao
 ) {
-    fun getExerciseInfoFlow(exerciseId: Long): Flow<ExerciseEntity?> {
-        return db.getExerciseFlow(exerciseId)
-    }
 
     fun getExercisePositions(): MutableList<Int>? {
         return db.getExercisePositions()
@@ -25,12 +22,8 @@ internal class ExerciseLocalDataSource @Inject constructor(
         db.deletedExercisesByFlag(flag)
     }
 
-    fun deleteExerciseById(exerciseId: Long) {
-        db.deleteExerciseById(exerciseId)
-    }
-
     fun updateExerciseDeleteFlagById(exerciseId: Long, deleteFlag: Boolean) {
-        db.deleteExerciseById(exerciseId)
+        db.updateExerciseDeleteFlagById(exerciseId = exerciseId, deleteFlag = deleteFlag)
     }
 
     fun updateExercise(exercise: ExerciseEntity) {
@@ -59,5 +52,17 @@ internal class ExerciseLocalDataSource @Inject constructor(
         trainingId: Long,
     ): Flow<List<ExerciseEntity>> {
         return db.getExercisesByTrainingIdFlow(trainingId = trainingId, flags = false).filterNotNull()
+    }
+
+    fun getExerciseListBySuperSetId(
+        superSetId: Long,
+    ): List<ExerciseEntity> {
+        return db.getExercisesInfoBySuperSetId(superSetId = superSetId, flags = false)
+    }
+
+    fun getExerciseListBySuperSetIdStream(
+        superSetId: Long,
+    ): Flow<List<ExerciseEntity>> {
+        return db.getExercisesInfoBySuperSetIdFlow(superSetId = superSetId, flags = false)
     }
 }

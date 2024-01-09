@@ -7,10 +7,13 @@
       <module name="Training_diary.buildSrc.main" target="11" />
       <module name="Training_diary.buildSrc.test" target="11" />
       <module name="Training_diary.external.preferences" target="11" />
-      <module name="Training_diary.external.storage.impl" target="11" />
+      <module name="Training_diary.external.storage" target="11" />
       <module name="Training_diary.features.approach.impl" target="11" />
+      <module name="Training_diary.features.exercise.impl" target="11" />
+      <module name="Training_diary.features.exercise_info.impl" target="11" />
       <module name="Training_diary.features.exercise_name.impl" target="11" />
       <module name="Training_diary.features.muscle_groups.impl" target="11" />
+      <module name="Training_diary.features.super_set.impl" target="11" />
       <module name="Training_diary.features.training.impl" target="11" />
       <module name="TrainingDiary.buildSrc" target="11" />
     </bytecodeTargetLevel>

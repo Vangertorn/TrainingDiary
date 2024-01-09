@@ -16,7 +16,7 @@ android {
 
 dependencies {
 
-    implementation(project(":external:storage:impl"))
+    implementation(project(":external:storage"))
     implementation(project(":features:muscle_groups:api"))
     implementation(project(":core:coroutine"))
 

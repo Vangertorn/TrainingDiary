@@ -46,8 +46,7 @@ android {
 
 dependencies {
 
-    implementation(project(":external:storage:api"))
-    implementation(project(":external:storage:impl"))
+    implementation(project(":external:storage"))
     implementation(project(":features:muscle_groups:api"))
     implementation(project(":features:muscle_groups:impl"))
     implementation(project(":core:coroutine"))
@@ -60,6 +59,8 @@ dependencies {
     implementation(project(":external:preferences"))
     implementation(project(":features:exercise:api"))
     implementation(project(":features:exercise:impl"))
+    implementation(project(":features:super_set:api"))
+    implementation(project(":features:super_set:impl"))
 
     testImplementation(Dependencies.Test.testJunit)
     androidTestImplementation(Dependencies.Test.testExtension)
@@ -98,6 +99,6 @@ dependencies {
 
 }
 
-kapt{
+kapt {
     correctErrorTypes = true
 }

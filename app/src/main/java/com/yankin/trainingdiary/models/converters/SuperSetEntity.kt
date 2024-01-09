@@ -1,6 +1,6 @@
 package com.yankin.trainingdiary.models.converters
 
-import com.yankin.models.SuperSetDomain
+import com.yankin.super_set.api.models.SuperSetDomain
 import com.yankin.trainingdiary.models.SuperSet
 
 fun SuperSetDomain.toModel() = SuperSet(

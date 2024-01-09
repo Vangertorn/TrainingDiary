@@ -15,6 +15,10 @@ internal interface ExerciseRepository {
 
     suspend fun deletedExerciseFalse(exerciseId: Long)
 
+    suspend fun getExerciseListBySuperSetId(superSetId: Long): List<ExerciseDomain>
+
+    suspend fun getExerciseListBySuperSetIdStream(superSetId: Long): Flow<List<ExerciseDomain>>
+
     suspend fun deleteExercises()
 
     suspend fun deleteEmptyExercise()

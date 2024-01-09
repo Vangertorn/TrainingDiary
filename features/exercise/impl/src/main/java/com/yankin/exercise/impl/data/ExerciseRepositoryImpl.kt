@@ -5,7 +5,6 @@ import com.yankin.exercise.api.models.ExerciseDomain
 import com.yankin.exercise.impl.domain.repositories.ExerciseRepository
 import com.yankin.preferences.AppSettings
 import com.yankin.room.entity.ExerciseEntity
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
@@ -64,6 +63,22 @@ internal class ExerciseRepositoryImpl @Inject constructor(
             exerciseLocalDataSource.updateExerciseDeleteFlagById(
                 exerciseId = exerciseId, deleteFlag = false
             )
+        }
+    }
+
+    override suspend fun getExerciseListBySuperSetId(superSetId: Long): List<ExerciseDomain> {
+        return withContext(coroutineDispatchers.io) {
+            exerciseLocalDataSource.getExerciseListBySuperSetId(superSetId).map { exerciseEntity ->
+                exerciseEntity.toDomain()
+            }
+        }
+    }
+
+    override suspend fun getExerciseListBySuperSetIdStream(superSetId: Long): Flow<List<ExerciseDomain>> {
+        return exerciseLocalDataSource.getExerciseListBySuperSetIdStream(superSetId).map { exerciseEntityList ->
+            exerciseEntityList.map { exerciseEntity ->
+                exerciseEntity.toDomain()
+            }
         }
     }
 

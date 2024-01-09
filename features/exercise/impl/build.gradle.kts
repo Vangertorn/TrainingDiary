@@ -16,7 +16,7 @@ android {
 
 dependencies {
 
-    implementation(project(":external:storage:impl"))
+    implementation(project(":external:storage"))
     implementation(project(":external:preferences"))
     implementation(project(":features:exercise:api"))
     implementation(project(":core:coroutine"))
