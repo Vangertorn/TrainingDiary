@@ -87,7 +87,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/etReoccurrence" />
 
-    <com.yankin.trainingdiary.support.CalendarView
+    <com.yankin.common.custom_view.CalendarView
         android:id="@+id/calendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

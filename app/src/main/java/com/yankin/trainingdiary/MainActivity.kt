@@ -7,14 +7,22 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import androidx.navigation.createGraph
 import androidx.navigation.fragment.NavHostFragment
+import com.yankin.common.activity.SupportActivityInset
+import com.yankin.common.fragment.setWindowTransparency
+import com.yankin.navigation.NavigationNode
+import com.yankin.training_create.impl.navigation.TrainingCreateNavigationNode
+import com.yankin.training_list.impl.navigation.TrainingListNavigationNode
 import com.yankin.trainingdiary.databinding.ActivityMainBinding
-import com.yankin.trainingdiary.support.SupportActivityInset
-import com.yankin.trainingdiary.support.setWindowTransparency
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : SupportActivityInset<ActivityMainBinding>() {
+
+    @Inject
+    lateinit var navigationNodes: @JvmSuppressWildcards Set<NavigationNode>
 
     override lateinit var viewBinding: ActivityMainBinding
     private val navHostFragment by lazy { supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment }
@@ -27,6 +35,7 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>() {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
+        setupNavGraph()
         setWindowTransparency(this)
         viewModel.deletedTrainings()
         viewModel.deletedExercises()
@@ -54,6 +63,16 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>() {
     }
 
     override fun getActiveFragment(): Fragment? {
-        return navHostFragment.childFragmentManager.fragments[0]
+        return (supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment).childFragmentManager.fragments[0]
+    }
+
+    private fun setupNavGraph() {
+       navController.graph = navController.createGraph(
+            startDestination = TrainingListNavigationNode.ROUTE
+        ) {
+            navigationNodes.forEach { navNode ->
+                navNode.addNode(this)
+            }
+        }
     }
 }

@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.yankin.trainingdiary.R
 import com.yankin.trainingdiary.databinding.BottomSheetSeasonTicketBinding
-import com.yankin.trainingdiary.support.CalendarView
+import com.yankin.common.custom_view.CalendarView
 import com.yankin.trainingdiary.support.extensions.navigateSave
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay

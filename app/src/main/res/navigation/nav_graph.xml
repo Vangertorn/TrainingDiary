@@ -81,7 +81,7 @@
     </dialog>
     <dialog
         android:id="@+id/trainingCreateBottomDialog"
-        android:name="com.yankin.trainingdiary.screen.training_create.TrainingCreateBottomDialog"
+        android:name="com.yankin.training_create.impl.presentation.TrainingCreateBottomDialog"
         android:label="TrainingCreateBottomDialog"
         tools:layout="@layout/bottom_sheet_add_training">
 

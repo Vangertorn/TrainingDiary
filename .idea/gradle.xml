@@ -36,6 +36,15 @@
             <option value="$PROJECT_DIR$/features/training" />
             <option value="$PROJECT_DIR$/features/training/api" />
             <option value="$PROJECT_DIR$/features/training/impl" />
+            <option value="$PROJECT_DIR$/navigation" />
+            <option value="$PROJECT_DIR$/screens" />
+            <option value="$PROJECT_DIR$/screens/common" />
+            <option value="$PROJECT_DIR$/screens/training_create" />
+            <option value="$PROJECT_DIR$/screens/training_create/api" />
+            <option value="$PROJECT_DIR$/screens/training_create/impl" />
+            <option value="$PROJECT_DIR$/screens/training_list" />
+            <option value="$PROJECT_DIR$/screens/training_list/api" />
+            <option value="$PROJECT_DIR$/screens/training_list/impl" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

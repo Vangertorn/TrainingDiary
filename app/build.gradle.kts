@@ -61,6 +61,12 @@ dependencies {
     implementation(project(":features:exercise:impl"))
     implementation(project(":features:super_set:api"))
     implementation(project(":features:super_set:impl"))
+    implementation(project(":screens:training_list:api"))
+    implementation(project(":screens:training_list:impl"))
+    implementation(project(":screens:training_create:api"))
+    implementation(project(":screens:training_create:impl"))
+    implementation(project(":navigation"))
+    implementation(project(":screens:common"))
 
     testImplementation(Dependencies.Test.testJunit)
     androidTestImplementation(Dependencies.Test.testExtension)
@@ -88,15 +94,11 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-common-java8:2.6.2")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
 
     implementation("androidx.fragment:fragment-ktx:1.6.2")
 
     implementation("com.github.kirich1409:viewbindingpropertydelegate:1.4.6")
-
-    implementation("com.google.android.material:material:1.10.0")
-
 }
 
 kapt {
