@@ -1,12 +1,12 @@
-package com.yankin.trainingdiary.screen.exercise_autofill
+package com.yankin.settings.impl.presentation.exercise_autofill
 
 import androidx.lifecycle.asLiveData
+import com.yankin.common.viewmodel.CoroutineViewModel
 import com.yankin.exercese_name.api.usecases.DeleteExerciseNameUseCase
 import com.yankin.exercese_name.api.usecases.GetCurrentExerciseNameStreamUseCase
 import com.yankin.exercese_name.api.usecases.UpdateExerciseNameUseCase
-import com.yankin.trainingdiary.models.ExerciseName
-import com.yankin.trainingdiary.models.converters.toDomain
-import com.yankin.trainingdiary.support.CoroutineViewModel
+import com.yankin.settings.impl.presentation.ExerciseName
+import com.yankin.settings.impl.presentation.toDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

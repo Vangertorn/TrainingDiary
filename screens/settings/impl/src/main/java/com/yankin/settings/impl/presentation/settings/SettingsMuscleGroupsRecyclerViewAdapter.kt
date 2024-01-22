@@ -1,4 +1,4 @@
-package com.yankin.trainingdiary.screen.settings
+package com.yankin.settings.impl.presentation.settings
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.yankin.trainingdiary.R
-import com.yankin.trainingdiary.models.MuscleGroup
+import com.yankin.settings.impl.presentation.MuscleGroup
+import com.yankin.trainingdiary.settings.impl.R
 
 class SettingsMuscleGroupsRecyclerViewAdapter(private val onClick: (MuscleGroup) -> Unit) :
     ListAdapter<MuscleGroup, SettingsMuscleGroupsRecyclerViewAdapter.MuscleGroupViewHolder>(

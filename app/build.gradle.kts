@@ -65,6 +65,8 @@ dependencies {
     implementation(project(":screens:training_list:impl"))
     implementation(project(":screens:training_create:api"))
     implementation(project(":screens:training_create:impl"))
+    implementation(project(":screens:settings:api"))
+    implementation(project(":screens:settings:impl"))
     implementation(project(":navigation"))
     implementation(project(":screens:common"))
 

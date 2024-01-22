@@ -39,6 +39,9 @@
             <option value="$PROJECT_DIR$/navigation" />
             <option value="$PROJECT_DIR$/screens" />
             <option value="$PROJECT_DIR$/screens/common" />
+            <option value="$PROJECT_DIR$/screens/settings" />
+            <option value="$PROJECT_DIR$/screens/settings/api" />
+            <option value="$PROJECT_DIR$/screens/settings/impl" />
             <option value="$PROJECT_DIR$/screens/training_create" />
             <option value="$PROJECT_DIR$/screens/training_create/api" />
             <option value="$PROJECT_DIR$/screens/training_create/impl" />

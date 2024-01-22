@@ -12,6 +12,7 @@ import com.yankin.common.fragment.SupportFragmentInset
 import com.yankin.common.fragment.VerticalInset
 import com.yankin.common.recyclerview.SwipeCallback
 import com.yankin.common.view.setVerticalMargin
+import com.yankin.settings.api.navigation.SettingsCommunicator
 import com.yankin.training_create.api.navigation.TrainingCreateCommunicator
 import com.yankin.training_create.api.navigation.TrainingCreateParams
 import com.yankin.training_list.impl.presentation.adapter.TrainingRecyclerViewAdapter
@@ -25,6 +26,9 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
 
     @Inject
     lateinit var trainingCreateCommunicator: TrainingCreateCommunicator
+
+    @Inject
+    lateinit var settingsCommunicator: SettingsCommunicator
 
     override lateinit var viewBinding: FragmentTrainingListBinding
 
@@ -121,7 +125,7 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
             }
         }
         viewBinding.settingsTrainingList.setOnClickListener {
-//            findNavController().navigateSave(TrainingListFragmentDirections.actionTrainingListFragmentToSettingsFragment())
+            settingsCommunicator.navigateTo()
         }
         viewModel.switchOrderLiveData.observe(this.viewLifecycleOwner) { boolean ->
             if (boolean) {

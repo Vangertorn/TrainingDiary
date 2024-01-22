@@ -12,7 +12,6 @@ import androidx.navigation.fragment.NavHostFragment
 import com.yankin.common.activity.SupportActivityInset
 import com.yankin.common.fragment.setWindowTransparency
 import com.yankin.navigation.NavigationNode
-import com.yankin.training_create.impl.navigation.TrainingCreateNavigationNode
 import com.yankin.training_list.impl.navigation.TrainingListNavigationNode
 import com.yankin.trainingdiary.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint

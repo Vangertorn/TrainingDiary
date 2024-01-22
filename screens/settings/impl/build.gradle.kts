@@ -10,7 +10,7 @@ plugins {
 
 android {
     compileSdk = 33
-    namespace  = "com.yankin.trainingdiary.training_list.impl"
+    namespace  = "com.yankin.trainingdiary.settings.impl"
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -33,9 +33,9 @@ dependencies {
     implementation(project(":external:preferences"))
     implementation(project(":navigation"))
     implementation(project(":screens:common"))
-    implementation(project(":screens:training_list:api"))
     implementation(project(":screens:training_create:api"))
     implementation(project(":features:muscle_groups:api"))
+    implementation(project(":features:exercise_name:api"))
     implementation(project(":screens:settings:api"))
 
     implementation(Dependencies.Hilt.android)

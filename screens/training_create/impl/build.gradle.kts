@@ -10,7 +10,7 @@ plugins {
 
 android {
     compileSdk = 33
-    namespace  = "com.yankin.trainingdiary.training_crate.impl"
+    namespace  = "com.yankin.trainingdiary.training_create.impl"
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8

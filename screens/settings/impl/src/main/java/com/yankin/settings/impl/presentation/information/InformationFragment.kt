@@ -1,22 +1,33 @@
-package com.yankin.trainingdiary.screen.information
+package com.yankin.settings.impl.presentation.information
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import by.kirich1409.viewbindingdelegate.viewBinding
-import com.yankin.trainingdiary.R
-import com.yankin.trainingdiary.databinding.FragmentInformationBinding
-import com.yankin.trainingdiary.support.SupportFragmentInset
-import com.yankin.trainingdiary.support.extensions.setVerticalMargin
+import com.yankin.common.fragment.SupportFragmentInset
+import com.yankin.common.view.setVerticalMargin
+import com.yankin.trainingdiary.settings.impl.R
+import com.yankin.trainingdiary.settings.impl.databinding.FragmentInformationBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class InformationFragment :
-    SupportFragmentInset<FragmentInformationBinding>(R.layout.fragment_information) {
-    override val viewBinding: FragmentInformationBinding by viewBinding()
+class InformationFragment : SupportFragmentInset<FragmentInformationBinding>(R.layout.fragment_information) {
+    override lateinit var viewBinding: FragmentInformationBinding
     private val viewModel: InformationViewModel by viewModels()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        viewBinding = FragmentInformationBinding.bind(
+            LayoutInflater.from(context).inflate(R.layout.fragment_information, container, false)
+        )
+        return viewBinding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

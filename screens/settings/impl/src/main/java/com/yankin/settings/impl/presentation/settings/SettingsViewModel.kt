@@ -1,16 +1,16 @@
-package com.yankin.trainingdiary.screen.settings
+package com.yankin.settings.impl.presentation.settings
 
 import android.content.Context
 import androidx.lifecycle.asLiveData
+import com.yankin.common.viewmodel.CoroutineViewModel
 import com.yankin.muscle_groups.api.usecases.DeleteMuscleGroupUseCase
 import com.yankin.muscle_groups.api.usecases.GetCurrentMuscleGroupStreamUseCase
 import com.yankin.muscle_groups.api.usecases.RecoverDefaultMuscleGroupListUseCase
 import com.yankin.muscle_groups.api.usecases.SaveMuscleGroupUseCase
-import com.yankin.trainingdiary.R
 import com.yankin.preferences.AppSettings
-import com.yankin.trainingdiary.models.MuscleGroup
-import com.yankin.trainingdiary.models.converters.toDomain
-import com.yankin.trainingdiary.support.CoroutineViewModel
+import com.yankin.settings.impl.presentation.MuscleGroup
+import com.yankin.settings.impl.presentation.toDomain
+import com.yankin.trainingdiary.settings.impl.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch

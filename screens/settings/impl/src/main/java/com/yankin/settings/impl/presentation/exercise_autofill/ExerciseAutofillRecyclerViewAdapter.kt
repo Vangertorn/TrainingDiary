@@ -1,4 +1,4 @@
-package com.yankin.trainingdiary.screen.exercise_autofill
+package com.yankin.settings.impl.presentation.exercise_autofill
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.yankin.trainingdiary.R
-import com.yankin.trainingdiary.models.ExerciseName
+import com.yankin.settings.impl.presentation.ExerciseName
+import com.yankin.trainingdiary.settings.impl.R
 
 class ExerciseAutofillRecyclerViewAdapter(private val onClick: (ExerciseName) -> Unit) :
     ListAdapter<ExerciseName, ExerciseAutofillRecyclerViewAdapter.ExerciseAutofillViewHolder>(

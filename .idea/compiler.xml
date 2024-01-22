@@ -17,6 +17,7 @@
       <module name="Training_diary.features.training.impl" target="11" />
       <module name="Training_diary.navigation" target="11" />
       <module name="Training_diary.screens.common" target="11" />
+      <module name="Training_diary.screens.settings.impl" target="11" />
       <module name="Training_diary.screens.training_create.impl" target="11" />
       <module name="Training_diary.screens.training_flow.impl" target="11" />
       <module name="Training_diary.screens.training_list.impl" target="11" />

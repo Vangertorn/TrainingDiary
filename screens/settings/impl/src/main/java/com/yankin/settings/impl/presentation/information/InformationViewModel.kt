@@ -1,6 +1,6 @@
-package com.yankin.trainingdiary.screen.information
+package com.yankin.settings.impl.presentation.information
 
-import com.yankin.trainingdiary.support.CoroutineViewModel
+import com.yankin.common.viewmodel.CoroutineViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

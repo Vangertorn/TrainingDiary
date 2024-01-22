@@ -17,8 +17,6 @@ object ActivityModule {
     @Provides
     fun provideNavController(@ActivityContext activityContext: Context): NavController {
         val activity = activityContext as FragmentActivity
-        println("TAG1 activity - $activity")
-        println("TAG1 navHostFragment - ${activity.supportFragmentManager.findFragmentById(R.id.navHostFragment)}")
         val navHostFragment =
             activity.supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         return navHostFragment.navController

@@ -1,31 +1,40 @@
-package com.yankin.trainingdiary.screen.settings
+package com.yankin.settings.impl.presentation.settings
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.yankin.trainingdiary.R
-import com.yankin.trainingdiary.databinding.FragmentSettingsBinding
-import com.yankin.trainingdiary.models.MuscleGroup
-import com.yankin.trainingdiary.models.converters.toModel
-import com.yankin.trainingdiary.support.SupportFragmentInset
-import com.yankin.trainingdiary.support.extensions.addDouble
-import com.yankin.trainingdiary.support.extensions.addInt
-import com.yankin.trainingdiary.support.extensions.hideKeyboard
-import com.yankin.trainingdiary.support.extensions.navigateSave
-import com.yankin.trainingdiary.support.extensions.removeDouble
-import com.yankin.trainingdiary.support.extensions.removeInt
-import com.yankin.trainingdiary.support.extensions.setVerticalMargin
+import com.yankin.common.addDouble
+import com.yankin.common.addInt
+import com.yankin.common.fragment.SupportFragmentInset
+import com.yankin.common.hideKeyboard
+import com.yankin.common.removeDouble
+import com.yankin.common.removeInt
+import com.yankin.common.view.setVerticalMargin
+import com.yankin.navigation.navigateToDestination
+import com.yankin.settings.impl.navigation.SettingsNavigationNode.Companion.EXERCISE_AUTOFILL_FRAGMENT_DESTINATION
+import com.yankin.settings.impl.navigation.SettingsNavigationNode.Companion.INFORMATION_FRAGMENT_DESTINATION
+import com.yankin.settings.impl.presentation.MuscleGroup
+import com.yankin.settings.impl.presentation.toModel
+import com.yankin.trainingdiary.settings.impl.R
+import com.yankin.trainingdiary.settings.impl.databinding.FragmentSettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.fragment_settings) {
-    override val viewBinding: FragmentSettingsBinding by viewBinding()
+
+    @Inject
+    lateinit var navController: NavController
+
+    override lateinit var viewBinding: FragmentSettingsBinding
     private val viewModel: SettingsViewModel by viewModels()
     private val adapter = SettingsMuscleGroupsRecyclerViewAdapter(
         onClick = { muscleGroup ->
@@ -47,11 +56,25 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
         }
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        viewBinding = FragmentSettingsBinding.bind(
+            LayoutInflater.from(context).inflate(R.layout.fragment_settings, container, false)
+        )
+        return viewBinding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewBinding.ivInformation.setOnClickListener {
-            findNavController().navigateSave(SettingsFragmentDirections.actionSettingsFragmentToInformationFragment())
+            navController.navigateToDestination(
+                destinationRoute = INFORMATION_FRAGMENT_DESTINATION,
+                args = null
+            )
         }
 
         viewBinding.ivReturnSettings.setOnClickListener {
@@ -87,8 +110,9 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
         }
 
         viewBinding.tvAutofill.setOnClickListener {
-            findNavController().navigateSave(
-                SettingsFragmentDirections.actionSettingsFragmentToExerciseAutofillFragment()
+            navController.navigateToDestination(
+                destinationRoute = EXERCISE_AUTOFILL_FRAGMENT_DESTINATION,
+                args = null
             )
         }
 
@@ -134,7 +158,7 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
 
     private fun addValues() {
         if (viewBinding.etReoccurrence.text.toString()
-            .isBlank() && viewBinding.etWeight.text.toString().isBlank()
+                .isBlank() && viewBinding.etWeight.text.toString().isBlank()
         ) {
             Toast.makeText(
                 this.context,
@@ -142,7 +166,7 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
                 Toast.LENGTH_SHORT
             ).show()
         } else if (viewBinding.etReoccurrence.text.toString()
-            .isNotBlank() && viewBinding.etWeight.text.toString()
+                .isNotBlank() && viewBinding.etWeight.text.toString()
                 .isBlank()
         ) {
 
@@ -154,7 +178,7 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
                 Toast.LENGTH_SHORT
             ).show()
         } else if (viewBinding.etWeight.text.toString()
-            .isNotBlank() && viewBinding.etReoccurrence.text.toString().isBlank()
+                .isNotBlank() && viewBinding.etReoccurrence.text.toString().isBlank()
         ) {
 
             viewModel.saveWeight(viewBinding.etWeight.text.toString())
