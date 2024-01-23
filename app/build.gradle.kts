@@ -67,6 +67,8 @@ dependencies {
     implementation(project(":screens:training_create:impl"))
     implementation(project(":screens:settings:api"))
     implementation(project(":screens:settings:impl"))
+    implementation(project(":screens:season_ticket:api"))
+    implementation(project(":screens:season_ticket:impl"))
     implementation(project(":navigation"))
     implementation(project(":screens:common"))
 

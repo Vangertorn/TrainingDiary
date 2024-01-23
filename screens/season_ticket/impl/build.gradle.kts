@@ -10,7 +10,7 @@ plugins {
 
 android {
     compileSdk = 33
-    namespace  = "com.yankin.trainingdiary.training_list.impl"
+    namespace  = "com.yankin.trainingdiary.season_ticket.impl"
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -28,16 +28,11 @@ android {
 
 dependencies {
 
-    implementation(project(":features:training:api"))
+    implementation(project(":screens:season_ticket:api"))
     implementation(project(":core:coroutine"))
     implementation(project(":external:preferences"))
     implementation(project(":navigation"))
     implementation(project(":screens:common"))
-    implementation(project(":screens:training_list:api"))
-    implementation(project(":screens:training_create:api"))
-    implementation(project(":features:muscle_groups:api"))
-    implementation(project(":screens:settings:api"))
-    implementation(project(":screens:season_ticket:api"))
 
     implementation(Dependencies.Hilt.android)
     kapt(Dependencies.Hilt.compiler)

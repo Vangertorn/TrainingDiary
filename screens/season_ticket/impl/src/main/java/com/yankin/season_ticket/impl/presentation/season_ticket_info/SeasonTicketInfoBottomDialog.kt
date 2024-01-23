@@ -1,18 +1,19 @@
-package com.yankin.trainingdiary.screen.season_ticket_info
+package com.yankin.season_ticket.impl.presentation.season_ticket_info
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.yankin.trainingdiary.R
-import com.yankin.trainingdiary.databinding.BottomSheetSeasonTicketInformationBinding
-import com.yankin.trainingdiary.support.extensions.navigateSave
+import com.yankin.trainingdiary.season_ticket.impl.R
+import com.yankin.trainingdiary.season_ticket.impl.databinding.BottomSheetSeasonTicketInformationBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SeasonTicketInfoBottomDialog : BottomSheetDialogFragment() {
@@ -56,7 +57,7 @@ class SeasonTicketInfoBottomDialog : BottomSheetDialogFragment() {
             runBlocking {
                 viewModel.resetSeasonTicket()
                 delay(50)
-                findNavController().navigateSave(SeasonTicketInfoBottomDialogDirections.actionSeasonTicketInfoBottomDialogToTrainingListFragment())
+                dismiss()
             }
         }
         viewBinding.tvDaysAmount.text = viewModel.daysAmount()

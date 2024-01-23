@@ -1,8 +1,8 @@
-package com.yankin.trainingdiary.screen.season_ticket
+package com.yankin.season_ticket.impl.presentation.season_ticket
 
 import android.annotation.SuppressLint
+import com.yankin.common.viewmodel.CoroutineViewModel
 import com.yankin.preferences.AppSettings
-import com.yankin.trainingdiary.support.CoroutineViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat

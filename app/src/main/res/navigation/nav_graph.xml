@@ -128,7 +128,7 @@
     </dialog>
     <dialog
         android:id="@+id/seasonTicketBottomDialog"
-        android:name="com.yankin.trainingdiary.screen.season_ticket.SeasonTicketBottomDialog"
+        android:name="com.yankin.season_ticket.impl.presentation.season_ticket.SeasonTicketBottomDialog"
         android:label="SeasonTicketBottomDialog"
         tools:layout="@layout/bottom_sheet_season_ticket">
         <action
@@ -139,7 +139,7 @@
     </dialog>
     <dialog
         android:id="@+id/seasonTicketInfoBottomDialog"
-        android:name="com.yankin.trainingdiary.screen.season_ticket_info.SeasonTicketInfoBottomDialog"
+        android:name="com.yankin.season_ticket.impl.presentation.season_ticket_info.SeasonTicketInfoBottomDialog"
         android:label="SeasonTicketInfoBottomDialog"
         tools:layout="@layout/bottom_sheet_season_ticket_information">
         <action

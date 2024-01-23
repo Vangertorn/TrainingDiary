@@ -12,6 +12,7 @@ import com.yankin.common.fragment.SupportFragmentInset
 import com.yankin.common.fragment.VerticalInset
 import com.yankin.common.recyclerview.SwipeCallback
 import com.yankin.common.view.setVerticalMargin
+import com.yankin.season_ticket.api.navigation.SeasonTicketCommunicator
 import com.yankin.settings.api.navigation.SettingsCommunicator
 import com.yankin.training_create.api.navigation.TrainingCreateCommunicator
 import com.yankin.training_create.api.navigation.TrainingCreateParams
@@ -29,6 +30,9 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
 
     @Inject
     lateinit var settingsCommunicator: SettingsCommunicator
+
+    @Inject
+    lateinit var seasonTicketCommunicator: SeasonTicketCommunicator
 
     override lateinit var viewBinding: FragmentTrainingListBinding
 
@@ -119,9 +123,9 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
             if (viewModel.numberOfTrainingSessions() == -1 && viewModel.subscriptionEndDate()
                 .isEmpty()
             ) {
-//                findNavController().navigateSave(TrainingListFragmentDirections.actionTrainingListFragmentToSeasonTicketBottomDialog())
+                seasonTicketCommunicator.navigateToSeasonTicket()
             } else {
-//                findNavController().navigateSave(TrainingListFragmentDirections.actionTrainingListFragmentToSeasonTicketInfoBottomDialog())
+                seasonTicketCommunicator.navigateToSeasonTicketInfo()
             }
         }
         viewBinding.settingsTrainingList.setOnClickListener {
