@@ -12,6 +12,8 @@ import com.yankin.common.fragment.SupportFragmentInset
 import com.yankin.common.fragment.VerticalInset
 import com.yankin.common.recyclerview.SwipeCallback
 import com.yankin.common.view.setVerticalMargin
+import com.yankin.exercise_list.api.navigation.ExerciseListCommunicator
+import com.yankin.exercise_list.api.navigation.ExerciseListParams
 import com.yankin.season_ticket.api.navigation.SeasonTicketCommunicator
 import com.yankin.settings.api.navigation.SettingsCommunicator
 import com.yankin.training_create.api.navigation.TrainingCreateCommunicator
@@ -34,6 +36,9 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
     @Inject
     lateinit var seasonTicketCommunicator: SeasonTicketCommunicator
 
+    @Inject
+    lateinit var exerciseListCommunicator: ExerciseListCommunicator
+
     override lateinit var viewBinding: FragmentTrainingListBinding
 
     private val viewModel: TrainingListViewModel by viewModels()
@@ -41,11 +46,18 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
     private val adapter = TrainingRecyclerViewAdapter(
         onClick = { training ->
             viewModel.rememberIdTraining(training)
-//            findNavController().navigateSave(
-//                TrainingListFragmentDirections.actionTrainingListFragmentToExerciseListFragment(
-//                    training
-//                )
-//            )
+            exerciseListCommunicator.navigateTo(
+                params = ExerciseListParams(
+                    trainingId = training.id,
+                    date = training.date,
+                    muscleGroups = training.muscleGroups,
+                    comment = training.comment,
+                    weight = training.weight,
+                    position = training.position,
+                    deleted = training.deleted,
+                    selectedMuscleGroup = training.selectedMuscleGroup,
+                )
+            )
         }
     )
 
@@ -116,7 +128,7 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
         viewBinding.recyclerViewTraining.adapter = adapter
 
         viewBinding.btnAdd.setOnClickListener {
-            trainingCreateCommunicator.navigateTo(TrainingCreateParams(null))
+            trainingCreateCommunicator.navigateTo(TrainingCreateParams.CreateTraining)
         }
 
         viewBinding.subscriptionTrainingList.setOnClickListener {

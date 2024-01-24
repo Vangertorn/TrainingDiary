@@ -28,13 +28,14 @@ android {
 
 dependencies {
 
-    implementation(project(":features:training:api"))
     implementation(project(":core:coroutine"))
     implementation(project(":external:preferences"))
     implementation(project(":navigation"))
+    implementation(project(":features:training:api"))
+    implementation(project(":features:muscle_groups:api"))
     implementation(project(":screens:common"))
     implementation(project(":screens:training_create:api"))
-    implementation(project(":features:muscle_groups:api"))
+    implementation(project(":screens:exercise_list:api"))
 
     implementation(Dependencies.Hilt.android)
     kapt(Dependencies.Hilt.compiler)

@@ -69,6 +69,12 @@ dependencies {
     implementation(project(":screens:settings:impl"))
     implementation(project(":screens:season_ticket:api"))
     implementation(project(":screens:season_ticket:impl"))
+    implementation(project(":screens:approach_create:api"))
+    implementation(project(":screens:approach_create:impl"))
+    implementation(project(":screens:exercise_create:api"))
+    implementation(project(":screens:exercise_create:impl"))
+    implementation(project(":screens:exercise_list:api"))
+    implementation(project(":screens:exercise_list:impl"))
     implementation(project(":navigation"))
     implementation(project(":screens:common"))
 
@@ -91,7 +97,6 @@ dependencies {
     implementation(Dependencies.Navigation.navigationFragment)
     implementation(Dependencies.Navigation.navigationUi)
 
-    implementation("com.google.code.gson:gson:2.10.1")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
@@ -101,8 +106,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
 
     implementation("androidx.fragment:fragment-ktx:1.6.2")
-
-    implementation("com.github.kirich1409:viewbindingpropertydelegate:1.4.6")
 }
 
 kapt {
