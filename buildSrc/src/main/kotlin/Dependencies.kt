@@ -42,4 +42,10 @@ object Dependencies {
         const val kotlinExtensions = "androidx.room:room-ktx:$version"
         const val room = "androidx.room:room-runtime:$version"
     }
+
+    object AppCompatUi {
+        const val appCompat = "androidx.appcompat:appcompat:1.6.1"
+        const val material = "com.google.android.material:material:1.10.0"
+        const val constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
+    }
 }

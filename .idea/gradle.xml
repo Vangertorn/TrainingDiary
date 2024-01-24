@@ -36,6 +36,30 @@
             <option value="$PROJECT_DIR$/features/training" />
             <option value="$PROJECT_DIR$/features/training/api" />
             <option value="$PROJECT_DIR$/features/training/impl" />
+            <option value="$PROJECT_DIR$/navigation" />
+            <option value="$PROJECT_DIR$/screens" />
+            <option value="$PROJECT_DIR$/screens/approach_create" />
+            <option value="$PROJECT_DIR$/screens/approach_create/api" />
+            <option value="$PROJECT_DIR$/screens/approach_create/impl" />
+            <option value="$PROJECT_DIR$/screens/common" />
+            <option value="$PROJECT_DIR$/screens/exercise_create" />
+            <option value="$PROJECT_DIR$/screens/exercise_create/api" />
+            <option value="$PROJECT_DIR$/screens/exercise_create/impl" />
+            <option value="$PROJECT_DIR$/screens/exercise_list" />
+            <option value="$PROJECT_DIR$/screens/exercise_list/api" />
+            <option value="$PROJECT_DIR$/screens/exercise_list/impl" />
+            <option value="$PROJECT_DIR$/screens/season_ticket" />
+            <option value="$PROJECT_DIR$/screens/season_ticket/api" />
+            <option value="$PROJECT_DIR$/screens/season_ticket/impl" />
+            <option value="$PROJECT_DIR$/screens/settings" />
+            <option value="$PROJECT_DIR$/screens/settings/api" />
+            <option value="$PROJECT_DIR$/screens/settings/impl" />
+            <option value="$PROJECT_DIR$/screens/training_create" />
+            <option value="$PROJECT_DIR$/screens/training_create/api" />
+            <option value="$PROJECT_DIR$/screens/training_create/impl" />
+            <option value="$PROJECT_DIR$/screens/training_list" />
+            <option value="$PROJECT_DIR$/screens/training_list/api" />
+            <option value="$PROJECT_DIR$/screens/training_list/impl" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

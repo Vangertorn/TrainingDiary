@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.yankin.common.custom_view.CalendarView
+        android:id="@+id/calendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:ivLeft_color="@color/crimson"
+        app:ivRight_color="@color/crimson"
+        app:layout_constraintBottom_toTopOf="@+id/rvMuscleCroups"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:month_text_color="@color/crimson"
+        app:month_text_size="20sp"
+        app:selected_day_background="@drawable/background_color"
+        app:selected_day_text_color="@color/white"
+        app:today_background="@drawable/background_today_calendar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMuscleCroups"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/tvText1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_muscle_groups" />
+
+    <EditText
+        android:id="@+id/etComment_create_training"
+        style="@style/EditTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/optional"
+        android:importantForAutofill="no"
+        android:inputType="textAutoCorrect"
+        app:layout_constraintBottom_toTopOf="@id/confirm_create_training"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="@string/comment"
+        app:layout_constraintBottom_toTopOf="@id/etComment_create_training"
+        app:layout_constraintStart_toStartOf="@id/etComment_create_training" />
+
+    <TextView
+        android:id="@+id/tvText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="@string/your_weight_kg"
+        app:layout_constraintBottom_toTopOf="@id/etWeight_create_training"
+        app:layout_constraintStart_toStartOf="@id/etWeight_create_training" />
+
+    <EditText
+        android:id="@+id/etWeight_create_training"
+        style="@style/EditWeightStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:hint="@string/optional"
+        android:importantForAutofill="no"
+        app:layout_constraintBottom_toTopOf="@id/tvText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/confirm_create_training"
+        style="@style/MyButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
