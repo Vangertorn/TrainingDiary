@@ -20,6 +20,7 @@ import com.yankin.common.chekDoubleEmpty
 import com.yankin.common.chekIntEmpty
 import com.yankin.common.removeDouble
 import com.yankin.common.removeInt
+import com.yankin.common.resource_import.CommonRString
 import com.yankin.navigation.BundleParcelable
 import com.yankin.trainingdiary.approach_create.impl.R
 import com.yankin.trainingdiary.approach_create.impl.databinding.BottomSheetAddApproachBinding
@@ -113,7 +114,7 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
             } else {
                 Toast.makeText(
                     this.context,
-                    getString(R.string.exercise_name_is_empty),
+                    getString(CommonRString.exercise_name_is_empty),
                     Toast.LENGTH_SHORT
                 ).show()
             }

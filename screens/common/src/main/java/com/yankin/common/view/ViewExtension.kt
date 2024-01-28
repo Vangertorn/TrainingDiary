@@ -24,3 +24,9 @@ fun View.addVerticalMargin(marginTop: Int = 0, marginBottom: Int = 0) {
     )
     this.layoutParams = _layoutParams
 }
+
+fun View.removeFromParent() {
+    if (parent != null) {
+        (parent as ViewGroup).removeView(this)
+    }
+}

@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.yankin.common.fragment.SupportFragmentInset
 import com.yankin.common.fragment.VerticalInset
 import com.yankin.common.recyclerview.SwipeCallback
+import com.yankin.common.resource_import.CommonRString
 import com.yankin.common.view.setVerticalMargin
 import com.yankin.exercise_list.api.navigation.ExerciseListCommunicator
 import com.yankin.exercise_list.api.navigation.ExerciseListParams
@@ -186,10 +187,10 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
 
         Snackbar.make(
             viewBinding.recyclerViewTraining,
-            getString(R.string.training_was_delete),
+            getString(CommonRString.training_was_delete),
             Snackbar.LENGTH_LONG
         )
-            .setAction(getString(R.string.undo)) {
+            .setAction(getString(CommonRString.undo)) {
                 viewModel.deletedTrainingFalse(training)
             }.apply {
                 this.view.translationY = -savedInsets.bottom.toFloat()

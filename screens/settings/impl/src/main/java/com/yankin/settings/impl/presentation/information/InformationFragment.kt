@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.yankin.common.fragment.SupportFragmentInset
+import com.yankin.common.resource_import.CommonRString
 import com.yankin.common.view.setVerticalMargin
 import com.yankin.trainingdiary.settings.impl.R
 import com.yankin.trainingdiary.settings.impl.databinding.FragmentInformationBinding
@@ -35,7 +36,7 @@ class InformationFragment : SupportFragmentInset<FragmentInformationBinding>(R.l
         viewBinding.toolbarInfo.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
-        viewBinding.tvLink.text = getString(R.string.email_address)
+        viewBinding.tvLink.text = getString(CommonRString.email_address)
 
         viewBinding.tvLink.setOnClickListener {
             sendMail()
@@ -50,8 +51,8 @@ class InformationFragment : SupportFragmentInset<FragmentInformationBinding>(R.l
     private fun sendMail() {
         val intent = Intent(Intent.ACTION_SEND)
         intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("Vangertorn@yandex.ru"))
-        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.subject))
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(CommonRString.subject))
         intent.type = "message/rfc822"
-        startActivity(Intent.createChooser(intent, getString(R.string.Chose_an_email_client)))
+        startActivity(Intent.createChooser(intent, getString(CommonRString.Chose_an_email_client)))
     }
 }

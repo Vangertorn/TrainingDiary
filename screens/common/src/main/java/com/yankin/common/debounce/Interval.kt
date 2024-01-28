@@ -1,0 +1,16 @@
+package com.yankin.common.debounce
+
+enum class Interval(val delay: Long) {
+    INTERVAL_0(0),
+    INTERVAL_100(100L),
+    INTERVAL_200(200L),
+    INTERVAL_400(400L),
+    INTERVAL_500(500L),
+    INTERVAL_600(600L),
+    INTERVAL_750(750L),
+    INTERVAL_1000(1000L),
+    INTERVAL_1500(1500L),
+    INTERVAL_2000(2000L),
+    INTERVAL_2500(2500L),
+    INTERVAL_5000(5000L),
+}

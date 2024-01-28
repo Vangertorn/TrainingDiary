@@ -3,9 +3,9 @@ package com.yankin.season_ticket.impl.presentation.season_ticket_info
 import android.annotation.SuppressLint
 import android.content.res.Resources
 import androidx.lifecycle.asLiveData
+import com.yankin.common.resource_import.CommonRString
 import com.yankin.common.viewmodel.CoroutineViewModel
 import com.yankin.preferences.AppSettings
-import com.yankin.trainingdiary.season_ticket.impl.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -37,7 +37,7 @@ class SeasonTicketInfoViewModel @Inject constructor(private val appSettings: App
             val currentDate = Date().time
             val result = dateEnd - currentDate
             return@runBlocking if (dayFormatter.format(result).equals("0")) {
-                Resources.getSystem().getString(R.string.last_day)
+                Resources.getSystem().getString(CommonRString.last_day)
             } else {
                 if (dayFormatter.format(dateEnd).equals("1")) {
                     "ထ"

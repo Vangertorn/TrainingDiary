@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="crimson">#d43b85</color>
     <color name="inactive">#56000000</color>
+
+    <color name="transparent">#00000000</color>
 </resources>

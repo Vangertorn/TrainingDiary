@@ -26,6 +26,8 @@ android {
 
 dependencies {
 
+    implementation(project(":features:theme:api"))
+
     implementation(Dependencies.AppCompatUi.appCompat)
     implementation(Dependencies.AppCompatUi.material)
     implementation(Dependencies.AppCompatUi.constraintlayout)

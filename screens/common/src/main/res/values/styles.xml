@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- BottomSheet Style -->
+    <style name="Widget.TrainingDiary.BottomSheet" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="android:background">@color/transparent</item>
+        <item name="backgroundTint">?attr/transparent</item>
+    </style>
+
+    <style name="Widget.TrainingDiary.Snackbar.TextView" parent="Widget.MaterialComponents.Snackbar.TextView">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="EditTextStyle" parent="@android:style/Widget.EditText">
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:background">@drawable/background_edit_text</item>
+        <item name="android:lines">1</item>
+        <item name="android:inputType">text</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:imeOptions">actionDone</item>
+        <item name="android:textCursorDrawable">@drawable/color_cursor</item>
+    </style>
+
+    <style name="EditWeightStyle" parent="EditTextStyle">
+        <item name="android:maxLength">5</item>
+        <item name="paddingStart">5dp</item>
+        <item name="android:gravity">center</item>
+        <item name="paddingEnd">5dp</item>
+        <item name="android:inputType">numberDecimal</item>
+        <item name="android:imeOptions">actionDone</item>
+    </style>
+
+    <style name="EditNumberStyle" parent="EditTextStyle">
+        <item name="android:maxLength">5</item>
+        <item name="paddingStart">5dp</item>
+        <item name="android:gravity">center</item>
+        <item name="paddingEnd">5dp</item>
+        <item name="android:inputType">number</item>
+        <item name="android:imeOptions">actionDone</item>
+
+
+    </style>
+
+    <style name="MyTextView" parent="Widget.AppCompat.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
+    <style name="AddRemoveImageButton">
+        <item name="android:tint">@color/crimson</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:background">@drawable/background_iv_action</item>
+    </style>
+
+    <style name="MyFloatingActionButton" parent="Widget.Design.FloatingActionButton">
+        <item name="android:layout_margin">24dp</item>
+        <item name="background">@android:color/transparent</item>
+        <item name="android:src">@drawable/ic_add</item>
+        <item name="backgroundTint">@color/crimson</item>
+        <item name="tint">@color/white</item>
+    </style>
+
+    <style name="MyButton" parent="Widget.AppCompat.Button">
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:background">@drawable/button_background1</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.06</item>
+    </style>
+</resources>

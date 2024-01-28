@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.yankin.approach_create.impl.presentation.Approach
+import com.yankin.common.resource_import.CommonRString
 import com.yankin.trainingdiary.approach_create.impl.R
 
 class ApproachRecyclerViewAdapter(private val onClick: (Approach) -> Unit) :
@@ -40,7 +41,7 @@ class ApproachRecyclerViewAdapter(private val onClick: (Approach) -> Unit) :
 
         fun bind(item: Approach) {
             tvText.text =
-                itemView.context.getString(R.string.approach, item.weight, item.reoccurrences)
+                itemView.context.getString(CommonRString.approach, item.weight, item.reoccurrences)
         }
     }
 

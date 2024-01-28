@@ -14,7 +14,8 @@ import androidx.annotation.StyleRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.widget.TextViewCompat
-import com.yankin.trainingdiary.R
+import com.yankin.common.resource_import.CommonRColor
+import com.yankin.common.resource_import.CommonRStyle
 
 fun TextView.setTextAppearanceCompat(@StyleRes id: Int) {
     TextViewCompat.setTextAppearance(this, id)
@@ -42,7 +43,7 @@ fun TextView.createClickableLinks(vararg links: Pair<String, View.OnClickListene
     for (link in links) {
         val clickableSpan = object : ClickableSpan() {
             override fun updateDrawState(ds: TextPaint) {
-                ds.color = getColor(context, R.color.crimson)
+                ds.color = getColor(context, CommonRColor.crimson)
             }
 
             override fun onClick(view: View) {
@@ -57,12 +58,12 @@ fun TextView.createClickableLinks(vararg links: Pair<String, View.OnClickListene
             startIndexOfLink + link.first.length,
             listOf(
                 clickableSpan,
-                TextAppearanceSpan(context, R.style.TextAppearance_AppCompat)
+                TextAppearanceSpan(context, CommonRStyle.TextAppearance_Bold)
             )
         )
     }
     movementMethod = LinkMovementMethod.getInstance()
-    highlightColor = getColor(context, R.color.black)
+    highlightColor = getColor(context, CommonRColor.black)
     setText(spannableString, TextView.BufferType.SPANNABLE)
 }
 

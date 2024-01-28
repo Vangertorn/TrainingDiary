@@ -4,7 +4,7 @@ import android.content.Context
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.BackgroundColorSpan
-import com.yankin.trainingdiary.R
+import com.yankin.common.resource_import.CommonRColor
 import java.io.File
 
 fun File.makeDirIfNotExist() = if (this.exists()) mkdir() else false
@@ -28,7 +28,7 @@ fun String.getSelectionSearchText(
     val spannable = SpannableString(this)
     if (searchText.length > 2) {
         spannable.setSpan(
-            BackgroundColorSpan(context.getColor(R.color.black)),
+            BackgroundColorSpan(context.getColor(CommonRColor.black)),
             startPos,
             endPos,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE

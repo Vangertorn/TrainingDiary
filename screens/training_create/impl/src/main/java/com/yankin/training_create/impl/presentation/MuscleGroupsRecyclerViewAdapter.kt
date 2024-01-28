@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.yankin.common.resource_import.CommonRDrawable
 import com.yankin.trainingdiary.training_create.impl.R
 
 class MuscleGroupsRecyclerViewAdapter(private val onClick: (MuscleGroup) -> Unit) :
@@ -47,10 +48,10 @@ class MuscleGroupsRecyclerViewAdapter(private val onClick: (MuscleGroup) -> Unit
 
         fun bind(item: MuscleGroup, selected: Boolean) {
             if (selected) {
-                tvText.setBackgroundResource(R.drawable.background_item_muscle_groups_selected)
+                tvText.setBackgroundResource(CommonRDrawable.background_item_muscle_groups_selected)
                 tvText.setTextColor(Color.WHITE)
             } else {
-                tvText.setBackgroundResource(R.drawable.backgound_item_muscle_groups)
+                tvText.setBackgroundResource(CommonRDrawable.backgound_item_muscle_groups)
                 tvText.setTextColor(Color.BLACK)
             }
 

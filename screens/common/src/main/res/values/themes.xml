@@ -1,6 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.TrainingDiary" parent="Theme.MaterialComponents.Light.NoActionBar">
+
+        <!-- Text Appearance -->
+        <item name="textAppearanceRegularPrimary14SP">@style/TextAppearance.Regular.Primary.14SP</item>
+        <item name="textAppearanceRegularPrimary18SP">@style/TextAppearance.Regular.Primary.18SP</item>
+        <item name="TextAppearanceBoldSecondary14SP">@style/TextAppearance.Bold.Secondary.14SP</item>
+        <item name="TextAppearanceBoldSecondary16SP">@style/TextAppearance.Bold.Secondary.16SP</item>
+
+
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -9,6 +17,7 @@
         <item name="colorSecondary">@color/crimson</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
+        <item name="transparent">@color/transparent</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
@@ -17,85 +26,43 @@
         <item name="android:alertDialogTheme">?alertDialogTheme</item>
         <item name="dialogTheme">?alertDialogTheme</item>
         <item name="android:dialogTheme">?alertDialogTheme</item>
+        <!-- Default Style -->
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.TrainingDiary.BottomSheetDialog</item>
     </style>
 
-    <style name="EditTextStyle" parent="@android:style/Widget.EditText">
-        <item name="android:padding">10dp</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:background">@drawable/background_edit_text</item>
-        <item name="android:lines">1</item>
-        <item name="android:inputType">text</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:imeOptions">actionDone</item>
-        <item name="android:textCursorDrawable">@drawable/color_cursor</item>
-    </style>
 
-    <style name="EditWeightStyle" parent="EditTextStyle">
-        <item name="android:maxLength">5</item>
-        <item name="paddingStart">5dp</item>
-        <item name="android:gravity">center</item>
-        <item name="paddingEnd">5dp</item>
-        <item name="android:inputType">numberDecimal</item>
-        <item name="android:imeOptions">actionDone</item>
-
-
-    </style>
-
-    <style name="EditNumberStyle" parent="EditTextStyle">
-        <item name="android:maxLength">5</item>
-        <item name="paddingStart">5dp</item>
-        <item name="android:gravity">center</item>
-        <item name="paddingEnd">5dp</item>
-        <item name="android:inputType">number</item>
-        <item name="android:imeOptions">actionDone</item>
-
-
-    </style>
-
-    <style name="MyTextView" parent="Widget.AppCompat.TextView">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:padding">4dp</item>
-        <item name="android:layout_margin">10dp</item>
-    </style>
-
-    <style name="AddRemoveImageButton">
-        <item name="android:tint">@color/crimson</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:padding">2dp</item>
-        <item name="android:background">@drawable/background_iv_action</item>
-    </style>
-
-    <style name="MyFloatingActionButton" parent="Widget.Design.FloatingActionButton">
-        <item name="android:layout_margin">24dp</item>
-        <item name="background">@android:color/transparent</item>
-        <item name="android:src">@drawable/ic_add</item>
-        <item name="backgroundTint">@color/crimson</item>
-        <item name="tint">@color/white</item>
-    </style>
-
-    <style name="MyButton" parent="Widget.AppCompat.Button">
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:background">@drawable/button_background1</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:letterSpacing">0.06</item>
-    </style>
-
-    <style name="DialogStyle" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowSoftInputMode">adjustResize</item>
-    </style>
 
     <style name="DialogTheme" parent="Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="android:buttonStyle">@color/crimson</item>
         <item name="android:textColorHint">@color/black</item>
 
+    </style>
+
+    <style name="Theme.TrainingDiary.Light" parent="Theme.TrainingDiary">
+        <!-- Colors -->
+        <item name="textColorSecondary">@color/text_color_secondary_light</item>
+        <item name="textColorPrimary">@color/text_color_primary_light</item>
+        <item name="contentBackground">@color/content_background_light</item>
+    </style>
+
+    <style name="Theme.TrainingDiary.Dark" parent="Theme.TrainingDiary">
+        <!-- Colors -->
+        <item name="textColorSecondary">@color/text_color_secondary_dark</item>
+        <item name="textColorPrimary">@color/text_color_primary_dark</item>
+        <item name="contentBackground">@color/content_background_dark</item>
+    </style>
+
+    <style name="Theme.TrainingDiary.Night" parent="Theme.TrainingDiary">
+        <!-- Colors -->
+        <item name="textColorSecondary">@color/text_color_secondary_night</item>
+        <item name="textColorPrimary">@color/text_color_primary_night</item>
+        <item name="contentBackground">@color/content_background_night</item>
+    </style>
+
+    <style name="ThemeOverlay.TrainingDiary.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="bottomSheetStyle">@style/Widget.TrainingDiary.BottomSheet</item>
     </style>
 
 

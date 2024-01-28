@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.yankin.common.resource_import.CommonRDrawable
+import com.yankin.common.resource_import.CommonRString
 import com.yankin.exercise_create.impl.presentation.Exercise
 import com.yankin.trainingdiary.exercise_create.impl.R
 
@@ -70,10 +72,10 @@ class SuperSetRecyclerViewAdapter(private val onClick: (Exercise) -> Unit) :
 
         fun bind(item: Exercise, selected: Boolean) {
             if (selected) {
-                tvText.setBackgroundResource(R.drawable.background_item_muscle_groups_selected)
+                tvText.setBackgroundResource(CommonRDrawable.background_item_muscle_groups_selected)
                 tvText.setTextColor(Color.WHITE)
             } else {
-                tvText.setBackgroundResource(R.drawable.backgound_item_muscle_groups)
+                tvText.setBackgroundResource(CommonRDrawable.backgound_item_muscle_groups)
                 tvText.setTextColor(Color.BLACK)
             }
 
@@ -93,13 +95,13 @@ class SuperSetRecyclerViewAdapter(private val onClick: (Exercise) -> Unit) :
 
         fun bind(selected: Boolean) {
             if (selected) {
-                tvText.setBackgroundResource(R.drawable.background_item_muscle_groups_selected)
+                tvText.setBackgroundResource(CommonRDrawable.background_item_muscle_groups_selected)
                 tvText.setTextColor(Color.WHITE)
             } else {
-                tvText.setBackgroundResource(R.drawable.backgound_item_muscle_groups)
+                tvText.setBackgroundResource(CommonRDrawable.backgound_item_muscle_groups)
                 tvText.setTextColor(Color.BLACK)
             }
-            tvText.text = itemView.context.getString(R.string.add_exercise)
+            tvText.text = itemView.context.getString(CommonRString.add_exercise)
         }
     }
 

@@ -17,6 +17,7 @@ import com.yankin.common.fragment.SupportFragmentInset
 import com.yankin.common.hideKeyboard
 import com.yankin.common.removeDouble
 import com.yankin.common.removeInt
+import com.yankin.common.resource_import.CommonRString
 import com.yankin.common.view.setVerticalMargin
 import com.yankin.navigation.navigateToDestination
 import com.yankin.settings.impl.navigation.SettingsNavigationNode.Companion.EXERCISE_AUTOFILL_FRAGMENT_DESTINATION
@@ -101,7 +102,7 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
             } else {
                 Toast.makeText(
                     this.context,
-                    getString(R.string.the_name_muscle_group_is_empty),
+                    getString(CommonRString.the_name_muscle_group_is_empty),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -140,10 +141,10 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
         }
         viewBinding.switchSortTraining.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                viewBinding.tvTrainingsLayout.text = getString(R.string.Last_training_above)
+                viewBinding.tvTrainingsLayout.text = getString(CommonRString.Last_training_above)
                 viewModel.saveOrderAdded(true)
             } else {
-                viewBinding.tvTrainingsLayout.text = getString(R.string.Last_training_below)
+                viewBinding.tvTrainingsLayout.text = getString(CommonRString.Last_training_below)
                 viewModel.saveOrderAdded(false)
             }
         }
@@ -162,7 +163,7 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
         ) {
             Toast.makeText(
                 this.context,
-                getString(R.string.the_weight_and_reoccurrence_fields_are_empty),
+                getString(CommonRString.the_weight_and_reoccurrence_fields_are_empty),
                 Toast.LENGTH_SHORT
             ).show()
         } else if (viewBinding.etReoccurrence.text.toString()
@@ -174,7 +175,7 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
 
             Toast.makeText(
                 this.context,
-                getString(R.string.reoccurrences_were_saved),
+                getString(CommonRString.reoccurrences_were_saved),
                 Toast.LENGTH_SHORT
             ).show()
         } else if (viewBinding.etWeight.text.toString()
@@ -185,7 +186,7 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
 
             Toast.makeText(
                 this.context,
-                getString(R.string.weight_was_saved),
+                getString(CommonRString.weight_was_saved),
                 Toast.LENGTH_SHORT
             ).show()
         } else {
@@ -193,7 +194,7 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
             viewModel.saveReoccurrences(viewBinding.etReoccurrence.text.toString())
             Toast.makeText(
                 this.context,
-                getString(R.string.default_values_were_saved),
+                getString(CommonRString.default_values_were_saved),
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -201,12 +202,12 @@ class SettingsFragment : SupportFragmentInset<FragmentSettingsBinding>(R.layout.
 
     private fun showRecoverDialog() {
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle(getString(R.string.title_recover_dialog))
-            .setMessage(getString(R.string.message_recover_dialog))
-            .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
+            .setTitle(getString(CommonRString.title_recover_dialog))
+            .setMessage(getString(CommonRString.message_recover_dialog))
+            .setPositiveButton(getString(CommonRString.yes)) { dialog, _ ->
                 viewModel.recoverValuesMuscleGroups()
                 dialog.cancel()
-            }.setNegativeButton(getString(R.string.no)) { dialog, _ ->
+            }.setNegativeButton(getString(CommonRString.no)) { dialog, _ ->
                 dialog.cancel()
             }.show()
     }

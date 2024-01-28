@@ -13,7 +13,9 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.yankin.trainingdiary.R
+import com.yankin.common.resource_import.CommonRColor
+import com.yankin.common.resource_import.CommonRString
+import com.yankin.common.resource_import.CommonRStyle
 import kotlin.math.roundToInt
 
 fun Fragment.hideKeyboard() {
@@ -32,11 +34,11 @@ fun Context.hideKeyboard(view: View) {
 fun Context.createSpannableTermsAndPrivacy(
     onAgreementClickAction: (String) -> Unit
 ): SpannableString {
-    val infoText = getString(R.string.Last_training_above)
-    val termsText = getString(R.string.Last_training_above)
-    val andText = getString(R.string.Last_training_above)
-    val privacyText = getString(R.string.Last_training_above)
-    val endingText = getString(R.string.Last_training_above)
+    val infoText = getString(CommonRString.Last_training_above)
+    val termsText = getString(CommonRString.Last_training_above)
+    val andText = getString(CommonRString.Last_training_above)
+    val privacyText = getString(CommonRString.Last_training_above)
+    val endingText = getString(CommonRString.Last_training_above)
     val result = SpannableString(
         String.format(
             "%s %s %s %s %s",
@@ -86,7 +88,7 @@ fun Context.dpToPx(dp: Float) =
 
 private fun Context.setNormalSpanText(text: SpannableString, start: Int, end: Int) {
     text.setSpan(
-        ForegroundColorSpan(ContextCompat.getColor(this, R.color.black)),
+        ForegroundColorSpan(ContextCompat.getColor(this, CommonRColor.black)),
         start,
         end,
         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -106,7 +108,7 @@ private fun Context.setClickableSpanText(
             }
 
             override fun updateDrawState(ds: TextPaint) {
-                ds.color = ContextCompat.getColor(this@setClickableSpanText, R.color.crimson)
+                ds.color = ContextCompat.getColor(this@setClickableSpanText, CommonRColor.crimson)
             }
         },
         start,
@@ -114,7 +116,7 @@ private fun Context.setClickableSpanText(
         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
     )
     text.setSpan(
-        TextAppearanceSpan(this, R.style.TextAppearance_AppCompat),
+        TextAppearanceSpan(this, CommonRStyle.TextAppearance_Bold),
         start,
         end,
         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE

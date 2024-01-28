@@ -4,7 +4,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.core.content.ContextCompat
 import com.google.android.material.textfield.TextInputEditText
-import com.yankin.trainingdiary.R
+import com.yankin.common.resource_import.CommonRDrawable
 
 fun TextInputEditText.onImeActionDone(clickAction: () -> Unit) {
     this.setOnEditorActionListener { _, actionId, _ ->
@@ -23,7 +23,7 @@ fun TextInputEditText.setDrawableRight() {
     setCompoundDrawablesWithIntrinsicBounds(
         null,
         null,
-        ContextCompat.getDrawable(context, R.drawable.ic_right),
+        ContextCompat.getDrawable(context, CommonRDrawable.ic_right),
         null
     )
 }

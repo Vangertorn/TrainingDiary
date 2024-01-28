@@ -3,6 +3,7 @@ package com.yankin.training_list.impl.presentation.adapter
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.yankin.common.resource_import.CommonRString
 import com.yankin.training_list.impl.presentation.Training
 import com.yankin.trainingdiary.training_list.impl.R
 
@@ -33,7 +34,7 @@ class TrainingViewHolder(itemView: View, private val itemClick: (Int) -> Unit) :
         if (item.weight.isNullOrBlank()) {
             tvWeight.visibility = View.INVISIBLE
         } else {
-            tvWeight.text = itemView.context.getString(R.string.weight, item.weight)
+            tvWeight.text = itemView.context.getString(CommonRString.weight, item.weight)
         }
     }
 }

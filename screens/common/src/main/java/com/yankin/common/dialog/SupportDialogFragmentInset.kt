@@ -1,13 +1,14 @@
-package com.yankin.common.fragment
+package com.yankin.common.dialog
 
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.LayoutRes
-import androidx.fragment.app.DialogFragment
 import androidx.viewbinding.ViewBinding
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.yankin.common.fragment.OnSystemBarsSizeChangedListener
+import com.yankin.common.fragment.VerticalInset
 
-abstract class SupportDialogFragmentInset<T : ViewBinding>(@LayoutRes layoutResId: Int) :
-    DialogFragment(layoutResId), ViewBindable<T> {
+abstract class SupportDialogFragmentInset<T : ViewBinding>() :
+    BottomSheetDialogFragment() {
 
     abstract fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean)
 
@@ -23,6 +24,10 @@ abstract class SupportDialogFragmentInset<T : ViewBinding>(@LayoutRes layoutResI
 
     private fun activityChangedInsets(lastVerticalInset: VerticalInset) {
         saveInsets = lastVerticalInset
-        onInsetsReceived(lastVerticalInset.top, lastVerticalInset.bottom, saveInsets.hasKeyboard)
+        onInsetsReceived(
+            top = lastVerticalInset.top,
+            bottom = lastVerticalInset.bottom,
+            hasKeyboard = lastVerticalInset.hasKeyboard
+        )
     }
 }

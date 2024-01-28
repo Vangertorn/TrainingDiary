@@ -12,6 +12,7 @@ import com.yankin.approach_create.api.navigation.ApproachCreateCommunicator
 import com.yankin.approach_create.api.navigation.ApproachCreateParams
 import com.yankin.common.fragment.SupportFragmentInset
 import com.yankin.common.recyclerview.SwipeCallback
+import com.yankin.common.resource_import.CommonRString
 import com.yankin.exercise_create.api.navigation.ExerciseCreateCommunicator
 import com.yankin.exercise_create.api.navigation.ExerciseCreateParams
 import com.yankin.exercise_list.api.navigation.ExerciseListCommunicator
@@ -105,8 +106,8 @@ class ExerciseListFragment : SupportFragmentInset<FragmentExerciseListBinding>(R
             viewBinding.muscleGroupsExerciseList.text = training.muscleGroups
             viewBinding.weightExerciseList.text =
                 if (!training.weight.isNullOrEmpty()) if (training.muscleGroups.isNullOrEmpty()) getString(
-                    R.string.weight, training.weight
-                ) else getString(R.string.weight1, training.weight) else ""
+                    CommonRString.weight, training.weight
+                ) else getString(CommonRString.weight1, training.weight) else ""
         }
         viewBinding.toolbarExerciseList.setNavigationOnClickListener {
             viewModel.forgotIdTraining()
@@ -139,10 +140,10 @@ class ExerciseListFragment : SupportFragmentInset<FragmentExerciseListBinding>(R
             viewModel.deletedExerciseTrue(exercise.exercise)
             Snackbar.make(
                 viewBinding.recyclerView,
-                getString(R.string.exercise_was_delete),
+                getString(CommonRString.exercise_was_delete),
                 Snackbar.LENGTH_LONG
             )
-                .setAction(getString(R.string.undo)) {
+                .setAction(getString(CommonRString.undo)) {
                     viewModel.deletedExerciseFalse(exercise.exercise)
                 }.apply {
                     this.view.translationY = -savedInsets.bottom.toFloat()
@@ -153,10 +154,10 @@ class ExerciseListFragment : SupportFragmentInset<FragmentExerciseListBinding>(R
             viewModel.deletedSuperSetTrue(superSet.superSet)
             Snackbar.make(
                 viewBinding.recyclerView,
-                getString(R.string.super_set_was_deleted),
+                getString(CommonRString.super_set_was_deleted),
                 Snackbar.LENGTH_LONG
             )
-                .setAction(getString(R.string.undo)) {
+                .setAction(getString(CommonRString.undo)) {
                     viewModel.deletedSuperSetFalse(superSet.superSet)
                 }.apply {
                     this.view.translationY = -savedInsets.bottom.toFloat()

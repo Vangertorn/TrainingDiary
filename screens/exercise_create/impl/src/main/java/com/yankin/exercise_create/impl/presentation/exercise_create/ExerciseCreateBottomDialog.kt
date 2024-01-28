@@ -10,7 +10,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.yankin.common.fragment.SupportDialogFragmentInset
+import com.yankin.common.dialog.SupportDialogFragmentInset
+import com.yankin.common.resource_import.CommonRString
 import com.yankin.common.view.setVerticalMargin
 import com.yankin.exercise_create.api.navigation.ExerciseCreateCommunicator
 import com.yankin.exercise_create.impl.navigation.ExerciseCreateNavigationNode.Companion.SUPER_SET_DIALOG_DIALOG_DESTINATION
@@ -28,12 +29,12 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class ExerciseCreateBottomDialog :
-    SupportDialogFragmentInset<BottomSheetAddExerciseBinding>(R.layout.bottom_sheet_add_exercise) {
+    SupportDialogFragmentInset<BottomSheetAddExerciseBinding>() {
 
     @Inject
     lateinit var navController: NavController
 
-    override lateinit var viewBinding: BottomSheetAddExerciseBinding
+    lateinit var viewBinding: BottomSheetAddExerciseBinding
     private val viewModel: ExerciseCreateViewModel by viewModels()
     private val params by BundleParcelable<ExerciseCreateParcelableParams>(ExerciseCreateCommunicator.NAV_KEY)
 
@@ -105,7 +106,7 @@ class ExerciseCreateBottomDialog :
             } else {
                 Toast.makeText(
                     requireContext(),
-                    getString(R.string.exercise_name_is_empty),
+                    getString(CommonRString.exercise_name_is_empty),
                     Toast.LENGTH_SHORT
                 )
                     .show()

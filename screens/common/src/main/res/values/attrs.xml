@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Text Appearance Attr -->
+    <attr name="textAppearanceRegularPrimary14SP" format="reference" />
+    <attr name="textAppearanceRegularPrimary18SP" format="reference" />
+    <attr name="TextAppearanceBoldSecondary16SP" format="reference" />
+    <attr name="TextAppearanceBoldSecondary14SP" format="reference" />
+
+
+    <!-- Color Attr -->
+    <attr name="textColorPrimary" format="reference" />
+    <attr name="textColorSecondary" format="reference" />
+    <attr name="contentBackground" format="reference" />
+    <attr name="transparent" format="reference" />
+
     <declare-styleable name="CalendarView">
         <attr name="month_text_color" format="color" />
         <attr name="day_text_color" format="color" />

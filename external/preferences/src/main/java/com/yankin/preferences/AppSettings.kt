@@ -13,6 +13,7 @@ import com.yankin.trainingdiary.preferences.BuildConfig
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_UNSPECIFIED
 
 private val Context.getPreferences: DataStore<Preferences> by preferencesDataStore(
     "${BuildConfig.preferences}_ds"
@@ -20,7 +21,7 @@ private val Context.getPreferences: DataStore<Preferences> by preferencesDataSto
 
 class AppSettings(context: Context) {
 
-    private val dataStore = context.getPreferences
+    private val dataStore: DataStore<Preferences> = context.getPreferences
 
     fun idTrainingFlow(): Flow<Long> = dataStore.data.map { preferences ->
         preferences[longPreferencesKey(TRAINING_ID_KEY)] ?: -1
@@ -130,6 +131,10 @@ class AppSettings(context: Context) {
         dataStore.edit { preferences -> preferences[intPreferencesKey(DAYS_LEFT)] = amount }
     }
 
+    fun getIdThemeStream(): Flow<Int> = dataStore.data.map { preferences ->
+        preferences[intPreferencesKey(THEME_ID_KEY)] ?: MODE_NIGHT_UNSPECIFIED
+    }
+
     companion object {
         private const val TRAINING_ID_KEY = "TRAINING_ID_KEY"
         private const val EXERCISE_ID_KEY = "EXERCISE_ID_KEY"
@@ -141,5 +146,6 @@ class AppSettings(context: Context) {
         private const val SUBSCRIPTION_END_DATE = "SUBSCRIPTION_END_DATE"
         private const val DATE_CREATED_TICKET = "DATE_CREATED_TICKET"
         private const val DAYS_LEFT = "DAYS_LEFT"
+        private const val THEME_ID_KEY = "THEME_ID_KEY"
     }
 }

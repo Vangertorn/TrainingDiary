@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dimens are for spaces between views -->
+    <dimen name="space_4">4dp</dimen>
+    <dimen name="space_8">8dp</dimen>
+    <dimen name="space_16">16dp</dimen>
+    <dimen name="space_20">20dp</dimen>
+
+    <!-- Dimens are for size of views -->
+    <dimen name="size_3">3dp</dimen>
+    <dimen name="size_32">32dp</dimen>
+
+
+    <!-- Dimens are for TextAppearances -->
+    <dimen name="text_14">14sp</dimen>
+    <dimen name="text_16">16sp</dimen>
+    <dimen name="text_18">18sp</dimen>
+</resources>

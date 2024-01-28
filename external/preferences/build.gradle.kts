@@ -35,4 +35,5 @@ dependencies {
     kapt(Dependencies.Room.compiler)
     implementation(Dependencies.Room.room)
     implementation(Dependencies.Room.kotlinExtensions)
+    implementation(Dependencies.AppCompatUi.appCompat)
 }

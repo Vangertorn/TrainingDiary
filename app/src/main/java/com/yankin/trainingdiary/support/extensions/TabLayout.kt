@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.forEach
 import com.google.android.material.tabs.TabLayout
-import com.yankin.trainingdiary.R
+import com.yankin.common.resource_import.CommonRColor
 
 fun TabLayout.setCustomText(
     text: String,
@@ -24,7 +24,7 @@ fun TabLayout.setCustomText(
             it.isAllCaps = false
             it.text = text
             it.textSize = resources.getDimensionPixelSize(textSize).toFloat()
-            it.setTextColor(ContextCompat.getColor(context, R.color.black))
+            it.setTextColor(ContextCompat.getColor(context, CommonRColor.black))
             if (isSelected) it.typeface = ResourcesCompat.getFont(context, font)
             else it.typeface = ResourcesCompat.getFont(context, font)
         }

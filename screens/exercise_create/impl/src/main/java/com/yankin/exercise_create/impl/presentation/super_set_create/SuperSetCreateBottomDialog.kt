@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.yankin.common.resource_import.CommonRString
 import com.yankin.exercise_create.api.navigation.ExerciseCreateCommunicator
 import com.yankin.exercise_create.impl.navigation.SuperSetCreateParcelableParams
 import com.yankin.exercise_create.impl.presentation.Exercise
@@ -81,7 +82,7 @@ class SuperSetCreateBottomDialog : BottomSheetDialogFragment() {
             } else {
                 Toast.makeText(
                     requireContext(),
-                    getString(R.string.exercise_name_is_empty),
+                    getString(CommonRString.exercise_name_is_empty),
                     Toast.LENGTH_SHORT
                 )
                     .show()

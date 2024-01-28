@@ -6,6 +6,9 @@
       <module name="Training_diary.buildSrc" target="11" />
       <module name="Training_diary.buildSrc.main" target="11" />
       <module name="Training_diary.buildSrc.test" target="11" />
+      <module name="Training_diary.core.config" target="1.8" />
+      <module name="Training_diary.core.config.main" target="1.8" />
+      <module name="Training_diary.core.config.test" target="1.8" />
       <module name="Training_diary.external.preferences" target="11" />
       <module name="Training_diary.external.storage" target="11" />
       <module name="Training_diary.features.approach.impl" target="11" />
@@ -14,6 +17,7 @@
       <module name="Training_diary.features.exercise_name.impl" target="11" />
       <module name="Training_diary.features.muscle_groups.impl" target="11" />
       <module name="Training_diary.features.super_set.impl" target="11" />
+      <module name="Training_diary.features.theme.impl" target="11" />
       <module name="Training_diary.features.training.impl" target="11" />
       <module name="Training_diary.navigation" target="11" />
       <module name="Training_diary.screens.approach_create.impl" target="11" />

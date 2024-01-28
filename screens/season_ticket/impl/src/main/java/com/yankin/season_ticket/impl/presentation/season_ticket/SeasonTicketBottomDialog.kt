@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.yankin.common.custom_view.CalendarView
+import com.yankin.common.resource_import.CommonRString
 import com.yankin.trainingdiary.season_ticket.impl.R
 import com.yankin.trainingdiary.season_ticket.impl.databinding.BottomSheetSeasonTicketBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -74,7 +75,7 @@ class SeasonTicketBottomDialog : BottomSheetDialogFragment() {
                 } else {
                     Toast.makeText(
                         this.context,
-                        getString(R.string.Term_season_ticket),
+                        getString(CommonRString.Term_season_ticket),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -88,7 +89,7 @@ class SeasonTicketBottomDialog : BottomSheetDialogFragment() {
                 } else {
                     Toast.makeText(
                         this.context,
-                        getString(R.string.number_of_training),
+                        getString(CommonRString.number_of_training),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

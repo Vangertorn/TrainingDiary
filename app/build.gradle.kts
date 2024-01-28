@@ -77,6 +77,8 @@ dependencies {
     implementation(project(":screens:exercise_list:impl"))
     implementation(project(":navigation"))
     implementation(project(":screens:common"))
+    implementation(project(":features:theme:api"))
+    implementation(project(":features:theme:impl"))
 
     testImplementation(Dependencies.Test.testJunit)
     androidTestImplementation(Dependencies.Test.testExtension)

@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.yankin.common.resource_import.CommonRString
 import com.yankin.exercise_list.impl.presentation.models.Approach
 import com.yankin.trainingdiary.exercise_list.impl.R
 
@@ -29,7 +30,7 @@ class ApproachRecyclerViewAdapterInExerciseItem :
         private val tvText = itemView.findViewById<TextView>(R.id.tvApproachInExerciseItem)
         fun bind(item: Approach) {
             tvText.text =
-                itemView.context.getString(R.string.approach, item.weight, item.reoccurrences)
+                itemView.context.getString(CommonRString.approach, item.weight, item.reoccurrences)
         }
     }
 

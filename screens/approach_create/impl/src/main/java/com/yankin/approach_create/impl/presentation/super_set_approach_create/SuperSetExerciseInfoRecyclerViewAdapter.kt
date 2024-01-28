@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.yankin.approach_create.impl.presentation.ViewHolderTypes
+import com.yankin.common.resource_import.CommonRDrawable
 import com.yankin.trainingdiary.approach_create.impl.R
 
 class SuperSetExerciseInfoRecyclerViewAdapter(private val onClick: (ViewHolderTypes.ExerciseInfo) -> Unit) :
@@ -49,10 +50,10 @@ class SuperSetExerciseInfoRecyclerViewAdapter(private val onClick: (ViewHolderTy
 
         fun bind(item: ViewHolderTypes.ExerciseInfo, selected: Boolean) {
             if (selected) {
-                tvText.setBackgroundResource(R.drawable.background_item_muscle_groups_selected)
+                tvText.setBackgroundResource(CommonRDrawable.background_item_muscle_groups_selected)
                 tvText.setTextColor(Color.WHITE)
             } else {
-                tvText.setBackgroundResource(R.drawable.backgound_item_muscle_groups)
+                tvText.setBackgroundResource(CommonRDrawable.backgound_item_muscle_groups)
                 tvText.setTextColor(Color.BLACK)
             }
 

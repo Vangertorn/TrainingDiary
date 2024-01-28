@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--        TextAppearances are on roboto_regular font-->
+    <style name="TextAppearance.Regular" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="TextAppearance.Regular.Primary">
+        <item name="android:textColor">?textColorPrimary</item>
+    </style>
+
+    <style name="TextAppearance.Regular.Primary.14SP">
+        <item name="android:textSize">@dimen/text_14</item>
+    </style>
+
+    <style name="TextAppearance.Regular.Primary.18SP">
+        <item name="android:textSize">@dimen/text_18</item>
+    </style>
+
+
+
+
+    <!--        TextAppearances are on roboto_bold font-->
+    <style name="TextAppearance.Bold" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="TextAppearance.Bold.Secondary">
+        <item name="android:textColor">?textColorSecondary</item>
+    </style>
+
+    <style name="TextAppearance.Bold.Secondary.14SP">
+        <item name="android:textSize">@dimen/text_14</item>
+    </style>
+
+    <style name="TextAppearance.Bold.Secondary.16SP">
+        <item name="android:textSize">@dimen/text_16</item>
+    </style>
+
+</resources>
