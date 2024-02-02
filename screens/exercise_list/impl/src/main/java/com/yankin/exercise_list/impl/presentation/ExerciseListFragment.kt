@@ -117,18 +117,7 @@ class ExerciseListFragment : SupportFragmentInset<FragmentExerciseListBinding>(R
             exerciseCreateCommunicator.navigateToExerciseCreate(ExerciseCreateParams(params.trainingId))
         }
         viewBinding.ivEditTrainingExerciseList.setOnClickListener {
-            trainingCreateCommunicator.navigateTo(
-                TrainingCreateParams.EditTraining(
-                    trainingId = params.trainingId,
-                    date = params.date,
-                    muscleGroups = params.muscleGroups,
-                    comment = params.comment,
-                    weight = params.weight,
-                    position = params.position,
-                    deleted = params.deleted,
-                    selectedMuscleGroup = params.selectedMuscleGroup,
-                )
-            )
+            trainingCreateCommunicator.navigateTo(TrainingCreateParams.EditTraining(trainingId = params.trainingId))
         }
     }
 

@@ -8,7 +8,7 @@
     android:layout_height="wrap_content">
 
     <com.yankin.common.custom_view.CalendarView
-        android:id="@+id/calendar"
+        android:id="@+id/vCalendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
@@ -30,56 +30,56 @@
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/tvText1"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/tvWeightTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_muscle_groups" />
 
     <EditText
-        android:id="@+id/etComment_create_training"
+        android:id="@+id/etComment"
         style="@style/EditTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/optional"
         android:importantForAutofill="no"
         android:inputType="textAutoCorrect"
-        app:layout_constraintBottom_toTopOf="@id/confirm_create_training"
+        app:layout_constraintBottom_toTopOf="@id/butConfirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvText"
+        android:id="@+id/tvCommentTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
         android:text="@string/comment"
-        app:layout_constraintBottom_toTopOf="@id/etComment_create_training"
-        app:layout_constraintStart_toStartOf="@id/etComment_create_training" />
+        app:layout_constraintBottom_toTopOf="@id/etComment"
+        app:layout_constraintStart_toStartOf="@id/etComment" />
 
     <TextView
-        android:id="@+id/tvText1"
+        android:id="@+id/tvWeightTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
         android:text="@string/your_weight_kg"
-        app:layout_constraintBottom_toTopOf="@id/etWeight_create_training"
-        app:layout_constraintStart_toStartOf="@id/etWeight_create_training" />
+        app:layout_constraintBottom_toTopOf="@id/etWeight"
+        app:layout_constraintStart_toStartOf="@id/etWeight" />
 
     <EditText
-        android:id="@+id/etWeight_create_training"
+        android:id="@+id/etWeight"
         style="@style/EditWeightStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="start"
         android:hint="@string/optional"
         android:importantForAutofill="no"
-        app:layout_constraintBottom_toTopOf="@id/tvText"
+        app:layout_constraintBottom_toTopOf="@id/tvCommentTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/confirm_create_training"
+        android:id="@+id/butConfirm"
         style="@style/MyButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

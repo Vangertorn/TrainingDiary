@@ -30,7 +30,6 @@ object Dependencies {
 
     object Hilt {
         private const val version = "2.45"
-
         const val plugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
         const val android = "com.google.dagger:hilt-android:$version"
         const val compiler = "com.google.dagger:hilt-android-compiler:$version"
@@ -47,5 +46,16 @@ object Dependencies {
         const val appCompat = "androidx.appcompat:appcompat:1.6.1"
         const val material = "com.google.android.material:material:1.10.0"
         const val constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
+    }
+
+    object AdapterDelegates {
+        const val adapter = "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:4.3.2"
+    }
+
+    object KotlinXLifecycle {
+        private const val version = "2.6.1"
+        const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$version"
+        const val common = "androidx.lifecycle:lifecycle-common-java8:$version"
+        const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
     }
 }

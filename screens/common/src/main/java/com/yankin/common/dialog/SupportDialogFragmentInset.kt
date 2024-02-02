@@ -17,17 +17,17 @@ abstract class SupportDialogFragmentInset<T : ViewBinding>() :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as? OnSystemBarsSizeChangedListener)?.apply {
-            activityChangedInsets(this.insets)
+        (activity as? OnSystemBarsSizeChangedListener)?.let { onSystemBarsSizeChangedListener ->
+            applyDialogInsets(onSystemBarsSizeChangedListener.insets)
         }
     }
 
-    private fun activityChangedInsets(lastVerticalInset: VerticalInset) {
-        saveInsets = lastVerticalInset
+    private fun applyDialogInsets(currentVerticalInset: VerticalInset) {
+        saveInsets = currentVerticalInset
         onInsetsReceived(
-            top = lastVerticalInset.top,
-            bottom = lastVerticalInset.bottom,
-            hasKeyboard = lastVerticalInset.hasKeyboard
+            top = currentVerticalInset.top,
+            bottom = currentVerticalInset.bottom,
+            hasKeyboard = currentVerticalInset.hasKeyboard
         )
     }
 }

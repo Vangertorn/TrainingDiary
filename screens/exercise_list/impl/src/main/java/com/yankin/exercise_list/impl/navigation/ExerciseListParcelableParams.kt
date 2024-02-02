@@ -12,5 +12,5 @@ internal data class ExerciseListParcelableParams(
     val weight: String?,
     val position: Int,
     val deleted: Boolean,
-    val selectedMuscleGroup: MutableList<Int>
+    val selectedMuscleGroup: List<Int>,
 ) : Parcelable

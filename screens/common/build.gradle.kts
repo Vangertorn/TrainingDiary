@@ -31,4 +31,7 @@ dependencies {
     implementation(Dependencies.AppCompatUi.appCompat)
     implementation(Dependencies.AppCompatUi.material)
     implementation(Dependencies.AppCompatUi.constraintlayout)
+    implementation(Dependencies.AdapterDelegates.adapter)
+    implementation(Dependencies.KotlinXLifecycle.common)
+    implementation(Dependencies.KotlinXLifecycle.runtime)
 }

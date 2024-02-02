@@ -5,7 +5,7 @@ import androidx.lifecycle.asLiveData
 import com.yankin.common.resource_import.CommonRString
 import com.yankin.common.viewmodel.CoroutineViewModel
 import com.yankin.muscle_groups.api.usecases.DeleteMuscleGroupUseCase
-import com.yankin.muscle_groups.api.usecases.GetCurrentMuscleGroupStreamUseCase
+import com.yankin.muscle_groups.api.usecases.GetAllMuscleGroupStreamUseCase
 import com.yankin.muscle_groups.api.usecases.RecoverDefaultMuscleGroupListUseCase
 import com.yankin.muscle_groups.api.usecases.SaveMuscleGroupUseCase
 import com.yankin.preferences.AppSettings
@@ -22,14 +22,14 @@ class SettingsViewModel @Inject constructor(
     private val deleteMuscleGroupUseCase: DeleteMuscleGroupUseCase,
     private val saveMuscleGroupUseCase: SaveMuscleGroupUseCase,
     private val recoverDefaultMuscleGroupListUseCase: RecoverDefaultMuscleGroupListUseCase,
-    getCurrentMuscleGroupStreamUseCase: GetCurrentMuscleGroupStreamUseCase,
+    getAllMuscleGroupStreamUseCase: GetAllMuscleGroupStreamUseCase,
     @ApplicationContext private val context: Context,
 ) : CoroutineViewModel() {
 
     val reoccurrencesLiveData = appSettings.reoccurrencesFlow().asLiveData()
     val weightLiveData = appSettings.weightFlow().asLiveData()
     val switchOrderLiveData = appSettings.orderAddedFlow().asLiveData()
-    val muscleGroupLiveData = getCurrentMuscleGroupStreamUseCase.invoke().asLiveData()
+    val muscleGroupLiveData = getAllMuscleGroupStreamUseCase.invoke().asLiveData()
 
     fun saveReoccurrences(reoccurrences: String) {
         launch {

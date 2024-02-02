@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.8">
+    <bytecodeTargetLevel target="1.7">
       <module name="Training_diary.app" target="11" />
       <module name="Training_diary.buildSrc" target="11" />
       <module name="Training_diary.buildSrc.main" target="11" />
@@ -9,25 +9,73 @@
       <module name="Training_diary.core.config" target="1.8" />
       <module name="Training_diary.core.config.main" target="1.8" />
       <module name="Training_diary.core.config.test" target="1.8" />
+      <module name="Training_diary.core.coroutine" target="1.8" />
+      <module name="Training_diary.core.coroutine.main" target="1.8" />
+      <module name="Training_diary.core.coroutine.test" target="1.8" />
+      <module name="Training_diary.core.mvi" target="1.8" />
+      <module name="Training_diary.core.mvi.main" target="1.8" />
+      <module name="Training_diary.core.mvi.test" target="1.8" />
       <module name="Training_diary.external.preferences" target="11" />
       <module name="Training_diary.external.storage" target="11" />
+      <module name="Training_diary.features.approach.api" target="1.8" />
+      <module name="Training_diary.features.approach.api.main" target="1.8" />
+      <module name="Training_diary.features.approach.api.test" target="1.8" />
       <module name="Training_diary.features.approach.impl" target="11" />
+      <module name="Training_diary.features.exercise.api" target="1.8" />
+      <module name="Training_diary.features.exercise.api.main" target="1.8" />
+      <module name="Training_diary.features.exercise.api.test" target="1.8" />
       <module name="Training_diary.features.exercise.impl" target="11" />
       <module name="Training_diary.features.exercise_info.impl" target="11" />
+      <module name="Training_diary.features.exercise_name.api" target="1.8" />
+      <module name="Training_diary.features.exercise_name.api.main" target="1.8" />
+      <module name="Training_diary.features.exercise_name.api.test" target="1.8" />
       <module name="Training_diary.features.exercise_name.impl" target="11" />
+      <module name="Training_diary.features.muscle_groups.api" target="1.8" />
+      <module name="Training_diary.features.muscle_groups.api.main" target="1.8" />
+      <module name="Training_diary.features.muscle_groups.api.test" target="1.8" />
       <module name="Training_diary.features.muscle_groups.impl" target="11" />
+      <module name="Training_diary.features.super_set.api" target="1.8" />
+      <module name="Training_diary.features.super_set.api.main" target="1.8" />
+      <module name="Training_diary.features.super_set.api.test" target="1.8" />
       <module name="Training_diary.features.super_set.impl" target="11" />
+      <module name="Training_diary.features.theme.api" target="1.8" />
+      <module name="Training_diary.features.theme.api.main" target="1.8" />
+      <module name="Training_diary.features.theme.api.test" target="1.8" />
       <module name="Training_diary.features.theme.impl" target="11" />
+      <module name="Training_diary.features.training.api" target="1.8" />
+      <module name="Training_diary.features.training.api.main" target="1.8" />
+      <module name="Training_diary.features.training.api.test" target="1.8" />
       <module name="Training_diary.features.training.impl" target="11" />
       <module name="Training_diary.navigation" target="11" />
+      <module name="Training_diary.screens.approach_create.api" target="1.8" />
+      <module name="Training_diary.screens.approach_create.api.main" target="1.8" />
+      <module name="Training_diary.screens.approach_create.api.test" target="1.8" />
       <module name="Training_diary.screens.approach_create.impl" target="11" />
       <module name="Training_diary.screens.common" target="11" />
+      <module name="Training_diary.screens.exercise_create.api" target="1.8" />
+      <module name="Training_diary.screens.exercise_create.api.main" target="1.8" />
+      <module name="Training_diary.screens.exercise_create.api.test" target="1.8" />
       <module name="Training_diary.screens.exercise_create.impl" target="11" />
+      <module name="Training_diary.screens.exercise_list.api" target="1.8" />
+      <module name="Training_diary.screens.exercise_list.api.main" target="1.8" />
+      <module name="Training_diary.screens.exercise_list.api.test" target="1.8" />
       <module name="Training_diary.screens.exercise_list.impl" target="11" />
+      <module name="Training_diary.screens.season_ticket.api" target="1.8" />
+      <module name="Training_diary.screens.season_ticket.api.main" target="1.8" />
+      <module name="Training_diary.screens.season_ticket.api.test" target="1.8" />
       <module name="Training_diary.screens.season_ticket.impl" target="11" />
+      <module name="Training_diary.screens.settings.api" target="1.8" />
+      <module name="Training_diary.screens.settings.api.main" target="1.8" />
+      <module name="Training_diary.screens.settings.api.test" target="1.8" />
       <module name="Training_diary.screens.settings.impl" target="11" />
+      <module name="Training_diary.screens.training_create.api" target="1.8" />
+      <module name="Training_diary.screens.training_create.api.main" target="1.8" />
+      <module name="Training_diary.screens.training_create.api.test" target="1.8" />
       <module name="Training_diary.screens.training_create.impl" target="11" />
       <module name="Training_diary.screens.training_flow.impl" target="11" />
+      <module name="Training_diary.screens.training_list.api" target="1.8" />
+      <module name="Training_diary.screens.training_list.api.main" target="1.8" />
+      <module name="Training_diary.screens.training_list.api.test" target="1.8" />
       <module name="Training_diary.screens.training_list.impl" target="11" />
       <module name="TrainingDiary.buildSrc" target="11" />
     </bytecodeTargetLevel>

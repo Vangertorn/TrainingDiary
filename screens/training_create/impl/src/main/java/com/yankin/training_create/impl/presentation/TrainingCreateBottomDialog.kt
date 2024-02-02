@@ -2,40 +2,48 @@ package com.yankin.training_create.impl.presentation
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.yankin.common.coroutines.observeWithLifecycle
 import com.yankin.common.custom_view.CalendarView
 import com.yankin.common.dialog.BaseBottomSheetDialogFragment
 import com.yankin.common.hideKeyboard
 import com.yankin.common.resource_import.CommonRAttr
 import com.yankin.common.viewbinding.viewBinding
+import com.yankin.common.viewmodel.AssistedViewModelFactory
 import com.yankin.exercise_list.api.navigation.ExerciseListCommunicator
-import com.yankin.exercise_list.api.navigation.ExerciseListParams
 import com.yankin.navigation.BundleParcelable
 import com.yankin.training_create.api.navigation.TrainingCreateCommunicator
+import com.yankin.training_create.impl.di.TrainingCreateViewModelFactory
 import com.yankin.training_create.impl.navigation.TrainingCreateParcelableParams
+import com.yankin.training_create.impl.presentation.adapter.MuscleGroupsAdapter
+import com.yankin.training_create.impl.presentation.models.TrainingCreateEvent
 import com.yankin.trainingdiary.training_create.impl.R
 import com.yankin.trainingdiary.training_create.impl.databinding.BottomSheetAddTrainingBinding
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
 import java.util.Date
-import java.util.Locale
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class TrainingCreateBottomDialog : BaseBottomSheetDialogFragment<BottomSheetAddTrainingBinding>() {
+internal class TrainingCreateBottomDialog : BaseBottomSheetDialogFragment<BottomSheetAddTrainingBinding>() {
+
+    @Inject
+    lateinit var viewModelFactory: TrainingCreateViewModelFactory
 
     @Inject
     lateinit var exerciseListCommunicator: ExerciseListCommunicator
 
-    private val viewModel: TrainingCreateViewModel by viewModels()
-    private var selectedDate: Date = Date()
-    private val dateFormatter = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
-    private val params by BundleParcelable<TrainingCreateParcelableParams>(TrainingCreateCommunicator.NAV_KEY)
-    private val adapter = MuscleGroupsRecyclerViewAdapter(
-        onClick = {
-        }
-    )
+    private val viewModel: TrainingCreateViewModel by viewModels {
+        AssistedViewModelFactory(params = params, factory = viewModelFactory, owner = this)
+    }
+
+    private var params by BundleParcelable<TrainingCreateParcelableParams>(TrainingCreateCommunicator.NAV_KEY)
+    private val adapter by lazy(LazyThreadSafetyMode.NONE) {
+        MuscleGroupsAdapter(
+            muscleGroupClickListener = viewModel::onMuscleGroupClick
+        )
+    }
 
     override fun parentLayoutId(): Int = R.id.addTrainingDialog
 
@@ -45,75 +53,54 @@ class TrainingCreateBottomDialog : BaseBottomSheetDialogFragment<BottomSheetAddT
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //TODO не получилось обновить либу без мавен репозитория
 
-        //        val chipsLayoutManager =
-        //            ChipsLayoutManager.newBuilder(requireContext())
-        //                .setChildGravity(Gravity.TOP)
-        //                .setScrollingEnabled(false)
-        //                .setGravityResolver { Gravity.CENTER }
-        //                .setRowBreaker { false }
-        //                .setOrientation(ChipsLayoutManager.HORIZONTAL)
-        //                .setRowStrategy(ChipsLayoutManager.STRATEGY_CENTER)
-        //                .withLastRow(true)
-        //                .build()
-        binding.rvMuscleCroups.adapter = adapter
-        //        viewBinding.rvMuscleCroups.layoutManager = chipsLayoutManager
-        viewModel.muscleGroupLiveData.observe(this.viewLifecycleOwner) {
-            adapter.submitList(it.map { it.toModel() })
+        binding.etComment.doOnTextChanged{text, start, before, count ->
+            if (start != 0 || before != 0 || count != 0) {
+                viewModel.onCommentChange(text ?: "")
+            }
         }
-        binding.calendar.onDateChangedCallback = object : CalendarView.DateChangeListener {
-            override fun onDateChanged(date: Date) {
-                selectedDate.time = date.time
+        binding.etWeight.doOnTextChanged{text, start, before, count ->
+            if (start != 0 || before != 0 || count != 0) {
+                viewModel.onWeightChange(text ?: "")
             }
         }
 
-        params.training?.let {
-            binding.etCommentCreateTraining.setText(it.comment)
-            binding.etWeightCreateTraining.setText(it.weight)
-            adapter.selectedPositions = it.selectedMuscleGroup
-            binding.calendar.selectedDate = dateFormatter.parse(it.date)
-            selectedDate = dateFormatter.parse(it.date)!!
+        binding.butConfirm.setOnClickListener {
+            viewModel.onSaveClick()
+            hideKeyboard()
         }
+    }
 
-        binding.confirmCreateTraining.setOnClickListener {
+    override fun onInitView() {
+        binding.rvMuscleCroups.adapter = adapter
+        binding.vCalendar.onDateChangedCallback = object : CalendarView.DateChangeListener {
+            override fun onDateChanged(date: Date) {
+                viewModel.onDateChange(date)
+            }
+        }
+    }
 
-            if (params.training == null) {
-                val training = Training(
-                    date = dateFormatter.format(selectedDate),
-                    comment = binding.etCommentCreateTraining.text.toString(),
-                    weight = binding.etWeightCreateTraining.text.toString(),
-                    muscleGroups = viewModel.addMuscleGroups(adapter.selectedPositions),
-                    selectedMuscleGroup = adapter.selectedPositions
-                )
-                viewModel.addNewTraining(training)
-                viewModel.takeAwayTraining(training)
-                hideKeyboard()
-                findNavController().popBackStack()
-            } else {
-                params.training?.let {
-                    val training = Training(
-                        id = it.id,
-                        date = dateFormatter.format(selectedDate),
-                        comment = binding.etCommentCreateTraining.text.toString(),
-                        weight = binding.etWeightCreateTraining.text.toString(),
-                        muscleGroups = viewModel.addMuscleGroups(adapter.selectedPositions),
-                        selectedMuscleGroup = adapter.selectedPositions
-                    )
-                    viewModel.updateTraining(training)
-                    hideKeyboard()
-                    exerciseListCommunicator.navigateTo(
-                        params = ExerciseListParams(
-                            trainingId = training.id,
-                            date = training.date,
-                            muscleGroups = training.muscleGroups,
-                            comment = training.comment,
-                            weight = training.weight,
-                            position = training.position,
-                            deleted = training.deleted,
-                            selectedMuscleGroup = training.selectedMuscleGroup,
-                        )
-                    )
+    override fun onObserveData() {
+        viewModel.getTrainingCreateUiStream().observeWithLifecycle(this) { uiState ->
+            adapter.items = uiState.muscleGroupList
+            if (uiState.weight != binding.etWeight.text?.toString()) {
+                binding.etWeight.setText(uiState.weight)
+            }
+            if (uiState.comment != binding.etComment.text?.toString()) {
+                binding.etComment.setText(uiState.comment)
+            }
+            binding.vCalendar.selectedDate = uiState.selectedDate
+        }
+        viewModel.getTrainingCreateEventStream().observeWithLifecycle(this) { event ->
+            when(event){
+                TrainingCreateEvent.Back -> {
+                    findNavController().popBackStack()
+                    viewModel.onEventHandle()
+                }
+                TrainingCreateEvent.Default -> {}
+                is TrainingCreateEvent.NavigateToExerciseList -> {
+                    exerciseListCommunicator.navigateTo(event.params)
+                    viewModel.onEventHandle()
                 }
             }
         }

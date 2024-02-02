@@ -80,7 +80,13 @@ abstract class BaseBottomSheetDialogFragment<V : ViewBinding> :
         setSubTitle()
         setBackground()
         super.onViewCreated(view, savedInstanceState)
+        onInitView()
+        onObserveData()
     }
+
+    open fun onInitView(){}
+
+    open fun onObserveData(){}
 
     private fun setBackground() {
         dialog?.let { safeDialog ->
