@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.yankin.common.coroutines.observeWithLifecycle
+import com.yankin.common.debounce.debounceClick
 import com.yankin.common.fragment.SupportFragmentInset
 import com.yankin.common.fragment.VerticalInset
 import com.yankin.common.recyclerview.SwipeCallback
@@ -20,6 +23,7 @@ import com.yankin.settings.api.navigation.SettingsCommunicator
 import com.yankin.training_create.api.navigation.TrainingCreateCommunicator
 import com.yankin.training_create.api.navigation.TrainingCreateParams
 import com.yankin.training_list.impl.presentation.adapter.TrainingRecyclerViewAdapter
+import com.yankin.training_list.impl.presentation.models.TrainingListEvent
 import com.yankin.trainingdiary.training_list.impl.R
 import com.yankin.trainingdiary.training_list.impl.databinding.FragmentTrainingListBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -67,6 +71,7 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
             ItemTouchHelper.LEFT -> {
                 deleteTraining(position)
             }
+
             ItemTouchHelper.RIGHT -> {
                 deleteTraining(position)
             }
@@ -100,31 +105,53 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.numberTrainingLiveData.observe(this.viewLifecycleOwner) {
-            if (it >= 0) {
-                viewBinding.tvNumberTraining.visibility = View.VISIBLE
-                if (it > 99) {
-                    viewBinding.tvNumberTraining.text = "ထ"
-                } else {
-                    viewBinding.tvNumberTraining.text = it.toString()
+        viewModel.getTrainingListUiStream().observeWithLifecycle(this) { uiState ->
+            viewBinding.tvNumberTraining.isVisible = uiState.trainingLeft.isNotEmpty()
+            viewBinding.tvNumberTraining.text = uiState.trainingLeft
+
+            viewBinding.tvNumberDays.isVisible = uiState.daysLeft.isNotEmpty()
+            viewBinding.tvNumberDays.text = uiState.daysLeft
+        }
+
+        viewModel.getTrainingCreateEventStream().observeWithLifecycle(this) { event ->
+            when(event){
+                TrainingListEvent.Default -> {}
+                TrainingListEvent.NavigateToCreateMembership -> {
+                    seasonTicketCommunicator.navigateToSeasonTicket()
+                    viewModel.onEventHandle()
                 }
-            } else {
-                viewBinding.tvNumberTraining.visibility = View.GONE
+                is TrainingListEvent.NavigateToEditMembership -> {
+                    seasonTicketCommunicator.navigateToSeasonTicketInfo()
+                    viewModel.onEventHandle()
+                }
             }
         }
 
-        viewModel.numberLeftDaysLiveData.observe(this.viewLifecycleOwner) {
-            if (it >= 0) {
-                viewBinding.tvNumberDays.visibility = View.VISIBLE
-                if (it >= 365) {
-                    viewBinding.tvNumberDays.text = "ထ"
-                } else {
-                    viewBinding.tvNumberDays.text = it.toString()
-                }
-            } else {
-                viewBinding.tvNumberDays.visibility = View.GONE
-            }
-        }
+//        viewModel.numberTrainingLiveData.observe(this.viewLifecycleOwner) {
+//            if (it >= 0) {
+//                viewBinding.tvNumberTraining.visibility = View.VISIBLE
+//                if (it > 99) {
+//                    viewBinding.tvNumberTraining.text = "ထ"
+//                } else {
+//                    viewBinding.tvNumberTraining.text = it.toString()
+//                }
+//            } else {
+//                viewBinding.tvNumberTraining.visibility = View.GONE
+//            }
+//        }
+
+//        viewModel.numberLeftDaysLiveData.observe(this.viewLifecycleOwner) {
+//            if (it >= 0) {
+//                viewBinding.tvNumberDays.visibility = View.VISIBLE
+//                if (it >= 365) {
+//                    viewBinding.tvNumberDays.text = "ထ"
+//                } else {
+//                    viewBinding.tvNumberDays.text = it.toString()
+//                }
+//            } else {
+//                viewBinding.tvNumberDays.visibility = View.GONE
+//            }
+//        }
 
         viewBinding.recyclerViewTraining.adapter = adapter
 
@@ -132,14 +159,15 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
             trainingCreateCommunicator.navigateTo(TrainingCreateParams.CreateTraining)
         }
 
-        viewBinding.subscriptionTrainingList.setOnClickListener {
-            if (viewModel.numberOfTrainingSessions() == -1 && viewModel.subscriptionEndDate()
-                .isEmpty()
-            ) {
-                seasonTicketCommunicator.navigateToSeasonTicket()
-            } else {
-                seasonTicketCommunicator.navigateToSeasonTicketInfo()
-            }
+        viewBinding.subscriptionTrainingList.debounceClick {
+            viewModel.onMembershipClick()
+//            if (viewModel.numberOfTrainingSessions() == -1 && viewModel.subscriptionEndDate()
+//                    .isEmpty()
+//            ) {
+//                seasonTicketCommunicator.navigateToSeasonTicket()
+//            } else {
+//                seasonTicketCommunicator.navigateToSeasonTicketInfo()
+//            }
         }
         viewBinding.settingsTrainingList.setOnClickListener {
             settingsCommunicator.navigateTo()

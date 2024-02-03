@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/core/coroutine" />
             <option value="$PROJECT_DIR$/core/date" />
             <option value="$PROJECT_DIR$/core/mvi" />
+            <option value="$PROJECT_DIR$/core/mvvm" />
             <option value="$PROJECT_DIR$/external" />
             <option value="$PROJECT_DIR$/external/preferences" />
             <option value="$PROJECT_DIR$/external/storage" />
@@ -28,6 +29,9 @@
             <option value="$PROJECT_DIR$/features/exercise_name" />
             <option value="$PROJECT_DIR$/features/exercise_name/api" />
             <option value="$PROJECT_DIR$/features/exercise_name/impl" />
+            <option value="$PROJECT_DIR$/features/membership" />
+            <option value="$PROJECT_DIR$/features/membership/api" />
+            <option value="$PROJECT_DIR$/features/membership/impl" />
             <option value="$PROJECT_DIR$/features/muscle_groups" />
             <option value="$PROJECT_DIR$/features/muscle_groups/api" />
             <option value="$PROJECT_DIR$/features/muscle_groups/impl" />
