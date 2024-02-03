@@ -79,6 +79,8 @@ dependencies {
     implementation(project(":screens:common"))
     implementation(project(":features:theme:api"))
     implementation(project(":features:theme:impl"))
+    implementation(project(":features:membership:api"))
+    implementation(project(":features:membership:impl"))
 
     testImplementation(Dependencies.Test.testJunit)
     androidTestImplementation(Dependencies.Test.testExtension)
