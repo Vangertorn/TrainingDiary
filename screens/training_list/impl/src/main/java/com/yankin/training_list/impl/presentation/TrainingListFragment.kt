@@ -18,7 +18,7 @@ import com.yankin.common.resource_import.CommonRString
 import com.yankin.common.view.setVerticalMargin
 import com.yankin.exercise_list.api.navigation.ExerciseListCommunicator
 import com.yankin.exercise_list.api.navigation.ExerciseListParams
-import com.yankin.season_ticket.api.navigation.SeasonTicketCommunicator
+import com.yankin.membership.api.navigation.MembershipCommunicator
 import com.yankin.settings.api.navigation.SettingsCommunicator
 import com.yankin.training_create.api.navigation.TrainingCreateCommunicator
 import com.yankin.training_create.api.navigation.TrainingCreateParams
@@ -39,7 +39,7 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
     lateinit var settingsCommunicator: SettingsCommunicator
 
     @Inject
-    lateinit var seasonTicketCommunicator: SeasonTicketCommunicator
+    lateinit var membershipCommunicator: MembershipCommunicator
 
     @Inject
     lateinit var exerciseListCommunicator: ExerciseListCommunicator
@@ -117,11 +117,11 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
             when(event){
                 TrainingListEvent.Default -> {}
                 TrainingListEvent.NavigateToCreateMembership -> {
-                    seasonTicketCommunicator.navigateToSeasonTicket()
+                    membershipCommunicator.navigateToCreateMembership()
                     viewModel.onEventHandle()
                 }
                 is TrainingListEvent.NavigateToEditMembership -> {
-                    seasonTicketCommunicator.navigateToSeasonTicketInfo()
+                    membershipCommunicator.navigateToMembership(event.params)
                     viewModel.onEventHandle()
                 }
             }

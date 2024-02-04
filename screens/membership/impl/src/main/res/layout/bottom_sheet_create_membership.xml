@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/createMembershipDialog">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSave_season_ticket"
+        style="@style/MyButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckedTextView
+        android:id="@+id/ctvPerpetual"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="false"
+        android:gravity="center"
+        android:text="@string/perpetual"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/btnSave_season_ticket"
+        app:layout_constraintEnd_toStartOf="@id/ctvUnlimited"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckedTextView
+        android:id="@+id/ctvUnlimited"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:checked="false"
+        android:gravity="center"
+        android:text="@string/unlimited"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/btnSave_season_ticket"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ctvPerpetual" />
+
+    <ImageButton
+        android:id="@+id/ibAddQuantity"
+        style="@style/AddRemoveImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/add_quantity"
+        android:src="@drawable/ic_plus"
+        app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etReoccurrence" />
+
+    <ImageButton
+        android:id="@+id/ibRemoveQuantity"
+        style="@style/AddRemoveImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/remove_quantity"
+        android:src="@drawable/ic_minus"
+        app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
+        app:layout_constraintEnd_toStartOf="@+id/etReoccurrence"
+        app:layout_constraintTop_toTopOf="@id/etReoccurrence" />
+
+    <EditText
+        android:id="@+id/etReoccurrence"
+        style="@style/EditNumberStyle"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        android:maxLength="2"
+        app:layout_constraintBottom_toTopOf="@id/ctvPerpetual"
+        app:layout_constraintEnd_toStartOf="@id/ibAddQuantity"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/tvNumber"
+        style="@style/MyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/number_of_training_sessions"
+        app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etReoccurrence" />
+
+    <com.yankin.common.custom_view.CalendarView
+        android:id="@+id/calendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:active="true"
+        app:enabled_background="@color/inactive"
+        app:ivLeft_color="@color/crimson"
+        app:ivRight_color="@color/crimson"
+        app:layout_constraintBottom_toTopOf="@id/etReoccurrence"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:month_text_color="@color/crimson"
+        app:month_text_size="20sp"
+        app:selected_day_background="@drawable/background_color"
+        app:selected_day_text_color="@color/white"
+        app:today_background="@drawable/background_today_calendar" />
+
+    <TextView
+        android:id="@+id/tvText"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:text="@string/valid_until"
+        app:layout_constraintBottom_toTopOf="@id/calendar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvText1"
+        style="@style/MyTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/season_ticket"
+        android:textColor="@color/crimson"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@id/tvText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivClose_number"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#56000000"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/etReoccurrence"
+        app:layout_constraintEnd_toEndOf="@id/ibAddQuantity"
+        app:layout_constraintStart_toStartOf="@id/tvNumber"
+        app:layout_constraintTop_toTopOf="@id/etReoccurrence"
+        tools:ignore="ContentDescription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

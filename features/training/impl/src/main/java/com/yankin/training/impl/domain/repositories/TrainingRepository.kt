@@ -9,7 +9,7 @@ internal interface TrainingRepository {
 
     val currentTrainingDescStream: Flow<List<TrainingDomain>>
 
-    suspend fun saveTraining(training: TrainingDomain)
+    suspend fun saveTraining(training: TrainingDomain): Long
 
     suspend fun updateTraining(training: TrainingDomain)
 

@@ -4,5 +4,5 @@ import com.yankin.training.api.models.TrainingDomain
 
 interface SaveTrainingUseCase {
 
-    suspend fun invoke(training: TrainingDomain)
+    suspend fun invoke(training: TrainingDomain):Long
 }

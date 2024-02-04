@@ -64,6 +64,10 @@
       <module name="Training_diary.screens.exercise_list.api.main" target="1.8" />
       <module name="Training_diary.screens.exercise_list.api.test" target="1.8" />
       <module name="Training_diary.screens.exercise_list.impl" target="11" />
+      <module name="Training_diary.screens.membership.api" target="1.8" />
+      <module name="Training_diary.screens.membership.api.main" target="1.8" />
+      <module name="Training_diary.screens.membership.api.test" target="1.8" />
+      <module name="Training_diary.screens.membership.impl" target="11" />
       <module name="Training_diary.screens.season_ticket.api" target="1.8" />
       <module name="Training_diary.screens.season_ticket.api.main" target="1.8" />
       <module name="Training_diary.screens.season_ticket.api.test" target="1.8" />

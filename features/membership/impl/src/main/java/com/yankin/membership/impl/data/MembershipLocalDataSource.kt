@@ -13,7 +13,7 @@ internal class MembershipLocalDataSource @Inject constructor(
         db.deleteTrainingId(exerciseId = trainingId, membershipId = membershipId)
     }
 
-    fun addTrainingId(trainingId: Long, membershipId: Long) {
+    fun addTrainingId(trainingId: Long, membershipId: Long?) {
         db.addTrainingId(exerciseId = trainingId, membershipId = membershipId)
     }
 
@@ -27,5 +27,9 @@ internal class MembershipLocalDataSource @Inject constructor(
 
     fun deleteMembership(membershipId: Long) {
         db.deleteMembership(membershipId)
+    }
+
+    fun getMembershipById(membershipId: Long): MembershipEntity {
+        return db.getMembershipById(membershipId)
     }
 }

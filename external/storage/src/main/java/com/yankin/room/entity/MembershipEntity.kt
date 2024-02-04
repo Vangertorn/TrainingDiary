@@ -14,7 +14,7 @@ data class MembershipEntity (
     @ColumnInfo(name = "id")
     val id: Long = 0L,
     val trainingCount: Int?,
-    val trainingCountPast: Int?,
+    val trainingCountPast: Int,
     val startDate: Long,
     val endDate: Long?,
     val accountedTrainingIdList: List<Long>,

@@ -56,9 +56,9 @@
             <option value="$PROJECT_DIR$/screens/exercise_list" />
             <option value="$PROJECT_DIR$/screens/exercise_list/api" />
             <option value="$PROJECT_DIR$/screens/exercise_list/impl" />
-            <option value="$PROJECT_DIR$/screens/season_ticket" />
-            <option value="$PROJECT_DIR$/screens/season_ticket/api" />
-            <option value="$PROJECT_DIR$/screens/season_ticket/impl" />
+            <option value="$PROJECT_DIR$/screens/membership" />
+            <option value="$PROJECT_DIR$/screens/membership/api" />
+            <option value="$PROJECT_DIR$/screens/membership/impl" />
             <option value="$PROJECT_DIR$/screens/settings" />
             <option value="$PROJECT_DIR$/screens/settings/api" />
             <option value="$PROJECT_DIR$/screens/settings/impl" />

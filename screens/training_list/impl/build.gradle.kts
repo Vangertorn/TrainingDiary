@@ -39,7 +39,7 @@ dependencies {
     implementation(project(":screens:training_list:api"))
     implementation(project(":screens:training_create:api"))
     implementation(project(":screens:settings:api"))
-    implementation(project(":screens:season_ticket:api"))
+    implementation(project(":screens:membership:api"))
     implementation(project(":screens:exercise_list:api"))
 
     implementation(Dependencies.Hilt.android)

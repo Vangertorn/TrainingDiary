@@ -20,6 +20,5 @@ fun MembershipDomain.toEntity() = MembershipEntity(
     trainingCountPast = accountedTrainingIdList.size,
     startDate = startDate.getMilliseconds(),
     endDate = endDate?.getMilliseconds(),
-    accountedTrainingIdList = accountedTrainingIdList
-
+    accountedTrainingIdList = accountedTrainingIdList,
 )

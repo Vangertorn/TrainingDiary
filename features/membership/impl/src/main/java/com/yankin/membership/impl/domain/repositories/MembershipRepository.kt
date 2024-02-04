@@ -9,9 +9,11 @@ interface MembershipRepository {
 
     suspend fun deleteTrainingId(trainingId: Long, membershipId: Long)
 
-    suspend fun addTrainingId(trainingId: Long, membershipId: Long)
+    suspend fun addTrainingId(trainingId: Long, membershipId: Long?)
 
     suspend fun addMembership(membership: MembershipDomain)
 
     suspend fun deleteMembership(membershipId: Long)
+
+    suspend fun getMembershipById(membershipId: Long): MembershipDomain
 }

@@ -7,4 +7,4 @@ import dagger.assisted.AssistedFactory
 
 @AssistedFactory
 internal interface TrainingCreateViewModelFactory :
-    ViewModelFactory<TrainingCreateViewModel, TrainingCreateParcelableParams>
+    ViewModelFactory.ViewModelParamsFactory<TrainingCreateViewModel, TrainingCreateParcelableParams>

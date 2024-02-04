@@ -25,7 +25,7 @@ internal class MembershipRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun addTrainingId(trainingId: Long, membershipId: Long) {
+    override suspend fun addTrainingId(trainingId: Long, membershipId: Long?) {
         withContext(coroutineDispatchers.io) {
             membershipLocalDataSource.addTrainingId(trainingId = trainingId, membershipId = membershipId)
         }
@@ -42,4 +42,9 @@ internal class MembershipRepositoryImpl @Inject constructor(
             membershipLocalDataSource.deleteMembership(membershipId = membershipId)
         }
     }
+
+    override suspend fun getMembershipById(membershipId: Long): MembershipDomain =
+        withContext(coroutineDispatchers.io) {
+            return@withContext membershipLocalDataSource.getMembershipById(membershipId = membershipId).toDomain()
+        }
 }

@@ -1,9 +1,7 @@
 package com.yankin.date
 
-import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.GregorianCalendar
-import java.util.Locale
 
 sealed interface Timestamp {
 
@@ -33,14 +31,8 @@ sealed interface Timestamp {
         is Milliseconds -> value / 1000L
     }
 
-    fun toDateString(
-        dateFormat: String,
-        locale: Locale = Locale.getDefault()
-    ): String = SimpleDateFormat(dateFormat, locale).format(timestampToDate())
-
-    private fun timestampToDate(): Date =
-        GregorianCalendar().apply {
-            clear()
-            timeInMillis = getMilliseconds()
-        }.time
+    fun timestampToDate(): Date = GregorianCalendar().apply {
+        clear()
+        timeInMillis = getMilliseconds()
+    }.time
 }

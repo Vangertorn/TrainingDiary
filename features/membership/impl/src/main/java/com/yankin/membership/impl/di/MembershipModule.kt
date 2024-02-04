@@ -5,6 +5,7 @@ import com.yankin.membership.api.usecases.AddTrainingIdFromMembershipUseCase
 import com.yankin.membership.api.usecases.DeleteMembershipByIdUseCase
 import com.yankin.membership.api.usecases.DeleteTrainingIdFromMembershipUseCase
 import com.yankin.membership.api.usecases.GetActiveMembershipStreamUseCase
+import com.yankin.membership.api.usecases.GetMembershipByIdUseCase
 import com.yankin.membership.impl.data.MembershipRepositoryImpl
 import com.yankin.membership.impl.domain.repositories.MembershipRepository
 import com.yankin.membership.impl.domain.usecases.AddMembershipUseCaseImpl
@@ -12,6 +13,7 @@ import com.yankin.membership.impl.domain.usecases.AddTrainingIdFromMembershipUse
 import com.yankin.membership.impl.domain.usecases.DeleteMembershipByIdUseCaseImpl
 import com.yankin.membership.impl.domain.usecases.DeleteTrainingIdFromMembershipUseCaseImpl
 import com.yankin.membership.impl.domain.usecases.GetActiveMembershipStreamUseCaseImpl
+import com.yankin.membership.impl.domain.usecases.GetMembershipByIdUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -45,6 +47,11 @@ internal interface MembershipModule {
     fun bindsDeleteMembershipByIdUseCase(
         deleteMembershipByIdUseCaseImpl: DeleteMembershipByIdUseCaseImpl
     ): DeleteMembershipByIdUseCase
+
+    @Binds
+    fun bindsGetMembershipByIdUseCase(
+        getMembershipByIdUseCaseImpl: GetMembershipByIdUseCaseImpl
+    ): GetMembershipByIdUseCase
 
     @Binds
     fun bindsMembershipRepository(membershipRepositoryImpl: MembershipRepositoryImpl): MembershipRepository

@@ -24,24 +24,20 @@ internal class TrainingRepositoryImpl @Inject constructor(
             trainingEntityList?.map { trainingEntity -> trainingEntity.toDomain() } ?: listOf()
         }
 
-    override suspend fun saveTraining(training: TrainingDomain) {
-        withContext(coroutineDispatchers.io) {
-            if (training.id == 0L) {
-                val listPositions: MutableList<Int> =
-                    trainingLocalDataSource.getTrainingPositions() ?: arrayListOf(0)
-                if (listPositions.isEmpty()) listPositions.add(500)
-                trainingLocalDataSource.insertTraining(
-                    TrainingEntity(
-                        date = training.date,
-                        muscleGroups = training.muscleGroups,
-                        comment = training.comment,
-                        weight = training.weight,
-                        position = listPositions[0] - 1,
-                        selectedMuscleGroup = training.selectedMuscleGroup
-                    )
-                )
-            }
-        }
+    override suspend fun saveTraining(training: TrainingDomain): Long = withContext(coroutineDispatchers.io) {
+        val listPositions: MutableList<Int> =
+            trainingLocalDataSource.getTrainingPositions() ?: arrayListOf(0)
+        if (listPositions.isEmpty()) listPositions.add(500)
+        return@withContext trainingLocalDataSource.insertTraining(
+            TrainingEntity(
+                date = training.date,
+                muscleGroups = training.muscleGroups,
+                comment = training.comment,
+                weight = training.weight,
+                position = listPositions[0] - 1,
+                selectedMuscleGroup = training.selectedMuscleGroup
+            )
+        )
     }
 
     override suspend fun updateTraining(training: TrainingDomain) {
@@ -96,7 +92,7 @@ internal class TrainingRepositoryImpl @Inject constructor(
 
     override suspend fun forgotIdTraining() {
         withContext(coroutineDispatchers.io) {
-           appSettings.setIdTraining(-1)
+            appSettings.setIdTraining(-1)
         }
     }
 }

@@ -11,7 +11,7 @@ import com.yankin.common.dialog.BaseBottomSheetDialogFragment
 import com.yankin.common.hideKeyboard
 import com.yankin.common.resource_import.CommonRAttr
 import com.yankin.common.viewbinding.viewBinding
-import com.yankin.common.viewmodel.AssistedViewModelFactory
+import com.yankin.common.viewmodel.AssistedParamsViewModelFactory
 import com.yankin.exercise_list.api.navigation.ExerciseListCommunicator
 import com.yankin.navigation.BundleParcelable
 import com.yankin.training_create.api.navigation.TrainingCreateCommunicator
@@ -35,7 +35,7 @@ internal class TrainingCreateBottomDialog : BaseBottomSheetDialogFragment<Bottom
     lateinit var exerciseListCommunicator: ExerciseListCommunicator
 
     private val viewModel: TrainingCreateViewModel by viewModels {
-        AssistedViewModelFactory(params = params, factory = viewModelFactory, owner = this)
+        AssistedParamsViewModelFactory(params = params, factory = viewModelFactory, owner = this)
     }
 
     private var params by BundleParcelable<TrainingCreateParcelableParams>(TrainingCreateCommunicator.NAV_KEY)

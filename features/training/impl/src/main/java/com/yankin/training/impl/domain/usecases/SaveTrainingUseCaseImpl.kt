@@ -9,7 +9,7 @@ internal class SaveTrainingUseCaseImpl @Inject constructor(
     private val trainingRepository: TrainingRepository,
 ) : SaveTrainingUseCase {
 
-    override suspend fun invoke(training: TrainingDomain) {
-        trainingRepository.saveTraining(training)
+    override suspend fun invoke(training: TrainingDomain): Long {
+        return trainingRepository.saveTraining(training)
     }
 }

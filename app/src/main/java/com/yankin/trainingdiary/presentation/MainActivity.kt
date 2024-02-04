@@ -50,7 +50,6 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>(), AppThemeOwner 
         viewModel.deletedTrainings()
         viewModel.deletedExercises()
         viewModel.deletedSuperSets()
-        viewModel.setLeftDays()
     }
 
     @Deprecated("Deprecated in Java")
@@ -73,7 +72,8 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>(), AppThemeOwner 
     }
 
     override fun getActiveFragment(): Fragment? {
-        return (supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment).childFragmentManager.fragments[0]
+        return(supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment)
+            .childFragmentManager.fragments[0]
     }
 
     private fun setupNavGraph() {

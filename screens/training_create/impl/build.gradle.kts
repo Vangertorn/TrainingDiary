@@ -30,10 +30,10 @@ dependencies {
 
     implementation(project(":core:coroutine"))
     implementation(project(":core:date"))
-    implementation(project(":external:preferences"))
     implementation(project(":navigation"))
     implementation(project(":features:training:api"))
     implementation(project(":features:muscle_groups:api"))
+    implementation(project(":features:membership:api"))
     implementation(project(":screens:common"))
     implementation(project(":screens:training_create:api"))
     implementation(project(":screens:exercise_list:api"))

@@ -7,7 +7,7 @@ import javax.inject.Inject
 internal class AddTrainingIdFromMembershipUseCaseImpl @Inject constructor(
     private val membershipRepository: MembershipRepository,
 ) : AddTrainingIdFromMembershipUseCase {
-    override suspend fun invoke(trainingId: Long, membershipId: Long) {
+    override suspend fun invoke(trainingId: Long, membershipId: Long?) {
         return membershipRepository.addTrainingId(trainingId = trainingId, membershipId = membershipId)
     }
 }
