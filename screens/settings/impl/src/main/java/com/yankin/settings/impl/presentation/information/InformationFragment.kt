@@ -7,45 +7,37 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.yankin.common.fragment.BaseFragment
 import com.yankin.common.fragment.SupportFragmentInset
 import com.yankin.common.resource_import.CommonRString
 import com.yankin.common.view.setVerticalMargin
+import com.yankin.common.viewbinding.viewBinding
 import com.yankin.trainingdiary.settings.impl.R
+import com.yankin.trainingdiary.settings.impl.databinding.FragmentExerciseAutofillBinding
 import com.yankin.trainingdiary.settings.impl.databinding.FragmentInformationBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class InformationFragment : SupportFragmentInset<FragmentInformationBinding>(R.layout.fragment_information) {
-    override lateinit var viewBinding: FragmentInformationBinding
+class InformationFragment : BaseFragment<FragmentInformationBinding>(R.layout.fragment_information) {
+    override val binding: FragmentInformationBinding by viewBinding(FragmentInformationBinding::bind)
     private val viewModel: InformationViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        viewBinding = FragmentInformationBinding.bind(
-            LayoutInflater.from(context).inflate(R.layout.fragment_information, container, false)
-        )
-        return viewBinding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewBinding.toolbarInfo.setNavigationOnClickListener {
+        binding.toolbarInfo.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
-        viewBinding.tvLink.text = getString(CommonRString.email_address)
+        binding.tvLink.text = getString(CommonRString.email_address)
 
-        viewBinding.tvLink.setOnClickListener {
+        binding.tvLink.setOnClickListener {
             sendMail()
         }
     }
 
     override fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean) {
-        viewBinding.toolbarInfo.setPadding(0, top, 0, 0)
-        viewBinding.tvLink.setVerticalMargin(marginBottom = bottom)
+        binding.toolbarInfo.setPadding(0, top, 0, 0)
+        binding.tvLink.setVerticalMargin(marginBottom = bottom)
     }
 
     private fun sendMail() {

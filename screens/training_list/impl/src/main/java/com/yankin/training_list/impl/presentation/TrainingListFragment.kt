@@ -11,11 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.yankin.common.coroutines.observeWithLifecycle
 import com.yankin.common.debounce.debounceClick
+import com.yankin.common.fragment.BaseFragment
 import com.yankin.common.fragment.SupportFragmentInset
 import com.yankin.common.fragment.VerticalInset
 import com.yankin.common.recyclerview.SwipeCallback
 import com.yankin.common.resource_import.CommonRString
 import com.yankin.common.view.setVerticalMargin
+import com.yankin.common.viewbinding.viewBinding
 import com.yankin.exercise_list.api.navigation.ExerciseListCommunicator
 import com.yankin.exercise_list.api.navigation.ExerciseListParams
 import com.yankin.membership.api.navigation.MembershipCommunicator
@@ -30,7 +32,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R.layout.fragment_training_list) {
+class TrainingListFragment : BaseFragment<FragmentTrainingListBinding>(R.layout.fragment_training_list) {
 
     @Inject
     lateinit var trainingCreateCommunicator: TrainingCreateCommunicator
@@ -44,7 +46,7 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
     @Inject
     lateinit var exerciseListCommunicator: ExerciseListCommunicator
 
-    override lateinit var viewBinding: FragmentTrainingListBinding
+    override val binding: FragmentTrainingListBinding by viewBinding(FragmentTrainingListBinding::bind)
 
     private val viewModel: TrainingListViewModel by viewModels()
 
@@ -80,37 +82,26 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
     private val dataObserverAsc = object : RecyclerView.AdapterDataObserver() {
         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
             super.onItemRangeInserted(positionStart, itemCount)
-            viewBinding.recyclerViewTraining.scrollToPosition(0)
+            binding.recyclerViewTraining.scrollToPosition(0)
         }
     }
     private val dataObserverDesc = object : RecyclerView.AdapterDataObserver() {
         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
             super.onItemRangeInserted(positionStart, itemCount)
-            viewBinding.recyclerViewTraining.scrollToPosition(adapter.itemCount - 1)
+            binding.recyclerViewTraining.scrollToPosition(adapter.itemCount - 1)
         }
     }
     private var dataObserverChek: Int? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        viewBinding = FragmentTrainingListBinding.bind(
-            LayoutInflater.from(context).inflate(R.layout.fragment_training_list, container, false)
-        )
-        return viewBinding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getTrainingListUiStream().observeWithLifecycle(this) { uiState ->
-            viewBinding.tvNumberTraining.isVisible = uiState.trainingLeft.isNotEmpty()
-            viewBinding.tvNumberTraining.text = uiState.trainingLeft
+            binding.tvNumberTraining.isVisible = uiState.trainingLeft.isNotEmpty()
+            binding.tvNumberTraining.text = uiState.trainingLeft
 
-            viewBinding.tvNumberDays.isVisible = uiState.daysLeft.isNotEmpty()
-            viewBinding.tvNumberDays.text = uiState.daysLeft
+            binding.tvNumberDays.isVisible = uiState.daysLeft.isNotEmpty()
+            binding.tvNumberDays.text = uiState.daysLeft
         }
 
         viewModel.getTrainingCreateEventStream().observeWithLifecycle(this) { event ->
@@ -127,16 +118,16 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
             }
         }
 
-        viewBinding.recyclerViewTraining.adapter = adapter
+        binding.recyclerViewTraining.adapter = adapter
 
-        viewBinding.btnAdd.setOnClickListener {
+        binding.btnAdd.setOnClickListener {
             trainingCreateCommunicator.navigateTo(TrainingCreateParams.CreateTraining)
         }
 
-        viewBinding.subscriptionTrainingList.debounceClick {
+        binding.subscriptionTrainingList.debounceClick {
             viewModel.onMembershipClick()
         }
-        viewBinding.settingsTrainingList.setOnClickListener {
+        binding.settingsTrainingList.setOnClickListener {
             settingsCommunicator.navigateTo()
         }
         viewModel.switchOrderLiveData.observe(this.viewLifecycleOwner) { boolean ->
@@ -161,7 +152,7 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
             }
         }
         val trainingHelper = ItemTouchHelper(simpleCallback)
-        trainingHelper.attachToRecyclerView(viewBinding.recyclerViewTraining)
+        trainingHelper.attachToRecyclerView(binding.recyclerViewTraining)
     }
 
     override fun onDestroyView() {
@@ -181,7 +172,7 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
         viewModel.deletedTrainingTrue(training)
 
         Snackbar.make(
-            viewBinding.recyclerViewTraining,
+            binding.recyclerViewTraining,
             getString(CommonRString.training_was_delete),
             Snackbar.LENGTH_LONG
         )
@@ -194,9 +185,9 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
 
     override fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean) {
         this.savedInsets = VerticalInset(top, bottom, hasKeyboard)
-        viewBinding.toolbarTrainingList.setPadding(0, top, 0, 0)
-        viewBinding.btnAdd.setVerticalMargin(0, bottom)
-        viewBinding.recyclerViewTraining.setPadding(0, 0, 0, bottom)
+        binding.toolbarTrainingList.setPadding(0, top, 0, 0)
+        binding.btnAdd.setVerticalMargin(0, bottom)
+        binding.recyclerViewTraining.setPadding(0, 0, 0, bottom)
     }
 
     companion object {

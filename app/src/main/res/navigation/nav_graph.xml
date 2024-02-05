@@ -89,7 +89,7 @@
     </fragment>
     <fragment
         android:id="@+id/exerciseAutofillFragment"
-        android:name="com.yankin.settings.impl.presentation.exercise_pattern_list.ExerciseAutofillFragment"
+        android:name="com.yankin.settings.impl.presentation.exercise_pattern_list.ExercisePatternListFragment"
         android:label="ExerciseAutofillFragment"
         tools:layout="@layout/fragment_exercise_autofill">
         <action
@@ -100,7 +100,7 @@
         android:id="@+id/exerciseAutofillBottomDialog"
         android:name="com.yankin.settings.impl.presentation.exercise_pattern_create.ExercisePatternCreateBottomDialog"
         android:label="ExerciseAutofillBottomDialog"
-        tools:layout="@layout/bottom_sheet_exercise_autofill">
+        tools:layout="@layout/bottom_sheet_exercise_pattern_create">
     </dialog>
     <dialog
         android:id="@+id/seasonTicketBottomDialog"

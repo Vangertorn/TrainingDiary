@@ -15,8 +15,11 @@ abstract class ExercisePatternDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insert(exercisePatternEntity: ExercisePatternEntity): Long
 
-    @Delete
-    abstract fun delete(exercisePatternEntity: ExercisePatternEntity)
+    @Query("DELETE FROM table_exercise_pattern WHERE id = :exercisePatternId")
+    abstract fun delete(exercisePatternId: Long)
+
+    @Query("SELECT * FROM table_exercise_pattern WHERE id = :exercisePatternId")
+    abstract fun getExercisePatternById(exercisePatternId: Long): ExercisePatternEntity
 
     @Update
     abstract fun update(exercisePatternEntity: ExercisePatternEntity)

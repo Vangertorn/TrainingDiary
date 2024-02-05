@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/coroutine" />
             <option value="$PROJECT_DIR$/core/date" />
+            <option value="$PROJECT_DIR$/core/kotlin" />
             <option value="$PROJECT_DIR$/core/mvi" />
             <option value="$PROJECT_DIR$/core/mvvm" />
             <option value="$PROJECT_DIR$/external" />

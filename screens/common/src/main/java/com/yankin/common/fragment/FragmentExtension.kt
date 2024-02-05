@@ -1,6 +1,7 @@
 package com.yankin.common.fragment
 
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import com.yankin.common.lifecycle.DefaultLifecycleObserverImpl
@@ -23,3 +24,11 @@ fun Fragment.onBackPressed(owner: LifecycleOwner, action: () -> Unit) {
 fun Fragment.onBackPressed(action: () -> Unit) {
     onBackPressed(viewLifecycleOwner, action)
 }
+
+fun Fragment?.isDialog(): Boolean =
+    when {
+        this is DialogFragment -> true
+        this?.parentFragment is DialogFragment -> true
+        this?.parentFragment != null -> this.parentFragment.isDialog()
+        else -> false
+    }

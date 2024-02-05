@@ -20,7 +20,7 @@ abstract class SupportActivityInset<T : ViewBinding> :
     override fun insetsChanged(statusBarSize: Int, navigationBarSize: Int, hasKeyboard: Boolean) {
         insets = VerticalInset(statusBarSize, navigationBarSize, hasKeyboard)
         val fragment = getActiveFragment()
-        if (fragment != null && fragment is SupportFragmentInset<*>) {
+        if (fragment != null && fragment is SupportFragmentInset) {
             fragment.onInsetsReceived(statusBarSize, navigationBarSize, hasKeyboard)
         }
     }

@@ -1,8 +1,8 @@
 package com.yankin.exercise_name.impl.data
 
 import com.yankin.coroutine.CoroutineDispatchers
-import com.yankin.exercise_pattern.api.models.ExercisePatternDomain
 import com.yankin.exercise_name.impl.domain.repositories.ExercisePatternRepository
+import com.yankin.exercise_pattern.api.models.ExercisePatternDomain
 import com.yankin.room.entity.ExercisePatternEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
@@ -20,7 +20,7 @@ internal class ExercisePatternRepositoryImpl @Inject constructor(
         exercisePatternLocalDataSource.getExercisePatternStream()
             .filterNotNull()
             .map { exercisePatternEntityList ->
-                exercisePatternEntityList.map(ExercisePatternEntity::toModel)
+                exercisePatternEntityList.map(ExercisePatternEntity::toDomain)
             }
 
     override suspend fun saveExercisePattern(exercisePattern: ExercisePatternDomain) {
@@ -29,9 +29,9 @@ internal class ExercisePatternRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun deleteExercisePattern(exercisePattern: ExercisePatternDomain) {
+    override suspend fun deleteExercisePattern(exercisePatternId: Long) {
         withContext(coroutineDispatchers.io) {
-            exercisePatternLocalDataSource.deleteExercisePattern(exercisePattern.toEntity())
+            exercisePatternLocalDataSource.deleteExercisePattern(exercisePatternId)
         }
     }
 
@@ -40,4 +40,9 @@ internal class ExercisePatternRepositoryImpl @Inject constructor(
             exercisePatternLocalDataSource.updateExercisePattern(exercisePattern.toEntity())
         }
     }
+
+    override suspend fun getExercisePatternById(exercisePatternId: Long): ExercisePatternDomain =
+        withContext(coroutineDispatchers.io) {
+            return@withContext exercisePatternLocalDataSource.getExercisePatternById(exercisePatternId).toDomain()
+        }
 }

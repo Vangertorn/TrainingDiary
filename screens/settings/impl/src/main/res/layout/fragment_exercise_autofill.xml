@@ -30,6 +30,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_exercise_list"
         app:spanCount="1"
-        tools:listitem="@layout/item_select_dialog" />
+        tools:listitem="@layout/item_exercise_pattern" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

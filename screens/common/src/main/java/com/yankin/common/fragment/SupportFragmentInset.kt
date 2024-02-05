@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import androidx.viewbinding.ViewBinding
 
-abstract class SupportFragmentInset<T : ViewBinding>(@LayoutRes layoutResId: Int) :
-    Fragment(layoutResId), ViewBindable<T> {
+abstract class SupportFragmentInset(@LayoutRes layoutResId: Int) :
+    Fragment(layoutResId) {
 
     abstract fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean)
 

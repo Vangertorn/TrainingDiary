@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.snackbar.Snackbar
 import com.yankin.approach_create.api.navigation.ApproachCreateCommunicator
 import com.yankin.approach_create.api.navigation.ApproachCreateParams
+import com.yankin.common.fragment.BaseFragment
 import com.yankin.common.fragment.SupportFragmentInset
 import com.yankin.common.recyclerview.SwipeCallback
 import com.yankin.common.resource_import.CommonRString
+import com.yankin.common.viewbinding.viewBinding
 import com.yankin.exercise_create.api.navigation.ExerciseCreateCommunicator
 import com.yankin.exercise_create.api.navigation.ExerciseCreateParams
 import com.yankin.exercise_list.api.navigation.ExerciseListCommunicator
@@ -28,7 +30,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ExerciseListFragment : SupportFragmentInset<FragmentExerciseListBinding>(R.layout.fragment_exercise_list) {
+class ExerciseListFragment : BaseFragment<FragmentExerciseListBinding>(R.layout.fragment_exercise_list) {
 
     @Inject
     lateinit var exerciseCreateCommunicator: ExerciseCreateCommunicator
@@ -39,7 +41,7 @@ class ExerciseListFragment : SupportFragmentInset<FragmentExerciseListBinding>(R
     @Inject
     lateinit var approachCreateCommunicator: ApproachCreateCommunicator
 
-    override lateinit var viewBinding: FragmentExerciseListBinding
+    override val binding: FragmentExerciseListBinding by viewBinding(FragmentExerciseListBinding::bind)
 
     private val viewModel: ExerciseListViewModel by viewModels()
     private val params by BundleParcelable<ExerciseListParcelableParams>(ExerciseListCommunicator.NAV_KEY)
@@ -55,17 +57,6 @@ class ExerciseListFragment : SupportFragmentInset<FragmentExerciseListBinding>(R
                 delete(position)
             }
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        viewBinding = FragmentExerciseListBinding.bind(
-            LayoutInflater.from(context).inflate(R.layout.fragment_exercise_list, container, false)
-        )
-        return viewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -94,29 +85,29 @@ class ExerciseListFragment : SupportFragmentInset<FragmentExerciseListBinding>(R
                     }
                 }
             )
-            viewBinding.recyclerView.adapter = adapter
+            binding.recyclerView.adapter = adapter
         }
 
         val exerciseHelper = ItemTouchHelper(simpleCallback)
-        exerciseHelper.attachToRecyclerView(viewBinding.recyclerView)
+        exerciseHelper.attachToRecyclerView(binding.recyclerView)
 
         params.let { training ->
-            viewBinding.commentExerciseList.text = training.comment
-            viewBinding.dateTrainingExerciseList.text = training.date
-            viewBinding.muscleGroupsExerciseList.text = training.muscleGroups
-            viewBinding.weightExerciseList.text =
+            binding.commentExerciseList.text = training.comment
+            binding.dateTrainingExerciseList.text = training.date
+            binding.muscleGroupsExerciseList.text = training.muscleGroups
+            binding.weightExerciseList.text =
                 if (!training.weight.isNullOrEmpty()) if (training.muscleGroups.isNullOrEmpty()) getString(
                     CommonRString.weight, training.weight
                 ) else getString(CommonRString.weight1, training.weight) else ""
         }
-        viewBinding.toolbarExerciseList.setNavigationOnClickListener {
+        binding.toolbarExerciseList.setNavigationOnClickListener {
             viewModel.forgotIdTraining()
             findNavController().popBackStack()
         }
-        viewBinding.btnAdd.setOnClickListener {
+        binding.btnAdd.setOnClickListener {
             exerciseCreateCommunicator.navigateToExerciseCreate(ExerciseCreateParams(params.trainingId))
         }
-        viewBinding.ivEditTrainingExerciseList.setOnClickListener {
+        binding.ivEditTrainingExerciseList.setOnClickListener {
             trainingCreateCommunicator.navigateTo(TrainingCreateParams.EditTraining(trainingId = params.trainingId))
         }
     }
@@ -128,7 +119,7 @@ class ExerciseListFragment : SupportFragmentInset<FragmentExerciseListBinding>(R
                 viewModel.getExerciseFromPosition(position) as ViewHolderTypes.ExerciseInfo
             viewModel.deletedExerciseTrue(exercise.exercise)
             Snackbar.make(
-                viewBinding.recyclerView,
+                binding.recyclerView,
                 getString(CommonRString.exercise_was_delete),
                 Snackbar.LENGTH_LONG
             )
@@ -142,7 +133,7 @@ class ExerciseListFragment : SupportFragmentInset<FragmentExerciseListBinding>(R
                 viewModel.getExerciseFromPosition(position) as ViewHolderTypes.SuperSetDate
             viewModel.deletedSuperSetTrue(superSet.superSet)
             Snackbar.make(
-                viewBinding.recyclerView,
+                binding.recyclerView,
                 getString(CommonRString.super_set_was_deleted),
                 Snackbar.LENGTH_LONG
             )
@@ -155,6 +146,6 @@ class ExerciseListFragment : SupportFragmentInset<FragmentExerciseListBinding>(R
     }
 
     override fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean) {
-        viewBinding.toolbarExerciseList.setPadding(0, top, 0, 0)
+        binding.toolbarExerciseList.setPadding(0, top, 0, 0)
     }
 }

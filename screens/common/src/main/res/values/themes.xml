@@ -43,6 +43,8 @@
         <item name="textColorSecondary">@color/text_color_secondary_light</item>
         <item name="textColorPrimary">@color/text_color_primary_light</item>
         <item name="contentBackground">@color/content_background_light</item>
+        <item name="statusBarColor">@color/status_bar_color_light</item>
+        <item name="android:statusBarColor">@color/content_background_light</item>
     </style>
 
     <style name="Theme.TrainingDiary.Dark" parent="Theme.TrainingDiary">
@@ -50,6 +52,8 @@
         <item name="textColorSecondary">@color/text_color_secondary_dark</item>
         <item name="textColorPrimary">@color/text_color_primary_dark</item>
         <item name="contentBackground">@color/content_background_dark</item>
+        <item name="android:statusBarColor">@color/content_background_dark</item>
+        <item name="statusBarColor">@color/status_bar_color_dark</item>
     </style>
 
     <style name="Theme.TrainingDiary.Night" parent="Theme.TrainingDiary">
@@ -57,6 +61,8 @@
         <item name="textColorSecondary">@color/text_color_secondary_night</item>
         <item name="textColorPrimary">@color/text_color_primary_night</item>
         <item name="contentBackground">@color/content_background_night</item>
+        <item name="android:statusBarColor">@color/content_background_night</item>
+        <item name="statusBarColor">@color/status_bar_color_night</item>
     </style>
 
     <style name="ThemeOverlay.TrainingDiary.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">

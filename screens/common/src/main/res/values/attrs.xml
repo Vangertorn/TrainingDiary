@@ -12,6 +12,7 @@
     <attr name="textColorSecondary" format="reference" />
     <attr name="contentBackground" format="reference" />
     <attr name="transparent" format="reference" />
+    <attr name="statusBarColor" format="reference" />
 
     <declare-styleable name="CalendarView">
         <attr name="month_text_color" format="color" />

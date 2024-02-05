@@ -34,22 +34,18 @@ internal class TrainingCreateBottomDialog : BaseBottomSheetDialogFragment<Bottom
     @Inject
     lateinit var exerciseListCommunicator: ExerciseListCommunicator
 
+    override fun parentLayoutId(): Int = R.id.addTrainingDialog
+    override fun attrColorBackground(): Int = CommonRAttr.contentBackground
+    override val binding: BottomSheetAddTrainingBinding by viewBinding(BottomSheetAddTrainingBinding::inflate)
     private val viewModel: TrainingCreateViewModel by viewModels {
         AssistedParamsViewModelFactory(params = params, factory = viewModelFactory, owner = this)
     }
-
     private var params by BundleParcelable<TrainingCreateParcelableParams>(TrainingCreateCommunicator.NAV_KEY)
     private val adapter by lazy(LazyThreadSafetyMode.NONE) {
         MuscleGroupsAdapter(
             muscleGroupClickListener = viewModel::onMuscleGroupClick
         )
     }
-
-    override fun parentLayoutId(): Int = R.id.addTrainingDialog
-
-    override fun attrColorBackground(): Int = CommonRAttr.contentBackground
-
-    override val binding: BottomSheetAddTrainingBinding by viewBinding(BottomSheetAddTrainingBinding::inflate)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
