@@ -7,7 +7,7 @@
 
 
     <AutoCompleteTextView
-        android:id="@+id/autoCompleteTvExerciseName"
+        android:id="@+id/autoCompleteTvexercisePattern"
         style="@style/EditTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,9 +23,9 @@
         android:layout_height="wrap_content"
         android:hint="@string/comment"
         android:importantForAutofill="no"
-        app:layout_constraintEnd_toEndOf="@id/autoCompleteTvExerciseName"
-        app:layout_constraintStart_toStartOf="@id/autoCompleteTvExerciseName"
-        app:layout_constraintTop_toBottomOf="@id/autoCompleteTvExerciseName" />
+        app:layout_constraintEnd_toEndOf="@id/autoCompleteTvexercisePattern"
+        app:layout_constraintStart_toStartOf="@id/autoCompleteTvexercisePattern"
+        app:layout_constraintTop_toBottomOf="@id/autoCompleteTvexercisePattern" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvApproach"

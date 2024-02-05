@@ -35,7 +35,7 @@ class ExerciseRecyclerViewAdapterInSuperSet :
     }
 
     inner class ExerciseInfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val tvExerciseName =
+        private val tvexercisePattern =
             itemView.findViewById<TextView>(R.id.tvNameExercise_super_set_item)
         private val tvComment =
             itemView.findViewById<TextView>(R.id.tvCommentExercise_super_set_item)
@@ -60,7 +60,7 @@ class ExerciseRecyclerViewAdapterInSuperSet :
 
         fun bind(item: ViewHolderTypes.ExerciseInfo) {
 
-            tvExerciseName.text = item.exercise.name
+            tvexercisePattern.text = item.exercise.name
             tvComment.text = item.exercise.comment
             adapter.submitList(item.approaches)
         }

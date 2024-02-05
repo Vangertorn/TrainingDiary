@@ -1,13 +1,13 @@
 package com.yankin.exercise_create.impl.presentation
 
-import com.yankin.exercese_name.api.models.ExerciseNameDomain
+import com.yankin.exercise_pattern.api.models.ExercisePatternDomain
 
-fun ExerciseNameDomain.toModel() = ExerciseName(
+fun ExercisePatternDomain.toModel() = exercisePattern(
     id = id,
-    nameExercise = nameExercise
+    nameExercise = name
 )
 
-fun ExerciseName.toDomain() = ExerciseNameDomain(
+fun exercisePattern.toDomain() = ExercisePatternDomain(
     id = id,
-    nameExercise = nameExercise
+    name = nameExercise
 )

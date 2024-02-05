@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ExerciseName(
+data class exercisePattern(
     val id: Long = 0,
     val nameExercise: String
 ) : Parcelable

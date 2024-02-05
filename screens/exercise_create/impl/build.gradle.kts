@@ -34,7 +34,7 @@ dependencies {
     implementation(project(":navigation"))
     implementation(project(":features:training:api"))
     implementation(project(":features:muscle_groups:api"))
-    implementation(project(":features:exercise_name:api"))
+    implementation(project(":features:exercise_pattern:api"))
     implementation(project(":features:exercise:api"))
     implementation(project(":features:super_set:api"))
     implementation(project(":screens:common"))

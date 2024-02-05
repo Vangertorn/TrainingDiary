@@ -18,7 +18,7 @@ import com.yankin.exercise_create.impl.navigation.ExerciseCreateNavigationNode.C
 import com.yankin.exercise_create.impl.navigation.ExerciseCreateParcelableParams
 import com.yankin.exercise_create.impl.navigation.SuperSetCreateParcelableParams
 import com.yankin.exercise_create.impl.presentation.Exercise
-import com.yankin.exercise_create.impl.presentation.ExerciseName
+import com.yankin.exercise_create.impl.presentation.exercisePattern
 import com.yankin.exercise_create.impl.presentation.SuperSet
 import com.yankin.navigation.BundleParcelable
 import com.yankin.navigation.navigateToDestination
@@ -56,15 +56,15 @@ class ExerciseCreateBottomDialog :
         viewModel.autoCompleteExerciseStringLiveData.observe(this.viewLifecycleOwner) {
             val arrayAdapter: ArrayAdapter<String> =
                 ArrayAdapter(requireContext(), R.layout.item_select_dialog, it)
-            viewBinding.autoCompleteTvExerciseName.setAdapter(arrayAdapter)
+            viewBinding.autoCompleteTvexercisePattern.setAdapter(arrayAdapter)
         }
 
         viewBinding.btnAddToSet.setOnClickListener {
-            if (viewBinding.autoCompleteTvExerciseName.text.isNotEmpty()) {
+            if (viewBinding.autoCompleteTvexercisePattern.text.isNotEmpty()) {
                 val id = viewModel.saveSuperSet(
                     SuperSet(idTraining = params.trainingId),
                     Exercise(
-                        name = viewBinding.autoCompleteTvExerciseName.text.toString(),
+                        name = viewBinding.autoCompleteTvexercisePattern.text.toString(),
                         comment = viewBinding.etCommentExercise.text.toString(),
                         idTraining = params.trainingId
                     ),
@@ -76,8 +76,8 @@ class ExerciseCreateBottomDialog :
                 )
                 viewModel.saveSuperSetId(id)
                 viewModel.addNewExerciseAutofill(
-                    ExerciseName(
-                        nameExercise = viewBinding.autoCompleteTvExerciseName.text.toString()
+                    exercisePattern(
+                        nameExercise = viewBinding.autoCompleteTvexercisePattern.text.toString()
                     )
                 )
                 this.dismiss()
@@ -89,17 +89,17 @@ class ExerciseCreateBottomDialog :
         }
 
         viewBinding.btnSave.setOnClickListener {
-            if (viewBinding.autoCompleteTvExerciseName.text.isNotEmpty()) {
+            if (viewBinding.autoCompleteTvexercisePattern.text.isNotEmpty()) {
                 viewModel.addNewExercise(
                     Exercise(
-                        name = viewBinding.autoCompleteTvExerciseName.text.toString(),
+                        name = viewBinding.autoCompleteTvexercisePattern.text.toString(),
                         idTraining = params.trainingId,
                         comment = viewBinding.etCommentExercise.text.toString()
                     )
                 )
                 viewModel.addNewExerciseAutofill(
-                    ExerciseName(
-                        nameExercise = viewBinding.autoCompleteTvExerciseName.text.toString()
+                    exercisePattern(
+                        nameExercise = viewBinding.autoCompleteTvexercisePattern.text.toString()
                     )
                 )
                 findNavController().popBackStack()

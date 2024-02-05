@@ -9,13 +9,13 @@
         android:id="@+id/tvText1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/autoCompleteTvExerciseName"
+        app:layout_constraintBottom_toTopOf="@id/autoCompleteTvexercisePattern"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <AutoCompleteTextView
-        android:id="@+id/autoCompleteTvExerciseName"
+        android:id="@+id/autoCompleteTvexercisePattern"
         style="@style/EditTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,9 +35,9 @@
         android:hint="@string/comment"
         android:importantForAutofill="no"
         app:layout_constraintBottom_toTopOf="@id/rvExerciseInSuperSet"
-        app:layout_constraintEnd_toEndOf="@id/autoCompleteTvExerciseName"
-        app:layout_constraintStart_toStartOf="@id/autoCompleteTvExerciseName"
-        app:layout_constraintTop_toBottomOf="@id/autoCompleteTvExerciseName" />
+        app:layout_constraintEnd_toEndOf="@id/autoCompleteTvexercisePattern"
+        app:layout_constraintStart_toStartOf="@id/autoCompleteTvexercisePattern"
+        app:layout_constraintTop_toBottomOf="@id/autoCompleteTvexercisePattern" />
 
 
     <androidx.appcompat.widget.AppCompatButton

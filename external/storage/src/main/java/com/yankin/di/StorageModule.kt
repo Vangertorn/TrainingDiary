@@ -6,7 +6,7 @@ import com.yankin.room.DATABASE_NAME
 import com.yankin.room.PlannerDatabase
 import com.yankin.room.dao.ApproachDao
 import com.yankin.room.dao.ExerciseDao
-import com.yankin.room.dao.ExerciseNameDao
+import com.yankin.room.dao.ExercisePatternDao
 import com.yankin.room.dao.MembershipDao
 import com.yankin.room.dao.MuscleGroupDao
 import com.yankin.room.dao.SuperSetDao
@@ -44,8 +44,8 @@ internal object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideExerciseAutofillDao(plannerDatabase: PlannerDatabase): ExerciseNameDao =
-        plannerDatabase.exerciseNameDao()
+    fun provideExerciseAutofillDao(plannerDatabase: PlannerDatabase): ExercisePatternDao =
+        plannerDatabase.exercisePatternDao()
 
     @Provides
     @Singleton

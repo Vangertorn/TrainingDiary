@@ -2,12 +2,12 @@ package com.yankin.exercise_create.impl.presentation.exercise_create
 
 import androidx.lifecycle.asLiveData
 import com.yankin.common.viewmodel.CoroutineViewModel
-import com.yankin.exercese_name.api.usecases.GetCurrentExerciseNameAsStringStreamUseCase
-import com.yankin.exercese_name.api.usecases.SaveExerciseNameUseCase
+import com.yankin.exercise_pattern.api.usecases.GetCurrentExercisePatternAsStringStreamUseCase
+import com.yankin.exercise_pattern.api.usecases.SaveExercisePatternUseCase
 import com.yankin.exercise.api.models.ExerciseDomain
 import com.yankin.exercise.api.usecases.SaveExerciseUseCase
 import com.yankin.exercise_create.impl.presentation.Exercise
-import com.yankin.exercise_create.impl.presentation.ExerciseName
+import com.yankin.exercise_create.impl.presentation.exercisePattern
 import com.yankin.exercise_create.impl.presentation.SuperSet
 import com.yankin.exercise_create.impl.presentation.toDomain
 import com.yankin.preferences.AppSettings
@@ -21,12 +21,12 @@ import javax.inject.Inject
 class ExerciseCreateViewModel @Inject constructor(
     private val saveExerciseUseCase: SaveExerciseUseCase,
     private val appSettings: AppSettings,
-    getCurrentExerciseNameAsStringStreamUseCase: GetCurrentExerciseNameAsStringStreamUseCase,
-    private val saveExerciseNameUseCase: SaveExerciseNameUseCase,
+    getCurrentexercisePatternAsStringStreamUseCase: GetCurrentExercisePatternAsStringStreamUseCase,
+    private val saveexercisePatternUseCase: SaveExercisePatternUseCase,
     private val saveSuperSetUseCase: SaveSuperSetUseCase,
 ) : CoroutineViewModel() {
 
-    val autoCompleteExerciseStringLiveData = getCurrentExerciseNameAsStringStreamUseCase.invoke().asLiveData()
+    val autoCompleteExerciseStringLiveData = getCurrentexercisePatternAsStringStreamUseCase.invoke().asLiveData()
 
     fun addNewExercise(exercise: Exercise) {
         launch {
@@ -34,9 +34,9 @@ class ExerciseCreateViewModel @Inject constructor(
         }
     }
 
-    fun addNewExerciseAutofill(exerciseName: ExerciseName) {
+    fun addNewExerciseAutofill(exercisePattern: exercisePattern) {
         launch {
-            saveExerciseNameUseCase.invoke(exerciseName.toDomain())
+            saveexercisePatternUseCase.invoke(exercisePattern.toDomain())
         }
     }
 

@@ -1,10 +1,10 @@
 package com.yankin.settings.impl.navigation
 
 import android.os.Parcelable
-import com.yankin.settings.impl.presentation.ExerciseName
+import com.yankin.settings.impl.presentation.exercisePattern
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 internal data class ExerciseAutofillDialogParams(
-    val exerciseName: ExerciseName,
+    val exercisePattern: exercisePattern,
 ) : Parcelable

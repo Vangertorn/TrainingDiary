@@ -30,6 +30,10 @@
       <module name="Training_diary.features.exercise_name.api.main" target="1.8" />
       <module name="Training_diary.features.exercise_name.api.test" target="1.8" />
       <module name="Training_diary.features.exercise_name.impl" target="11" />
+      <module name="Training_diary.features.exercise_pattern.api" target="1.8" />
+      <module name="Training_diary.features.exercise_pattern.api.main" target="1.8" />
+      <module name="Training_diary.features.exercise_pattern.api.test" target="1.8" />
+      <module name="Training_diary.features.exercise_pattern.impl" target="11" />
       <module name="Training_diary.features.membership.api" target="1.8" />
       <module name="Training_diary.features.membership.api.main" target="1.8" />
       <module name="Training_diary.features.membership.api.test" target="1.8" />

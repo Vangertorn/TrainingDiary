@@ -35,7 +35,7 @@ dependencies {
     implementation(project(":screens:common"))
     implementation(project(":screens:training_create:api"))
     implementation(project(":features:muscle_groups:api"))
-    implementation(project(":features:exercise_name:api"))
+    implementation(project(":features:exercise_pattern:api"))
     implementation(project(":screens:settings:api"))
 
     implementation(Dependencies.Hilt.android)

@@ -2,13 +2,13 @@ package com.yankin.exercise_create.impl.presentation.super_set_create
 
 import androidx.lifecycle.asLiveData
 import com.yankin.common.viewmodel.CoroutineViewModel
-import com.yankin.exercese_name.api.usecases.SaveExerciseNameUseCase
+import com.yankin.exercise_pattern.api.usecases.SaveExercisePatternUseCase
 import com.yankin.exercise.api.usecases.DeleteEmptyExerciseUseCase
 import com.yankin.exercise.api.usecases.DeleteExerciseTrueUseCase
 import com.yankin.exercise.api.usecases.GetExerciseListBySuperSetIdStreamUseCase
 import com.yankin.exercise.api.usecases.SaveExerciseUseCase
 import com.yankin.exercise_create.impl.presentation.Exercise
-import com.yankin.exercise_create.impl.presentation.ExerciseName
+import com.yankin.exercise_create.impl.presentation.exercisePattern
 import com.yankin.exercise_create.impl.presentation.Training
 import com.yankin.exercise_create.impl.presentation.toDomain
 import com.yankin.exercise_create.impl.presentation.toModel
@@ -29,7 +29,7 @@ class SuperSetCreateViewModel @Inject constructor(
     private val deleteExerciseTrueUseCase: DeleteExerciseTrueUseCase,
     private val deleteEmptyExerciseUseCase: DeleteEmptyExerciseUseCase,
     private val appSettings: AppSettings,
-    private val saveExerciseNameUseCase: SaveExerciseNameUseCase,
+    private val saveexercisePatternUseCase: SaveExercisePatternUseCase,
     private val getTrainingByIdUseCase: GetTrainingByIdUseCase,
     private val updateSuperSetVisibleUseCase: UpdateSuperSetVisibleUseCase,
     private val getExerciseListBySuperSetIdStreamUseCase: GetExerciseListBySuperSetIdStreamUseCase,
@@ -51,9 +51,9 @@ class SuperSetCreateViewModel @Inject constructor(
         }
     }
 
-    fun addNewExerciseAutofill(exerciseName: ExerciseName) {
+    fun addNewExerciseAutofill(exercisePattern: exercisePattern) {
         launch {
-            saveExerciseNameUseCase.invoke(exerciseName.toDomain())
+            saveexercisePatternUseCase.invoke(exercisePattern.toDomain())
         }
     }
 

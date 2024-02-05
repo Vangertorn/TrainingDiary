@@ -127,32 +127,6 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
             }
         }
 
-//        viewModel.numberTrainingLiveData.observe(this.viewLifecycleOwner) {
-//            if (it >= 0) {
-//                viewBinding.tvNumberTraining.visibility = View.VISIBLE
-//                if (it > 99) {
-//                    viewBinding.tvNumberTraining.text = "ထ"
-//                } else {
-//                    viewBinding.tvNumberTraining.text = it.toString()
-//                }
-//            } else {
-//                viewBinding.tvNumberTraining.visibility = View.GONE
-//            }
-//        }
-
-//        viewModel.numberLeftDaysLiveData.observe(this.viewLifecycleOwner) {
-//            if (it >= 0) {
-//                viewBinding.tvNumberDays.visibility = View.VISIBLE
-//                if (it >= 365) {
-//                    viewBinding.tvNumberDays.text = "ထ"
-//                } else {
-//                    viewBinding.tvNumberDays.text = it.toString()
-//                }
-//            } else {
-//                viewBinding.tvNumberDays.visibility = View.GONE
-//            }
-//        }
-
         viewBinding.recyclerViewTraining.adapter = adapter
 
         viewBinding.btnAdd.setOnClickListener {
@@ -161,13 +135,6 @@ class TrainingListFragment : SupportFragmentInset<FragmentTrainingListBinding>(R
 
         viewBinding.subscriptionTrainingList.debounceClick {
             viewModel.onMembershipClick()
-//            if (viewModel.numberOfTrainingSessions() == -1 && viewModel.subscriptionEndDate()
-//                    .isEmpty()
-//            ) {
-//                seasonTicketCommunicator.navigateToSeasonTicket()
-//            } else {
-//                seasonTicketCommunicator.navigateToSeasonTicketInfo()
-//            }
         }
         viewBinding.settingsTrainingList.setOnClickListener {
             settingsCommunicator.navigateTo()

@@ -6,12 +6,12 @@ import com.yankin.approach.api.usecases.GetCurrentApproachStreamUseCase
 import com.yankin.approach.api.usecases.SaveApproachUseCase
 import com.yankin.approach_create.impl.presentation.Approach
 import com.yankin.approach_create.impl.presentation.Exercise
-import com.yankin.approach_create.impl.presentation.ExerciseName
+import com.yankin.approach_create.impl.presentation.exercisePattern
 import com.yankin.approach_create.impl.presentation.toDomain
 import com.yankin.approach_create.impl.presentation.toModel
 import com.yankin.common.viewmodel.CoroutineViewModel
-import com.yankin.exercese_name.api.usecases.GetCurrentExerciseNameAsStringStreamUseCase
-import com.yankin.exercese_name.api.usecases.SaveExerciseNameUseCase
+import com.yankin.exercise_pattern.api.usecases.GetCurrentExercisePatternAsStringStreamUseCase
+import com.yankin.exercise_pattern.api.usecases.SaveExercisePatternUseCase
 import com.yankin.exercise.api.usecases.UpdateExerciseUseCase
 import com.yankin.preferences.AppSettings
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,8 +23,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ApproachCreateViewModel @Inject constructor(
     appSettings: AppSettings,
-    getCurrentExerciseNameAsStringStreamUseCase: GetCurrentExerciseNameAsStringStreamUseCase,
-    private val saveExerciseNameUseCase: SaveExerciseNameUseCase,
+    getCurrentexercisePatternAsStringStreamUseCase: GetCurrentExercisePatternAsStringStreamUseCase,
+    private val saveexercisePatternUseCase: SaveExercisePatternUseCase,
     getCurrentApproachStreamUseCase: GetCurrentApproachStreamUseCase,
     private val saveApproachUseCase: SaveApproachUseCase,
     private val deleteApproachUseCase: DeleteApproachUseCase,
@@ -37,7 +37,7 @@ class ApproachCreateViewModel @Inject constructor(
     }.asLiveData()
     val reoccurrencesLiveData = appSettings.reoccurrencesFlow().asLiveData()
     val weightLiveData = appSettings.weightFlow().asLiveData()
-    val autoCompleteExerciseLiveData = getCurrentExerciseNameAsStringStreamUseCase.invoke().asLiveData()
+    val autoCompleteExerciseLiveData = getCurrentexercisePatternAsStringStreamUseCase.invoke().asLiveData()
 
     fun addNewApproach(approach: Approach) {
         launch {
@@ -57,9 +57,9 @@ class ApproachCreateViewModel @Inject constructor(
         }
     }
 
-    fun addNewExerciseAutofill(exerciseName: ExerciseName) {
+    fun addNewExerciseAutofill(exercisePattern: exercisePattern) {
         launch {
-            saveExerciseNameUseCase.invoke(exerciseName.toDomain())
+            saveexercisePatternUseCase.invoke(exercisePattern.toDomain())
         }
     }
 }

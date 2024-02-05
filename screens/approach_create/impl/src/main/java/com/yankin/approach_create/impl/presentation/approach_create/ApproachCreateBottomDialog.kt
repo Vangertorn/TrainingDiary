@@ -13,7 +13,7 @@ import com.yankin.approach_create.api.navigation.ApproachCreateCommunicator
 import com.yankin.approach_create.impl.navigation.ApproachCreateParcelableParams
 import com.yankin.approach_create.impl.presentation.Approach
 import com.yankin.approach_create.impl.presentation.Exercise
-import com.yankin.approach_create.impl.presentation.ExerciseName
+import com.yankin.approach_create.impl.presentation.exercisePattern
 import com.yankin.common.addDouble
 import com.yankin.common.addInt
 import com.yankin.common.chekDoubleEmpty
@@ -65,7 +65,7 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
         viewModel.autoCompleteExerciseLiveData.observe(this.viewLifecycleOwner) {
             val arrayAdapter: ArrayAdapter<String> =
                 ArrayAdapter(requireContext(), R.layout.item_select_dialog, it)
-            viewBinding.autoCompleteTvExerciseName.setAdapter(arrayAdapter)
+            viewBinding.autoCompleteTvexercisePattern.setAdapter(arrayAdapter)
         }
 
         viewBinding.rvApproach.adapter = adapter
@@ -93,12 +93,12 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
         adapter.registerAdapterDataObserver(dataObserver)
 
         viewBinding.btnEditExercise.setOnClickListener {
-            if (viewBinding.autoCompleteTvExerciseName.text.isNotBlank()) {
+            if (viewBinding.autoCompleteTvexercisePattern.text.isNotBlank()) {
                 params.let {
                     viewModel.updateExercise(
                         Exercise(
                             id = it.exerciseId,
-                            name = viewBinding.autoCompleteTvExerciseName.text.toString(),
+                            name = viewBinding.autoCompleteTvexercisePattern.text.toString(),
                             idTraining = it.trainingId,
                             position = it.position,
                             comment = viewBinding.etCommentExercise.text.toString(),
@@ -107,8 +107,8 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
                     )
                 }
                 viewModel.addNewExerciseAutofill(
-                    ExerciseName(
-                        nameExercise = viewBinding.autoCompleteTvExerciseName.text.toString()
+                    exercisePattern(
+                        nameExercise = viewBinding.autoCompleteTvexercisePattern.text.toString()
                     )
                 )
             } else {
@@ -133,7 +133,7 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
             )
         }
         params.let {
-            viewBinding.autoCompleteTvExerciseName.setText(it.name)
+            viewBinding.autoCompleteTvexercisePattern.setText(it.name)
             viewBinding.etCommentExercise.setText(it.comment)
         }
 

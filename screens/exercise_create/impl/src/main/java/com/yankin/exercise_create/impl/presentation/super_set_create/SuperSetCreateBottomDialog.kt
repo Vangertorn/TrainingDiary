@@ -11,7 +11,7 @@ import com.yankin.common.resource_import.CommonRString
 import com.yankin.exercise_create.api.navigation.ExerciseCreateCommunicator
 import com.yankin.exercise_create.impl.navigation.SuperSetCreateParcelableParams
 import com.yankin.exercise_create.impl.presentation.Exercise
-import com.yankin.exercise_create.impl.presentation.ExerciseName
+import com.yankin.exercise_create.impl.presentation.exercisePattern
 import com.yankin.exercise_list.api.navigation.ExerciseListCommunicator
 import com.yankin.exercise_list.api.navigation.ExerciseListParams
 import com.yankin.navigation.BundleParcelable
@@ -33,7 +33,7 @@ class SuperSetCreateBottomDialog : BottomSheetDialogFragment() {
     private val adapter = SuperSetRecyclerViewAdapter(
         onClick = { exercise ->
             selectedExercise = exercise
-            viewBinding.autoCompleteTvExerciseName.setText(exercise.name)
+            viewBinding.autoCompleteTvexercisePattern.setText(exercise.name)
             viewBinding.etCommentExercise.setText(exercise.comment)
             if (exercise.name.isEmpty()) {
                 viewBinding.btnDeleteFromSet.visibility = View.GONE
@@ -64,20 +64,20 @@ class SuperSetCreateBottomDialog : BottomSheetDialogFragment() {
             adapter.submitList(exercise)
         }
         viewBinding.btnAddToSet.setOnClickListener {
-            if (viewBinding.autoCompleteTvExerciseName.text.isNotEmpty()) {
+            if (viewBinding.autoCompleteTvexercisePattern.text.isNotEmpty()) {
                 viewModel.addNewExercise(
                     Exercise(
-                        name = viewBinding.autoCompleteTvExerciseName.text.toString(),
+                        name = viewBinding.autoCompleteTvexercisePattern.text.toString(),
                         comment = viewBinding.etCommentExercise.text.toString(),
                         idSet = params.superSetId
                     )
                 )
                 viewModel.addNewExerciseAutofill(
-                    ExerciseName(
-                        nameExercise = viewBinding.autoCompleteTvExerciseName.text.toString()
+                    exercisePattern(
+                        nameExercise = viewBinding.autoCompleteTvexercisePattern.text.toString()
                     )
                 )
-                viewBinding.autoCompleteTvExerciseName.setText("")
+                viewBinding.autoCompleteTvexercisePattern.setText("")
                 viewBinding.etCommentExercise.setText("")
             } else {
                 Toast.makeText(
@@ -92,7 +92,7 @@ class SuperSetCreateBottomDialog : BottomSheetDialogFragment() {
             viewModel.deletedExercise(selectedExercise!!)
             adapter.selectedPositions = 0
             adapter.notifyItemChanged(0)
-            viewBinding.autoCompleteTvExerciseName.setText("")
+            viewBinding.autoCompleteTvexercisePattern.setText("")
             viewBinding.etCommentExercise.setText("")
             viewBinding.btnDeleteFromSet.visibility = View.GONE
             viewBinding.btnAddToSet.visibility = View.VISIBLE

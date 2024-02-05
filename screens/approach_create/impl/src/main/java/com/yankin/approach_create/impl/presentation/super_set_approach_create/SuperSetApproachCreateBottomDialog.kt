@@ -45,7 +45,7 @@ class SuperSetApproachCreateBottomDialog : BottomSheetDialogFragment() {
         onClick = { exerciseInfo ->
             selectedExercise = exerciseInfo
             viewModel.rememberIdExercise(exerciseInfo.exercise)
-            viewBinding.autoCompleteTvExerciseNameSs.setText(exerciseInfo.exercise.name)
+            viewBinding.autoCompleteTvexercisePatternSs.setText(exerciseInfo.exercise.name)
             viewBinding.etCommentExerciseSs.setText(exerciseInfo.exercise.comment)
         }
     )
@@ -66,7 +66,7 @@ class SuperSetApproachCreateBottomDialog : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         selectedExercise = viewModel.exerciseInfoFirst()
-        viewBinding.autoCompleteTvExerciseNameSs.setText(selectedExercise.exercise.name)
+        viewBinding.autoCompleteTvexercisePatternSs.setText(selectedExercise.exercise.name)
         viewBinding.etCommentExerciseSs.setText(selectedExercise.exercise.comment)
         viewModel.rememberIdExercise(selectedExercise.exercise)
 
