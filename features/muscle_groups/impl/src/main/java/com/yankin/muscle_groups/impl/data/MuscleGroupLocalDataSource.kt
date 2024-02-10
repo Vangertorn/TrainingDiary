@@ -6,29 +6,30 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 internal class MuscleGroupLocalDataSource @Inject constructor(
-    private val db: MuscleGroupDao
-)  {
-     fun getMuscleGroupsByFlagsFlow(flags: Boolean): Flow<List<MuscleGroupEntity>?> {
+    private val db: MuscleGroupDao,
+) {
+
+    fun getMuscleGroupsByFlagsFlow(flags: Boolean): Flow<List<MuscleGroupEntity>?> {
         return db.getMuscleGroupsByFlagsFlow(flags)
     }
 
-     fun getMuscleGroups(): List<MuscleGroupEntity>? {
+    fun getMuscleGroups(): List<MuscleGroupEntity>? {
         return db.getMuscleGroups()
     }
 
-     fun deletedMuscleGroupFlags(muscleGroupDomainEntity:MuscleGroupEntity) {
-        db.deletedMuscleGroupFlags(muscleGroupDomainEntity)
+    fun deletedMuscleGroupById(muscleGroupId: Long) {
+        db.deletedMuscleGroup(muscleGroupId)
     }
 
-     fun saveMuscleGroup(muscleGroupDomainEntity: MuscleGroupEntity) {
+    fun saveMuscleGroup(muscleGroupDomainEntity: MuscleGroupEntity) {
         db.saveMuscleGroup(muscleGroupDomainEntity)
     }
 
-     fun saveMuscleGroups(muscleGroupDomainEntities: List<MuscleGroupEntity>) {
+    fun saveMuscleGroups(muscleGroupDomainEntities: List<MuscleGroupEntity>) {
         db.saveMuscleGroups(muscleGroupDomainEntities)
     }
 
-     fun recoverDefaultValues(muscleGroupDomainEntities: List<MuscleGroupEntity>) {
-        db.recoverDefaultValues(muscleGroupDomainEntities)
+    fun recoverDefaultValues() {
+        db.recoverDefaultValues()
     }
 }

@@ -106,7 +106,7 @@ class SuperSetApproachCreateBottomDialog : BottomSheetDialogFragment() {
 
         viewModel.weightLiveData.observe(this.viewLifecycleOwner) {
             if (viewBinding.etWeightSs.text.isBlank()) {
-                viewBinding.etWeightSs.setText(it)
+                viewBinding.etWeightSs.setText(it.toString())
             }
         }
 

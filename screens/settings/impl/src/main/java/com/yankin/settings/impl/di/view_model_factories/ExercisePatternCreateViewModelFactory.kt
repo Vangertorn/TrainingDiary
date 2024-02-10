@@ -1,4 +1,4 @@
-package com.yankin.settings.impl.di
+package com.yankin.settings.impl.di.view_model_factories
 
 import com.yankin.common.viewmodel.ViewModelFactory
 import com.yankin.settings.impl.navigation.ExercisePatternCreateDialogParams

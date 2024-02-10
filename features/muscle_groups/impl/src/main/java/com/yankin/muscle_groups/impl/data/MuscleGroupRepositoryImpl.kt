@@ -24,9 +24,9 @@ internal class MuscleGroupRepositoryImpl @Inject constructor(
         muscleGroupLocalDataSource.getMuscleGroups()?.map(MuscleGroupEntity::toDomain) ?: emptyList()
     }
 
-    override suspend fun deleteMuscleGroup(muscleGroup: MuscleGroupDomain) {
+    override suspend fun deleteMuscleGroup(muscleGroupId: Long) {
         withContext(coroutineDispatchers.io) {
-            muscleGroupLocalDataSource.deletedMuscleGroupFlags(muscleGroup.toEntity())
+            muscleGroupLocalDataSource.deletedMuscleGroupById(muscleGroupId)
         }
     }
 
@@ -42,9 +42,9 @@ internal class MuscleGroupRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun recoverDefaultValues(defaultList: List<MuscleGroupDomain>) {
+    override suspend fun recoverDefaultValues() {
         withContext(coroutineDispatchers.io) {
-            muscleGroupLocalDataSource.recoverDefaultValues(defaultList.map(MuscleGroupDomain::toEntity))
+            muscleGroupLocalDataSource.recoverDefaultValues()
         }
     }
 }

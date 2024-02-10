@@ -35,8 +35,8 @@ class ApproachCreateViewModel @Inject constructor(
     val approachLiveData = getCurrentApproachStreamUseCase.invoke().map { approachDomainList ->
         approachDomainList.map { approachDomain -> approachDomain.toModel() }
     }.asLiveData()
-    val reoccurrencesLiveData = appSettings.reoccurrencesFlow().asLiveData()
-    val weightLiveData = appSettings.weightFlow().asLiveData()
+    val reoccurrencesLiveData = appSettings.getRepsStream().asLiveData()
+    val weightLiveData = appSettings.getWeightStream().asLiveData()
     val autoCompleteExerciseLiveData = getCurrentexercisePatternAsStringStreamUseCase.invoke().asLiveData()
 
     fun addNewApproach(approach: Approach) {

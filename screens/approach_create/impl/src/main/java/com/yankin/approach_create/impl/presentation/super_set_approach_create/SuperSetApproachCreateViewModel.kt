@@ -46,8 +46,8 @@ class SuperSetApproachCreateViewModel @Inject constructor(
     }
         .asLiveData()
 
-    val reoccurrencesLiveData = appSettings.reoccurrencesFlow().asLiveData()
-    val weightLiveData = appSettings.weightFlow().asLiveData()
+    val reoccurrencesLiveData = appSettings.getRepsStream().asLiveData()
+    val weightLiveData = appSettings.getWeightStream().asLiveData()
 
     @ExperimentalCoroutinesApi
     val approachLiveData = getCurrentApproachStreamUseCase.invoke().map { approachDomainList ->

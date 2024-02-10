@@ -78,7 +78,7 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
 
         viewModel.weightLiveData.observe(this.viewLifecycleOwner) {
             if (viewBinding.etWeight.text.isBlank()) {
-                viewBinding.etWeight.setText(it)
+                viewBinding.etWeight.setText(it.toString())
             }
         }
 

@@ -17,6 +17,9 @@
             <option value="$PROJECT_DIR$/core/kotlin" />
             <option value="$PROJECT_DIR$/core/mvi" />
             <option value="$PROJECT_DIR$/core/mvvm" />
+            <option value="$PROJECT_DIR$/core/resource_manager" />
+            <option value="$PROJECT_DIR$/core/resource_manager/api" />
+            <option value="$PROJECT_DIR$/core/resource_manager/impl" />
             <option value="$PROJECT_DIR$/external" />
             <option value="$PROJECT_DIR$/external/preferences" />
             <option value="$PROJECT_DIR$/external/storage" />

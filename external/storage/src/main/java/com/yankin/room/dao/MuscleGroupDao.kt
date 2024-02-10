@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import androidx.room.Update
 import com.yankin.room.entity.MuscleGroupEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -17,8 +16,11 @@ abstract class MuscleGroupDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract fun saveMuscleGroups(muscleGroupEntities: List<MuscleGroupEntity>): List<Long>
 
-    @Query("DELETE FROM table_muscle_group")
+    @Query("DELETE FROM table_muscle_group WHERE isDefault == 0")
     abstract fun clearMuscleGroupTable()
+
+    @Query("UPDATE table_muscle_group SET deleted = 0 WHERE isDefault== 1")
+    abstract fun restoreMuscleGroupTable()
 
     @Query("SELECT * FROM table_muscle_group WHERE deleted ==:flags ORDER BY id ASC ")
     abstract fun getMuscleGroupsByFlagsFlow(flags: Boolean): Flow<List<MuscleGroupEntity>?>
@@ -26,12 +28,12 @@ abstract class MuscleGroupDao {
     @Query("SELECT * FROM table_muscle_group")
     abstract fun getMuscleGroups(): List<MuscleGroupEntity>?
 
-    @Update
-    abstract fun deletedMuscleGroupFlags(muscleGroupEntity: MuscleGroupEntity)
+    @Query("UPDATE table_muscle_group SET deleted = 1 WHERE id==:muscleGroupId ")
+    abstract fun deletedMuscleGroup(muscleGroupId: Long)
 
     @Transaction
-    open fun recoverDefaultValues(muscleGroupEntities: List<MuscleGroupEntity>) {
+    open fun recoverDefaultValues() {
         clearMuscleGroupTable()
-        saveMuscleGroups(muscleGroupEntities)
+        restoreMuscleGroupTable()
     }
 }

@@ -50,6 +50,8 @@ dependencies {
     implementation(project(":features:muscle_groups:api"))
     implementation(project(":features:muscle_groups:impl"))
     implementation(project(":core:coroutine"))
+    implementation(project(":core:resource_manager:api"))
+    implementation(project(":core:resource_manager:impl"))
     implementation(project(":features:exercise_pattern:api"))
     implementation(project(":features:exercise_pattern:impl"))
     implementation(project(":features:training:api"))

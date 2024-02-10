@@ -60,7 +60,6 @@ internal class ExercisePatternCreateViewModel @AssistedInject constructor(
                     exercisePattern.copy(name = exercisePatternCreateState.value.exerciseNameByUser)
                 )
             }
-
         }
     }
 

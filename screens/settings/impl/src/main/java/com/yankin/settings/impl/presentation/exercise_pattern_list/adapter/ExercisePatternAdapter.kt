@@ -7,6 +7,10 @@ internal class ExercisePatternAdapter(
 ) : BaseAsyncListDifferDelegationAdapter() {
 
     init {
-        delegatesManager.addDelegate(exercisePatternAdapterDelegate(onExercisePatternClickListener))
+        delegatesManager.addDelegate(
+            com.yankin.settings.impl.presentation.settings.adapter.muscleGroupAdapterDelegate(
+                onExercisePatternClickListener
+            )
+        )
     }
 }

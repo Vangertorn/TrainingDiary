@@ -19,6 +19,6 @@ data class MuscleGroupEntity(
     @ColumnInfo(name = "id")
     val id: Long = 0,
     val nameMuscleGroup: String,
-    val factorySettings: Boolean,
-    val deleted: Boolean = false
+    val deleted: Boolean,
+    val isDefault: Boolean,
 )

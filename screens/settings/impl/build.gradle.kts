@@ -31,6 +31,7 @@ dependencies {
     implementation(project(":features:training:api"))
     implementation(project(":core:coroutine"))
     implementation(project(":core:kotlin"))
+    implementation(project(":core:resource_manager:api"))
     implementation(project(":external:preferences"))
     implementation(project(":navigation"))
     implementation(project(":screens:common"))
@@ -48,11 +49,4 @@ dependencies {
     implementation(Dependencies.AppCompatUi.material)
     implementation(Dependencies.AppCompatUi.constraintlayout)
     implementation(Dependencies.AdapterDelegates.adapter)
-
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
 }

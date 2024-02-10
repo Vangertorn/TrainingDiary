@@ -15,7 +15,7 @@
         android:background="@drawable/background_item_approach">
 
         <TextView
-            android:id="@+id/tvApproach"
+            android:id="@+id/tvMuscleGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
@@ -37,7 +37,7 @@
             android:paddingBottom="5dp"
             android:src="@drawable/ic_minus_rv"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tvApproach"
+            app:layout_constraintEnd_toStartOf="@id/tvMuscleGroup"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/white"

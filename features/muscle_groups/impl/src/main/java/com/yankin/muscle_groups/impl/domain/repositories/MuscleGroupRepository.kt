@@ -9,11 +9,11 @@ interface MuscleGroupRepository {
 
     suspend fun getMuscleGroups(): List<MuscleGroupDomain>
 
-    suspend fun deleteMuscleGroup(muscleGroup: MuscleGroupDomain)
+    suspend fun deleteMuscleGroup(muscleGroupId: Long)
 
     suspend fun saveMuscleGroup(muscleGroup: MuscleGroupDomain)
 
     suspend fun saveDefaultValues(defaultList: List<MuscleGroupDomain>)
 
-    suspend fun recoverDefaultValues(defaultList: List<MuscleGroupDomain>)
+    suspend fun recoverDefaultValues()
 }

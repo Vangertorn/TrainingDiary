@@ -12,7 +12,7 @@ import com.yankin.common.viewbinding.viewBinding
 import com.yankin.common.viewmodel.AssistedParamsViewModelFactory
 import com.yankin.navigation.BundleParcelable
 import com.yankin.settings.api.navigation.SettingsCommunicator
-import com.yankin.settings.impl.di.ExercisePatternCreateViewModelFactory
+import com.yankin.settings.impl.di.view_model_factories.ExercisePatternCreateViewModelFactory
 import com.yankin.settings.impl.navigation.ExercisePatternCreateDialogParams
 import com.yankin.trainingdiary.settings.impl.R
 import com.yankin.trainingdiary.settings.impl.databinding.BottomSheetExercisePatternCreateBinding
