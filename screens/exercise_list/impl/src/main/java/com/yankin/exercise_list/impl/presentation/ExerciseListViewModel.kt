@@ -2,7 +2,7 @@ package com.yankin.exercise_list.impl.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
-import com.yankin.approach.api.usecases.GetApproachListUseCase
+import com.yankin.set.api.usecases.GetSetListUseCase
 import com.yankin.common.viewmodel.CoroutineViewModel
 import com.yankin.exercise.api.usecases.DeleteExerciseFalseUseCase
 import com.yankin.exercise.api.usecases.DeleteExerciseTrueUseCase
@@ -37,7 +37,7 @@ class ExerciseListViewModel @Inject constructor(
     private val switchExercisePositionUseCase: SwitchExercisePositionUseCase,
     private val getCurrentExerciseListStreamUseCase: GetCurrentExerciseListStreamUseCase,
     private val getCurrentSuperSetListStreamUseCase: GetCurrentSuperSetListStreamUseCase,
-    private val getApproachListUseCase: GetApproachListUseCase,
+    private val getSetListUseCase: GetSetListUseCase,
     private val getExerciseListBySuperSetIdUseCase: GetExerciseListBySuperSetIdUseCase,
 ) : CoroutineViewModel() {
 
@@ -48,7 +48,7 @@ class ExerciseListViewModel @Inject constructor(
                 exerciseDomainList.map { exerciseDomain ->
                     ViewHolderTypes.ExerciseInfo(
                         exercise = exerciseDomain.toModel(),
-                        approaches = getApproachListUseCase.invoke(exerciseDomain.id).map { approachDomain ->
+                        approaches = getSetListUseCase.invoke(exerciseDomain.id).map { approachDomain ->
                             approachDomain.toModel()
                         }
                     )
@@ -63,7 +63,7 @@ class ExerciseListViewModel @Inject constructor(
                         exercise = getExerciseListBySuperSetIdUseCase.invoke(superSetDomain.id).map { exerciseDomain ->
                             ViewHolderTypes.ExerciseInfo(
                                 exercise = exerciseDomain.toModel(),
-                                approaches = getApproachListUseCase.invoke(exerciseDomain.id).map { approachDomain ->
+                                approaches = getSetListUseCase.invoke(exerciseDomain.id).map { approachDomain ->
                                     approachDomain.toModel()
                                 }
                             )

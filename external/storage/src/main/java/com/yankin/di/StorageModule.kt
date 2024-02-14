@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.yankin.room.DATABASE_NAME
 import com.yankin.room.PlannerDatabase
-import com.yankin.room.dao.ApproachDao
+import com.yankin.room.dao.SetDao
 import com.yankin.room.dao.ExerciseDao
 import com.yankin.room.dao.ExercisePatternDao
 import com.yankin.room.dao.MembershipDao
@@ -34,8 +34,8 @@ internal object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideApproachDao(plannerDatabase: PlannerDatabase): ApproachDao =
-        plannerDatabase.approachDao()
+    fun provideApproachDao(plannerDatabase: PlannerDatabase): SetDao =
+        plannerDatabase.setDao()
 
     @Provides
     @Singleton

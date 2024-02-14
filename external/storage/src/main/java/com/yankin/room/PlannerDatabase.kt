@@ -3,14 +3,14 @@ package com.yankin.room
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.yankin.room.dao.ApproachDao
+import com.yankin.room.dao.SetDao
 import com.yankin.room.dao.ExerciseDao
 import com.yankin.room.dao.ExercisePatternDao
 import com.yankin.room.dao.MembershipDao
 import com.yankin.room.dao.MuscleGroupDao
 import com.yankin.room.dao.SuperSetDao
 import com.yankin.room.dao.TrainingDao
-import com.yankin.room.entity.ApproachEntity
+import com.yankin.room.entity.SetEntity
 import com.yankin.room.entity.ExerciseEntity
 import com.yankin.room.entity.ExercisePatternEntity
 import com.yankin.room.entity.MembershipEntity
@@ -23,7 +23,7 @@ const val DATABASE_NAME = "com.yankin.trainingdiary.dp"
 @Database(
     entities = [
         TrainingEntity::class,
-        ApproachEntity::class,
+        SetEntity::class,
         ExerciseEntity::class,
         MuscleGroupEntity::class,
         ExercisePatternEntity::class,
@@ -37,7 +37,7 @@ const val DATABASE_NAME = "com.yankin.trainingdiary.dp"
 abstract class PlannerDatabase : RoomDatabase() {
 
     abstract fun trainingDao(): TrainingDao
-    abstract fun approachDao(): ApproachDao
+    abstract fun setDao(): SetDao
     abstract fun exerciseDao(): ExerciseDao
     abstract fun muscleGroupDao(): MuscleGroupDao
     abstract fun exercisePatternDao(): ExercisePatternDao

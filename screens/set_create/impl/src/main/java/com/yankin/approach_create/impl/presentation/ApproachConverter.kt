@@ -1,4 +1,4 @@
-package com.yankin.exercise_list.impl.presentation.models
+package com.yankin.approach_create.impl.presentation
 
 import com.yankin.set.api.models.SetDomain
 

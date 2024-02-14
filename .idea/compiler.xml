@@ -43,6 +43,10 @@
       <module name="Training_diary.features.muscle_groups.api.main" target="1.8" />
       <module name="Training_diary.features.muscle_groups.api.test" target="1.8" />
       <module name="Training_diary.features.muscle_groups.impl" target="11" />
+      <module name="Training_diary.features.set.api" target="1.8" />
+      <module name="Training_diary.features.set.api.main" target="1.8" />
+      <module name="Training_diary.features.set.api.test" target="1.8" />
+      <module name="Training_diary.features.set.impl" target="11" />
       <module name="Training_diary.features.super_set.api" target="1.8" />
       <module name="Training_diary.features.super_set.api.main" target="1.8" />
       <module name="Training_diary.features.super_set.api.test" target="1.8" />
@@ -77,6 +81,10 @@
       <module name="Training_diary.screens.season_ticket.api.main" target="1.8" />
       <module name="Training_diary.screens.season_ticket.api.test" target="1.8" />
       <module name="Training_diary.screens.season_ticket.impl" target="11" />
+      <module name="Training_diary.screens.set_create.api" target="1.8" />
+      <module name="Training_diary.screens.set_create.api.main" target="1.8" />
+      <module name="Training_diary.screens.set_create.api.test" target="1.8" />
+      <module name="Training_diary.screens.set_create.impl" target="11" />
       <module name="Training_diary.screens.settings.api" target="1.8" />
       <module name="Training_diary.screens.settings.api.main" target="1.8" />
       <module name="Training_diary.screens.settings.api.test" target="1.8" />
