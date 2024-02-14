@@ -9,13 +9,9 @@ internal interface SuperSetRepository {
 
     suspend fun saveSuperSet(superSet: SuperSetDomain): Long
 
-    suspend fun updateSuperSetVisible(superSetId: Long)
-
     suspend fun deleteSuperSetTrue(superSetId: Long)
 
     suspend fun deleteSuperSetFalse(superSetId: Long)
-
-    suspend fun deleteSuperSets()
 
     suspend fun switchSuperSetPosition(
         firstSuperSetId: Long,

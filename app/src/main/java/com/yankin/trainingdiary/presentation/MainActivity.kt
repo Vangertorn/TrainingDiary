@@ -49,7 +49,6 @@ class MainActivity : SupportActivityInset<ActivityMainBinding>(), AppThemeOwner 
         setWindowTransparency(this)
         viewModel.deletedTrainings()
         viewModel.deletedExercises()
-        viewModel.deletedSuperSets()
     }
 
     @Deprecated("Deprecated in Java")

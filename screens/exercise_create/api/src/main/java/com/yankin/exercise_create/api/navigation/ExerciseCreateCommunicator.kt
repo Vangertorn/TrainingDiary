@@ -4,8 +4,6 @@ interface ExerciseCreateCommunicator {
 
     fun navigateToExerciseCreate(params: ExerciseCreateParams)
 
-    fun navigateToSuperSetCreate(params: SuperSetCreateParams)
-
     companion object {
         const val NAV_KEY = "ExerciseCreateCommunicatorNavKey"
     }

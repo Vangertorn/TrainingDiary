@@ -100,7 +100,7 @@ class SuperSetApproachCreateBottomDialog : BottomSheetDialogFragment() {
 
         viewModel.reoccurrencesLiveData.observe(this.viewLifecycleOwner) {
             if (viewBinding.etReoccurrenceSs.text.isBlank()) {
-                viewBinding.etReoccurrenceSs.setText(it)
+                viewBinding.etReoccurrenceSs.setText(it.toString())
             }
         }
 

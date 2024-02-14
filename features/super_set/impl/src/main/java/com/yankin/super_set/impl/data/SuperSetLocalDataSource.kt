@@ -9,23 +9,15 @@ class SuperSetLocalDataSource @Inject constructor(
     private val db: SuperSetDao
 ) {
     fun getSuperSetListByTrainingIdStream(id: Long): Flow<List<SuperSetEntity>> {
-        return db.getSuperSetListByTrainingIdFlow(id = id, flags = false, visibility = true)
+        return db.getSuperSetListByTrainingIdFlow(id = id, flags = false)
     }
 
     fun getSuperSetById(superSetId: Long): SuperSetEntity {
         return db.getSuperSetById(idSuperSet = superSetId)
     }
 
-    fun updateSuperSetVisible(superSetId: Long) {
-        db.updateSuperSetVisible(superSetId = superSetId, visibility = true)
-    }
-
     fun updateSuperSetDeleted(superSetId: Long, deleted: Boolean) {
         db.updateSuperSetDeleted(superSetId = superSetId, deleted = deleted)
-    }
-
-    fun deletedSuperSetByVisible() {
-        db.deleteSuperSetByVisible(visible = false)
     }
 
     fun insertSuperSet(superSet: SuperSetEntity): Long {

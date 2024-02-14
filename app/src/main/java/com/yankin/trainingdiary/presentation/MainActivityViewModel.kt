@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.yankin.common.resource_import.CommonRString
 import com.yankin.exercise.api.usecases.DeleteExercisesUseCase
 import com.yankin.muscle_groups.api.usecases.SaveDefaultMuscleGroupListUseCase
-import com.yankin.super_set.api.usecases.DeleteSuperSetsUseCase
 import com.yankin.training.api.usecases.DeleteTrainingByFlagsUseCase
 import com.yankin.trainingdiary.presentation.models.MuscleGroup
 import com.yankin.trainingdiary.presentation.models.toDomain
@@ -17,7 +16,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
-    private val deleteSuperSetsUseCase: DeleteSuperSetsUseCase,
     private val saveDefaultMuscleGroupListUseCase: SaveDefaultMuscleGroupListUseCase,
     @ApplicationContext private val context: Context,
     private val deleteTrainingByFlagsUseCase: DeleteTrainingByFlagsUseCase,
@@ -33,12 +31,6 @@ class MainActivityViewModel @Inject constructor(
     fun deletedExercises() {
         viewModelScope.launch {
             deleteExercisesUseCase.invoke()
-        }
-    }
-
-    fun deletedSuperSets() {
-        viewModelScope.launch {
-            deleteSuperSetsUseCase.invoke()
         }
     }
 

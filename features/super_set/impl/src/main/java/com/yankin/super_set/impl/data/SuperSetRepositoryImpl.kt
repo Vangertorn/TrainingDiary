@@ -31,12 +31,6 @@ internal class SuperSetRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun updateSuperSetVisible(superSetId: Long) {
-        withContext(coroutineDispatchers.io) {
-            superSetLocalDataSource.updateSuperSetVisible(superSetId)
-        }
-    }
-
     override suspend fun deleteSuperSetTrue(superSetId: Long) {
         withContext(coroutineDispatchers.io) {
             superSetLocalDataSource.updateSuperSetDeleted(superSetId = superSetId, deleted = true)
@@ -46,12 +40,6 @@ internal class SuperSetRepositoryImpl @Inject constructor(
     override suspend fun deleteSuperSetFalse(superSetId: Long) {
         withContext(coroutineDispatchers.io) {
             superSetLocalDataSource.updateSuperSetDeleted(superSetId = superSetId, deleted = false)
-        }
-    }
-
-    override suspend fun deleteSuperSets() {
-        withContext(coroutineDispatchers.io) {
-            superSetLocalDataSource.deletedSuperSetByVisible()
         }
     }
 

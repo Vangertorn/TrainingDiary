@@ -20,23 +20,13 @@ abstract class SuperSetDao {
         flags: Boolean
     ): List<SuperSetEntity>
 
-    @Query("UPDATE table_super_set SET visibility = :visibility WHERE id = :superSetId")
-    abstract fun updateSuperSetVisible(superSetId: Long, visibility: Boolean)
-
     @Query("SELECT * FROM table_super_set WHERE id==:idSuperSet LIMIT 1")
     abstract fun getSuperSetById(idSuperSet: Long): SuperSetEntity
 
-    @Query("SELECT * FROM table_super_set WHERE visibility ==:flags ")
-    abstract fun getSuperSetByVisible(flags: Boolean): List<SuperSetEntity>?
-
-    @Query("DELETE FROM table_super_set WHERE visibility ==:visible")
-    abstract fun deleteSuperSetByVisible(visible: Boolean)
-
-    @Query("SELECT * FROM table_super_set WHERE idTraining == :id AND deleted ==:flags AND visibility==:visibility")
+    @Query("SELECT * FROM table_super_set WHERE idTraining == :id AND deleted ==:flags")
     abstract fun getSuperSetListByTrainingIdFlow(
         id: Long,
         flags: Boolean,
-        visibility: Boolean
     ): Flow<List<SuperSetEntity>>
 
     @Query("UPDATE table_super_set SET deleted = :deleted WHERE id = :superSetId")

@@ -72,7 +72,7 @@ class ApproachCreateBottomDialog : BottomSheetDialogFragment() {
 
         viewModel.reoccurrencesLiveData.observe(this.viewLifecycleOwner) {
             if (viewBinding.etReoccurrence.text.isBlank()) {
-                viewBinding.etReoccurrence.setText(it)
+                viewBinding.etReoccurrence.setText(it.toString())
             }
         }
 

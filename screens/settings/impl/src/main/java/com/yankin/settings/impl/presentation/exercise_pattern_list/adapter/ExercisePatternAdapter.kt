@@ -8,9 +8,7 @@ internal class ExercisePatternAdapter(
 
     init {
         delegatesManager.addDelegate(
-            com.yankin.settings.impl.presentation.settings.adapter.muscleGroupAdapterDelegate(
-                onExercisePatternClickListener
-            )
+            exercisePatternAdapterDelegate(onExercisePatternClickListener)
         )
     }
 }

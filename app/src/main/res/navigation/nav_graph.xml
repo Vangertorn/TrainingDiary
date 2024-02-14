@@ -54,9 +54,6 @@
         android:name="com.yankin.exercise_create.impl.presentation.exercise_create.ExerciseCreateBottomDialog"
         android:label="ExerciseCreateBottomDialog"
         tools:layout="@layout/bottom_sheet_add_exercise">
-        <action
-            android:id="@+id/action_exerciseCreateBottomDialog_to_superSetCreateBottomDialog"
-            app:destination="@id/superSetCreateBottomDialog" />
     </dialog>
     <dialog
         android:id="@+id/approachCreateBottomDialog2"
@@ -121,17 +118,6 @@
         <action
             android:id="@+id/action_seasonTicketInfoBottomDialog_to_trainingListFragment"
             app:destination="@id/trainingListFragment"
-            app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true"/>
-    </dialog>
-    <dialog
-        android:id="@+id/superSetCreateBottomDialog"
-        android:name="com.yankin.exercise_create.impl.presentation.super_set_create.SuperSetCreateBottomDialog"
-        android:label="SuperSetCreateBottomDialog"
-        tools:layout="@layout/bottom_sheet_add_set">
-        <action
-            android:id="@+id/action_superSetCreateBottomDialog_to_exerciseListFragment"
-            app:destination="@id/exerciseListFragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true"/>
     </dialog>

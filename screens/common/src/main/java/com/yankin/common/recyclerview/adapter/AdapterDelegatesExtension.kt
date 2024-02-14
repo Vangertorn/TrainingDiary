@@ -4,8 +4,8 @@ import com.hannesdorfmann.adapterdelegates4.dsl.AdapterDelegateViewBindingViewHo
 
 
 @Suppress("UNCHECKED_CAST")
-inline fun <reified T> AdapterDelegateViewBindingViewHolder<*, *>.bindWithPayloads(
-    crossinline bindPayload: (T) -> Unit,
+inline fun <reified Payload> AdapterDelegateViewBindingViewHolder<*, *>.bindWithPayloads(
+    crossinline bindPayload: (Payload) -> Unit,
     crossinline bindAll: () -> Unit
 ) {
     bind { rawPayloads: List<Any> ->
@@ -14,7 +14,7 @@ inline fun <reified T> AdapterDelegateViewBindingViewHolder<*, *>.bindWithPayloa
             return@bind
         }
         rawPayloads
-            .flatMap { rawPayload -> rawPayload as Collection<T> }
-            .forEach { payload: T -> bindPayload(payload) }
+            .flatMap { rawPayload -> rawPayload as Collection<Payload> }
+            .forEach { payload: Payload -> bindPayload(payload) }
     }
 }

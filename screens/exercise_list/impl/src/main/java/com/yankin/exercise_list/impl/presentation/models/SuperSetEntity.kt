@@ -6,7 +6,7 @@ fun SuperSetDomain.toModel() = SuperSet(
     id = id,
     idTraining = idTraining,
     deleted = deleted,
-    visibility = visibility,
+    visibility = true,
     position = position
 )
 
@@ -14,6 +14,5 @@ fun SuperSet.toDomain() = SuperSetDomain(
     id = id,
     idTraining = idTraining,
     deleted = deleted,
-    visibility = visibility,
     position = position
 )
