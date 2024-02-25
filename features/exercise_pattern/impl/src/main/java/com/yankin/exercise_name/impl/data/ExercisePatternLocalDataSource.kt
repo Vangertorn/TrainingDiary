@@ -28,6 +28,10 @@ internal class ExercisePatternLocalDataSource @Inject constructor(
         db.update(exercisePatternDomainEntity)
     }
 
+    fun updateExercisePatternByName(oldName: String, newName: String) {
+        db.updateByName(oldName = oldName, newName = newName)
+    }
+
     fun getExercisePatternById(exercisePatternId: Long): ExercisePatternEntity {
         return db.getExercisePatternById(exercisePatternId)
     }

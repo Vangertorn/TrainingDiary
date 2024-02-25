@@ -30,17 +30,20 @@ dependencies {
 
 
     implementation(project(":core:coroutine"))
+    implementation(project(":core:resource_manager:api"))
+    implementation(project(":core:kotlin"))
     implementation(project(":external:preferences"))
     implementation(project(":navigation"))
     implementation(project(":features:training:api"))
     implementation(project(":features:muscle_groups:api"))
     implementation(project(":features:exercise_pattern:api"))
+    implementation(project(":features:set:api"))
+    implementation(project(":features:exercise:api"))
     implementation(project(":screens:common"))
     implementation(project(":screens:set_create:api"))
 
+
     implementation(Dependencies.Hilt.android)
-    implementation(project(":features:set:api"))
-    implementation(project(":features:exercise:api"))
     kapt(Dependencies.Hilt.compiler)
 
     implementation(Dependencies.Navigation.navigationFragment)
@@ -48,11 +51,5 @@ dependencies {
     implementation(Dependencies.AppCompatUi.appCompat)
     implementation(Dependencies.AppCompatUi.material)
     implementation(Dependencies.AppCompatUi.constraintlayout)
-
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation(Dependencies.AdapterDelegates.adapter)
 }

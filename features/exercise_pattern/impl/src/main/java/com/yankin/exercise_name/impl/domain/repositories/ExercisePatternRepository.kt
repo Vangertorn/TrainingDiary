@@ -15,5 +15,7 @@ interface ExercisePatternRepository {
 
     suspend fun updateExercisePattern(exercisePattern: ExercisePatternDomain)
 
+    suspend fun updateExercisePatternByName(oldName: String, newName: String)
+
     suspend fun getExercisePatternById(exercisePatternId: Long): ExercisePatternDomain
 }

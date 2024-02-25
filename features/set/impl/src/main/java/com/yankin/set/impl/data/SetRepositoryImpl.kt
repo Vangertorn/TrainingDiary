@@ -25,15 +25,21 @@ internal class SetRepositoryImpl @Inject constructor(
             }
         }
 
+    override fun getSetListStream(exerciseId: Long): Flow<List<SetDomain>> {
+       return setLocalDataSource.getSetListStream(exerciseId).map { setEntityList ->
+           setEntityList?.map { setEntity -> setEntity.toDomain() } ?: emptyList()
+       }
+    }
+
     override suspend fun saveSet(set: SetDomain) {
         withContext(coroutineDispatchers.io) {
             setLocalDataSource.insertSet(set.toEntity())
         }
     }
 
-    override suspend fun deleteSet(set: SetDomain) {
+    override suspend fun deleteSetById(setId: Long) {
         withContext(coroutineDispatchers.io) {
-            setLocalDataSource.deleteSet(set.toEntity())
+            setLocalDataSource.deleteSetById(setId)
         }
     }
 

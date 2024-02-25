@@ -1,7 +1,7 @@
 package com.yankin.approach_create.impl.di
 
 import com.yankin.navigation.NavigationNode
-import com.yankin.approach_create.impl.navigation.ApproachCreateNavigationNode
+import com.yankin.approach_create.impl.navigation.SetCreateNavigationNode
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,5 +14,5 @@ internal interface ApproachCreateNavigationModule {
 
     @IntoSet
     @Binds
-    fun bindNavigationNode(approachCreateNavigationNode: ApproachCreateNavigationNode): NavigationNode
+    fun bindNavigationNode(setCreateNavigationNode: SetCreateNavigationNode): NavigationNode
 }

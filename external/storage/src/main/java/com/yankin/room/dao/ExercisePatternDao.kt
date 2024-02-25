@@ -18,6 +18,9 @@ abstract class ExercisePatternDao {
     @Query("DELETE FROM table_exercise_pattern WHERE id = :exercisePatternId")
     abstract fun delete(exercisePatternId: Long)
 
+    @Query("UPDATE table_exercise_pattern SET name =:newName WHERE name = :oldName")
+    abstract fun updateByName(oldName: String, newName: String)
+
     @Query("SELECT * FROM table_exercise_pattern WHERE id = :exercisePatternId")
     abstract fun getExercisePatternById(exercisePatternId: Long): ExercisePatternEntity
 

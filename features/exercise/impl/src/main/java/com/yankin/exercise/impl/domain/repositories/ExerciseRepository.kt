@@ -9,7 +9,7 @@ internal interface ExerciseRepository {
 
     suspend fun saveExercise(exercise: ExerciseDomain)
 
-    suspend fun updateExercise(exercise: ExerciseDomain)
+    suspend fun updateExercise(exerciseId: Long, exerciseName: String, exerciseComment: String?)
 
     suspend fun deletedExerciseTrue(exerciseId: Long)
 
@@ -17,7 +17,7 @@ internal interface ExerciseRepository {
 
     suspend fun getExerciseListBySuperSetId(superSetId: Long): List<ExerciseDomain>
 
-    suspend fun getExerciseListBySuperSetIdStream(superSetId: Long): Flow<List<ExerciseDomain>>
+    fun getExerciseListBySuperSetIdStream(superSetId: Long): Flow<List<ExerciseDomain>>
 
     suspend fun deleteExercises()
 
@@ -29,4 +29,6 @@ internal interface ExerciseRepository {
         secondExerciseId: Long,
         secondExercisePosition: Int
     )
+
+    fun getExerciseByIdStream(exerciseId: Long): Flow<ExerciseDomain>
 }

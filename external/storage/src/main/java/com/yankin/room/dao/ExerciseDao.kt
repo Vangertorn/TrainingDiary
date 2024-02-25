@@ -5,7 +5,6 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
-import androidx.room.Update
 import com.yankin.room.entity.ExerciseEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -31,14 +30,14 @@ abstract class ExerciseDao {
     @Query("DELETE FROM table_exercise WHERE name=='' ")
     abstract fun deletedEmptyExercise()
 
-    @Update
-    abstract fun updateExercise(exerciseEntity: ExerciseEntity)
+    @Query("UPDATE table_exercise SET name = :exerciseName, comment = :exerciseComment WHERE id= :exerciseId ")
+    abstract fun updateExercise(exerciseId: Long, exerciseName: String, exerciseComment: String?)
 
     @Query("UPDATE table_exercise SET deleted = :deleteFlag WHERE id = :exerciseId")
     abstract fun updateExerciseDeleteFlagById(exerciseId: Long, deleteFlag: Boolean)
 
     @Query("SELECT * FROM table_exercise WHERE id == :id LIMIT 1")
-    abstract fun getExerciseFromId(id: Long): ExerciseEntity
+    abstract fun getExerciseFromIdStream(id: Long): Flow<ExerciseEntity>
 
     @Delete
     abstract fun deleteExercise(exerciseEntity: ExerciseEntity)
@@ -80,10 +79,4 @@ abstract class ExerciseDao {
         superSetId: Long,
         flags: Boolean
     ): Flow<List<ExerciseEntity>>
-    //
-    //    @Query("SELECT * FROM table_exercise WHERE idTraining == :id AND deleted == :flags AND idSet is null ORDER BY position DESC")
-    //    abstract fun getExercisesInfoByTrainingIdAndFlagsFlow(
-    //        id: Long,
-    //        flags: Boolean
-    //    ): Flow<List<ViewHolderTypesEntity.ExerciseInfo>>
 }

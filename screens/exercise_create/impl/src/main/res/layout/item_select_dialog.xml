@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/backgroung_item_select_dialog"
     android:id="@+id/tvName_exercise"
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:layout_margin="10dp"
+    android:background="@drawable/backgroung_item_select_dialog"
     android:drawablePadding="8dp"
     android:gravity="center_vertical"
     android:paddingStart="15dp"
     android:paddingEnd="15dp"
-    tools:text="exercise">
-
-</TextView>
+    tools:text="exercise" />

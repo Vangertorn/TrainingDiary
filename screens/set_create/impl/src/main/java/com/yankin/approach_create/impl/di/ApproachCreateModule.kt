@@ -1,7 +1,7 @@
 package com.yankin.approach_create.impl.di
 
-import com.yankin.approach_create.api.navigation.ApproachCreateCommunicator
-import com.yankin.approach_create.impl.navigation.ApproachCreateCommunicatorImpl
+import com.yankin.approach_create.api.navigation.SetCreateCommunicator
+import com.yankin.approach_create.impl.navigation.SetCreateCommunicatorImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -11,5 +11,5 @@ import dagger.hilt.android.components.FragmentComponent
 @InstallIn(FragmentComponent::class)
 interface ApproachCreateModule {
     @Binds
-    fun bindCommunicator(approachCreateCommunicatorImpl: ApproachCreateCommunicatorImpl): ApproachCreateCommunicator
+    fun bindCommunicator(approachCreateCommunicatorImpl: SetCreateCommunicatorImpl): SetCreateCommunicator
 }

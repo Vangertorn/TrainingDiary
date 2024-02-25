@@ -51,15 +51,15 @@
     </fragment>
     <dialog
         android:id="@+id/exerciseCreateBottomDialog"
-        android:name="com.yankin.exercise_create.impl.presentation.exercise_create.ExerciseCreateBottomDialog"
+        android:name="com.yankin.exercise_create.impl.presentation.ExerciseCreateBottomDialog"
         android:label="ExerciseCreateBottomDialog"
         tools:layout="@layout/bottom_sheet_add_exercise">
     </dialog>
     <dialog
         android:id="@+id/approachCreateBottomDialog2"
-        android:name="com.yankin.approach_create.impl.presentation.approach_create.ApproachCreateBottomDialog"
+        android:name="com.yankin.approach_create.impl.presentation.SetCreateBottomDialog"
         android:label="ApproachCreateBottomDialog"
-        tools:layout="@layout/bottom_sheet_add_approach">
+        tools:layout="@layout/bottom_sheet_add_set">
     </dialog>
     <dialog
         android:id="@+id/trainingCreateBottomDialog"

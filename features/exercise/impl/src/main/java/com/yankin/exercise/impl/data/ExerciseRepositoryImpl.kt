@@ -44,9 +44,11 @@ internal class ExerciseRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun updateExercise(exercise: ExerciseDomain) {
+    override suspend fun updateExercise(exerciseId: Long, exerciseName: String, exerciseComment: String?) {
         withContext(coroutineDispatchers.io) {
-            exerciseLocalDataSource.updateExercise(exercise.toEntity())
+            exerciseLocalDataSource.updateExercise(
+                exerciseId = exerciseId, exerciseName = exerciseName, exerciseComment = exerciseComment
+            )
         }
     }
 
@@ -74,7 +76,7 @@ internal class ExerciseRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getExerciseListBySuperSetIdStream(superSetId: Long): Flow<List<ExerciseDomain>> {
+    override fun getExerciseListBySuperSetIdStream(superSetId: Long): Flow<List<ExerciseDomain>> {
         return exerciseLocalDataSource.getExerciseListBySuperSetIdStream(superSetId).map { exerciseEntityList ->
             exerciseEntityList.map { exerciseEntity ->
                 exerciseEntity.toDomain()
@@ -107,6 +109,12 @@ internal class ExerciseRepositoryImpl @Inject constructor(
                 secondExerciseId = secondExerciseId,
                 secondExercisePosition = secondExercisePosition,
             )
+        }
+    }
+
+    override fun getExerciseByIdStream(exerciseId: Long): Flow<ExerciseDomain> {
+        return exerciseLocalDataSource.getExerciseByIdStream(exerciseId).map { exerciseEntity ->
+            exerciseEntity.toDomain()
         }
     }
 }

@@ -5,6 +5,7 @@ import com.yankin.exercise.api.usecases.DeleteExerciseFalseUseCase
 import com.yankin.exercise.api.usecases.DeleteExerciseTrueUseCase
 import com.yankin.exercise.api.usecases.DeleteExercisesUseCase
 import com.yankin.exercise.api.usecases.GetCurrentExerciseListStreamUseCase
+import com.yankin.exercise.api.usecases.GetExerciseByIdStreamUseCase
 import com.yankin.exercise.api.usecases.GetExerciseListBySuperSetIdStreamUseCase
 import com.yankin.exercise.api.usecases.GetExerciseListBySuperSetIdUseCase
 import com.yankin.exercise.api.usecases.SaveExerciseUseCase
@@ -17,6 +18,7 @@ import com.yankin.exercise.impl.domain.usecases.DeleteExerciseFalseUseCaseImpl
 import com.yankin.exercise.impl.domain.usecases.DeleteExerciseTrueUseCaseImpl
 import com.yankin.exercise.impl.domain.usecases.DeleteExercisesUseCaseImpl
 import com.yankin.exercise.impl.domain.usecases.GetCurrentExerciseListStreamUseCaseImpl
+import com.yankin.exercise.impl.domain.usecases.GetExerciseByIdStreamUseCaseImpl
 import com.yankin.exercise.impl.domain.usecases.GetExerciseListBySuperSetIdStreamUseCaseImpl
 import com.yankin.exercise.impl.domain.usecases.GetExerciseListBySuperSetIdUseCaseImpl
 import com.yankin.exercise.impl.domain.usecases.SaveExerciseUseCaseImpl
@@ -80,6 +82,11 @@ internal interface ExerciseModule {
     fun bindsUpdateExerciseUseCase(
         updateExerciseUseCaseImpl: UpdateExerciseUseCaseImpl
     ): UpdateExerciseUseCase
+
+    @Binds
+    fun bindsGetExerciseByIdStreamUseCase(
+        getExerciseByIdStreamUseCaseImpl: GetExerciseByIdStreamUseCaseImpl
+    ): GetExerciseByIdStreamUseCase
 
     @Binds
     fun bindsExerciseRepository(exerciseRepositoryImpl: ExerciseRepositoryImpl): ExerciseRepository

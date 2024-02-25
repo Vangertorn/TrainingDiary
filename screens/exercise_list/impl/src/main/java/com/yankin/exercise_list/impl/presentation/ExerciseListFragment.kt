@@ -1,17 +1,14 @@
 package com.yankin.exercise_list.impl.presentation
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.snackbar.Snackbar
-import com.yankin.approach_create.api.navigation.ApproachCreateCommunicator
-import com.yankin.approach_create.api.navigation.ApproachCreateParams
+import com.yankin.approach_create.api.navigation.SetCreateCommunicator
+import com.yankin.approach_create.api.navigation.SetCreateParams
 import com.yankin.common.fragment.BaseFragment
-import com.yankin.common.fragment.SupportFragmentInset
 import com.yankin.common.recyclerview.SwipeCallback
 import com.yankin.common.resource_import.CommonRString
 import com.yankin.common.viewbinding.viewBinding
@@ -39,7 +36,7 @@ class ExerciseListFragment : BaseFragment<FragmentExerciseListBinding>(R.layout.
     lateinit var trainingCreateCommunicator: TrainingCreateCommunicator
 
     @Inject
-    lateinit var approachCreateCommunicator: ApproachCreateCommunicator
+    lateinit var setCreateCommunicator: SetCreateCommunicator
 
     override val binding: FragmentExerciseListBinding by viewBinding(FragmentExerciseListBinding::bind)
 
@@ -68,20 +65,16 @@ class ExerciseListFragment : BaseFragment<FragmentExerciseListBinding>(R.layout.
                 onClick = { item ->
                     if (item is ViewHolderTypes.ExerciseInfo) {
                         viewModel.rememberIdExercise(item.exercise)
-                        approachCreateCommunicator.navigateToApproachCreate(
-                            ApproachCreateParams(
-                                exerciseId = item.exercise.id,
-                                name = item.exercise.name,
-                                trainingId = item.exercise.idTraining ?: 0L,
-                                position = item.exercise.position,
-                                comment = item.exercise.comment,
-                                deleted = item.exercise.deleted,
-                                idSet = item.exercise.idSet
-                            )
+                        setCreateCommunicator.navigateToSetCreate(
+                            SetCreateParams(exerciseId = item.exercise.id, superSetId = null)
                         )
                     } else {
-                        viewModel.rememberIdSuperSet((item as ViewHolderTypes.SuperSetDate).superSet)
-                        approachCreateCommunicator.navigateToSuperSetApproachCreate()
+                        setCreateCommunicator.navigateToSetCreate(
+                            SetCreateParams(
+                                exerciseId = null,
+                                superSetId = (item as ViewHolderTypes.SuperSetDate).superSet.id
+                            )
+                        )
                     }
                 }
             )

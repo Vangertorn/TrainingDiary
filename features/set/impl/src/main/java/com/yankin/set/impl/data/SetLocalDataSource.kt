@@ -13,8 +13,8 @@ internal class SetLocalDataSource @Inject constructor(
         db.insertSet(set)
     }
 
-    fun deleteSet(set: SetEntity) {
-        db.deleteSet(set)
+    fun deleteSetById(setId: Long) {
+        db.deleteSetById(setId)
     }
 
     fun getSetListStream(exerciseId: Long): Flow<List<SetEntity>?> {

@@ -13,8 +13,8 @@ abstract class SetDao {
     @Insert
     abstract fun insertSet(setEntity: SetEntity): Long
 
-    @Delete
-    abstract fun deleteSet(setEntity: SetEntity)
+    @Query("DELETE FROM table_set WHERE id == :setId")
+    abstract fun deleteSetById(setId: Long)
 
     @Query("SELECT * FROM table_set WHERE idExercise == :exerciseId")
     abstract fun getSetListStream(exerciseId: Long): Flow<List<SetEntity>?>

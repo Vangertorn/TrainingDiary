@@ -2,7 +2,7 @@ package com.yankin.exercise_create.impl.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.fragment.dialog
-import com.yankin.exercise_create.impl.presentation.exercise_create.ExerciseCreateBottomDialog
+import com.yankin.exercise_create.impl.presentation.ExerciseCreateBottomDialog
 import com.yankin.navigation.NavigationNode
 import javax.inject.Inject
 

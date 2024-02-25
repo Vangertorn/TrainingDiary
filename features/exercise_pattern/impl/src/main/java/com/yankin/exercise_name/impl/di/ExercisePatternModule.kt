@@ -7,12 +7,14 @@ import com.yankin.exercise_name.impl.domain.usecases.GetCurrentExercisePatternAs
 import com.yankin.exercise_name.impl.domain.usecases.GetCurrentExercisePatternStreamUseCaseImpl
 import com.yankin.exercise_name.impl.domain.usecases.GetExercisePatternByIdUseCaseImpl
 import com.yankin.exercise_name.impl.domain.usecases.SaveExercisePatternUseCaseImpl
+import com.yankin.exercise_name.impl.domain.usecases.UpdateExercisePatternByNameUseCaseImpl
 import com.yankin.exercise_name.impl.domain.usecases.UpdateExercisePatternUseCaseImpl
 import com.yankin.exercise_pattern.api.usecases.DeleteExercisePatternUseCase
 import com.yankin.exercise_pattern.api.usecases.GetCurrentExercisePatternAsStringStreamUseCase
 import com.yankin.exercise_pattern.api.usecases.GetCurrentExercisePatternStreamUseCase
 import com.yankin.exercise_pattern.api.usecases.GetExercisePatternByIdUseCase
 import com.yankin.exercise_pattern.api.usecases.SaveExercisePatternUseCase
+import com.yankin.exercise_pattern.api.usecases.UpdateExercisePatternByNameUseCase
 import com.yankin.exercise_pattern.api.usecases.UpdateExercisePatternUseCase
 import dagger.Binds
 import dagger.Module
@@ -52,6 +54,11 @@ internal interface ExercisePatternModule {
     fun bindsGetExercisePatternByIdUseCase(
         getExercisePatternByIdUseCaseImpl: GetExercisePatternByIdUseCaseImpl
     ): GetExercisePatternByIdUseCase
+
+    @Binds
+    fun bindsUpdateExercisePatternByNameUseCase(
+        updateExercisePatternByNameUseCaseImpl: UpdateExercisePatternByNameUseCaseImpl
+    ): UpdateExercisePatternByNameUseCase
 
     @Binds
     fun bindsExercisePatternRepository(

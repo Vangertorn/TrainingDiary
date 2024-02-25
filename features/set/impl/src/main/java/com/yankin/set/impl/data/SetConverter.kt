@@ -6,13 +6,13 @@ import com.yankin.room.entity.SetEntity
 fun SetDomain.toEntity() = SetEntity(
     id = id,
     weight = weight,
-    reps = repeat,
+    reps = reps,
     idExercise = idExercise
 )
 
 fun SetEntity.toDomain() = SetDomain(
     id = id,
     weight = weight,
-    repeat = reps,
+    reps = reps,
     idExercise = idExercise
 )

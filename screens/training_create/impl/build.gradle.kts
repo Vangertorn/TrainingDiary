@@ -30,6 +30,7 @@ dependencies {
 
     implementation(project(":core:coroutine"))
     implementation(project(":core:date"))
+    implementation(project(":core:kotlin"))
     implementation(project(":navigation"))
     implementation(project(":features:training:api"))
     implementation(project(":features:muscle_groups:api"))

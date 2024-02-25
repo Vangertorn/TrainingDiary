@@ -13,6 +13,7 @@ import com.yankin.common.resource_import.CommonRAttr
 import com.yankin.common.viewbinding.viewBinding
 import com.yankin.common.viewmodel.AssistedParamsViewModelFactory
 import com.yankin.exercise_list.api.navigation.ExerciseListCommunicator
+import com.yankin.kotlin.unsafeLazy
 import com.yankin.navigation.BundleParcelable
 import com.yankin.training_create.api.navigation.TrainingCreateCommunicator
 import com.yankin.training_create.impl.di.TrainingCreateViewModelFactory
@@ -40,8 +41,8 @@ internal class TrainingCreateBottomDialog : BaseBottomSheetDialogFragment<Bottom
     private val viewModel: TrainingCreateViewModel by viewModels {
         AssistedParamsViewModelFactory(params = params, factory = viewModelFactory, owner = this)
     }
-    private var params by BundleParcelable<TrainingCreateParcelableParams>(TrainingCreateCommunicator.NAV_KEY)
-    private val adapter by lazy(LazyThreadSafetyMode.NONE) {
+    private val params by BundleParcelable<TrainingCreateParcelableParams>(TrainingCreateCommunicator.NAV_KEY)
+    private val adapter by unsafeLazy {
         MuscleGroupsAdapter(
             muscleGroupClickListener = viewModel::onMuscleGroupClick
         )

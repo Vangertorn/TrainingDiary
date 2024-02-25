@@ -49,7 +49,6 @@ abstract class MembershipDao {
         membershipEntity?.let { entity ->
             val resultList = entity.accountedTrainingIdList.toMutableList()
             resultList.remove(exerciseId)
-            println("TAG1 deleteTrainingId resultList- $resultList")
             updateAccountedTrainingIdList(accountedTrainingIdList = resultList, membershipId = entity.id)
             updateTrainingCountPast(trainingCountPast = resultList.size, membershipId = entity.id)
         }

@@ -1,14 +1,16 @@
 package com.yankin.set.impl.di
 
-import com.yankin.set.api.usecases.DeleteSetUseCase
+import com.yankin.set.api.usecases.DeleteSetByIdUseCase
 import com.yankin.set.api.usecases.GetSetListUseCase
 import com.yankin.set.api.usecases.GetCurrentSetStreamUseCase
+import com.yankin.set.api.usecases.GetSetListStreamUseCase
 import com.yankin.set.api.usecases.SaveSetUseCase
 import com.yankin.set.impl.data.SetRepositoryImpl
 import com.yankin.set.impl.domain.repositories.SetRepository
-import com.yankin.set.impl.domain.usecases.DeleteSetUseCaseImpl
+import com.yankin.set.impl.domain.usecases.DeleteSetByIdByIdUseCaseImpl
 import com.yankin.set.impl.domain.usecases.GetSetListUseCaseImpl
 import com.yankin.set.impl.domain.usecases.GetCurrentSetStreamUseCaseImpl
+import com.yankin.set.impl.domain.usecases.GetSetListStreamUseCaseImpl
 import com.yankin.set.impl.domain.usecases.SaveSetUseCaseImpl
 import dagger.Binds
 import dagger.Module
@@ -21,8 +23,8 @@ internal interface SetModule {
 
     @Binds
     fun bindsDeleteSetUseCase(
-        deleteSetUseCaseImpl: DeleteSetUseCaseImpl
-    ): DeleteSetUseCase
+        deleteSetByIdUseCaseImpl: DeleteSetByIdByIdUseCaseImpl
+    ): DeleteSetByIdUseCase
 
     @Binds
     fun bindsGetSetListUseCase(
@@ -38,6 +40,12 @@ internal interface SetModule {
     fun bindsSaveSetUseCase(
         saveSetUseCaseImpl: SaveSetUseCaseImpl
     ): SaveSetUseCase
+
+    @Binds
+    fun bindsGetSetListStreamUseCase(
+        getSetListStreamUseCaseImpl: GetSetListStreamUseCaseImpl
+    ): GetSetListStreamUseCase
+
 
     @Binds
     fun bindsSetRepository(setRepositoryImpl: SetRepositoryImpl): SetRepository

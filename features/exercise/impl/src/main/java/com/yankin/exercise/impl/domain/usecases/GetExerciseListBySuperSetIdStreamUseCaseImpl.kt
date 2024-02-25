@@ -10,7 +10,7 @@ internal class GetExerciseListBySuperSetIdStreamUseCaseImpl @Inject constructor(
     private val exerciseRepository: ExerciseRepository,
 ) : GetExerciseListBySuperSetIdStreamUseCase {
 
-    override suspend fun invoke(superSetId: Long): Flow<List<ExerciseDomain>> {
+    override fun invoke(superSetId: Long): Flow<List<ExerciseDomain>> {
         return exerciseRepository.getExerciseListBySuperSetIdStream(superSetId)
     }
 }

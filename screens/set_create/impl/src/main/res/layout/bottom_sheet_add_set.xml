@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/addSetDialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <AutoCompleteTextView
+        android:id="@+id/acTvExerciseName"
+        style="@style/EditTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/names_exercise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etCommentExercise"
+        style="@style/EditTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/comment"
+        android:importantForAutofill="no"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/acTvExerciseName" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnEditExercise"
+        style="@style/MyButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/space_16"
+        android:paddingHorizontal="@dimen/space_12"
+        android:text="@string/edit_exercise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etCommentExercise" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSets"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_8"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnEditExercise"
+        tools:listitem="@layout/item_set" />
+
+    <ImageButton
+        android:id="@+id/ibAddWeight"
+        style="@style/AddRemoveImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/add_weight"
+        android:src="@drawable/ic_plus"
+        app:layout_constraintBottom_toBottomOf="@id/etWeight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etWeight" />
+
+    <ImageButton
+        android:id="@+id/ibRemoveWeight"
+        style="@style/AddRemoveImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/remove_weight"
+        android:src="@drawable/ic_minus"
+        app:layout_constraintBottom_toBottomOf="@id/etWeight"
+        app:layout_constraintEnd_toStartOf="@+id/etWeight"
+        app:layout_constraintTop_toTopOf="@id/etWeight" />
+
+    <EditText
+        android:id="@+id/etWeight"
+        style="@style/EditWeightStyle"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        app:layout_constraintEnd_toStartOf="@id/ibAddWeight"
+        app:layout_constraintTop_toBottomOf="@id/rvSets" />
+
+    <TextView
+        style="@style/MyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/weight_kg"
+        app:layout_constraintBaseline_toBaselineOf="@id/etWeight"
+        app:layout_constraintBottom_toBottomOf="@id/etWeight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etWeight" />
+
+    <ImageButton
+        android:id="@+id/ibAddQuantity"
+        style="@style/AddRemoveImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/add_quantity"
+        android:src="@drawable/ic_plus"
+        app:layout_constraintBottom_toBottomOf="@id/etReps"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etReps" />
+
+    <ImageButton
+        android:id="@+id/ibRemoveQuantity"
+        style="@style/AddRemoveImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/remove_quantity"
+        android:src="@drawable/ic_minus"
+        app:layout_constraintBottom_toBottomOf="@id/etReps"
+        app:layout_constraintEnd_toStartOf="@+id/etReps"
+        app:layout_constraintTop_toTopOf="@id/etReps" />
+
+    <EditText
+        android:id="@+id/etReps"
+        style="@style/EditNumberStyle"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        app:layout_constraintEnd_toEndOf="@id/etWeight"
+        app:layout_constraintStart_toStartOf="@id/etWeight"
+        app:layout_constraintTop_toBottomOf="@id/etWeight" />
+
+    <TextView
+        style="@style/MyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reoccurrences"
+        android:textColor="@color/black"
+        app:layout_constraintBaseline_toBaselineOf="@id/etReps"
+        app:layout_constraintBottom_toBottomOf="@id/etReps"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etReps" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvExercises"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_12"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etReps"
+        tools:listitem="@layout/item_exercise" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAddSet"
+        style="@style/MyButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/space_16"
+        android:paddingHorizontal="@dimen/space_12"
+        android:text="@string/add_approach"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvExercises" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.yankin.exercise.impl.data
 
+import com.yankin.exercise.api.models.ExerciseDomain
 import com.yankin.room.dao.ExerciseDao
 import com.yankin.room.entity.ExerciseEntity
 import kotlinx.coroutines.flow.Flow
@@ -26,8 +27,10 @@ internal class ExerciseLocalDataSource @Inject constructor(
         db.updateExerciseDeleteFlagById(exerciseId = exerciseId, deleteFlag = deleteFlag)
     }
 
-    fun updateExercise(exercise: ExerciseEntity) {
-        db.updateExercise(exercise)
+    fun updateExercise(exerciseId: Long, exerciseName: String, exerciseComment: String?) {
+        db.updateExercise(
+            exerciseId = exerciseId, exerciseName = exerciseName, exerciseComment = exerciseComment
+        )
     }
 
     fun switchExercisePositions(
@@ -64,5 +67,9 @@ internal class ExerciseLocalDataSource @Inject constructor(
         superSetId: Long,
     ): Flow<List<ExerciseEntity>> {
         return db.getExercisesInfoBySuperSetIdFlow(superSetId = superSetId, flags = false)
+    }
+
+    fun getExerciseByIdStream(exerciseId: Long): Flow<ExerciseEntity>{
+        return db.getExerciseFromIdStream(exerciseId)
     }
 }

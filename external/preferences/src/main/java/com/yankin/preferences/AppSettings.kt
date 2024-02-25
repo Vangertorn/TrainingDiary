@@ -32,7 +32,7 @@ class AppSettings(context: Context) {
     }
 
     fun getRepsStream(): Flow<Int> = dataStore.data.map { preferences ->
-        preferences[intPreferencesKey(REP_KEY)] ?: 0
+        preferences[intPreferencesKey(REPS_KEY)] ?: 0
     }
 
     fun getWeightStream(): Flow<Double> = dataStore.data.map { preferences ->
@@ -46,8 +46,6 @@ class AppSettings(context: Context) {
     fun idSuperSetFlow(): Flow<Long> = dataStore.data.map { preferences ->
         preferences[longPreferencesKey(SUPERSET_ID_KEY)] ?: -1
     }
-
-    suspend fun getIdTraining(): Long = idTrainingFlow().first()
 
     suspend fun orderAdded(): Boolean = orderAddedFlow().first()
 
@@ -65,7 +63,7 @@ class AppSettings(context: Context) {
 
     suspend fun setReps(reps: Int) {
         dataStore.edit { preferences ->
-            preferences[intPreferencesKey(REP_KEY)] = reps
+            preferences[intPreferencesKey(REPS_KEY)] = reps
         }
     }
 
@@ -95,7 +93,7 @@ class AppSettings(context: Context) {
         private const val TRAINING_ID_KEY = "TRAINING_ID_KEY"
         private const val EXERCISE_ID_KEY = "EXERCISE_ID_KEY"
         private const val SUPERSET_ID_KEY = "SUPERSET_ID_KEY"
-        private const val REP_KEY = "REP_KEY"
+        private const val REPS_KEY = "REPS_KEY"
         private const val WEIGHT_KEY = "WEIGHT_KEY"
         private const val ORDER_ADDED = "ORDER_ADDED"
         private const val THEME_ID_KEY = "THEME_ID_KEY"

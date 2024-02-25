@@ -46,7 +46,7 @@
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/etExerciseComment"
-        tools:listitem="@layout/item_set" />
+        tools:listitem="@layout/item_exercise_exercise_create" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSave"

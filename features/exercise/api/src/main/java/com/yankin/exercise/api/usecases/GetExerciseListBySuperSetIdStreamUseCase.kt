@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface GetExerciseListBySuperSetIdStreamUseCase {
 
-    suspend fun invoke(superSetId: Long): Flow<List<ExerciseDomain>>
+   fun invoke(superSetId: Long): Flow<List<ExerciseDomain>>
 }

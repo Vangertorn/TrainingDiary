@@ -41,6 +41,12 @@ internal class ExercisePatternRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun updateExercisePatternByName(oldName: String, newName: String) {
+        withContext(coroutineDispatchers.io) {
+            exercisePatternLocalDataSource.updateExercisePatternByName(oldName = oldName, newName = newName)
+        }
+    }
+
     override suspend fun getExercisePatternById(exercisePatternId: Long): ExercisePatternDomain =
         withContext(coroutineDispatchers.io) {
             return@withContext exercisePatternLocalDataSource.getExercisePatternById(exercisePatternId).toDomain()
