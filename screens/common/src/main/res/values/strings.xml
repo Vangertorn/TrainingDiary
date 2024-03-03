@@ -64,7 +64,7 @@
     <string name="Term_season_ticket">Term in  season ticket cannot be less current date</string>
     <string name="number_of_training">The number of trainings can not be less than 1</string>
     <string name="exercise_was_delete">Exercise was delete</string>
-    <string name="approach">%1s kg x %2s</string>
+    <string name="set">%1s kg x %2s</string>
     <string name="exercise_name_is_empty">Exercise name  is empty</string>
     <string name="exercise_autofill">Exercise autofill</string>
     <string name="Settings">Settings</string>

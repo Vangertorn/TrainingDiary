@@ -40,7 +40,7 @@ dependencies {
     implementation(project(":features:super_set:api"))
     implementation(project(":screens:common"))
     implementation(project(":screens:exercise_create:api"))
-    implementation(project(":screens:exercise_list:api"))
+    implementation(project(":screens:training_exercises:api"))
 
     implementation(Dependencies.Hilt.android)
 

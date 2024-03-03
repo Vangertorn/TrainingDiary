@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 internal interface SuperSetRepository {
 
-    val currentSuperSetListStream: Flow<List<SuperSetDomain>>
+    fun getSuperSetByTrainingIdStream(trainingId: Long): Flow<List<SuperSetDomain>>
 
     suspend fun saveSuperSet(superSet: SuperSetDomain): Long
 

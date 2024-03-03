@@ -93,6 +93,10 @@
       <module name="Training_diary.screens.training_create.api.main" target="1.8" />
       <module name="Training_diary.screens.training_create.api.test" target="1.8" />
       <module name="Training_diary.screens.training_create.impl" target="11" />
+      <module name="Training_diary.screens.training_exercises.api" target="1.8" />
+      <module name="Training_diary.screens.training_exercises.api.main" target="1.8" />
+      <module name="Training_diary.screens.training_exercises.api.test" target="1.8" />
+      <module name="Training_diary.screens.training_exercises.impl" target="11" />
       <module name="Training_diary.screens.training_flow.impl" target="11" />
       <module name="Training_diary.screens.training_list.api" target="1.8" />
       <module name="Training_diary.screens.training_list.api.main" target="1.8" />

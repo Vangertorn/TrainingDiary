@@ -37,7 +37,7 @@ dependencies {
     implementation(project(":features:membership:api"))
     implementation(project(":screens:common"))
     implementation(project(":screens:training_create:api"))
-    implementation(project(":screens:exercise_list:api"))
+    implementation(project(":screens:training_exercises:api"))
 
     implementation(Dependencies.Hilt.android)
     kapt(Dependencies.Hilt.compiler)

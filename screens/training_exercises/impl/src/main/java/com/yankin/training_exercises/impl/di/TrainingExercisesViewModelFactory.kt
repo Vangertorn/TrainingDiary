@@ -1,0 +1,10 @@
+package com.yankin.training_exercises.impl.di
+
+import com.yankin.common.viewmodel.ViewModelFactory
+import com.yankin.training_exercises.impl.navigation.TrainingExercisesParcelableParams
+import com.yankin.training_exercises.impl.presentation.TrainingExercisesViewModel
+import dagger.assisted.AssistedFactory
+
+@AssistedFactory
+internal interface TrainingExercisesViewModelFactory :
+    ViewModelFactory.ViewModelParamsFactory<TrainingExercisesViewModel, TrainingExercisesParcelableParams>

@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 internal interface ExerciseRepository {
 
-    val currentExerciseListStream: Flow<List<ExerciseDomain>>
+    fun getExercisesByTrainingIdStream(trainingId: Long): Flow<List<ExerciseDomain>>
 
     suspend fun saveExercise(exercise: ExerciseDomain)
 

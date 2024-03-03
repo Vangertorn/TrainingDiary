@@ -1,9 +1,7 @@
 package com.yankin.training_list.impl.presentation
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -12,14 +10,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.yankin.common.coroutines.observeWithLifecycle
 import com.yankin.common.debounce.debounceClick
 import com.yankin.common.fragment.BaseFragment
-import com.yankin.common.fragment.SupportFragmentInset
 import com.yankin.common.fragment.VerticalInset
 import com.yankin.common.recyclerview.SwipeCallback
 import com.yankin.common.resource_import.CommonRString
 import com.yankin.common.view.setVerticalMargin
 import com.yankin.common.viewbinding.viewBinding
-import com.yankin.exercise_list.api.navigation.ExerciseListCommunicator
-import com.yankin.exercise_list.api.navigation.ExerciseListParams
+import com.yankin.training_exercises.api.navigation.TrainingExercisesCommunicator
+import com.yankin.training_exercises.api.navigation.TrainingExercisesParams
 import com.yankin.membership.api.navigation.MembershipCommunicator
 import com.yankin.settings.api.navigation.SettingsCommunicator
 import com.yankin.training_create.api.navigation.TrainingCreateCommunicator
@@ -44,7 +41,7 @@ class TrainingListFragment : BaseFragment<FragmentTrainingListBinding>(R.layout.
     lateinit var membershipCommunicator: MembershipCommunicator
 
     @Inject
-    lateinit var exerciseListCommunicator: ExerciseListCommunicator
+    lateinit var trainingExercisesCommunicator: TrainingExercisesCommunicator
 
     override val binding: FragmentTrainingListBinding by viewBinding(FragmentTrainingListBinding::bind)
 
@@ -53,17 +50,8 @@ class TrainingListFragment : BaseFragment<FragmentTrainingListBinding>(R.layout.
     private val adapter = TrainingRecyclerViewAdapter(
         onClick = { training ->
             viewModel.rememberIdTraining(training)
-            exerciseListCommunicator.navigateTo(
-                params = ExerciseListParams(
-                    trainingId = training.id,
-                    date = training.date,
-                    muscleGroups = training.muscleGroups,
-                    comment = training.comment,
-                    weight = training.weight,
-                    position = training.position,
-                    deleted = training.deleted,
-                    selectedMuscleGroup = training.selectedMuscleGroup,
-                )
+            trainingExercisesCommunicator.navigateTo(
+                params = TrainingExercisesParams(trainingId = training.id,)
             )
         }
     )
@@ -71,11 +59,11 @@ class TrainingListFragment : BaseFragment<FragmentTrainingListBinding>(R.layout.
     private val simpleCallback = SwipeCallback { position, direction ->
         when (direction) {
             ItemTouchHelper.LEFT -> {
-                deleteTraining(position)
+                deleteTraining(position.toInt())
             }
 
             ItemTouchHelper.RIGHT -> {
-                deleteTraining(position)
+                deleteTraining(position.toInt())
             }
         }
     }

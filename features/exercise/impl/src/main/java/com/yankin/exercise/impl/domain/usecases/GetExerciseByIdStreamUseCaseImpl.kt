@@ -1,7 +1,6 @@
 package com.yankin.exercise.impl.domain.usecases
 
 import com.yankin.exercise.api.models.ExerciseDomain
-import com.yankin.exercise.api.usecases.GetCurrentExerciseListStreamUseCase
 import com.yankin.exercise.api.usecases.GetExerciseByIdStreamUseCase
 import com.yankin.exercise.impl.domain.repositories.ExerciseRepository
 import kotlinx.coroutines.flow.Flow

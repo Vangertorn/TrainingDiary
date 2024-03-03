@@ -28,9 +28,9 @@
     </fragment>
     <fragment
         android:id="@+id/exerciseListFragment"
-        android:name="com.yankin.exercise_list.impl.presentation.ExerciseListFragment"
+        android:name="com.yankin.training_exercises.impl.presentation.TrainingExercisesFragment"
         android:label="ExerciseListFragment"
-        tools:layout="@layout/fragment_exercise_list">
+        tools:layout="@layout/fragment_training_exercises">
         <action
             android:id="@+id/action_exerciseListFragment_to_exerciseCreateBottomDialog"
             app:destination="@id/exerciseCreateBottomDialog" />

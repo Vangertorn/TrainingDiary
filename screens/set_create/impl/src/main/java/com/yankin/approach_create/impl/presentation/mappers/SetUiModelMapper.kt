@@ -11,6 +11,6 @@ internal fun SetDomain.toSetUiModel(
 
     return SetUiModel(
         setId = id,
-        description = resourceManager.getString(CommonRString.approach, weight.toString(), reps.toString())
+        description = resourceManager.getString(CommonRString.set, weight.toString(), reps.toString())
     )
 }

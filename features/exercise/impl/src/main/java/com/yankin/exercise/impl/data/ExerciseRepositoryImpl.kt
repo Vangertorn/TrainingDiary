@@ -3,10 +3,8 @@ package com.yankin.exercise.impl.data
 import com.yankin.coroutine.CoroutineDispatchers
 import com.yankin.exercise.api.models.ExerciseDomain
 import com.yankin.exercise.impl.domain.repositories.ExerciseRepository
-import com.yankin.preferences.AppSettings
 import com.yankin.room.entity.ExerciseEntity
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -14,16 +12,15 @@ import javax.inject.Inject
 internal class ExerciseRepositoryImpl @Inject constructor(
     private val exerciseLocalDataSource: ExerciseLocalDataSource,
     private val coroutineDispatchers: CoroutineDispatchers,
-    appSettings: AppSettings,
 ) : ExerciseRepository {
-    override val currentExerciseListStream: Flow<List<ExerciseDomain>> = appSettings.idTrainingFlow()
-        .flatMapLatest { idTraining ->
-            exerciseLocalDataSource.getExerciseListByTrainingIdStream(idTraining).map { exerciseEntityList ->
-                exerciseEntityList.map { exerciseEntity ->
-                    exerciseEntity.toDomain()
-                }
+
+    override fun getExercisesByTrainingIdStream(trainingId: Long): Flow<List<ExerciseDomain>> {
+        return exerciseLocalDataSource.getExerciseListByTrainingIdStream(trainingId).map { exerciseEntityList ->
+            exerciseEntityList.map { exerciseEntity ->
+                exerciseEntity.toDomain()
             }
         }
+    }
 
     override suspend fun saveExercise(exercise: ExerciseDomain) {
         withContext(coroutineDispatchers.io) {

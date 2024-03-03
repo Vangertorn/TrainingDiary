@@ -12,7 +12,7 @@ import com.yankin.common.hideKeyboard
 import com.yankin.common.resource_import.CommonRAttr
 import com.yankin.common.viewbinding.viewBinding
 import com.yankin.common.viewmodel.AssistedParamsViewModelFactory
-import com.yankin.exercise_list.api.navigation.ExerciseListCommunicator
+import com.yankin.training_exercises.api.navigation.TrainingExercisesCommunicator
 import com.yankin.kotlin.unsafeLazy
 import com.yankin.navigation.BundleParcelable
 import com.yankin.training_create.api.navigation.TrainingCreateCommunicator
@@ -33,7 +33,7 @@ internal class TrainingCreateBottomDialog : BaseBottomSheetDialogFragment<Bottom
     lateinit var viewModelFactory: TrainingCreateViewModelFactory
 
     @Inject
-    lateinit var exerciseListCommunicator: ExerciseListCommunicator
+    lateinit var trainingExercisesCommunicator: TrainingExercisesCommunicator
 
     override fun parentLayoutId(): Int = R.id.addTrainingDialog
     override fun attrColorBackground(): Int = CommonRAttr.contentBackground
@@ -96,7 +96,7 @@ internal class TrainingCreateBottomDialog : BaseBottomSheetDialogFragment<Bottom
                 }
                 TrainingCreateEvent.Default -> {}
                 is TrainingCreateEvent.NavigateToExerciseList -> {
-                    exerciseListCommunicator.navigateTo(event.params)
+                    trainingExercisesCommunicator.navigateTo(event.params)
                     viewModel.onEventHandle()
                 }
             }

@@ -40,7 +40,7 @@ dependencies {
     implementation(project(":screens:training_create:api"))
     implementation(project(":screens:settings:api"))
     implementation(project(":screens:membership:api"))
-    implementation(project(":screens:exercise_list:api"))
+    implementation(project(":screens:training_exercises:api"))
 
     implementation(Dependencies.Hilt.android)
     kapt(Dependencies.Hilt.compiler)

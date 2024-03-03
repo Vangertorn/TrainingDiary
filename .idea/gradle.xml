@@ -54,9 +54,6 @@
             <option value="$PROJECT_DIR$/screens/exercise_create" />
             <option value="$PROJECT_DIR$/screens/exercise_create/api" />
             <option value="$PROJECT_DIR$/screens/exercise_create/impl" />
-            <option value="$PROJECT_DIR$/screens/exercise_list" />
-            <option value="$PROJECT_DIR$/screens/exercise_list/api" />
-            <option value="$PROJECT_DIR$/screens/exercise_list/impl" />
             <option value="$PROJECT_DIR$/screens/membership" />
             <option value="$PROJECT_DIR$/screens/membership/api" />
             <option value="$PROJECT_DIR$/screens/membership/impl" />
@@ -69,6 +66,9 @@
             <option value="$PROJECT_DIR$/screens/training_create" />
             <option value="$PROJECT_DIR$/screens/training_create/api" />
             <option value="$PROJECT_DIR$/screens/training_create/impl" />
+            <option value="$PROJECT_DIR$/screens/training_exercises" />
+            <option value="$PROJECT_DIR$/screens/training_exercises/api" />
+            <option value="$PROJECT_DIR$/screens/training_exercises/impl" />
             <option value="$PROJECT_DIR$/screens/training_list" />
             <option value="$PROJECT_DIR$/screens/training_list/api" />
             <option value="$PROJECT_DIR$/screens/training_list/impl" />

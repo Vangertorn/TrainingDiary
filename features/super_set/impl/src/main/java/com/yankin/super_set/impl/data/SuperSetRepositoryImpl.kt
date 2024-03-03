@@ -13,15 +13,12 @@ import javax.inject.Inject
 internal class SuperSetRepositoryImpl @Inject constructor(
     private val superSetLocalDataSource: SuperSetLocalDataSource,
     private val coroutineDispatchers: CoroutineDispatchers,
-    appSettings: AppSettings,
 ) : SuperSetRepository {
 
-    override val currentSuperSetListStream: Flow<List<SuperSetDomain>> =
-        appSettings.idTrainingFlow().flatMapLatest { trainingId ->
-            superSetLocalDataSource.getSuperSetListByTrainingIdStream(trainingId).map { superSetEntityList ->
-                superSetEntityList.map { superSetEntity ->
-                    superSetEntity.toModel()
-                }
+    override fun getSuperSetByTrainingIdStream(trainingId: Long): Flow<List<SuperSetDomain>> =
+        superSetLocalDataSource.getSuperSetListByTrainingIdStream(trainingId).map { superSetEntityList ->
+            superSetEntityList.map { superSetEntity ->
+                superSetEntity.toModel()
             }
         }
 
