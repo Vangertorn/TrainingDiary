@@ -1,7 +1,7 @@
 package com.yankin.exercise.impl.domain.usecases
 
 import com.yankin.exercise.api.usecases.UpdateExerciseUseCase
-import com.yankin.exercise.impl.domain.repositories.ExerciseRepository
+import com.yankin.exercise.api.repositories.ExerciseRepository
 import javax.inject.Inject
 
 internal class UpdateExerciseUseCaseImpl @Inject constructor(

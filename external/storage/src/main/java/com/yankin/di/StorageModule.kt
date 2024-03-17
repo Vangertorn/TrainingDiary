@@ -10,6 +10,7 @@ import com.yankin.room.dao.ExercisePatternDao
 import com.yankin.room.dao.MembershipDao
 import com.yankin.room.dao.MuscleGroupDao
 import com.yankin.room.dao.SuperSetDao
+import com.yankin.room.dao.TrainingBlockDao
 import com.yankin.room.dao.TrainingDao
 import dagger.Module
 import dagger.Provides
@@ -56,6 +57,11 @@ internal object DatabaseModule {
     @Singleton
     fun provideMembershipDao(plannerDatabase: PlannerDatabase): MembershipDao =
         plannerDatabase.membershipDao()
+
+    @Provides
+    @Singleton
+    fun provideTrainingBlockDao(plannerDatabase: PlannerDatabase): TrainingBlockDao =
+        plannerDatabase.trainingBlockDao()
 
     @Provides
     @Singleton

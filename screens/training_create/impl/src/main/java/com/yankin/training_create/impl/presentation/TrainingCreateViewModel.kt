@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.yankin.coroutine.launchInJob
 import com.yankin.coroutine.launchJob
 import com.yankin.date.DateFormatter
-import com.yankin.training_exercises.api.navigation.TrainingExercisesParams
+import com.yankin.workout_routines.api.navigation.WorkoutRoutinesParams
 import com.yankin.membership.api.usecases.AddTrainingIdFromMembershipUseCase
 import com.yankin.membership.api.usecases.GetActiveMembershipStreamUseCase
 import com.yankin.muscle_groups.api.usecases.GetAllMuscleGroupListUseCase
@@ -106,7 +106,7 @@ internal class TrainingCreateViewModel @AssistedInject constructor(
                     )
                 )
                 trainingCreateEventState.value = TrainingCreateEvent.NavigateToExerciseList(
-                    params = TrainingExercisesParams(trainingId = currentTraining.id)
+                    params = WorkoutRoutinesParams(trainingId = currentTraining.id)
                 )
             } ?: run {
                 val trainingId = saveTrainingUseCase.invoke(

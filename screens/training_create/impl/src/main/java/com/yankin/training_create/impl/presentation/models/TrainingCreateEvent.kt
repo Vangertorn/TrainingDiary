@@ -1,6 +1,6 @@
 package com.yankin.training_create.impl.presentation.models
 
-import com.yankin.training_exercises.api.navigation.TrainingExercisesParams
+import com.yankin.workout_routines.api.navigation.WorkoutRoutinesParams
 
 internal sealed interface TrainingCreateEvent {
 
@@ -8,5 +8,5 @@ internal sealed interface TrainingCreateEvent {
 
     object Default : TrainingCreateEvent
 
-    data class NavigateToExerciseList(val params: TrainingExercisesParams) : TrainingCreateEvent
+    data class NavigateToExerciseList(val params: WorkoutRoutinesParams) : TrainingCreateEvent
 }

@@ -14,8 +14,6 @@ import com.yankin.approach_create.impl.presentation.state.SetCreateStateOwnerImp
 import com.yankin.common.resource_import.CommonRString
 import com.yankin.coroutine.launchInJob
 import com.yankin.coroutine.launchJob
-import com.yankin.exercise.api.usecases.GetExerciseByIdStreamUseCase
-import com.yankin.exercise.api.usecases.GetExerciseListBySuperSetIdStreamUseCase
 import com.yankin.exercise.api.usecases.UpdateExerciseUseCase
 import com.yankin.exercise_pattern.api.usecases.GetCurrentExercisePatternStreamUseCase
 import com.yankin.exercise_pattern.api.usecases.UpdateExercisePatternByNameUseCase
@@ -25,6 +23,8 @@ import com.yankin.set.api.models.SetDomain
 import com.yankin.set.api.usecases.DeleteSetByIdUseCase
 import com.yankin.set.api.usecases.GetSetListStreamUseCase
 import com.yankin.set.api.usecases.SaveSetUseCase
+import com.yankin.training_block.api.models.TrainingBlockDomain
+import com.yankin.training_block.api.usecases.GetTrainingBlockByIdStreamUseCase
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.Flow
@@ -32,7 +32,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNot
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 
@@ -45,9 +44,8 @@ internal class SetCreateViewModel @AssistedInject constructor(
     private val deleteSetByIdUseCase: DeleteSetByIdUseCase,
     private val updateExerciseUseCase: UpdateExerciseUseCase,
     private val resourceManager: ResourceManager,
-    private val getExerciseListBySuperSetIdStreamUseCase: GetExerciseListBySuperSetIdStreamUseCase,
+    getTrainingBlockByIdStreamUseCase: GetTrainingBlockByIdStreamUseCase,
     private val getSetListStreamUseCase: GetSetListStreamUseCase,
-    private val getExerciseByIdStreamUseCase: GetExerciseByIdStreamUseCase,
     private val updateExercisePatternByNameUseCase: UpdateExercisePatternByNameUseCase,
 ) : ViewModel(), SetCreateStateOwner by SetCreateStateOwnerImpl(savedStateHandle) {
 
@@ -56,10 +54,20 @@ internal class SetCreateViewModel @AssistedInject constructor(
     init {
         observeDefaultValues()
         observeExercisePatterns()
-        when (params) {
-            is SetCreateParcelableParams.SetCreate -> observeSingleExercise(params.exerciseId)
-            is SetCreateParcelableParams.SuperSetCreate -> observeSuperSetExercise(params.superSetId)
-        }
+        getTrainingBlockByIdStreamUseCase.invoke(params.trainingBlockId)
+            .onEach { trainingBlock ->
+                when (trainingBlock) {
+                    is TrainingBlockDomain.SingleExercise -> trainingBlock.handleSingleTrainingBlock()
+                    is TrainingBlockDomain.SuperSet -> trainingBlock.handleSuperSetTrainingBlock()
+                }
+            }
+            .flatMapLatest { trainingBlock ->
+                when (trainingBlock) {
+                    is TrainingBlockDomain.SingleExercise -> trainingBlock.observeSets()
+                    is TrainingBlockDomain.SuperSet -> trainingBlock.observeSets()
+                }
+            }
+            .launchInJob(scope = viewModelScope, catchBlock = Throwable::printStackTrace)
     }
 
     fun getSetCreateUiStream(): Flow<SetCreateUiState> = getStateStream().map { stateModel ->
@@ -162,46 +170,38 @@ internal class SetCreateViewModel @AssistedInject constructor(
             .launchInJob(scope = viewModelScope, catchBlock = Throwable::printStackTrace)
     }
 
-    private fun observeSingleExercise(exerciseId: Long) {
-        getExerciseByIdStreamUseCase.invoke(exerciseId)
-            .onEach { exerciseDomain ->
-                updateState(exerciseDomain = exerciseDomain)
-                updateState(selectedExerciseId = exerciseDomain.id)
-            }
-            .flatMapLatest { exerciseDomain ->
-                getSetListStreamUseCase.invoke(exerciseDomain.id)
-                    .onEach { setDomainList ->
-                        updateState(
-                            setDomainList = setDomainList,
-                            exerciseId = exerciseDomain.id
-                        )
-                    }
-            }
-            .launchInJob(scope = viewModelScope, catchBlock = Throwable::printStackTrace)
+    private fun TrainingBlockDomain.SingleExercise.handleSingleTrainingBlock() {
+        updateState(exerciseDomain = exercise)
+        updateState(selectedExerciseId = exercise.id)
     }
 
-    private fun observeSuperSetExercise(superSetId: Long) {
-        getExerciseListBySuperSetIdStreamUseCase.invoke(superSetId)
-            .onEach { exerciseDomainList ->
-                exerciseDomainList.forEach { exerciseDomain ->
-                    updateState(exerciseDomain = exerciseDomain)
-                }
-                if (selectedExerciseId == null) updateState(selectedExerciseId = exerciseDomainList.first().id)
+    private fun TrainingBlockDomain.SuperSet.handleSuperSetTrainingBlock() {
+        exerciseList.forEach { exerciseDomain ->
+            updateState(exerciseDomain = exerciseDomain)
+        }
+        if (selectedExerciseId == null) updateState(selectedExerciseId = exerciseList.first().id)
+    }
 
+    private fun TrainingBlockDomain.SingleExercise.observeSets(): Flow<List<SetDomain>> {
+        return getSetListStreamUseCase.invoke(exercise.id)
+            .onEach { setDomainList ->
+                updateState(
+                    setDomainList = setDomainList,
+                    exerciseId = exercise.id
+                )
             }
-            .flatMapMerge { exerciseDomainList ->
-                combine(
-                    exerciseDomainList
-                        .map { exerciseDomain ->
-                            getSetListStreamUseCase.invoke(exerciseDomain.id).onEach { setDomainList ->
-                                updateState(
-                                    setDomainList = setDomainList,
-                                    exerciseId = exerciseDomain.id
-                                )
-                            }
-                        }
-                ) { setDomainListArray -> setDomainListArray }
+    }
+
+    private fun TrainingBlockDomain.SuperSet.observeSets(): Flow<Array<List<SetDomain>>> {
+        return combine(
+            exerciseList.map { exerciseDomain ->
+                getSetListStreamUseCase.invoke(exerciseDomain.id).onEach { setDomainList ->
+                    updateState(
+                        setDomainList = setDomainList,
+                        exerciseId = exerciseDomain.id
+                    )
+                }
             }
-            .launchInJob(scope = viewModelScope, catchBlock = Throwable::printStackTrace)
+        ) { setDomainListArray -> setDomainListArray }
     }
 }

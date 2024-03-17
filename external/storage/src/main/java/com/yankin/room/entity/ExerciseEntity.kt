@@ -10,15 +10,9 @@ import androidx.room.PrimaryKey
     tableName = "table_exercise", indices = [Index(value = ["id"], unique = true)],
     foreignKeys = [
         ForeignKey(
-            entity = TrainingEntity::class,
+            entity = TrainingBlockEntity::class,
             parentColumns = arrayOf("id"),
-            childColumns = arrayOf("idTraining"),
-            onDelete = ForeignKey.CASCADE,
-            onUpdate = ForeignKey.CASCADE
-        ), ForeignKey(
-            entity = SuperSetEntity::class,
-            parentColumns = arrayOf("id"),
-            childColumns = arrayOf("idSet"),
+            childColumns = arrayOf("trainingBlockId"),
             onDelete = ForeignKey.CASCADE,
             onUpdate = ForeignKey.CASCADE
         )
@@ -30,11 +24,8 @@ data class ExerciseEntity(
     @ColumnInfo(name = "id")
     val id: Long = 0,
     val name: String,
-    @ColumnInfo(index = true, name = "idTraining")
-    val idTraining: Long? = null,
-    val position: Int = 0,
-    val comment: String? = null,
-    val deleted: Boolean = false,
-    @ColumnInfo(index = true, name = "idSet")
-    val idSet: Long? = null
+    @ColumnInfo(index = true, name = "trainingBlockId")
+    val trainingBlockId: Long,
+    val position: Int,
+    val comment: String?,
 )

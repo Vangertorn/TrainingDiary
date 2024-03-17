@@ -9,6 +9,7 @@ import com.yankin.room.dao.ExercisePatternDao
 import com.yankin.room.dao.MembershipDao
 import com.yankin.room.dao.MuscleGroupDao
 import com.yankin.room.dao.SuperSetDao
+import com.yankin.room.dao.TrainingBlockDao
 import com.yankin.room.dao.TrainingDao
 import com.yankin.room.entity.SetEntity
 import com.yankin.room.entity.ExerciseEntity
@@ -16,6 +17,7 @@ import com.yankin.room.entity.ExercisePatternEntity
 import com.yankin.room.entity.MembershipEntity
 import com.yankin.room.entity.MuscleGroupEntity
 import com.yankin.room.entity.SuperSetEntity
+import com.yankin.room.entity.TrainingBlockEntity
 import com.yankin.room.entity.TrainingEntity
 
 const val DATABASE_NAME = "com.yankin.trainingdiary.dp"
@@ -28,7 +30,8 @@ const val DATABASE_NAME = "com.yankin.trainingdiary.dp"
         MuscleGroupEntity::class,
         ExercisePatternEntity::class,
         SuperSetEntity::class,
-        MembershipEntity::class
+        MembershipEntity::class,
+        TrainingBlockEntity::class,
     ],
     version = 1,
     exportSchema = false
@@ -43,4 +46,5 @@ abstract class PlannerDatabase : RoomDatabase() {
     abstract fun exercisePatternDao(): ExercisePatternDao
     abstract fun superSetDao(): SuperSetDao
     abstract fun membershipDao(): MembershipDao
+    abstract fun trainingBlockDao(): TrainingBlockDao
 }

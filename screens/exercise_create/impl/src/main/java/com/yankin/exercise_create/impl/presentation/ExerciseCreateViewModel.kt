@@ -7,7 +7,6 @@ import com.yankin.common.resource_import.CommonRString
 import com.yankin.coroutine.launchInJob
 import com.yankin.coroutine.launchJob
 import com.yankin.exercise.api.models.ExerciseDomain
-import com.yankin.exercise.api.usecases.SaveExerciseUseCase
 import com.yankin.exercise_create.impl.navigation.ExerciseCreateParcelableParams
 import com.yankin.exercise_create.impl.presentation.mappers.toExerciseCreateUiState
 import com.yankin.exercise_create.impl.presentation.models.ExerciseCreateEvent
@@ -18,8 +17,8 @@ import com.yankin.exercise_pattern.api.models.ExercisePatternDomain
 import com.yankin.exercise_pattern.api.usecases.GetCurrentExercisePatternStreamUseCase
 import com.yankin.exercise_pattern.api.usecases.SaveExercisePatternUseCase
 import com.yankin.resource_manager.api.ResourceManager
-import com.yankin.super_set.api.models.SuperSetDomain
-import com.yankin.super_set.api.usecases.SaveSuperSetUseCase
+import com.yankin.training_block.api.models.TrainingBlockDomain
+import com.yankin.training_block.api.usecases.SaveTrainingBlockUseCase
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.Flow
@@ -31,10 +30,9 @@ import kotlinx.coroutines.flow.update
 
 internal class ExerciseCreateViewModel @AssistedInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
-    private val saveExerciseUseCase: SaveExerciseUseCase,
     private val getCurrentExercisePatternStreamUseCase: GetCurrentExercisePatternStreamUseCase,
     private val saveExercisePatternUseCase: SaveExercisePatternUseCase,
-    private val saveSuperSetUseCase: SaveSuperSetUseCase,
+    private val saveTrainingBlockUseCase: SaveTrainingBlockUseCase,
     @Assisted private val params: ExerciseCreateParcelableParams,
     private val resourceManager: ResourceManager,
 ) : ViewModel() {
@@ -101,7 +99,7 @@ internal class ExerciseCreateViewModel @AssistedInject constructor(
 
     fun onExerciseClick(exerciseId: Int) {
         exerciseCreateState.update { stateModel ->
-           val exercise =  stateModel.exerciseList.first { exerciseTemporary -> exerciseTemporary.id == exerciseId }
+            val exercise = stateModel.exerciseList.first { exerciseTemporary -> exerciseTemporary.id == exerciseId }
             stateModel.copy(
                 selectedExerciseId = exerciseId,
                 exerciseName = exercise.name,
@@ -116,7 +114,7 @@ internal class ExerciseCreateViewModel @AssistedInject constructor(
         exerciseCreateState.update { stateModel ->
             stateModel.copy(
                 selectedExerciseId = null,
-                exerciseName = savedStateHandle[EXERCISE_NAME_KEY]?:"",
+                exerciseName = savedStateHandle[EXERCISE_NAME_KEY] ?: "",
                 exerciseComment = savedStateHandle[EXERCISE_COMMENT_KEY],
             ).also { updatedStateModel ->
                 savedStateHandle[SELECTED_EXERCISE_ID_KEY] = updatedStateModel.selectedExerciseId
@@ -161,15 +159,18 @@ internal class ExerciseCreateViewModel @AssistedInject constructor(
         }
         if (exerciseCreateState.value.exerciseList.isEmpty() || exerciseCreateState.value.exerciseList.size == 1) {
             viewModelScope.launchJob(catchBlock = Throwable::printStackTrace) {
-                saveExerciseUseCase.invoke(
-                    exercise = ExerciseDomain(
+                saveTrainingBlockUseCase.invoke(
+                    TrainingBlockDomain.SingleExercise(
                         id = 0,
-                        name = exerciseCreateState.value.exerciseName,
-                        idTraining = params.trainingId,
+                        trainingId = params.trainingId,
                         position = 0,
-                        comment = exerciseCreateState.value.exerciseComment,
-                        deleted = false,
-                        idSet = null,
+                        exercise = ExerciseDomain(
+                            id = 0,
+                            name = exerciseCreateState.value.exerciseName,
+                            trainingBlockId = 0,
+                            position = 0,
+                            comment = exerciseCreateState.value.exerciseComment,
+                        )
                     )
                 )
                 saveExercisePatternUseCase.invoke(
@@ -179,30 +180,25 @@ internal class ExerciseCreateViewModel @AssistedInject constructor(
             }
         } else {
             viewModelScope.launchJob(catchBlock = Throwable::printStackTrace) {
-                val superSetId = saveSuperSetUseCase.invoke(
-                    superSet = SuperSetDomain(
+                saveTrainingBlockUseCase.invoke(
+                    TrainingBlockDomain.SuperSet(
                         id = 0,
-                        idTraining = params.trainingId,
-                        deleted = false,
-                        position = 0
+                        trainingId = params.trainingId,
+                        position = 0,
+                        exerciseList = exerciseCreateState.value.exerciseList.mapIndexed { index, exerciseTemporary ->
+                            saveExercisePatternUseCase.invoke(
+                                exercisePattern = ExercisePatternDomain(id = 0, name = exerciseTemporary.name)
+                            )
+                            ExerciseDomain(
+                                id = 0,
+                                name = exerciseTemporary.name,
+                                trainingBlockId = 0,
+                                position = index,
+                                comment = exerciseTemporary.comment
+                            )
+                        }
                     )
                 )
-                exerciseCreateState.value.exerciseList.forEach { exerciseTemporary ->
-                    saveExerciseUseCase.invoke(
-                        exercise = ExerciseDomain(
-                            id = 0,
-                            name = exerciseTemporary.name,
-                            idTraining = params.trainingId,
-                            position = 0,
-                            comment = exerciseTemporary.comment,
-                            deleted = false,
-                            idSet = superSetId,
-                        )
-                    )
-                    saveExercisePatternUseCase.invoke(
-                        exercisePattern = ExercisePatternDomain(id = 0, name = exerciseTemporary.name)
-                    )
-                }
                 exerciseCreateEventState.value = ExerciseCreateEvent.Dismiss
             }
         }

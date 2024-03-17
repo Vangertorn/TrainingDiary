@@ -15,8 +15,8 @@ import com.yankin.common.recyclerview.SwipeCallback
 import com.yankin.common.resource_import.CommonRString
 import com.yankin.common.view.setVerticalMargin
 import com.yankin.common.viewbinding.viewBinding
-import com.yankin.training_exercises.api.navigation.TrainingExercisesCommunicator
-import com.yankin.training_exercises.api.navigation.TrainingExercisesParams
+import com.yankin.workout_routines.api.navigation.WorkoutRoutinesCommunicator
+import com.yankin.workout_routines.api.navigation.WorkoutRoutinesParams
 import com.yankin.membership.api.navigation.MembershipCommunicator
 import com.yankin.settings.api.navigation.SettingsCommunicator
 import com.yankin.training_create.api.navigation.TrainingCreateCommunicator
@@ -41,7 +41,7 @@ class TrainingListFragment : BaseFragment<FragmentTrainingListBinding>(R.layout.
     lateinit var membershipCommunicator: MembershipCommunicator
 
     @Inject
-    lateinit var trainingExercisesCommunicator: TrainingExercisesCommunicator
+    lateinit var workoutRoutinesCommunicator: WorkoutRoutinesCommunicator
 
     override val binding: FragmentTrainingListBinding by viewBinding(FragmentTrainingListBinding::bind)
 
@@ -50,8 +50,8 @@ class TrainingListFragment : BaseFragment<FragmentTrainingListBinding>(R.layout.
     private val adapter = TrainingRecyclerViewAdapter(
         onClick = { training ->
             viewModel.rememberIdTraining(training)
-            trainingExercisesCommunicator.navigateTo(
-                params = TrainingExercisesParams(trainingId = training.id,)
+            workoutRoutinesCommunicator.navigateTo(
+                params = WorkoutRoutinesParams(trainingId = training.id,)
             )
         }
     )

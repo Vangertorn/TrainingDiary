@@ -4,11 +4,6 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-internal sealed interface SetCreateParcelableParams : Parcelable {
-
-    @Parcelize
-    data class SetCreate(val exerciseId: Long) : SetCreateParcelableParams
-
-    @Parcelize
-    data class SuperSetCreate(val superSetId: Long) : SetCreateParcelableParams
-}
+internal data class SetCreateParcelableParams(
+    val trainingBlockId: Long,
+) : Parcelable

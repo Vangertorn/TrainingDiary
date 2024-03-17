@@ -37,10 +37,10 @@ dependencies {
     implementation(project(":features:muscle_groups:api"))
     implementation(project(":features:exercise_pattern:api"))
     implementation(project(":features:exercise:api"))
-    implementation(project(":features:super_set:api"))
+    implementation(project(":features:training_block:api"))
     implementation(project(":screens:common"))
     implementation(project(":screens:exercise_create:api"))
-    implementation(project(":screens:training_exercises:api"))
+    implementation(project(":screens:workout_routines:api"))
 
     implementation(Dependencies.Hilt.android)
 

@@ -38,10 +38,10 @@ dependencies {
     implementation(project(":features:muscle_groups:api"))
     implementation(project(":features:exercise_pattern:api"))
     implementation(project(":features:set:api"))
+    implementation(project(":features:training_block:api"))
     implementation(project(":features:exercise:api"))
     implementation(project(":screens:common"))
     implementation(project(":screens:set_create:api"))
-
 
     implementation(Dependencies.Hilt.android)
     kapt(Dependencies.Hilt.compiler)

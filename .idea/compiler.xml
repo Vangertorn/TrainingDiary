@@ -59,6 +59,10 @@
       <module name="Training_diary.features.training.api.main" target="1.8" />
       <module name="Training_diary.features.training.api.test" target="1.8" />
       <module name="Training_diary.features.training.impl" target="11" />
+      <module name="Training_diary.features.training_block.api" target="1.8" />
+      <module name="Training_diary.features.training_block.api.main" target="1.8" />
+      <module name="Training_diary.features.training_block.api.test" target="1.8" />
+      <module name="Training_diary.features.training_block.impl" target="11" />
       <module name="Training_diary.navigation" target="11" />
       <module name="Training_diary.screens.approach_create.api" target="1.8" />
       <module name="Training_diary.screens.approach_create.api.main" target="1.8" />
@@ -102,6 +106,10 @@
       <module name="Training_diary.screens.training_list.api.main" target="1.8" />
       <module name="Training_diary.screens.training_list.api.test" target="1.8" />
       <module name="Training_diary.screens.training_list.impl" target="11" />
+      <module name="Training_diary.screens.workout_routines.api" target="1.8" />
+      <module name="Training_diary.screens.workout_routines.api.main" target="1.8" />
+      <module name="Training_diary.screens.workout_routines.api.test" target="1.8" />
+      <module name="Training_diary.screens.workout_routines.impl" target="11" />
       <module name="TrainingDiary.buildSrc" target="11" />
     </bytecodeTargetLevel>
   </component>

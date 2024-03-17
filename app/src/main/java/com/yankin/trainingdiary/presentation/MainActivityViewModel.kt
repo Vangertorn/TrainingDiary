@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yankin.common.resource_import.CommonRString
-import com.yankin.exercise.api.usecases.DeleteExercisesUseCase
 import com.yankin.muscle_groups.api.usecases.SaveDefaultMuscleGroupListUseCase
 import com.yankin.training.api.usecases.DeleteTrainingByFlagsUseCase
+import com.yankin.training_block.api.usecases.ClearTrainingBlockDeleteQueueUseCase
 import com.yankin.trainingdiary.presentation.models.MuscleGroup
 import com.yankin.trainingdiary.presentation.models.toDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +19,7 @@ class MainActivityViewModel @Inject constructor(
     private val saveDefaultMuscleGroupListUseCase: SaveDefaultMuscleGroupListUseCase,
     @ApplicationContext private val context: Context,
     private val deleteTrainingByFlagsUseCase: DeleteTrainingByFlagsUseCase,
-    private val deleteExercisesUseCase: DeleteExercisesUseCase,
+    private val clearTrainingBlockDeleteQueueUseCase: ClearTrainingBlockDeleteQueueUseCase,
 ) : ViewModel() {
 
     fun deletedTrainings() {
@@ -30,7 +30,7 @@ class MainActivityViewModel @Inject constructor(
 
     fun deletedExercises() {
         viewModelScope.launch {
-            deleteExercisesUseCase.invoke()
+            clearTrainingBlockDeleteQueueUseCase.invoke()
         }
     }
 
