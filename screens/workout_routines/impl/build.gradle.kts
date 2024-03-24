@@ -31,6 +31,7 @@ dependencies {
 
     implementation(project(":core:coroutine"))
     implementation(project(":core:kotlin"))
+    implementation(project(":core:date"))
     implementation(project(":external:preferences"))
     implementation(project(":navigation"))
     implementation(project(":features:training:api"))
@@ -47,7 +48,6 @@ dependencies {
     implementation(project(":core:resource_manager:api"))
 
     implementation(Dependencies.Hilt.android)
-
     kapt(Dependencies.Hilt.compiler)
 
     implementation(Dependencies.Navigation.navigationFragment)

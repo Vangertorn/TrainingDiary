@@ -52,7 +52,6 @@ internal class WorkoutRoutinesFragment :
     private val adapter by unsafeLazy {
         WorkoutRoutinesAdapter(
             dragListener = { viewHolder ->
-                println("TAG1 viewHolder - $viewHolder, touchHelper - $touchHelper")
                 touchHelper?.startDrag(viewHolder)
             },
             onTrainingBlockClick = viewModel::onClickTrainingBlock

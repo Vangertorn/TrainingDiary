@@ -32,7 +32,7 @@ object DateFormatter {
         return date
     }
 
-    fun longToDate(timestamp: Timestamp): Date =
+    fun timestampToDate(timestamp: Timestamp): Date =
         GregorianCalendar().apply {
             clear()
             timeInMillis = timestamp.getMilliseconds()

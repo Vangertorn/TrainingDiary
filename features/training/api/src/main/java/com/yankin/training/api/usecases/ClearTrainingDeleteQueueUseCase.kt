@@ -1,6 +1,6 @@
 package com.yankin.training.api.usecases
 
-interface DeleteTrainingByFlagsUseCase {
+interface ClearTrainingDeleteQueueUseCase {
 
     suspend fun invoke()
 }

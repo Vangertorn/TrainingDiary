@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yankin.common.resource_import.CommonRString
 import com.yankin.muscle_groups.api.usecases.SaveDefaultMuscleGroupListUseCase
-import com.yankin.training.api.usecases.DeleteTrainingByFlagsUseCase
+import com.yankin.training.api.usecases.ClearTrainingDeleteQueueUseCase
 import com.yankin.training_block.api.usecases.ClearTrainingBlockDeleteQueueUseCase
 import com.yankin.trainingdiary.presentation.models.MuscleGroup
 import com.yankin.trainingdiary.presentation.models.toDomain
@@ -18,13 +18,13 @@ import javax.inject.Inject
 class MainActivityViewModel @Inject constructor(
     private val saveDefaultMuscleGroupListUseCase: SaveDefaultMuscleGroupListUseCase,
     @ApplicationContext private val context: Context,
-    private val deleteTrainingByFlagsUseCase: DeleteTrainingByFlagsUseCase,
+    private val clearTrainingDeleteQueueUseCase: ClearTrainingDeleteQueueUseCase,
     private val clearTrainingBlockDeleteQueueUseCase: ClearTrainingBlockDeleteQueueUseCase,
 ) : ViewModel() {
 
     fun deletedTrainings() {
         viewModelScope.launch {
-            deleteTrainingByFlagsUseCase.invoke()
+            clearTrainingDeleteQueueUseCase.invoke()
         }
     }
 

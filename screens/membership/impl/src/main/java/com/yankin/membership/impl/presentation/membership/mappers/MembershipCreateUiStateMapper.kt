@@ -7,7 +7,7 @@ import com.yankin.membership.impl.presentation.membership.models.MembershipCreat
 internal fun MembershipCreateStateModel.toMembershipCreateUiState(): MembershipCreateUiState {
 
     return MembershipCreateUiState(
-        selectedDate = DateFormatter.longToDate(selectedDate),
+        selectedDate = DateFormatter.timestampToDate(selectedDate),
         trainingCount = trainingCount.toString(),
         isUnlimitedCheck = isUnlimited,
         isIndefiniteCheck = isIndefinite,

@@ -2,7 +2,7 @@ package com.yankin.muscle_groups.impl.data
 
 import com.yankin.coroutine.CoroutineDispatchers
 import com.yankin.muscle_groups.api.models.MuscleGroupDomain
-import com.yankin.muscle_groups.impl.domain.repositories.MuscleGroupRepository
+import com.yankin.muscle_groups.api.repositories.MuscleGroupRepository
 import com.yankin.room.entity.MuscleGroupEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -22,6 +22,12 @@ internal class MuscleGroupRepositoryImpl @Inject constructor(
 
     override suspend fun getMuscleGroups(): List<MuscleGroupDomain> = withContext(coroutineDispatchers.io) {
         muscleGroupLocalDataSource.getMuscleGroups()?.map(MuscleGroupEntity::toDomain) ?: emptyList()
+    }
+
+    override suspend fun getMuscleGroupsByIds(muscleGroupsIds: List<Long>): List<MuscleGroupDomain> {
+        return withContext(coroutineDispatchers.io) {
+            muscleGroupLocalDataSource.getMuscleGroupsByIds(muscleGroupsIds).map(MuscleGroupEntity::toDomain)
+        }
     }
 
     override suspend fun deleteMuscleGroup(muscleGroupId: Long) {

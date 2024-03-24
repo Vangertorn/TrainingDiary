@@ -23,14 +23,6 @@ class AppSettings(context: Context) {
 
     private val dataStore: DataStore<Preferences> = context.getPreferences
 
-    fun idTrainingFlow(): Flow<Long> = dataStore.data.map { preferences ->
-        preferences[longPreferencesKey(TRAINING_ID_KEY)] ?: -1
-    }
-
-    fun idExerciseFlow(): Flow<Long> = dataStore.data.map { preferences ->
-        preferences[longPreferencesKey(EXERCISE_ID_KEY)] ?: -1
-    }
-
     fun getRepsStream(): Flow<Int> = dataStore.data.map { preferences ->
         preferences[intPreferencesKey(REPS_KEY)] ?: 0
     }
@@ -43,21 +35,11 @@ class AppSettings(context: Context) {
         preferences[booleanPreferencesKey(ORDER_ADDED)] ?: true
     }
 
-    fun idSuperSetFlow(): Flow<Long> = dataStore.data.map { preferences ->
-        preferences[longPreferencesKey(SUPERSET_ID_KEY)] ?: -1
-    }
-
     suspend fun orderAdded(): Boolean = orderAddedFlow().first()
 
     suspend fun setIdTraining(idTraining: Long) {
         dataStore.edit { preferences ->
             preferences[longPreferencesKey(TRAINING_ID_KEY)] = idTraining
-        }
-    }
-
-    suspend fun setIdExercise(idExercise: Long) {
-        dataStore.edit { preferences ->
-            preferences[longPreferencesKey(EXERCISE_ID_KEY)] = idExercise
         }
     }
 
@@ -79,20 +61,12 @@ class AppSettings(context: Context) {
         }
     }
 
-    suspend fun setSuperSetId(superSetId: Long) {
-        dataStore.edit { preferences ->
-            preferences[longPreferencesKey(SUPERSET_ID_KEY)] = superSetId
-        }
-    }
-
     fun getIdThemeStream(): Flow<Int> = dataStore.data.map { preferences ->
         preferences[intPreferencesKey(THEME_ID_KEY)] ?: MODE_NIGHT_UNSPECIFIED
     }
 
     companion object {
         private const val TRAINING_ID_KEY = "TRAINING_ID_KEY"
-        private const val EXERCISE_ID_KEY = "EXERCISE_ID_KEY"
-        private const val SUPERSET_ID_KEY = "SUPERSET_ID_KEY"
         private const val REPS_KEY = "REPS_KEY"
         private const val WEIGHT_KEY = "WEIGHT_KEY"
         private const val ORDER_ADDED = "ORDER_ADDED"

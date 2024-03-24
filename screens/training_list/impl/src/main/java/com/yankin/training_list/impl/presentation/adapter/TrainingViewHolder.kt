@@ -1,40 +1,59 @@
 package com.yankin.training_list.impl.presentation.adapter
 
-import android.view.View
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import com.yankin.common.resource_import.CommonRString
-import com.yankin.training_list.impl.presentation.Training
-import com.yankin.trainingdiary.training_list.impl.R
+import androidx.core.view.isVisible
+import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
+import com.hannesdorfmann.adapterdelegates4.dsl.AdapterDelegateViewBindingViewHolder
+import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
+import com.yankin.common.debounce.debounceClick
+import com.yankin.common.recyclerview.adapter.UiItem
+import com.yankin.common.recyclerview.adapter.bindWithPayloads
+import com.yankin.trainingdiary.training_list.impl.databinding.ItemTrainingListBinding
 
-class TrainingViewHolder(itemView: View, private val itemClick: (Int) -> Unit) :
-    RecyclerView.ViewHolder(itemView) {
-    private val tvDate = itemView.findViewById<TextView>(R.id.tvDate_training_item)
-    private val tvMuscleGroups =
-        itemView.findViewById<TextView>(R.id.tvMuscleGroups_training_item)
-    private val tvComment = itemView.findViewById<TextView>(R.id.tvComment_training_item)
-    private val tvWeight = itemView.findViewById<TextView>(R.id.tvWeight_training_item)
+private typealias TrainingViewHolder =
+    AdapterDelegateViewBindingViewHolder<TrainingUiModel, ItemTrainingListBinding>
 
-    init {
-        itemView.setOnClickListener { itemClick(adapterPosition) }
+internal fun trainingAdapterDelegate(
+    onTrainingClick: (trainingId: Long) -> Unit
+): AdapterDelegate<List<UiItem>> =
+    adapterDelegateViewBinding<TrainingUiModel, UiItem, ItemTrainingListBinding>(
+        { layoutInflater, parent ->
+            ItemTrainingListBinding.inflate(layoutInflater, parent, false)
+        }
+    ) {
+        binding.root.debounceClick {
+            onTrainingClick.invoke(item.trainingId)
+        }
+
+        bindWithPayloads<TrainingUiModel.Payload>(
+            bindPayload = { payload ->
+                when (payload) {
+                    is TrainingUiModel.Payload.MuscleGroups -> bindMuscleGroups(payload)
+                    is TrainingUiModel.Payload.PersonWeight -> bindPersonWeight(payload)
+                    is TrainingUiModel.Payload.TrainingComment -> bindTrainingComment(payload)
+                    is TrainingUiModel.Payload.TrainingDate ->
+                        binding.tvDateTrainingItem.text = payload.value
+                }
+            },
+            bindAll = {
+                binding.tvDateTrainingItem.text = item.trainingDate.value
+                bindTrainingComment(item.trainingComment)
+                bindMuscleGroups(item.muscleGroups)
+                bindPersonWeight(item.personWeight)
+            }
+        )
     }
 
-    fun bind(item: Training) {
-        tvDate.text = item.date
-        if (item.comment.isNullOrBlank()) {
-            tvComment.visibility = View.INVISIBLE
-        } else {
-            tvComment.text = item.comment
-        }
-        if (item.muscleGroups.isNullOrBlank()) {
-            tvMuscleGroups.visibility = View.INVISIBLE
-        } else {
-            tvMuscleGroups.text = item.muscleGroups
-        }
-        if (item.weight.isNullOrBlank()) {
-            tvWeight.visibility = View.INVISIBLE
-        } else {
-            tvWeight.text = itemView.context.getString(CommonRString.weight, item.weight)
-        }
-    }
+private fun TrainingViewHolder.bindMuscleGroups(muscleGroups: TrainingUiModel.Payload.MuscleGroups) {
+    binding.tvMuscleGroupsTrainingItem.isVisible = muscleGroups.value.isNotEmpty()
+    binding.tvMuscleGroupsTrainingItem.text = muscleGroups.value
+}
+
+private fun TrainingViewHolder.bindPersonWeight(personWeight: TrainingUiModel.Payload.PersonWeight) {
+    binding.tvWeightTrainingItem.isVisible = personWeight.value.isNotEmpty()
+    binding.tvWeightTrainingItem.text = personWeight.value
+}
+
+private fun TrainingViewHolder.bindTrainingComment(trainingComment: TrainingUiModel.Payload.TrainingComment) {
+    binding.tvCommentTrainingItem.isVisible = trainingComment.value.isNotEmpty()
+    binding.tvCommentTrainingItem.text = trainingComment.value
 }

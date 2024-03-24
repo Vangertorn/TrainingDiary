@@ -1,26 +1,24 @@
 package com.yankin.training.impl.data
 
+import com.yankin.date.Timestamp
 import com.yankin.room.entity.TrainingEntity
 import com.yankin.training.api.models.TrainingDomain
+import com.yankin.training.impl.domain.models.TrainingModel
 
-fun TrainingDomain.toEntity() = TrainingEntity(
+fun TrainingEntity.toModel() = TrainingModel(
     id = id,
-    date = date,
-    muscleGroups = muscleGroups,
+    date = Timestamp.Milliseconds(date),
     comment = comment,
-    weight = weight,
-    position = position,
-    deleted = deleted,
-    selectedMuscleGroup = selectedMuscleGroup
+    personWeight = personWeight,
+    selectedMuscleGroup = selectedMuscleGroup,
 )
 
-fun TrainingEntity.toDomain() = TrainingDomain(
+fun TrainingDomain.toModel() = TrainingModel(
     id = id,
     date = date,
-    muscleGroups = muscleGroups,
     comment = comment,
-    weight = weight,
-    position = position,
-    deleted = deleted,
-    selectedMuscleGroup = selectedMuscleGroup
+    personWeight = personWeight,
+    selectedMuscleGroup = selectedMuscleGroup.map { muscleGroupDomain ->
+        muscleGroupDomain.id
+    },
 )

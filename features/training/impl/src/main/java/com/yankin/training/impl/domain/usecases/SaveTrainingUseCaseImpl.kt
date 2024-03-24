@@ -2,6 +2,7 @@ package com.yankin.training.impl.domain.usecases
 
 import com.yankin.training.api.models.TrainingDomain
 import com.yankin.training.api.usecases.SaveTrainingUseCase
+import com.yankin.training.impl.data.toModel
 import com.yankin.training.impl.domain.repositories.TrainingRepository
 import javax.inject.Inject
 
@@ -10,6 +11,6 @@ internal class SaveTrainingUseCaseImpl @Inject constructor(
 ) : SaveTrainingUseCase {
 
     override suspend fun invoke(training: TrainingDomain): Long {
-        return trainingRepository.saveTraining(training)
+        return trainingRepository.saveTraining(training.toModel())
     }
 }

@@ -5,26 +5,24 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.yankin.common.coroutines.observeWithLifecycle
 import com.yankin.common.debounce.debounceClick
 import com.yankin.common.fragment.BaseFragment
 import com.yankin.common.fragment.VerticalInset
-import com.yankin.common.recyclerview.SwipeCallback
-import com.yankin.common.resource_import.CommonRString
 import com.yankin.common.view.setVerticalMargin
 import com.yankin.common.viewbinding.viewBinding
-import com.yankin.workout_routines.api.navigation.WorkoutRoutinesCommunicator
-import com.yankin.workout_routines.api.navigation.WorkoutRoutinesParams
+import com.yankin.kotlin.unsafeLazy
 import com.yankin.membership.api.navigation.MembershipCommunicator
 import com.yankin.settings.api.navigation.SettingsCommunicator
 import com.yankin.training_create.api.navigation.TrainingCreateCommunicator
 import com.yankin.training_create.api.navigation.TrainingCreateParams
-import com.yankin.training_list.impl.presentation.adapter.TrainingRecyclerViewAdapter
+import com.yankin.training_list.impl.presentation.adapter.TrainingsAdapter
+import com.yankin.training_list.impl.presentation.adapter.TrainingsSwipeCallback
 import com.yankin.training_list.impl.presentation.models.TrainingListEvent
 import com.yankin.trainingdiary.training_list.impl.R
 import com.yankin.trainingdiary.training_list.impl.databinding.FragmentTrainingListBinding
+import com.yankin.workout_routines.api.navigation.WorkoutRoutinesCommunicator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -47,53 +45,53 @@ class TrainingListFragment : BaseFragment<FragmentTrainingListBinding>(R.layout.
 
     private val viewModel: TrainingListViewModel by viewModels()
 
-    private val adapter = TrainingRecyclerViewAdapter(
-        onClick = { training ->
-            viewModel.rememberIdTraining(training)
-            workoutRoutinesCommunicator.navigateTo(
-                params = WorkoutRoutinesParams(trainingId = training.id,)
-            )
-        }
-    )
-
-    private val simpleCallback = SwipeCallback { position, direction ->
-        when (direction) {
-            ItemTouchHelper.LEFT -> {
-                deleteTraining(position.toInt())
-            }
-
-            ItemTouchHelper.RIGHT -> {
-                deleteTraining(position.toInt())
-            }
-        }
+    private val adapter by unsafeLazy {
+        TrainingsAdapter(onTrainingClick = viewModel::onTrainingClick)
     }
-    private val dataObserverAsc = object : RecyclerView.AdapterDataObserver() {
-        override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-            super.onItemRangeInserted(positionStart, itemCount)
-            binding.recyclerViewTraining.scrollToPosition(0)
-        }
+    private val swipeCallback by unsafeLazy {
+        TrainingsSwipeCallback(
+            recyclerView = binding.recyclerViewTraining,
+            onSwipe = viewModel::onSwipeTraining,
+        )
     }
-    private val dataObserverDesc = object : RecyclerView.AdapterDataObserver() {
-        override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-            super.onItemRangeInserted(positionStart, itemCount)
-            binding.recyclerViewTraining.scrollToPosition(adapter.itemCount - 1)
-        }
-    }
-    private var dataObserverChek: Int? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.btnAdd.debounceClick {
+            trainingCreateCommunicator.navigateTo(TrainingCreateParams.CreateTraining)
+        }
+
+        binding.subscriptionTrainingList.debounceClick {
+            viewModel.onMembershipClick()
+        }
+        binding.settingsTrainingList.debounceClick {
+            settingsCommunicator.navigateTo()
+        }
+        val touchHelper = ItemTouchHelper(swipeCallback)
+        touchHelper.attachToRecyclerView(binding.recyclerViewTraining)
+    }
+
+    override fun onInitView(savedInstanceState: Bundle?) {
+        super.onInitView(savedInstanceState)
+
+        binding.recyclerViewTraining.adapter = adapter
+    }
+
+    override fun onObserveData() {
         viewModel.getTrainingListUiStream().observeWithLifecycle(this) { uiState ->
             binding.tvNumberTraining.isVisible = uiState.trainingLeft.isNotEmpty()
             binding.tvNumberTraining.text = uiState.trainingLeft
 
             binding.tvNumberDays.isVisible = uiState.daysLeft.isNotEmpty()
             binding.tvNumberDays.text = uiState.daysLeft
+            adapter.items = uiState.trainings
+            if (uiState.scrollToUp) binding.recyclerViewTraining.scrollToPosition(0)
+            if (uiState.scrollToBottom) binding.recyclerViewTraining.scrollToPosition(uiState.trainings.size - 1)
         }
 
         viewModel.getTrainingCreateEventStream().observeWithLifecycle(this) { event ->
-            when(event){
+            when (event) {
                 TrainingListEvent.Default -> {}
                 TrainingListEvent.NavigateToCreateMembership -> {
                     membershipCommunicator.navigateToCreateMembership()
@@ -103,72 +101,27 @@ class TrainingListFragment : BaseFragment<FragmentTrainingListBinding>(R.layout.
                     membershipCommunicator.navigateToMembership(event.params)
                     viewModel.onEventHandle()
                 }
+                is TrainingListEvent.NavigateToWorkout -> {
+                    workoutRoutinesCommunicator.navigateTo(event.params)
+                    viewModel.onEventHandle()
+                }
+                is TrainingListEvent.ShowSnackBar -> event.handleEvent()
             }
         }
-
-        binding.recyclerViewTraining.adapter = adapter
-
-        binding.btnAdd.setOnClickListener {
-            trainingCreateCommunicator.navigateTo(TrainingCreateParams.CreateTraining)
-        }
-
-        binding.subscriptionTrainingList.debounceClick {
-            viewModel.onMembershipClick()
-        }
-        binding.settingsTrainingList.setOnClickListener {
-            settingsCommunicator.navigateTo()
-        }
-        viewModel.switchOrderLiveData.observe(this.viewLifecycleOwner) { boolean ->
-            if (boolean) {
-                if (dataObserverChek == null) {
-                    adapter.registerAdapterDataObserver(dataObserverAsc)
-                    dataObserverChek = DATA_OBSERVER_ASC
-                }
-
-                viewModel.trainingAscLiveData.observe(this.viewLifecycleOwner) {
-                    adapter.submitList(it)
-                }
-            } else {
-                if (dataObserverChek == null) {
-                    adapter.registerAdapterDataObserver(dataObserverDesc)
-                    dataObserverChek = DATA_OBSERVER_DESC
-                }
-
-                viewModel.trainingDescLiveData.observe(this.viewLifecycleOwner) {
-                    adapter.submitList(it)
-                }
-            }
-        }
-        val trainingHelper = ItemTouchHelper(simpleCallback)
-        trainingHelper.attachToRecyclerView(binding.recyclerViewTraining)
     }
 
-    override fun onDestroyView() {
-        dataObserverChek = if (dataObserverChek == DATA_OBSERVER_ASC) {
-            adapter.unregisterAdapterDataObserver(dataObserverAsc)
-            null
-        } else {
-            adapter.unregisterAdapterDataObserver(dataObserverDesc)
-            null
-        }
-
-        super.onDestroyView()
-    }
-
-    private fun deleteTraining(position: Int) {
-        val training = viewModel.getTrainingFromPosition(position)!!
-        viewModel.deletedTrainingTrue(training)
-
+    private fun TrainingListEvent.ShowSnackBar.handleEvent() {
         Snackbar.make(
             binding.recyclerViewTraining,
-            getString(CommonRString.training_was_delete),
+            message,
             Snackbar.LENGTH_LONG
         )
-            .setAction(getString(CommonRString.undo)) {
-                viewModel.deletedTrainingFalse(training)
+            .setAction(actionName) {
+                viewModel.onUndoClick(trainingId)
             }.apply {
                 this.view.translationY = -savedInsets.bottom.toFloat()
             }.show()
+        viewModel.onEventHandle()
     }
 
     override fun onInsetsReceived(top: Int, bottom: Int, hasKeyboard: Boolean) {
@@ -176,10 +129,5 @@ class TrainingListFragment : BaseFragment<FragmentTrainingListBinding>(R.layout.
         binding.toolbarTrainingList.setPadding(0, top, 0, 0)
         binding.btnAdd.setVerticalMargin(0, bottom)
         binding.recyclerViewTraining.setPadding(0, 0, 0, bottom)
-    }
-
-    companion object {
-        private const val DATA_OBSERVER_ASC = 1
-        private const val DATA_OBSERVER_DESC = 2
     }
 }

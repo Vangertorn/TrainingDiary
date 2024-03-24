@@ -7,7 +7,7 @@ import com.yankin.muscle_groups.api.usecases.RecoverDefaultMuscleGroupListUseCas
 import com.yankin.muscle_groups.api.usecases.SaveDefaultMuscleGroupListUseCase
 import com.yankin.muscle_groups.api.usecases.SaveMuscleGroupUseCase
 import com.yankin.muscle_groups.impl.data.MuscleGroupRepositoryImpl
-import com.yankin.muscle_groups.impl.domain.repositories.MuscleGroupRepository
+import com.yankin.muscle_groups.api.repositories.MuscleGroupRepository
 import com.yankin.muscle_groups.impl.domain.usecases.DeleteMuscleGroupUseCaseImpl
 import com.yankin.muscle_groups.impl.domain.usecases.GetAllMuscleGroupListUseCaseImpl
 import com.yankin.muscle_groups.impl.domain.usecases.GetAllMuscleGroupStreamUseCaseImpl

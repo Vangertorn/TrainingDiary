@@ -17,6 +17,10 @@ internal class MuscleGroupLocalDataSource @Inject constructor(
         return db.getMuscleGroups()
     }
 
+    fun getMuscleGroupsByIds(muscleGroupsIds: List<Long>): List<MuscleGroupEntity> {
+        return db.getMuscleGroupsByIds(muscleGroupsIds)
+    }
+
     fun deletedMuscleGroupById(muscleGroupId: Long) {
         db.deletedMuscleGroup(muscleGroupId)
     }

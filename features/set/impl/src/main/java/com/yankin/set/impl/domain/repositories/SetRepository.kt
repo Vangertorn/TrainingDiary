@@ -5,8 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 internal interface SetRepository {
 
-    val currentSetStream: Flow<List<SetDomain>>
-
     fun getSetListStream(exerciseId: Long): Flow<List<SetDomain>>
 
     suspend fun saveSet(set: SetDomain)

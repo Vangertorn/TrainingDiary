@@ -2,10 +2,13 @@ package com.yankin.training_list.impl.presentation.mappers
 
 import com.yankin.date.DateFormatter
 import com.yankin.date.DateFormatter.toDateStringOrEmpty
+import com.yankin.resource_manager.api.ResourceManager
 import com.yankin.training_list.impl.presentation.models.TrainingListStateModel
 import com.yankin.training_list.impl.presentation.models.TrainingListUiState
 
-internal fun TrainingListStateModel.toTrainingListUiState(): TrainingListUiState {
+internal fun TrainingListStateModel.toTrainingListUiState(
+    resourceManager: ResourceManager
+): TrainingListUiState {
 
     return TrainingListUiState(
         daysLeft = membership?.let { membership ->
@@ -28,6 +31,11 @@ internal fun TrainingListStateModel.toTrainingListUiState(): TrainingListUiState
                     "-"
                 }
             } ?: "ထ"
-        } ?: ""
+        } ?: "",
+        trainings = trainings.map { trainingDomain ->
+            trainingDomain.toTrainingUiModel(resourceManager)
+        },
+        scrollToUp = isScrollNeed && isLastTrainUp,
+        scrollToBottom = isScrollNeed && !isLastTrainUp,
     )
 }

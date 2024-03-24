@@ -5,8 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yankin.coroutine.launchInJob
 import com.yankin.coroutine.launchJob
-import com.yankin.date.DateFormatter
-import com.yankin.workout_routines.api.navigation.WorkoutRoutinesParams
+import com.yankin.date.Timestamp
 import com.yankin.membership.api.usecases.AddTrainingIdFromMembershipUseCase
 import com.yankin.membership.api.usecases.GetActiveMembershipStreamUseCase
 import com.yankin.muscle_groups.api.usecases.GetAllMuscleGroupListUseCase
@@ -20,6 +19,7 @@ import com.yankin.training_create.impl.presentation.mappers.toTrainingCreateUiSt
 import com.yankin.training_create.impl.presentation.models.TrainingCreateEvent
 import com.yankin.training_create.impl.presentation.models.TrainingCreateStateModel
 import com.yankin.training_create.impl.presentation.models.TrainingCreateUiState
+import com.yankin.workout_routines.api.navigation.WorkoutRoutinesParams
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.Flow
@@ -29,12 +29,10 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.runBlocking
 import java.util.Date
 
 internal class TrainingCreateViewModel @AssistedInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
-    private val getAllMuscleGroupListUseCase: GetAllMuscleGroupListUseCase,
     getAllMuscleGroupStreamUseCase: GetAllMuscleGroupStreamUseCase,
     private val saveTrainingUseCase: SaveTrainingUseCase,
     private val updateTrainingUseCase: UpdateTrainingUseCase,
@@ -47,11 +45,11 @@ internal class TrainingCreateViewModel @AssistedInject constructor(
     private val trainingCreateState = MutableStateFlow(
         TrainingCreateStateModel(
             muscleGroupList = emptyList(),
-            selectedMuscleGroupIdList = savedStateHandle.get<IntArray>(KEY_SELECTED_MUSCLE_GROUP_ID_LIST)
+            selectedMuscleGroupIdList = savedStateHandle.get<LongArray>(KEY_SELECTED_MUSCLE_GROUP_ID_LIST)
                 ?.toList() ?: emptyList(),
             currentTraining = null,
-            selectedDate = savedStateHandle.get<String>(KEY_TRAINING_DATE) ?: "",
-            weight = savedStateHandle.get<String>(KEY_TRAINING_WEIGHT) ?: "",
+            selectedDate = Timestamp.Milliseconds(savedStateHandle.get<Long>(KEY_TRAINING_DATE) ?: -1L),
+            weight = savedStateHandle.get<Double>(KEY_TRAINING_WEIGHT),
             comment = savedStateHandle.get<String>(KEY_TRAINING_COMMENT) ?: "",
             membership = null,
         )
@@ -76,11 +74,11 @@ internal class TrainingCreateViewModel @AssistedInject constructor(
                         weight = training.getWeight(),
                         comment = training.getComment(),
                         selectedMuscleGroupIdList = training.getSelectedMuscleGroup(),
-                        selectedDate = training.getDateString(),
+                        selectedDate = Timestamp.Milliseconds(training.getDateString()),
                         membership = membership,
                     )
                 }
-            }?:run{
+            } ?: run {
                 trainingCreateState.update { stateModel -> stateModel.copy(membership = membership) }
             }
         }
@@ -100,9 +98,8 @@ internal class TrainingCreateViewModel @AssistedInject constructor(
                     currentTraining.copy(
                         date = trainingCreateState.value.selectedDate,
                         comment = trainingCreateState.value.comment,
-                        weight = trainingCreateState.value.weight,
-                        muscleGroups = trainingCreateState.value.selectedMuscleGroupIdList.getString(),
-                        selectedMuscleGroup = trainingCreateState.value.selectedMuscleGroupIdList.toMutableList(),
+                        personWeight = trainingCreateState.value.weight,
+                        selectedMuscleGroup = trainingCreateState.value.getSelectedMuscleGroup(),
                     )
                 )
                 trainingCreateEventState.value = TrainingCreateEvent.NavigateToExerciseList(
@@ -111,11 +108,11 @@ internal class TrainingCreateViewModel @AssistedInject constructor(
             } ?: run {
                 val trainingId = saveTrainingUseCase.invoke(
                     TrainingDomain(
+                        id = 0,
                         date = trainingCreateState.value.selectedDate,
                         comment = trainingCreateState.value.comment,
-                        weight = trainingCreateState.value.weight,
-                        muscleGroups = trainingCreateState.value.selectedMuscleGroupIdList.getString(),
-                        selectedMuscleGroup = trainingCreateState.value.selectedMuscleGroupIdList.toMutableList(),
+                        personWeight = trainingCreateState.value.weight,
+                        selectedMuscleGroup = trainingCreateState.value.getSelectedMuscleGroup(),
                     )
                 )
                 addTrainingIdFromMembershipUseCase.invoke(
@@ -140,7 +137,7 @@ internal class TrainingCreateViewModel @AssistedInject constructor(
 
     fun onWeightChange(weightValue: CharSequence) {
         trainingCreateState.update { stateModel ->
-            stateModel.copy(weight = weightValue.toString()).also { updatedStateModel ->
+            stateModel.copy(weight = weightValue.toString().toDouble()).also { updatedStateModel ->
                 savedStateHandle[KEY_TRAINING_WEIGHT] = updatedStateModel.weight
             }
         }
@@ -149,56 +146,39 @@ internal class TrainingCreateViewModel @AssistedInject constructor(
     fun onDateChange(date: Date) {
         trainingCreateState.update { stateModel ->
             stateModel.copy(
-                selectedDate = DateFormatter.dateToString(
-                    date = date,
-                    dateFormat = DateFormatter.DD_POINT_MM_POINT_YY
-                )
+                selectedDate = Timestamp.Milliseconds(date.time)
             ).also { updatedStateModel ->
-                savedStateHandle[KEY_TRAINING_DATE] = updatedStateModel.selectedDate
+                savedStateHandle[KEY_TRAINING_DATE] = updatedStateModel.selectedDate.value
             }
         }
     }
 
     fun onMuscleGroupClick(muscleGroupId: Long) {
         val resultList = trainingCreateState.value.selectedMuscleGroupIdList.toMutableList()
-        if (!resultList.removeIf { id -> id == muscleGroupId.toInt() }) {
-            resultList.add(muscleGroupId.toInt())
+        if (!resultList.removeIf { id -> id == muscleGroupId }) {
+            resultList.add(muscleGroupId)
         }
         trainingCreateState.update { stateModel ->
             stateModel.copy(selectedMuscleGroupIdList = resultList).also {
-                savedStateHandle[KEY_SELECTED_MUSCLE_GROUP_ID_LIST] = resultList.toIntArray()
+                savedStateHandle[KEY_SELECTED_MUSCLE_GROUP_ID_LIST] = resultList.toLongArray()
             }
         }
     }
 
-    private fun List<Int>.getString(): String {
-        val stringBuilder = StringBuilder()
-        val listMuscleGroups = runBlocking {
-            getAllMuscleGroupListUseCase.invoke()
-        }
-        for (index in listMuscleGroups.indices) {
-            if (index in this) {
-                stringBuilder.append(listMuscleGroups[index].nameMuscleGroup)
-                stringBuilder.append(", ")
-            }
-        }
-        return stringBuilder.toString().removeSuffix(", ")
-    }
-
-    private fun TrainingDomain.getWeight(): String =
-        if (savedStateHandle.contains(KEY_TRAINING_WEIGHT)) trainingCreateState.value.weight else weight ?: ""
+    private fun TrainingDomain.getWeight(): Double? =
+        if (savedStateHandle.contains(KEY_TRAINING_WEIGHT)) trainingCreateState.value.weight else personWeight
 
     private fun TrainingDomain.getComment(): String =
         if (savedStateHandle.contains(KEY_TRAINING_COMMENT)) trainingCreateState.value.comment else comment ?: ""
 
-    private fun TrainingDomain.getDateString(): String =
-        if (savedStateHandle.contains(KEY_TRAINING_DATE)) trainingCreateState.value.selectedDate else date
+    private fun TrainingDomain.getDateString(): Long =
+        if (savedStateHandle.contains(KEY_TRAINING_DATE)) trainingCreateState.value.selectedDate.value else date.value
 
-    private fun TrainingDomain.getSelectedMuscleGroup(): List<Int> =
+    private fun TrainingDomain.getSelectedMuscleGroup(): List<Long> =
         if (savedStateHandle.contains(KEY_SELECTED_MUSCLE_GROUP_ID_LIST)) {
             trainingCreateState.value.selectedMuscleGroupIdList
         } else {
-            selectedMuscleGroup
+            selectedMuscleGroup.map { muscleGroupDomain -> muscleGroupDomain.id }
         }
 
     companion object {

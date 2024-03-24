@@ -11,4 +11,6 @@ java {
 dependencies {
 
     implementation(Dependencies.KotlinX.coroutineCore)
+    implementation(project(":core:date"))
+    implementation(project(":features:muscle_groups:api"))
 }

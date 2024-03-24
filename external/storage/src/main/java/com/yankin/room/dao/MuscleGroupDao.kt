@@ -28,6 +28,9 @@ abstract class MuscleGroupDao {
     @Query("SELECT * FROM table_muscle_group")
     abstract fun getMuscleGroups(): List<MuscleGroupEntity>?
 
+    @Query("SELECT * FROM table_muscle_group WHERE id IN (:muscleGroupsIds)")
+    abstract fun getMuscleGroupsByIds(muscleGroupsIds: List<Long>): List<MuscleGroupEntity>
+
     @Query("UPDATE table_muscle_group SET deleted = 1 WHERE id==:muscleGroupId ")
     abstract fun deletedMuscleGroup(muscleGroupId: Long)
 

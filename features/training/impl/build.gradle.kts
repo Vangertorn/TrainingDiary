@@ -18,8 +18,10 @@ dependencies {
 
     implementation(project(":external:storage"))
     implementation(project(":features:training:api"))
+    implementation(project(":features:muscle_groups:api"))
     implementation(project(":external:preferences"))
     implementation(project(":core:coroutine"))
+    implementation(project(":core:date"))
 
     implementation(Dependencies.Hilt.android)
     kapt(Dependencies.Hilt.compiler)

@@ -1,12 +1,12 @@
 package com.yankin.training.api.models
 
+import com.yankin.date.Timestamp
+import com.yankin.muscle_groups.api.models.MuscleGroupDomain
+
 data class TrainingDomain(
-    val id: Long = 0L,
-    val date: String,
-    val muscleGroups: String? = null,
-    val comment: String? = null,
-    val weight: String? = null,
-    val position: Int = 0,
-    val deleted: Boolean = false,
-    val selectedMuscleGroup: MutableList<Int> = mutableListOf()
+    val id: Long,
+    val date: Timestamp.Milliseconds,
+    val comment: String?,
+    val personWeight: Double?,
+    val selectedMuscleGroup: List<MuscleGroupDomain>,
 )

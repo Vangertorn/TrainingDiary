@@ -1,25 +1,21 @@
 package com.yankin.training.impl.domain.repositories
 
-import com.yankin.training.api.models.TrainingDomain
+import com.yankin.training.impl.domain.models.TrainingModel
 import kotlinx.coroutines.flow.Flow
 
 internal interface TrainingRepository {
 
-    val currentTrainingAscStream: Flow<List<TrainingDomain>>
+    val currentTrainingAscStream: Flow<List<TrainingModel>>
 
-    val currentTrainingDescStream: Flow<List<TrainingDomain>>
+    val currentTrainingDescStream: Flow<List<TrainingModel>>
 
-    suspend fun saveTraining(training: TrainingDomain): Long
+    suspend fun saveTraining(training: TrainingModel): Long
 
-    suspend fun updateTraining(training: TrainingDomain)
+    suspend fun updateTraining(training: TrainingModel)
 
-    suspend fun deletedTrainingTrue(training: TrainingDomain)
+    suspend fun getTrainingById(trainingId: Long): TrainingModel
 
-    suspend fun deletedTrainingFalse(training: TrainingDomain)
+    suspend fun updateTrainingBlockDeleteQueue(trainingId: Long, addToDeleteQueue: Boolean)
 
-    suspend fun getTrainingById(trainingId: Long): TrainingDomain
-
-    suspend fun deleteTrainingsByFlags()
-
-    suspend fun forgotIdTraining()
+    suspend fun clearDeleteQueue()
 }

@@ -9,35 +9,47 @@ internal class TrainingLocalDataSource @Inject constructor(
     private val db: TrainingDao
 ) {
 
-    fun getTrainingDeletedFalseAscFlow(flags: Boolean): Flow<List<TrainingEntity>?> {
-        return db.getTrainingDeletedFalseAscFlow(flags)
+    fun getTrainingDeletedFalseAscFlow(): Flow<List<TrainingEntity>?> {
+        return db.getTrainingDeletedFalseAscFlow()
     }
 
-    fun getTrainingDeletedFalseDescFlow(flags: Boolean): Flow<List<TrainingEntity>?> {
-        return db.getTrainingDeletedFalseDescFlow(flags)
-    }
-
-    fun getTrainingPositions(): MutableList<Int>? {
-        return db.getTrainingPositions()
+    fun getTrainingDeletedFalseDescFlow(): Flow<List<TrainingEntity>?> {
+        return db.getTrainingDeletedFalseDescFlow()
     }
 
     fun insertTraining(trainingDomainEntity: TrainingEntity): Long {
         return db.insertTraining(trainingDomainEntity)
     }
 
-    fun updateTraining(trainingDomainEntity: TrainingEntity) {
-        db.updateTraining(trainingDomainEntity)
-    }
-
-    fun deletedTrainingFlags(trainingDomainEntity: TrainingEntity) {
-        db.deletedTrainingFlags(trainingDomainEntity)
+    fun updateTraining(
+        trainingId: Long,
+        trainingDate: Long,
+        comment: String?,
+        personWeight: Double?,
+        trainingMuscleGroupIds: List<Long>
+    ) {
+        db.updateTraining(
+            trainingId = trainingId,
+            trainingDate = trainingDate,
+            comment = comment,
+            personWeight = personWeight,
+            trainingMuscleGroupIds = trainingMuscleGroupIds,
+        )
     }
 
     fun getTraining(id: Long): TrainingEntity {
         return db.getTraining(id)
     }
 
-    fun deletedTrainingsByFlag(flag: Boolean) {
-        db.deletedTrainingsByFlag(flag)
+    fun updateTrainingBlockDeleteQueue(trainingId: Long, addToDeleteQueue: Boolean) {
+        if (addToDeleteQueue) {
+            db.addToDeleteQueue(trainingId)
+        } else {
+            db.removeFromDeleteQueue(trainingId)
+        }
+    }
+
+    fun clearDeleteQueue() {
+        db.clearDeleteQueue()
     }
 }

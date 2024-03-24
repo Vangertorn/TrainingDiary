@@ -1,7 +1,7 @@
 package com.yankin.muscle_groups.impl.domain.usecases
 
 import com.yankin.muscle_groups.api.usecases.DeleteMuscleGroupUseCase
-import com.yankin.muscle_groups.impl.domain.repositories.MuscleGroupRepository
+import com.yankin.muscle_groups.api.repositories.MuscleGroupRepository
 import javax.inject.Inject
 
 internal class DeleteMuscleGroupUseCaseImpl @Inject constructor(

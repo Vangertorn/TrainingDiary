@@ -78,7 +78,6 @@ internal class WorkoutRoutinesViewModel @AssistedInject constructor(
                     state.update { stateModel ->
                         stateModel.copy(trainingBlockList = trainingBlockModelList.toList())
                     }
-
                 }
             }
             .launchInJob(scope = viewModelScope, catchBlock = Throwable::printStackTrace)

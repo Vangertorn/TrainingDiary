@@ -8,13 +8,12 @@ internal fun TrainingCreateStateModel.toTrainingCreateUiState(): TrainingCreateU
 
     return TrainingCreateUiState(
         muscleGroupList = muscleGroupList.map { muscleGroup ->
-            muscleGroup.toMuscleGroupUiModel(selectedMuscleGroupIdList.contains(muscleGroup.id.toInt()))
+            muscleGroup.toMuscleGroupUiModel(selectedMuscleGroupIdList.contains(muscleGroup.id))
         },
-        weight = weight,
+        weight = weight?.toString() ?: "",
         comment = comment,
-        selectedDate = DateFormatter.convertStringToDate(
-            dateStr = selectedDate,
-            pattern = DateFormatter.DD_POINT_MM_POINT_YY
+        selectedDate = DateFormatter.timestampToDate(
+            timestamp = selectedDate,
         ),
     )
 }

@@ -1,11 +1,9 @@
 package com.yankin.room.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
-import androidx.room.Update
 import com.yankin.room.entity.TrainingEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -15,47 +13,47 @@ abstract class TrainingDao {
     @Insert
     abstract fun insertTraining(trainingEntity: TrainingEntity): Long
 
-    @Delete
-    abstract fun deleteTrainings(trainingEntities: List<TrainingEntity>)
+    @Query("UPDATE table_trainings SET date = :trainingDate WHERE id == :trainingId")
+    abstract fun updateTrainingDate(trainingId: Long, trainingDate: Long)
 
-    @Update
-    abstract fun updateTraining(trainingEntity: TrainingEntity)
+    @Query("UPDATE table_trainings SET comment = :comment WHERE id == :trainingId")
+    abstract fun updateTrainingComment(trainingId: Long, comment: String?)
 
-    @Update
-    abstract fun deletedTrainingFlags(trainingEntity: TrainingEntity)
+    @Query("UPDATE table_trainings SET personWeight = :personWeight WHERE id == :trainingId")
+    abstract fun updateTrainingPersonWeight(trainingId: Long, personWeight: Double?)
 
-    @Query("SELECT * FROM table_trainings WHERE deleted == :flags ORDER BY position ASC")
-    abstract fun getTrainingDeletedFalseAscFlow(flags: Boolean): Flow<List<TrainingEntity>?>
+    @Query("UPDATE table_trainings SET selectedMuscleGroup = :trainingMuscleGroupIds WHERE id == :trainingId")
+    abstract fun updateTrainingMuscleGroupIds(trainingId: Long, trainingMuscleGroupIds: List<Long>)
 
-    @Query("SELECT * FROM table_trainings WHERE deleted == :flags ORDER BY position DESC")
-    abstract fun getTrainingDeletedFalseDescFlow(flags: Boolean): Flow<List<TrainingEntity>?>
+    @Query("SELECT * FROM table_trainings WHERE inDeleteQueue == 0 ORDER BY createTime ASC")
+    abstract fun getTrainingDeletedFalseAscFlow(): Flow<List<TrainingEntity>?>
 
-    @Query("DELETE FROM table_trainings")
-    abstract fun clearTrainingTable()
-
-    @Insert
-    abstract fun insertTrainings(trainingEntities: List<TrainingEntity>)
-
-    @Transaction
-    open fun updateTrainingTable(trainingEntities: List<TrainingEntity>) {
-        clearTrainingTable()
-        insertTrainings(trainingEntities)
-    }
-
-    @Query("SELECT * FROM table_trainings WHERE deleted ==:flags")
-    abstract fun getTrainingByFlags(
-        flags: Boolean
-    ): List<TrainingEntity>
-
-    @Transaction
-    open fun deletedTrainingsByFlag(flags: Boolean) {
-        val list = getTrainingByFlags(flags)
-        deleteTrainings(list)
-    }
+    @Query("SELECT * FROM table_trainings WHERE inDeleteQueue == 0 ORDER BY createTime DESC")
+    abstract fun getTrainingDeletedFalseDescFlow(): Flow<List<TrainingEntity>?>
 
     @Query("SELECT * FROM table_trainings WHERE id == :id LIMIT 1")
     abstract fun getTraining(id: Long): TrainingEntity
 
-    @Query("SELECT position FROM table_trainings ORDER BY position ASC")
-    abstract fun getTrainingPositions(): MutableList<Int>?
+    @Query("UPDATE table_trainings SET inDeleteQueue = 1 WHERE id = :trainingId")
+    abstract fun addToDeleteQueue(trainingId: Long)
+
+    @Query("UPDATE table_trainings SET inDeleteQueue = 0 WHERE id = :trainingId")
+    abstract fun removeFromDeleteQueue(trainingId: Long)
+
+    @Query("DELETE FROM table_trainings WHERE inDeleteQueue == 1")
+    abstract fun clearDeleteQueue()
+
+    @Transaction
+    open fun updateTraining(
+        trainingId: Long,
+        trainingDate: Long,
+        comment: String?,
+        personWeight: Double?,
+        trainingMuscleGroupIds: List<Long>
+    ) {
+        updateTrainingDate(trainingId = trainingId, trainingDate = trainingDate)
+        updateTrainingComment(trainingId = trainingId, comment = comment)
+        updateTrainingPersonWeight(trainingId = trainingId, personWeight = personWeight)
+        updateTrainingMuscleGroupIds(trainingId = trainingId, trainingMuscleGroupIds = trainingMuscleGroupIds)
+    }
 }

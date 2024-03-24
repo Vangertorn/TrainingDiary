@@ -10,11 +10,10 @@ data class TrainingEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id: Long = 0L,
-    val date: String,
-    val muscleGroups: String? = null,
-    val comment: String? = null,
-    val weight: String? = null,
-    val position: Int = 0,
-    val deleted: Boolean = false,
-    val selectedMuscleGroup: MutableList<Int> = mutableListOf()
+    val date: Long,
+    val createTime: Long,
+    val comment: String?,
+    val personWeight: Double?,
+    val inDeleteQueue: Boolean,
+    val selectedMuscleGroup: List<Long>,
 )
