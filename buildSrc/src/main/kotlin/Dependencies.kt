@@ -58,4 +58,9 @@ object Dependencies {
         const val common = "androidx.lifecycle:lifecycle-common-java8:$version"
         const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
     }
+
+    object Worker {
+        private const val version = "2.7.1"
+        const val worker = "androidx.work:work-runtime-ktx:$version"
+    }
 }

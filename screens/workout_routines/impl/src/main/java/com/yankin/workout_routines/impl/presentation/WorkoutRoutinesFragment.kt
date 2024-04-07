@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.yankin.approach_create.api.navigation.SetCreateCommunicator
 import com.yankin.common.coroutines.observeWithLifecycle
 import com.yankin.common.fragment.BaseFragment
+import com.yankin.common.fragment.onBackPressed
 import com.yankin.common.viewbinding.viewBinding
 import com.yankin.common.viewmodel.AssistedParamsViewModelFactory
 import com.yankin.exercise_create.api.navigation.ExerciseCreateCommunicator
@@ -80,6 +81,9 @@ internal class WorkoutRoutinesFragment :
         }
         binding.ivEditTrainingExerciseList.setOnClickListener {
             trainingCreateCommunicator.navigateTo(TrainingCreateParams.EditTraining(trainingId = params.trainingId))
+        }
+        onBackPressed {
+            findNavController().popBackStack()
         }
     }
 

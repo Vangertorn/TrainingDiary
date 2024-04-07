@@ -110,6 +110,14 @@
       <module name="Training_diary.screens.workout_routines.api.main" target="1.8" />
       <module name="Training_diary.screens.workout_routines.api.test" target="1.8" />
       <module name="Training_diary.screens.workout_routines.impl" target="11" />
+      <module name="Training_diary.workers.clear_delete_queue.api" target="11" />
+      <module name="Training_diary.workers.clear_delete_queue.api.main" target="11" />
+      <module name="Training_diary.workers.clear_delete_queue.api.test" target="11" />
+      <module name="Training_diary.workers.clear_delete_queue.impl" target="11" />
+      <module name="Training_diary.workers.clear_delete_queue.main" target="11" />
+      <module name="Training_diary.workers.clear_delete_queue.test" target="11" />
+      <module name="Training_diary.workers.main" target="11" />
+      <module name="Training_diary.workers.test" target="11" />
       <module name="TrainingDiary.buildSrc" target="11" />
     </bytecodeTargetLevel>
   </component>

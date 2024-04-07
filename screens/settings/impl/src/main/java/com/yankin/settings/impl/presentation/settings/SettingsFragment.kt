@@ -13,6 +13,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.yankin.common.coroutines.observeWithLifecycle
 import com.yankin.common.debounce.debounceClick
 import com.yankin.common.fragment.BaseFragment
+import com.yankin.common.fragment.onBackPressed
 import com.yankin.common.hideKeyboard
 import com.yankin.common.view.setVerticalMargin
 import com.yankin.common.viewbinding.viewBinding
@@ -88,6 +89,10 @@ internal class SettingsFragment : BaseFragment<FragmentSettingsBinding>(R.layout
             if (start != 0 || before != 0 || count != 0) {
                 viewModel.onMuscleGroupNameChange(text ?: "")
             }
+        }
+
+        onBackPressed {
+           navController.popBackStack()
         }
     }
 

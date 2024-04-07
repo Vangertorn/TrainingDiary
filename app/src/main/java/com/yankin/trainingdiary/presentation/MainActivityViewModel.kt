@@ -1,58 +1,73 @@
 package com.yankin.trainingdiary.presentation
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yankin.common.resource_import.CommonRString
+import com.yankin.coroutine.launchJob
+import com.yankin.muscle_groups.api.models.MuscleGroupDomain
+import com.yankin.muscle_groups.api.usecases.GetAllMuscleGroupListUseCase
 import com.yankin.muscle_groups.api.usecases.SaveDefaultMuscleGroupListUseCase
-import com.yankin.training.api.usecases.ClearTrainingDeleteQueueUseCase
-import com.yankin.training_block.api.usecases.ClearTrainingBlockDeleteQueueUseCase
-import com.yankin.trainingdiary.presentation.models.MuscleGroup
-import com.yankin.trainingdiary.presentation.models.toDomain
+import com.yankin.resource_manager.api.ResourceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
     private val saveDefaultMuscleGroupListUseCase: SaveDefaultMuscleGroupListUseCase,
-    @ApplicationContext private val context: Context,
-    private val clearTrainingDeleteQueueUseCase: ClearTrainingDeleteQueueUseCase,
-    private val clearTrainingBlockDeleteQueueUseCase: ClearTrainingBlockDeleteQueueUseCase,
+    private val getAllMuscleGroupListUseCase: GetAllMuscleGroupListUseCase,
+    private val resourceManager: ResourceManager,
 ) : ViewModel() {
 
-    fun deletedTrainings() {
-        viewModelScope.launch {
-            clearTrainingDeleteQueueUseCase.invoke()
-        }
-    }
-
-    fun deletedExercises() {
-        viewModelScope.launch {
-            clearTrainingBlockDeleteQueueUseCase.invoke()
-        }
-    }
-
-    init {
-        viewModelScope.launch {
-            saveDefaultMuscleGroupListUseCase.invoke(
-                listOf(
-                    MuscleGroup(nameMuscleGroup = context.getString(CommonRString.legs), factorySettings = true),
-                    MuscleGroup(
-                        nameMuscleGroup = context.getString(CommonRString.all_muscle_groups),
-                        factorySettings = true
-                    ),
-                    MuscleGroup(nameMuscleGroup = context.getString(CommonRString.breast), factorySettings = true),
-                    MuscleGroup(nameMuscleGroup = context.getString(CommonRString.biceps), factorySettings = true),
-                    MuscleGroup(
-                        nameMuscleGroup = context.getString(CommonRString.shoulders),
-                        factorySettings = true
-                    ),
-                    MuscleGroup(nameMuscleGroup = context.getString(CommonRString.back), factorySettings = true),
-                    MuscleGroup(nameMuscleGroup = context.getString(CommonRString.triceps), factorySettings = true)
-                ).map { it.toDomain() }
-            )
+    fun onDefaultMuscleGroupsLaunch() {
+        viewModelScope.launchJob(Throwable::printStackTrace) {
+            getAllMuscleGroupListUseCase.invoke().ifEmpty {
+                saveDefaultMuscleGroupListUseCase.invoke(
+                    listOf(
+                        MuscleGroupDomain(
+                            nameMuscleGroup = resourceManager.getString(CommonRString.legs),
+                            id = 0,
+                            isDefault = true,
+                            deleted = false
+                        ),
+                        MuscleGroupDomain(
+                            nameMuscleGroup = resourceManager.getString(CommonRString.all_muscle_groups),
+                            id = 0,
+                            isDefault = true,
+                            deleted = false
+                        ),
+                        MuscleGroupDomain(
+                            nameMuscleGroup = resourceManager.getString(CommonRString.breast),
+                            id = 0,
+                            isDefault = true,
+                            deleted = false
+                        ),
+                        MuscleGroupDomain(
+                            nameMuscleGroup = resourceManager.getString(CommonRString.biceps),
+                            id = 0,
+                            isDefault = true,
+                            deleted = false
+                        ),
+                        MuscleGroupDomain(
+                            nameMuscleGroup = resourceManager.getString(CommonRString.shoulders),
+                            id = 0,
+                            isDefault = true,
+                            deleted = false
+                        ),
+                        MuscleGroupDomain(
+                            nameMuscleGroup = resourceManager.getString(CommonRString.back),
+                            id = 0,
+                            isDefault = true,
+                            deleted = false
+                        ),
+                        MuscleGroupDomain(
+                            nameMuscleGroup = resourceManager.getString(CommonRString.triceps),
+                            id = 0,
+                            isDefault = true,
+                            deleted = false
+                        )
+                    )
+                )
+            }
         }
     }
 }

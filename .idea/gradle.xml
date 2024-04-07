@@ -72,6 +72,10 @@
             <option value="$PROJECT_DIR$/screens/workout_routines" />
             <option value="$PROJECT_DIR$/screens/workout_routines/api" />
             <option value="$PROJECT_DIR$/screens/workout_routines/impl" />
+            <option value="$PROJECT_DIR$/workers" />
+            <option value="$PROJECT_DIR$/workers/clear_delete_queue" />
+            <option value="$PROJECT_DIR$/workers/clear_delete_queue/api" />
+            <option value="$PROJECT_DIR$/workers/clear_delete_queue/impl" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

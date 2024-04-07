@@ -2,6 +2,7 @@ package com.yankin.training_list.impl.presentation
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -10,6 +11,9 @@ import com.yankin.common.coroutines.observeWithLifecycle
 import com.yankin.common.debounce.debounceClick
 import com.yankin.common.fragment.BaseFragment
 import com.yankin.common.fragment.VerticalInset
+import com.yankin.common.fragment.onBackPressed
+import com.yankin.common.resource_import.CommonRString
+import com.yankin.common.vibrate.VibrateUtil
 import com.yankin.common.view.setVerticalMargin
 import com.yankin.common.viewbinding.viewBinding
 import com.yankin.kotlin.unsafeLazy
@@ -54,6 +58,7 @@ class TrainingListFragment : BaseFragment<FragmentTrainingListBinding>(R.layout.
             onSwipe = viewModel::onSwipeTraining,
         )
     }
+    private var backPressTime: Long? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -70,6 +75,11 @@ class TrainingListFragment : BaseFragment<FragmentTrainingListBinding>(R.layout.
         }
         val touchHelper = ItemTouchHelper(swipeCallback)
         touchHelper.attachToRecyclerView(binding.recyclerViewTraining)
+
+
+        onBackPressed {
+            onBackClick()
+        }
     }
 
     override fun onInitView(savedInstanceState: Bundle?) {
@@ -129,5 +139,25 @@ class TrainingListFragment : BaseFragment<FragmentTrainingListBinding>(R.layout.
         binding.toolbarTrainingList.setPadding(0, top, 0, 0)
         binding.btnAdd.setVerticalMargin(0, bottom)
         binding.recyclerViewTraining.setPadding(0, 0, 0, bottom)
+    }
+
+    private fun onBackClick() {
+        val currentTime = System.currentTimeMillis()
+        backPressTime?.let { backPressTime ->
+            if (currentTime - backPressTime < DOUBLE_CLICK_WAIT_TIME) {
+                activity?.finishAffinity()
+                return
+            }
+        }
+        backPressTime = currentTime
+        VibrateUtil(requireContext()).vibrate(VIBRATE_DURATION)
+        if (activity?.isFinishing != true) {
+            Toast.makeText(requireContext(), getString(CommonRString.press_back), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    companion object {
+        private const val DOUBLE_CLICK_WAIT_TIME = 2000
+        private const val VIBRATE_DURATION = 100L
     }
 }
